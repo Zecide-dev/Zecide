@@ -260,6 +260,11 @@ button:active {
   flex-direction: column;
 }
 
+.emoji {
+    color: black;
+    text-align: center;
+}
+
 .waitlist form{
   display: flex;
   justify-content: space-between;
@@ -604,9 +609,15 @@ button:active {
   height: 40vh;
 }
 
+.bottom h1.bottom-emphasis {
+  color: #3B98FF;
+  font-weight: 600;
+  font-size: 2vw;
+}
+
 .bottom h1 {
   font-size: 1.8vw;
-  color: #3b98ff;
+  color: black;
   font-weight: 500;
   margin: 6vh 0;
 }
@@ -810,6 +821,12 @@ body::-webkit-scrollbar-thumb
   .mid {
     height: 170vh;
     width: 100vw !important;
+  }
+
+  .bottom h1.bottom-emphasis {
+    color: #3B98FF;
+    font-weight: 600;
+    font-size: 4vw;
   }
 
   .top button {
@@ -1214,7 +1231,7 @@ body::-webkit-scrollbar-thumb
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 0;
+    margin-top: 60px;
     width: 100vw;
   }
 
@@ -1390,6 +1407,7 @@ body::-webkit-scrollbar-thumb
     flex-direction: column;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(14, 1fr);
+    margin-top: 370px;
   }
 
   .bottom button {
@@ -1466,9 +1484,13 @@ body::-webkit-scrollbar-thumb
     text-align: center;
   }
 
+  h1.bottom-emphasis {
+    color: #3B98FF;
+  }
+
   .bottom h1 {
     font-size: 4vw;
-    color: #3b98ff;
+    color: black;
     margin: 2vh 4vh 4vh 4vh !important;
   }
 
