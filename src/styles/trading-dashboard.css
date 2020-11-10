@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+body {
+  font-family: 'Quicksand';
+}
+
+.upper-nav {
+  background-color: #F3FAFf;
+  display: flex;
+  min-height: 7vh;
+  height: 5.2vw;
+  padding-top: 1.5vw;
+}
+
+.logo {
+  display: flex;
+  float: left;
+  margin: 0 2vw 2vw 4vw;
+}
+
+.logo-img {
+  height: calc(20px + 1.1vw);
+}
+
+.logo-text {
+  margin-left: 0.7vw;
+  font-size: calc(5px + 1.4vw);
+}
+
+.search {
+  display: inline-flex;
+  float: left;
+  margin: 0 2vw;
+  background-color: #f8f8f8;
+  border-radius: 20px;
+  border: 1px solid #DDD;
+  height: 30px;
+  width: 50%;
+}
+
+.search-input {
+  border: none;
+  background-color: transparent;
+  margin: 0 1vw;
+  width: 93%;
+}
+
+.download-btn {
+  display: inline-flex;
+  float: left;
+  height: 4vh;
+  font-size: calc(5px + 0.7vw);
+  background-color: #3b98ff;
+  color: #ffffff;
+  font-family: 'Quicksand';
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.dropdown-toggle {
+  margin-left: calc(3vw - 15px);
+  float: right;
+  border: none;
+  background-color: transparent;
+}
+
+.profile-img {
+  width: calc(20px + 1.1vw);
+  border-radius: 300px;
+}
+
+.container-fluid {
+  margin-top: 8vh;
+  padding-left: 3vw;
+}
+
+.card {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.068);
+}
+
+#candlestick-chart {
+  height: 65vh;
+}
