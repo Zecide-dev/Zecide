@@ -193,6 +193,24 @@ const chartCreation = () => {
       height: $('#candlestick-chart').height(),
     });
   })
+
+  document.getElementById('side-nav').addEventListener('mouseenter', () => {
+    const elements = document.getElementsByClassName('side-nav-text');
+    setTimeout(() => {
+      for(let element of elements) {
+        element.style.display = 'initial';
+      }
+      document.getElementById('side-nav-logo-text').style.display = 'initial';
+    }, 350);
+  })
+
+  document.getElementById('side-nav').addEventListener('mouseleave', () => {
+    const elements = document.getElementsByClassName('side-nav-text')
+    for(let element of elements) {
+      element.style.display = 'none';
+    }
+    document.getElementById('side-nav-logo-text').style.display = 'none';
+  })
 }
 
 window.addEventListener('load', chartCreation());
