@@ -202,6 +202,7 @@ const chartCreation = () => {
       }
       document.getElementById('side-nav-logo-text').style.display = 'initial';
       document.getElementById('side-nav-help').style.display = 'initial';
+      document.getElementById('side-nav-z').classList.toggle('nav-z-part');
     }, 350);
   })
 
@@ -212,6 +213,7 @@ const chartCreation = () => {
     }
     document.getElementById('side-nav-logo-text').style.display = 'none';
     document.getElementById('side-nav-help').style.display = 'none';
+    document.getElementById('side-nav-z').classList.toggle('nav-z-part');
   })
 }
 
