@@ -3,6 +3,15 @@ body {
   font-family: 'Quicksand';
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .upper-nav {
   background-color: #F3FAFf;
   display: flex;
@@ -24,6 +33,11 @@ body {
 .logo-text {
   margin-left: 0.7vw;
   font-size: calc(5px + 1.4vw);
+}
+
+#upper-nav-logo-text {
+  padding-left: 1vw;
+  padding-top: 0.5vw;
 }
 
 .search {
@@ -70,8 +84,14 @@ body {
 }
 
 .container-fluid {
+  position: relative;
+  z-index: 50;
   margin-top: 8vh;
   padding-left: 3vw;
+}
+
+#chart-container {
+  padding-left: 7vw;
 }
 
 .card {
@@ -85,4 +105,65 @@ body {
 #candlestick-chart {
   width: 100%;
   height: 100%;
+}
+
+.side-nav {
+  /* Changing the transition duration, then look into the js file for text addition */
+  transition-duration: 0.5s; 
+  height: 100%;
+  padding-top: 2vw;
+  padding-right: 0.5vw;
+  padding-left: 1vw;
+  position: fixed;
+  background-color: #F3FAFf;
+  z-index: 100;
+  margin-top: 0;
+  width: 5vw;
+  border-right: 2px solid #7acdf0;
+}
+
+.side-nav:hover {
+  transform: translateX(0);
+  width: 18vw;
+}
+
+.side-nav-logo {
+  display: block;
+  margin: 0 2vw 15vh 0;
+}
+
+#side-nav-logo-text {
+  display: none;
+}
+
+.side-nav-img {
+  width: calc(10px + 1.7vw);
+}
+
+.side-nav-text {
+  padding-left: 1.5vw;
+  font-size: 1.2vw;
+  display: none;
+}
+
+.nav-item {
+  margin-bottom: 5vh;
+  border-radius: 50px;
+}
+
+.nav-item-active {
+  color: #3b98ff;
+  font-size: 1.2vw;
+}
+
+.nav-link {
+  text-align: center;
+  font-weight: 500;
+}
+
+.nav-z-part {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 7px rgba(79, 172, 255, 0.3);
+  border-radius: 28px;
+  padding: 10px 12px;
 }
