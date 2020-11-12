@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/src/styles/trading-dashboard.css">
   <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
     type="text/javascript"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -83,7 +84,7 @@
   </div>
 
   <!-- BODY -->
-  <div id="chart-container" class="container-fluid">
+  <div id="body-container" class="container-fluid">
     <div class="row">
       <div class="col-sm-8">
         <div class="card">
@@ -91,6 +92,103 @@
             <div class="candlestick-chart-div">
               <div id="candlestick-chart"></div>
             </div>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <div class="card">
+              <div class="card-header">
+                Risk Management
+              </div>
+              <div class="card-body">
+                <h5 class="card-text">Scrip: Reliance</h5>
+                <label for="formControlRange">Confidence</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+                <label for="formControlRange">Risk Reward</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+                <button>Go</button>
+              </div>
+              <div class="card-footer">
+                Setting
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-6'>
+            <div class="card text-center">
+              <div class="card-header">
+                Checklist
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                <p>1. Checkbox1 <input type="checkbox" aria-label="Checkbox for following text input"></p>
+                <p>2. Checkbox2 <input type="checkbox" aria-label="Checkbox for following text input"></p>
+                <p>3. Checkbox3 <input type="checkbox" aria-label="Checkbox for following text input"></p>
+                <p>4. Checkbox4 <input type="checkbox" aria-label="Checkbox for following text input"></p>
+                </p>
+              </div>
+              <div class="card-footer">
+                <button>Reset</button>
+                <button>Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="bubble-chart-div">
+              <div id="bubble-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-4'>
+        <div class="card">
+          <div class="card-header">
+            Monitor
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Lorem Ipsum</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam excepturi possimus est
+              omnis ipsa consequuntur nesciunt impedit debitis corrupti voluptate aut doloribus numquam saepe tempore
+              cumque, molestiae deserunt aliquam necessitatibus.</p>
+          </div>
+          <div class="card-footer">
+            <button>Monitor Event</button>
+            <button>Create Event</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            Order
+          </div>
+          <div class="card-body">
+          </div>
+          <div class="card-footer">
+            <button>Buy</button>
+            <button>Sell</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            Market
+          </div>
+          <div class="card-body">
+            <h5>Uptrend</h5>
+            <p class="card-text">
+              <ol>
+                <li>Item1</li>
+                <li>Item2</li>
+                <li>Item3</li>
+              </ol>
+            </p>
+            <h5>Downtrend</h5>
+            <p class="card-text">
+              <ol>
+                <li>Item1</li>
+                <li>Item2</li>
+                <li>Item3</li>
+              </ol>
+            </p>
           </div>
         </div>
       </div>
