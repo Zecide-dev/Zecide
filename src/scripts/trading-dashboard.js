@@ -252,3 +252,109 @@ const chartCreation = () => {
 }
 
 window.addEventListener('load', chartCreation());
+
+
+// Checklist addition
+let numChecklists = 0;
+
+const addChecklistButton = document.getElementById('add-checklist');
+addChecklistButton.addEventListener('click', () => {
+  if (numChecklists < 5) {
+    numChecklists++;
+    let checklistItem = document.getElementById('checklist-item-' + numChecklists)
+    let checklistInput = document.getElementById('checklist-input-' + numChecklists);
+    let checklistP = document.getElementById('checklist-p-' + numChecklists);
+    let editChecklist = document.getElementById('edit-checklist-' + numChecklists);
+    let submitChecklist = document.getElementById('submit-checklist-' + numChecklists);
+
+    checklistItem.style.display = 'flex';
+    checklistInput.focus();
+    checklistInput.addEventListener('change', (event) => {
+      checklistP.innerText = event.target.value;
+    });
+    checklistInput.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter') {
+        submitChecklist.click();
+      }
+    })
+    submitChecklist.addEventListener('click', () => {
+      checklistInput.style.display = 'none';
+      checklistP.style.display = 'initial';
+      submitChecklist.style.display = 'none';
+      editChecklist.style.display = 'initial';
+    })
+
+    if (numChecklists === 5) {
+      addChecklistButton.classList.add('disabled');
+    }
+  }
+})
+
+// Adding edit and remove checklist handlers
+for (let i = 1; i < 6; i++) {
+  let checklistInput = document.getElementById('checklist-input-' + i);
+  let checklistP = document.getElementById('checklist-p-' + i);
+  let editChecklist = document.getElementById('edit-checklist-' + i);
+  let removeChecklist = document.getElementById('remove-checklist-' + i);
+  let submitChecklist = document.getElementById('submit-checklist-' + i);
+  editChecklist.addEventListener('click', () => {
+    editChecklist.style.display = 'none';
+    submitChecklist.style.display = 'initial';
+    checklistP.style.display = 'none';
+    checklistInput.style.display = 'initial';
+    checklistInput.focus();
+  })
+
+  removeChecklist.addEventListener('click', () => {
+    for (let j = i + 1; j < numChecklists + 1; j++) {
+      let k = j - 1;
+      let upperChecklistP = document.getElementById('checklist-p-' + k);
+      let lowerChecklistP = document.getElementById('checklist-p-' + j);
+      let upperChecklistInput = document.getElementById('checklist-input-' + k);
+      let lowerChecklistInput = document.getElementById('checklist-input-' + j);
+      upperChecklistP.innerText = lowerChecklistP.innerText;
+      upperChecklistInput.value = lowerChecklistInput.value;
+    }
+
+    let lastChecklistItem = document.getElementById('checklist-item-' + numChecklists);
+    let lastChecklistP = document.getElementById('checklist-p-' + numChecklists);
+    let lastChecklistInput = document.getElementById('checklist-input-' + numChecklists);
+    let lastEditChecklist = document.getElementById('edit-checklist-' + numChecklists);
+    let lastSubmitChecklist = document.getElementById('submit-checklist-' + numChecklists);
+
+    lastChecklistP.innerText = '';
+    lastChecklistInput.value = '';
+    lastChecklistP.style.display = 'none';
+    lastEditChecklist.style.display = 'none';
+    lastChecklistInput.style.display = 'initial';
+    lastSubmitChecklist.style.display = 'initial';
+    lastChecklistItem.style.display = 'none';
+
+    numChecklists--;
+    addChecklistButton.classList.remove('disabled');
+  })
+}
+
+// Reset Checklist
+
+let resetChecklistButton = document.getElementById('reset-checklist');
+
+resetChecklistButton.addEventListener('click', () => {
+  for (let i = 1; i <= numChecklists; i++) {
+    let checklistItem = document.getElementById('checklist-item-' + i);
+    let checklistInput = document.getElementById('checklist-input-' + i);
+    let checklistP = document.getElementById('checklist-p-' + i);
+    let editChecklist = document.getElementById('edit-checklist-' + i);
+    let submitChecklist = document.getElementById('submit-checklist-' + i);
+
+    checklistInput.value = '';
+    checklistInput.style.display = 'initial';
+    checklistP.innerText = '';
+    checklistP.style.display = 'none';
+    editChecklist.style.display = 'none';
+    submitChecklist.style.display = 'initial';
+    checklistItem.style.display = 'none';
+  }
+  numChecklists = 0;
+  addChecklistButton.classList.remove('disabled');
+})

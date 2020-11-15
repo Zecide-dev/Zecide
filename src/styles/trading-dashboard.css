@@ -51,6 +51,10 @@ a:hover {
   width: 50%;
 }
 
+.search:focus {
+  outline: none;
+}
+
 .search-input {
   border: none;
   background-color: transparent;
@@ -98,6 +102,15 @@ a:hover {
 .card {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.068);
   margin-bottom: 2vw;
+}
+
+.card-header {
+  background-color: #F3FAFf;
+  text-align: center;
+}
+
+.card-footer {
+  background-color: #F3FAFf;
 }
 
 .candlestick-chart-div {
@@ -178,3 +191,55 @@ a:hover {
   width: 100%;
   height: 100%;
 }
+
+.order-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+#reset-checklist {
+  float: right;
+}
+
+.order-button {
+  width: 5vw;
+}
+
+.header-buttons {
+  font-size: 0.7rem;
+  border-radius: 500px;
+  padding: 2px 8px;
+}
+
+.checklist-item {
+  display: none;
+  margin-top: 5px;
+}
+
+.checklist-input {
+  border: 1px solid #3b98ff;
+  border-radius: 15px;
+  padding: 1px 8px;
+  width: 100%;
+}
+
+.checklist-input:focus {
+  outline: none;
+}
+
+.checklist-p {
+  display: none;
+}
+
+.checklist-buttons {
+  font-size: 0.8rem;
+  padding: 2px 10px;
+}
+
+.edit-checklist {
+  display: none;
+}
+
+/* .hover-buttons {
+  display: none;
+} */
