@@ -264,24 +264,28 @@ addChecklistButton.addEventListener('click', () => {
     let checklistItem = document.getElementById('checklist-item-' + numChecklists)
     let checklistInput = document.getElementById('checklist-input-' + numChecklists);
     let checklistP = document.getElementById('checklist-p-' + numChecklists);
-    let editChecklist = document.getElementById('edit-checklist-' + numChecklists);
-    let submitChecklist = document.getElementById('submit-checklist-' + numChecklists);
+    let hoverableButtons = document.getElementById('hoverable-buttons-' + numChecklists);
+
+    checklistItem.addEventListener('mouseenter', () => {
+      hoverableButtons.style.visibility = 'visible';
+    })
+
+    checklistItem.addEventListener('mouseleave', () => {
+      hoverableButtons.style.visibility = 'hidden';
+    })
 
     checklistItem.style.display = 'flex';
     checklistInput.focus();
+
     checklistInput.addEventListener('change', (event) => {
       checklistP.innerText = event.target.value;
     });
+
     checklistInput.addEventListener('keypress', (e) => {
       if(e.key === 'Enter') {
-        submitChecklist.click();
+        checklistInput.style.display = 'none';
+        checklistP.style.display = 'initial';
       }
-    })
-    submitChecklist.addEventListener('click', () => {
-      checklistInput.style.display = 'none';
-      checklistP.style.display = 'initial';
-      submitChecklist.style.display = 'none';
-      editChecklist.style.display = 'initial';
     })
 
     if (numChecklists === 5) {
@@ -296,10 +300,8 @@ for (let i = 1; i < 6; i++) {
   let checklistP = document.getElementById('checklist-p-' + i);
   let editChecklist = document.getElementById('edit-checklist-' + i);
   let removeChecklist = document.getElementById('remove-checklist-' + i);
-  let submitChecklist = document.getElementById('submit-checklist-' + i);
+
   editChecklist.addEventListener('click', () => {
-    editChecklist.style.display = 'none';
-    submitChecklist.style.display = 'initial';
     checklistP.style.display = 'none';
     checklistInput.style.display = 'initial';
     checklistInput.focus();
@@ -312,23 +314,25 @@ for (let i = 1; i < 6; i++) {
       let lowerChecklistP = document.getElementById('checklist-p-' + j);
       let upperChecklistInput = document.getElementById('checklist-input-' + k);
       let lowerChecklistInput = document.getElementById('checklist-input-' + j);
+      let upperCheckbox = document.getElementById('checkbox' + k);
+      let lowerCheckbox = document.getElementById('checkbox' + j);
+
       upperChecklistP.innerText = lowerChecklistP.innerText;
       upperChecklistInput.value = lowerChecklistInput.value;
+      upperCheckbox.checked = lowerCheckbox.checked;
     }
 
     let lastChecklistItem = document.getElementById('checklist-item-' + numChecklists);
     let lastChecklistP = document.getElementById('checklist-p-' + numChecklists);
     let lastChecklistInput = document.getElementById('checklist-input-' + numChecklists);
-    let lastEditChecklist = document.getElementById('edit-checklist-' + numChecklists);
-    let lastSubmitChecklist = document.getElementById('submit-checklist-' + numChecklists);
+    let lastCheckbox = document.getElementById('checkbox' + numChecklists);
 
     lastChecklistP.innerText = '';
     lastChecklistInput.value = '';
     lastChecklistP.style.display = 'none';
-    lastEditChecklist.style.display = 'none';
     lastChecklistInput.style.display = 'initial';
-    lastSubmitChecklist.style.display = 'initial';
     lastChecklistItem.style.display = 'none';
+    lastCheckbox.checked = false;
 
     numChecklists--;
     addChecklistButton.classList.remove('disabled');
@@ -344,16 +348,14 @@ resetChecklistButton.addEventListener('click', () => {
     let checklistItem = document.getElementById('checklist-item-' + i);
     let checklistInput = document.getElementById('checklist-input-' + i);
     let checklistP = document.getElementById('checklist-p-' + i);
-    let editChecklist = document.getElementById('edit-checklist-' + i);
-    let submitChecklist = document.getElementById('submit-checklist-' + i);
+    let checkbox = document.getElementById('checkbox' + i);
 
     checklistInput.value = '';
     checklistInput.style.display = 'initial';
     checklistP.innerText = '';
     checklistP.style.display = 'none';
-    editChecklist.style.display = 'none';
-    submitChecklist.style.display = 'initial';
     checklistItem.style.display = 'none';
+    checkbox.checked = false;
   }
   numChecklists = 0;
   addChecklistButton.classList.remove('disabled');
