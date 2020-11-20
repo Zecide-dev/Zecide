@@ -9,8 +9,11 @@
   <title>Trading Dashboard</title>
   <link rel="icon" href="/src/images/logo.svg" />
   <link rel="stylesheet" href="/src/styles/trading-dashboard.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+    integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
   <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
     type="text/javascript"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -83,7 +86,7 @@
   </div>
 
   <!-- BODY -->
-  <div id="chart-container" class="container-fluid">
+  <div id="body-container" class="container-fluid">
     <div class="row">
       <div class="col-sm-8">
         <div class="card">
@@ -91,6 +94,160 @@
             <div class="candlestick-chart-div">
               <div id="candlestick-chart"></div>
             </div>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <div class="card">
+              <div class="card-header">
+                Risk Management
+              </div>
+              <div class="card-body">
+                <h5 class="card-text">Scrip: Reliance</h5>
+                <label for="formControlRange">Confidence</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+                <label for="formControlRange">Risk Reward</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+                <button>Go</button>
+              </div>
+              <div class="card-footer">
+                Setting
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-6'>
+            <div class="card">
+              <div class="card-header">
+                Checklist
+              </div>
+              <div class="card-body">
+                <div>
+                  <button type='button' id='add-checklist' class='header-buttons btn btn-outline-primary'>Add
+                    Checklist</button>
+                  <button type='button' id='reset-checklist' class='header-buttons btn btn-outline-danger'>Reset <i
+                      class="fas fa-sync-alt"></i></button>
+                </div>
+                <div style="margin-top: 10px;">
+                  <div class='checklist-item row' id='checklist-item-1'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox1" value="option1">
+                    <input class='checklist-input' id='checklist-input-1' type="text">
+                    <p id='checklist-p-1' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-1'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-1'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-1'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-2'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox2" value="option2">
+                    <input class='checklist-input' id='checklist-input-2' type="text">
+                    <p id='checklist-p-2' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-2'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-2'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-2'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-3'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox3" value="option3">
+                    <input class='checklist-input' id='checklist-input-3' type="text">
+                    <p id='checklist-p-3' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-3'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-3'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-3'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-4'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox4" value="option4">
+                    <input class='checklist-input' id='checklist-input-4' type="text">
+                    <p id='checklist-p-4' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-4'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-4'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-4'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-5'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox5" value="option5">
+                    <input class='checklist-input' id='checklist-input-5' type="text">
+                    <p id='checklist-p-5' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-5'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-5'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-5'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="bubble-chart-div">
+              <div id="bubble-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-4'>
+        <div class="card">
+          <div class="card-header">
+            Monitor
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Lorem Ipsum</h5>
+            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam excepturi possimus est
+              omnis ipsa consequuntur nesciunt impedit debitis corrupti voluptate aut doloribus numquam saepe tempore
+              cumque, molestiae deserunt aliquam necessitatibus.</p>
+          </div>
+          <div class="card-footer">
+            <button>Monitor Event</button>
+            <button>Create Event</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            Order
+          </div>
+          <div class="card-footer">
+            <div class='order-buttons'>
+              <button type="button" class="btn btn-outline-success order-button">Buy</button>
+              <button type="button" class="btn btn-outline-danger order-button">Sell</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            Market
+          </div>
+          <div class="card-body">
+            <h5>Uptrend</h5>
+            <p class="card-text">
+            <ol>
+              <li>Item1</li>
+              <li>Item2</li>
+              <li>Item3</li>
+            </ol>
+            </p>
+            <h5>Downtrend</h5>
+            <p class="card-text">
+            <ol>
+              <li>Item1</li>
+              <li>Item2</li>
+              <li>Item3</li>
+            </ol>
+            </p>
           </div>
         </div>
       </div>

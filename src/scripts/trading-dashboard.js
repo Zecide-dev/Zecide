@@ -24,7 +24,7 @@ const chartCreation = () => {
       borderColor: 'rgba(197, 203, 206, 0.8)',
     },
   });
-  
+
   var candleSeries = chart.addCandlestickSeries({
     upColor: 'rgba(255, 144, 0, 1)',
     downColor: '#000',
@@ -33,7 +33,7 @@ const chartCreation = () => {
     wickDownColor: 'rgba(255, 144, 0, 1)',
     wickUpColor: 'rgba(255, 144, 0, 1)',
   });
-  
+
   candleSeries.setData([
     { time: '2018-10-19', open: 180.34, high: 180.99, low: 178.57, close: 179.85 },
     { time: '2018-10-22', open: 180.82, high: 181.40, low: 177.56, close: 178.75 },
@@ -197,7 +197,7 @@ const chartCreation = () => {
   document.getElementById('side-nav').addEventListener('mouseenter', () => {
     const elements = document.getElementsByClassName('side-nav-text');
     setTimeout(() => {
-      for(let element of elements) {
+      for (let element of elements) {
         element.style.display = 'initial';
       }
       document.getElementById('side-nav-logo-text').style.display = 'initial';
@@ -208,13 +208,155 @@ const chartCreation = () => {
 
   document.getElementById('side-nav').addEventListener('mouseleave', () => {
     const elements = document.getElementsByClassName('side-nav-text')
-    for(let element of elements) {
+    for (let element of elements) {
       element.style.display = 'none';
     }
     document.getElementById('side-nav-logo-text').style.display = 'none';
     document.getElementById('side-nav-help').style.display = 'none';
     document.getElementById('side-nav-z').classList.toggle('nav-z-part');
   })
+
+  var bubbleChart = new CanvasJS.Chart("bubble-chart",
+    {
+      title: {
+        text: "Comparison among Countries on Fertility Rate Vs Life Expectancy in 2009"
+      },
+      data: [
+        {
+          type: "bubble",
+          dataPoints: [
+            // { x: 64.8, y: 2.66, z:12074.4 , name: "India"},
+            //  { x: 73.1, y: 1.61, z:13313.8, name: "China"},
+            { x: 78.1, y: 2.00, z: 306.77, name: "US" },
+            { x: 68.5, y: 2.15, z: 237.414, name: "Indonesia" },
+            { x: 72.5, y: 1.86, z: 193.24, name: "Brazil" },
+            { x: 76.5, y: 2.36, z: 112.24, name: "Mexico" },
+            { x: 50.9, y: 5.56, z: 154.48, name: "Nigeria" },
+            { x: 68.6, y: 1.54, z: 141.91, name: "Russia" },
+
+            { x: 82.9, y: 1.37, z: 127.55, name: "Japan" },
+            { x: 79.8, y: 1.36, z: 81.90, name: "Australia" },
+            { x: 72.7, y: 2.78, z: 79.71, name: "Egypt" },
+            { x: 80.1, y: 1.94, z: 61.81, name: "UK" },
+            { x: 55.8, y: 4.76, z: 39.24, name: "Kenya" },
+            { x: 81.5, y: 1.93, z: 21.95, name: "Australia" },
+            { x: 68.1, y: 4.77, z: 31.09, name: "Iraq" },
+            { x: 47.9, y: 6.42, z: 33.42, name: "Afganistan" },
+            { x: 50.3, y: 5.58, z: 18.55, name: "Angola" }
+          ]
+        }
+      ]
+    });
+
+  bubbleChart.render();
 }
 
 window.addEventListener('load', chartCreation());
+
+
+// Checklist addition
+let numChecklists = 0;
+
+const addChecklistButton = document.getElementById('add-checklist');
+addChecklistButton.addEventListener('click', () => {
+  if (numChecklists < 5) {
+    numChecklists++;
+    let checklistItem = document.getElementById('checklist-item-' + numChecklists)
+    let checklistInput = document.getElementById('checklist-input-' + numChecklists);
+    let checklistP = document.getElementById('checklist-p-' + numChecklists);
+    let hoverableButtons = document.getElementById('hoverable-buttons-' + numChecklists);
+
+    checklistItem.addEventListener('mouseenter', () => {
+      hoverableButtons.style.visibility = 'visible';
+    })
+
+    checklistItem.addEventListener('mouseleave', () => {
+      hoverableButtons.style.visibility = 'hidden';
+    })
+
+    checklistItem.style.display = 'flex';
+    checklistInput.focus();
+
+    checklistInput.addEventListener('change', (event) => {
+      checklistP.innerText = event.target.value;
+    });
+
+    checklistInput.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter') {
+        checklistInput.style.display = 'none';
+        checklistP.style.display = 'initial';
+      }
+    })
+
+    if (numChecklists === 5) {
+      addChecklistButton.classList.add('disabled');
+    }
+  }
+})
+
+// Adding edit and remove checklist handlers
+for (let i = 1; i < 6; i++) {
+  let checklistInput = document.getElementById('checklist-input-' + i);
+  let checklistP = document.getElementById('checklist-p-' + i);
+  let editChecklist = document.getElementById('edit-checklist-' + i);
+  let removeChecklist = document.getElementById('remove-checklist-' + i);
+
+  editChecklist.addEventListener('click', () => {
+    checklistP.style.display = 'none';
+    checklistInput.style.display = 'initial';
+    checklistInput.focus();
+  })
+
+  removeChecklist.addEventListener('click', () => {
+    for (let j = i + 1; j < numChecklists + 1; j++) {
+      let k = j - 1;
+      let upperChecklistP = document.getElementById('checklist-p-' + k);
+      let lowerChecklistP = document.getElementById('checklist-p-' + j);
+      let upperChecklistInput = document.getElementById('checklist-input-' + k);
+      let lowerChecklistInput = document.getElementById('checklist-input-' + j);
+      let upperCheckbox = document.getElementById('checkbox' + k);
+      let lowerCheckbox = document.getElementById('checkbox' + j);
+
+      upperChecklistP.innerText = lowerChecklistP.innerText;
+      upperChecklistInput.value = lowerChecklistInput.value;
+      upperCheckbox.checked = lowerCheckbox.checked;
+    }
+
+    let lastChecklistItem = document.getElementById('checklist-item-' + numChecklists);
+    let lastChecklistP = document.getElementById('checklist-p-' + numChecklists);
+    let lastChecklistInput = document.getElementById('checklist-input-' + numChecklists);
+    let lastCheckbox = document.getElementById('checkbox' + numChecklists);
+
+    lastChecklistP.innerText = '';
+    lastChecklistInput.value = '';
+    lastChecklistP.style.display = 'none';
+    lastChecklistInput.style.display = 'initial';
+    lastChecklistItem.style.display = 'none';
+    lastCheckbox.checked = false;
+
+    numChecklists--;
+    addChecklistButton.classList.remove('disabled');
+  })
+}
+
+// Reset Checklist
+
+let resetChecklistButton = document.getElementById('reset-checklist');
+
+resetChecklistButton.addEventListener('click', () => {
+  for (let i = 1; i <= numChecklists; i++) {
+    let checklistItem = document.getElementById('checklist-item-' + i);
+    let checklistInput = document.getElementById('checklist-input-' + i);
+    let checklistP = document.getElementById('checklist-p-' + i);
+    let checkbox = document.getElementById('checkbox' + i);
+
+    checklistInput.value = '';
+    checklistInput.style.display = 'initial';
+    checklistP.innerText = '';
+    checklistP.style.display = 'none';
+    checklistItem.style.display = 'none';
+    checkbox.checked = false;
+  }
+  numChecklists = 0;
+  addChecklistButton.classList.remove('disabled');
+})
