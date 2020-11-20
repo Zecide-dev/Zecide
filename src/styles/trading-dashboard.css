@@ -192,17 +192,29 @@ a:hover {
   height: 100%;
 }
 
-.order-buttons {
-  display: flex;
-  justify-content: space-around;
-}
-
 #reset-checklist {
   float: right;
 }
 
+.order-buttons {
+  padding: 0;
+  display: flex;
+}
+
 .order-button {
-  width: 5vw;
+  height: 35px;
+  border: none;
+  text-align: center;
+  margin: 0;
+  width: 50%;
+}
+
+#buy-button {
+  background-color: #8aff917a;
+}
+
+#sell-button {
+  background-color: #ff868687;
 }
 
 .header-buttons {
@@ -248,7 +260,3 @@ a:hover {
 .checklist-checkbox {
   margin: 8px 12px;
 }
-
-/* .hover-buttons {
-  display: none;
-} */
