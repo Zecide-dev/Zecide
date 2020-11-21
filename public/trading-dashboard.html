@@ -201,19 +201,73 @@
         </div>
       </div>
       <div class='col-sm-4'>
-        <div class="card">
+        <div class="card monitor-create-card">
           <div class="card-header">
             Monitor
           </div>
           <div class="card-body">
-            <h5 class="card-title">Lorem Ipsum</h5>
-            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam excepturi possimus est
-              omnis ipsa consequuntur nesciunt impedit debitis corrupti voluptate aut doloribus numquam saepe tempore
-              cumque, molestiae deserunt aliquam necessitatibus.</p>
+            <ul class="nav nav-tabs screen-nav-tabs custom-scrollbar" id="screenTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="screen1-tab" data-toggle="tab" href="#screen1" role="tab"
+                  aria-controls="screen1" aria-selected="true">
+                  Screen 1 <button><i class="fas fa-times"></i></button>
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="screen2-tab" data-toggle="tab" href="#screen2" role="tab"
+                  aria-controls="screen2" aria-selected="false">
+                  Screen 2 <button><i class="fas fa-times"></i></button>
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="screen3-tab" data-toggle="tab" href="#screen3" role="tab"
+                  aria-controls="screen3" aria-selected="false">
+                  Screen 3 <button><i class="fas fa-times"></i></button>
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="-tab" data-toggle="tab" href="#screen3" role="tab" aria-controls="screen3"
+                  aria-selected="false" style="font-size: 0.7rem;">
+                  <i class="fas fa-plus"></i>
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane screen fade show active" id="screen1" role="tabpanel" aria-labelledby="screen1-tab">
+                Screen 1
+                <div class='company-tabs'>
+                  <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                      class='chng-percent'>Chng%</span></div>
+                  <div class='company-tab'><span class='symbol'>MINDTREE</span> <span class='chng-percent'>1.23%</span>
+                  </div>
+                  <div class='company-tab'><span class='symbol'>RELIANCE</span> <span class='chng-percent'>8.39%</span>
+                  </div>
+                  <div class='company-tab'><span class='symbol'>TATA STEEL</span> <span
+                      class='chng-percent'>2.53%</span></div>
+                  <div class='company-tab'><span class='symbol'>BAJAJ FINSV</span> <span
+                      class='chng-percent'>0.01%</span></div>
+                </div>
+                <div class='monitor-bottom-section'>
+                  <div class='monitor-bottom-section-buttons-div'>
+                    <button class='monitor-bottom-section-buttons' id='show-all-events'>Show All Events</button>
+                    <button class='monitor-bottom-section-buttons' id='show-watchlist'>Show Watchlist</button>
+                  </div>
+                  <div class='monitor-bubbles row'>
+                    <div class='monitor-bubble active'>ORB<button><i class="fas fa-times"></i></button></div>
+                    <div class='monitor-bubble'>Breakout RSI<button><i class="fas fa-times"></i></button></div>
+                    <div class='monitor-bubble'>Pivot Touch<button><i class="fas fa-times"></i></button></div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane screen fade" id="screen2" role="tabpanel" aria-labelledby="screen2-tab">Screen 2
+              </div>
+              <div class="tab-pane screen fade" id="screen3" role="tabpanel" aria-labelledby="screen3-tab">Screen 3
+              </div>
+            </div>
           </div>
-          <div class="card-footer">
-            <button>Monitor Event</button>
-            <button>Create Event</button>
+          <div class="card-footer monitor-create-buttons-div">
+            <button class='monitor-create-buttons'>Monitor Event</button>
+            <button class='monitor-create-buttons'>Create Event</button>
           </div>
         </div>
         <div class="card">
