@@ -376,7 +376,6 @@ let numScreens = {
 // Currently selected event, 'ORB' by default
 let selectedEvent = 'ORB';
 
-
 // This function created and returns a new li element (for a given eventName and a screen number)
 // used for making screen tab in the navbar of the monitor card.
 function createNewScreenTab(eventName, num) {
@@ -396,6 +395,7 @@ function createNewScreenTab(eventName, num) {
 
   let btn = document.createElement('button');
   btn.innerHTML = '<i class="fas fa-times"></i>';
+  btn.setAttribute('onclick', 'deleteScreen(' + num + ')');
 
   a.append(btn);
   li.append(a);
@@ -443,6 +443,14 @@ function addScreen() {
   let screenDiv = createNewScreenDiv(selectedEvent, numScreens[selectedEvent]);
   document.getElementById(selectedEvent + '-myTabContent').append(screenDiv);
   li.childNodes[0].click();
+}
+
+// This function deletes (hides) the screen with the given screen number, for the selectedEvent.
+function deleteScreen(num) {
+  let screenTab = document.getElementById(selectedEvent + '-screen' + num + '-tab');
+  let screenDiv = document.getElementById(selectedEvent + '-screen' + num);
+  screenTab.style.display = 'none';
+  screenDiv.style.display = 'none';
 }
 
 // Chaging the event
