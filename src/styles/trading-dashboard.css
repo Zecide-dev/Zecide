@@ -424,3 +424,13 @@ a:hover {
   width: 50%;
   text-align: center;
 }
+
+.modal-bubble {
+  margin: 8px;
+  padding: 5px 10px;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  border-radius: 40px;
+  font-size: 1rem;
+  display: flex;
+}

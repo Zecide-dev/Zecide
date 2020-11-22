@@ -19,7 +19,8 @@
 <body>
   <!-- Modal -->
   <!-- Modal for deletion of each monitor-bubble -->
-  <div class="modal fade" id="delete-monitor-bubble-modal" tabindex="-1" aria-labelledby="delete-monitor-bubble-modal-label" aria-hidden="true">
+  <div class="modal fade" id="delete-monitor-bubble-modal" tabindex="-1"
+    aria-labelledby="delete-monitor-bubble-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -34,6 +35,31 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id='close-modal'>Cancel</button>
           <button type="button" class="btn btn-outline-danger" id='confirm-delete-button'>Yes, I'm Sure</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Show all events -->
+  <div class="modal fade" id="show-all-events-modal" tabindex="-1" aria-labelledby="show-all-events-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">All Events</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='container row'>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>ORB</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Breakout RSI</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Pivot Touch</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 1</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 2</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 3</a>
+          </div>
         </div>
       </div>
     </div>
@@ -291,36 +317,29 @@
             </div>
             <div class='monitor-bottom-section'>
               <div class='monitor-bottom-section-buttons-div'>
-                <button class='monitor-bottom-section-buttons data-toggle' id='show-all-events' data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">Show All Events</button>
-                <div class="dropdown-menu" aria-labelledby="show-all-events">
-                  <a class="dropdown-item" id='ORB-dropdown-item' style="display: none;">ORB</a>
-                  <a class="dropdown-item" id='Breakout-RSI-dropdown-item' style="display: none;">Breakout RSI</a>
-                  <a class="dropdown-item" id='Pivot-Touch-dropdown-item' style="display: none;">Pivot Touch</a>
-                  <a class="dropdown-item" id='Event-1-dropdown-item'>Event 1</a>
-                  <a class="dropdown-item" id='Event-2-dropdown-item'>Event 2</a>
-                </div>
+                <button type="button" class='monitor-bottom-section-buttons' id='show-all-events' data-toggle="modal"
+                  data-target="#show-all-events-modal">Show All Events</button>
                 <button class='monitor-bottom-section-buttons' id='show-watchlist'>Show Watchlist</button>
               </div>
               <div class='monitor-bubbles row'>
-                <a class='monitor-bubble active' id='ORB-monitor-bubble'
-                  onclick="changeCurrentEvent('ORB')">
+                <a class='monitor-bubble active' id='ORB-monitor-bubble' onclick="changeCurrentEvent('ORB')">
                   ORB
-                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal" data-bubblename="ORB">
+                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                    data-bubblename="ORB">
                     <i class="fas fa-times"></i>
                   </button>
                 </a>
-                <a class='monitor-bubble' id='Breakout-RSI-monitor-bubble'
-                  onclick="changeCurrentEvent('Breakout-RSI')">
+                <a class='monitor-bubble' id='Breakout-RSI-monitor-bubble' onclick="changeCurrentEvent('Breakout-RSI')">
                   Breakout RSI
-                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal" data-bubblename="Breakout-RSI">
+                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                    data-bubblename="Breakout-RSI">
                     <i class="fas fa-times"></i>
                   </button>
                 </a>
-                <a class='monitor-bubble' id='Pivot-Touch-monitor-bubble'
-                  onclick="changeCurrentEvent('Pivot-Touch')">
+                <a class='monitor-bubble' id='Pivot-Touch-monitor-bubble' onclick="changeCurrentEvent('Pivot-Touch')">
                   Pivot Touch
-                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal" data-bubblename="Pivot-Touch">
+                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                    data-bubblename="Pivot-Touch">
                     <i class="fas fa-times"></i>
                   </button>
                 </a>
