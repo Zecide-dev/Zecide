@@ -374,34 +374,30 @@ let numScreens = {
 
 let selectedEvent = 'ORB';
 
-function addScreen() {
-  numScreens[selectedEvent]++;
-
+function createNewScreenTab(eventName, num) {
   let li = document.createElement('li');
   li.setAttribute('class', 'nav-item');
   li.setAttribute('role', 'presentation');
-  li.setAttribute('id', selectedEvent + '-screen' + numScreens[selectedEvent] + '-tab');
+  li.setAttribute('id', eventName + '-screen' + num + '-tab');
 
   let a = document.createElement('a');
   a.setAttribute('class', 'nav-link');
   a.setAttribute('data-toggle', 'tab');
-  a.setAttribute('href', '#' + selectedEvent + '-screen' + numScreens[selectedEvent]);
+  a.setAttribute('href', '#' + eventName + '-screen' + num);
   a.setAttribute('role', 'tab');
-  a.setAttribute('aria-controls', selectedEvent + '-screen' + numScreens[selectedEvent]);
+  a.setAttribute('aria-controls', eventName + '-screen' + num);
   a.setAttribute('aria-selected', 'false');
-  a.innerText = 'Screen ' + numScreens[selectedEvent];
+  a.innerText = 'Screen ' + num;
 
   let btn = document.createElement('button');
   btn.innerHTML = '<i class="fas fa-times"></i>';
 
   a.append(btn);
   li.append(a);
+  return (li);
+}
 
-  let addScreenButton = document.getElementById(selectedEvent + '-add-screen-button');
-  let screenTab = document.getElementById(selectedEvent + '-screenTab');
-
-  screenTab.insertBefore(li, addScreenButton);
-
+function createNewScreenDiv(eventName, num) {
   let screenDiv = document.createElement('div');
   let companyTabs = document.createElement('div');
   let companyTabHeading = document.createElement('div');
@@ -409,9 +405,9 @@ function addScreen() {
   let chngPercentSpan = document.createElement('span');
 
   screenDiv.setAttribute('class', "tab-pane screen fade");
-  screenDiv.setAttribute('id', selectedEvent + '-screen' + numScreens[selectedEvent]);
+  screenDiv.setAttribute('id', eventName + '-screen' + num);
   screenDiv.setAttribute('role', 'tabpanel');
-  screenDiv.setAttribute('aria-labelledby', selectedEvent + '-screen' + numScreens[selectedEvent] + '-tab');
+  screenDiv.setAttribute('aria-labelledby', eventName + '-screen' + num + '-tab');
   companyTabs.setAttribute('class', 'company-tabs');
   companyTabHeading.setAttribute('class', 'company-tab-heading');
   symbolSpan.setAttribute('class', 'symbol');
@@ -419,12 +415,80 @@ function addScreen() {
 
   symbolSpan.innerText = 'Symbol';
   chngPercentSpan.innerText = 'Chng%';
-  screenDiv.innerText = 'Screen ' + numScreens[selectedEvent];
+  screenDiv.innerText = 'Screen ' + num;
   companyTabHeading.append(symbolSpan);
   companyTabHeading.append(chngPercentSpan);
   companyTabs.append(companyTabHeading);
   screenDiv.append(companyTabs);
 
+  return (screenDiv);
+}
+
+function addScreen() {
+  numScreens[selectedEvent]++;
+
+  let li = createNewScreenTab(selectedEvent, numScreens[selectedEvent]);
+  let addScreenButton = document.getElementById(selectedEvent + '-add-screen-button');
+  let screenTab = document.getElementById(selectedEvent + '-screenTab');
+  screenTab.insertBefore(li, addScreenButton);
+
+  let screenDiv = createNewScreenDiv(selectedEvent, numScreens[selectedEvent]);
   document.getElementById(selectedEvent + '-myTabContent').append(screenDiv);
-  a.click();
+  li.childNodes[0].click();
+}
+
+function changeCurrentEvent(newEventName) {
+  document.getElementById(selectedEvent + '-div').style.display = 'none';
+  selectedEvent = newEventName
+
+  let bubbles = document.getElementsByClassName('monitor-bubble');
+  for(let k = 0; k < bubbles.length; k++) {
+    bubbles[k].classList.remove('active');
+    if(bubbles[k].id == selectedEvent + '-monitor-bubble') {
+      bubbles[k].classList.add('active');
+    }
+  }
+
+  let eventDiv = document.getElementById(selectedEvent + '-div');
+  if (eventDiv) {
+    eventDiv.style.display = 'initial';
+  } else {
+    let eventDiv = document.createElement('div');
+    eventDiv.setAttribute('id', selectedEvent + '-div');
+
+    let ul = document.createElement('ul');
+    ul.setAttribute('class', 'nav nav-tabs screen-nav-tabs custom-scrollbar');
+    ul.setAttribute('id', selectedEvent + '-screenTab');
+    ul.setAttribute('role', 'tablist');
+
+    for (let i = 1; i <= numScreens[selectedEvent]; i++) {
+      let li = createNewScreenTab(selectedEvent, i);
+      ul.append(li);
+
+      if (i === numScreens[selectedEvent]) {
+        let addScreenButton = document.createElement('button');
+        addScreenButton.setAttribute('id', selectedEvent + '-add-screen-button');
+        addScreenButton.setAttribute('class', 'add-screen-button');
+        addScreenButton.setAttribute('onclick', 'addScreen()');
+        addScreenButton.innerHTML = '<i class="fas fa-plus"></i>';
+        ul.append(addScreenButton);
+        eventDiv.append(ul);
+
+        let screensDiv = document.createElement('div');
+        screensDiv.setAttribute('class', 'tab-content');
+        screensDiv.setAttribute('id', selectedEvent + '-myTabContent');
+
+        for (let j = 1; j <= numScreens[selectedEvent]; j++) {
+          let screenDiv = createNewScreenDiv(selectedEvent, j);
+          screensDiv.append(screenDiv);
+
+          if (j === numScreens[selectedEvent]) {
+            eventDiv.append(screensDiv);
+            document.getElementById('outer-screen-div').append(eventDiv);
+            ul.childNodes[0].childNodes[0].click();
+          }
+        }
+      }
+    }
+  }
 }
