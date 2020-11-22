@@ -364,6 +364,7 @@ resetChecklistButton.addEventListener('click', () => {
 
 // MONITOR SCREEN
 
+// Defined the initial number of screens for each event.
 let numScreens = {
   'ORB': 3,
   'Breakout-RSI': 2,
@@ -372,8 +373,12 @@ let numScreens = {
   'Event-2': 1
 }
 
+// Currently selected event, 'ORB' by default
 let selectedEvent = 'ORB';
 
+
+// This function created and returns a new li element (for a given eventName and a screen number)
+// used for making screen tab in the navbar of the monitor card.
 function createNewScreenTab(eventName, num) {
   let li = document.createElement('li');
   li.setAttribute('class', 'nav-item');
@@ -397,6 +402,7 @@ function createNewScreenTab(eventName, num) {
   return (li);
 }
 
+// This function creates and returns a new screen div, for a given event name and screen number.
 function createNewScreenDiv(eventName, num) {
   let screenDiv = document.createElement('div');
   let companyTabs = document.createElement('div');
@@ -424,6 +430,8 @@ function createNewScreenDiv(eventName, num) {
   return (screenDiv);
 }
 
+// When adding a screen, first the numscreens[selectedEvent] is increased by one.
+// Then a screentab is created using the function and appended and same for the screendiv.
 function addScreen() {
   numScreens[selectedEvent]++;
 
@@ -437,34 +445,42 @@ function addScreen() {
   li.childNodes[0].click();
 }
 
+// Chaging the event
 function changeCurrentEvent(newEventName) {
   document.getElementById(selectedEvent + '-div').style.display = 'none';
   selectedEvent = newEventName
 
   let bubbles = document.getElementsByClassName('monitor-bubble');
-  for(let k = 0; k < bubbles.length; k++) {
+  // This for loop is asyncronous, but who cares, doesnt affect the aage wala code.
+  // First removes active class from all the bubbles and then adds it to the desired class.
+  for (let k = 0; k < bubbles.length; k++) {
     bubbles[k].classList.remove('active');
-    if(bubbles[k].id == selectedEvent + '-monitor-bubble') {
+    if (bubbles[k].id == selectedEvent + '-monitor-bubble') {
       bubbles[k].classList.add('active');
     }
   }
 
   let eventDiv = document.getElementById(selectedEvent + '-div');
+  // If element has already been created, then simply display it, else create the element.
   if (eventDiv) {
     eventDiv.style.display = 'initial';
   } else {
     let eventDiv = document.createElement('div');
     eventDiv.setAttribute('id', selectedEvent + '-div');
 
+    // Creating the UL element.
     let ul = document.createElement('ul');
     ul.setAttribute('class', 'nav nav-tabs screen-nav-tabs custom-scrollbar');
     ul.setAttribute('id', selectedEvent + '-screenTab');
     ul.setAttribute('role', 'tablist');
 
+    // For loop for creating the required number of screenTabs
     for (let i = 1; i <= numScreens[selectedEvent]; i++) {
       let li = createNewScreenTab(selectedEvent, i);
       ul.append(li);
 
+      // As the createElement and other  functions are async, to keep them in sync,
+      // I've added them in this if statement so that this code runs only when the last loop is completed.
       if (i === numScreens[selectedEvent]) {
         let addScreenButton = document.createElement('button');
         addScreenButton.setAttribute('id', selectedEvent + '-add-screen-button');
@@ -478,10 +494,13 @@ function changeCurrentEvent(newEventName) {
         screensDiv.setAttribute('class', 'tab-content');
         screensDiv.setAttribute('id', selectedEvent + '-myTabContent');
 
+        // For loop for creating screendiv
         for (let j = 1; j <= numScreens[selectedEvent]; j++) {
           let screenDiv = createNewScreenDiv(selectedEvent, j);
           screensDiv.append(screenDiv);
 
+          // Same reason for creating this if statement.
+          // This code executes only after the last loop is completed.
           if (j === numScreens[selectedEvent]) {
             eventDiv.append(screensDiv);
             document.getElementById('outer-screen-div').append(eventDiv);
