@@ -380,10 +380,10 @@ function addScreen() {
   let li = document.createElement('li');
   li.setAttribute('class', 'nav-item');
   li.setAttribute('role', 'presentation');
+  li.setAttribute('id', selectedEvent + '-screen' + numScreens[selectedEvent] + '-tab');
 
   let a = document.createElement('a');
   a.setAttribute('class', 'nav-link');
-  a.setAttribute('id', selectedEvent + '-screen' + numScreens[selectedEvent] + '-tab');
   a.setAttribute('data-toggle', 'tab');
   a.setAttribute('href', '#' + selectedEvent + '-screen' + numScreens[selectedEvent]);
   a.setAttribute('role', 'tab');
