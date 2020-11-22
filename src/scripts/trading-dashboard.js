@@ -519,3 +519,24 @@ function changeCurrentEvent(newEventName) {
     }
   }
 }
+
+// Deletes(hides) an event completely.
+function deleteMonitorEvent(eventName) {
+  document.getElementById('close-modal').click();
+  document.getElementById(eventName + '-monitor-bubble').style.display = 'none';
+  document.getElementById(eventName + '-dropdown-item').style.display = 'none';
+  let eventDiv = document.getElementById(eventName + '-div');
+  if(eventDiv) {
+    eventDiv.style.display = 'none';
+  }
+}
+
+// Code for dynamic modal on confirming event deletion
+// Check bootstrap-modals docs for more info
+$('#delete-monitor-bubble-modal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var recipient = button.data('bubblename')
+  var modal = $(this)
+  modal.find('.modal-body').text('This will delete the ' + recipient + ' event permanantly. Are you sure?')
+  modal.find('#confirm-delete-button').attr('onclick', "deleteMonitorEvent('" +  recipient + "')");
+})

@@ -399,9 +399,17 @@ a:hover {
   background-color: #cae9ff;
 }
 
+.monitor-bubble:hover {
+  cursor: pointer;
+}
+
 .monitor-bubble button {
   border: none;
   background-color: transparent;
+}
+
+.monitor-bubble button:focus {
+  outline: none;
 }
 
 .monitor-create-buttons-div {
