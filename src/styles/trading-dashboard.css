@@ -299,6 +299,23 @@ a:hover {
   background-color: transparent;
 }
 
+.add-screen-button {
+  padding: 2px 10px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 300px;
+  font-size: 0.7rem;
+  outline: none;
+}
+
+.add-screen-button:hover {
+  background-color: #F3FAFf;
+}
+
+.add-screen-button:focus {
+  outline: none;
+}
+
 .screen {
   margin-top: 5px;
   padding: 5px;
@@ -333,6 +350,7 @@ a:hover {
 }
 
 .monitor-bottom-section {
+  margin-top: 5px;
   border-top: 1px dashed black;
 }
 
@@ -348,6 +366,15 @@ a:hover {
   outline: none;
   border: 1px solid #aaa;
   border-radius: 30px;
+}
+
+.monitor-bottom-section-buttons:hover {
+  background-color: #cae9ff;
+  outline: none;
+}
+
+.monitor-bottom-section-buttons:focus {
+  outline: none;
 }
 
 .monitor-bubbles {

@@ -282,7 +282,7 @@ addChecklistButton.addEventListener('click', () => {
     });
 
     checklistInput.addEventListener('keypress', (e) => {
-      if(e.key === 'Enter') {
+      if (e.key === 'Enter') {
         checklistInput.style.display = 'none';
         checklistP.style.display = 'initial';
       }
@@ -360,3 +360,71 @@ resetChecklistButton.addEventListener('click', () => {
   numChecklists = 0;
   addChecklistButton.classList.remove('disabled');
 })
+
+
+// MONITOR SCREEN
+
+let numScreens = {
+  'ORB': 3,
+  'Breakout-RSI': 2,
+  'Pivot-Touch': 1,
+  'Event-1': 1,
+  'Event-2': 1
+}
+
+let selectedEvent = 'ORB';
+
+function addScreen() {
+  numScreens[selectedEvent]++;
+
+  let li = document.createElement('li');
+  li.setAttribute('class', 'nav-item');
+  li.setAttribute('role', 'presentation');
+
+  let a = document.createElement('a');
+  a.setAttribute('class', 'nav-link');
+  a.setAttribute('id', selectedEvent + '-screen' + numScreens[selectedEvent] + '-tab');
+  a.setAttribute('data-toggle', 'tab');
+  a.setAttribute('href', '#' + selectedEvent + '-screen' + numScreens[selectedEvent]);
+  a.setAttribute('role', 'tab');
+  a.setAttribute('aria-controls', selectedEvent + '-screen' + numScreens[selectedEvent]);
+  a.setAttribute('aria-selected', 'false');
+  a.innerText = 'Screen ' + numScreens[selectedEvent];
+
+  let btn = document.createElement('button');
+  btn.innerHTML = '<i class="fas fa-times"></i>';
+
+  a.append(btn);
+  li.append(a);
+
+  let addScreenButton = document.getElementById(selectedEvent + '-add-screen-button');
+  let screenTab = document.getElementById(selectedEvent + '-screenTab');
+
+  screenTab.insertBefore(li, addScreenButton);
+
+  let screenDiv = document.createElement('div');
+  let companyTabs = document.createElement('div');
+  let companyTabHeading = document.createElement('div');
+  let symbolSpan = document.createElement('span');
+  let chngPercentSpan = document.createElement('span');
+
+  screenDiv.setAttribute('class', "tab-pane screen fade");
+  screenDiv.setAttribute('id', selectedEvent + '-screen' + numScreens[selectedEvent]);
+  screenDiv.setAttribute('role', 'tabpanel');
+  screenDiv.setAttribute('aria-labelledby', selectedEvent + '-screen' + numScreens[selectedEvent] + '-tab');
+  companyTabs.setAttribute('class', 'company-tabs');
+  companyTabHeading.setAttribute('class', 'company-tab-heading');
+  symbolSpan.setAttribute('class', 'symbol');
+  chngPercentSpan.setAttribute('class', 'chng-percent');
+
+  symbolSpan.innerText = 'Symbol';
+  chngPercentSpan.innerText = 'Chng%';
+  screenDiv.innerText = 'Screen ' + numScreens[selectedEvent];
+  companyTabHeading.append(symbolSpan);
+  companyTabHeading.append(chngPercentSpan);
+  companyTabs.append(companyTabHeading);
+  screenDiv.append(companyTabs);
+
+  document.getElementById(selectedEvent + '-myTabContent').append(screenDiv);
+  a.click();
+}
