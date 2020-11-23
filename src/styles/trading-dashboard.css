@@ -403,12 +403,12 @@ a:hover {
   cursor: pointer;
 }
 
-.monitor-bubble button {
+.monitor-bubble button, .modal-bubble button {
   border: none;
   background-color: transparent;
 }
 
-.monitor-bubble button:focus {
+.monitor-bubble button:focus, .modal-bubble button:focus {
   outline: none;
 }
 
@@ -433,4 +433,8 @@ a:hover {
   border-radius: 40px;
   font-size: 1rem;
   display: flex;
+}
+
+.modal-bubble.active {
+  background-color: #cae9ff;
 }

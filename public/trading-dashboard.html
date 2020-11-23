@@ -47,18 +47,47 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">All Events</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button id='close-show-all-events-modal' type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class='container row'>
-            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>ORB</a>
-            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Breakout RSI</a>
-            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Pivot Touch</a>
-            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 1</a>
-            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 2</a>
-            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 3</a>
+            <a class='modal-bubble active' id='ORB-modal-bubble' onclick="changeCurrentEvent('ORB')">
+              ORB
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="ORB">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble' onclick="changeCurrentEvent('Breakout-RSI')">
+              Breakout RSI
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Breakout-RSI">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Pivot-Touch-modal-bubble' onclick="changeCurrentEvent('Pivot-Touch')">
+              Pivot Touch
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Pivot-Touch">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Event-1-modal-bubble' onclick="changeCurrentEvent('Event-1')">
+              Event 1
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Event-1">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Event-2-modal-bubble' onclick="changeCurrentEvent('Event-2')">
+              Event 2
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Event-2">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
           </div>
         </div>
       </div>

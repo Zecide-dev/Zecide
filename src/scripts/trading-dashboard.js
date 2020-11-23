@@ -455,6 +455,10 @@ function deleteScreen(num) {
 
 // Chaging the event
 function changeCurrentEvent(newEventName) {
+  // If we are changing/deleting event from the show-all-events-modal, then this will close that modal.
+  // If we are doing so from the bottom section of the monitor screen, then no effect.
+  document.getElementById('close-show-all-events-modal').click();
+
   document.getElementById(selectedEvent + '-div').style.display = 'none';
   selectedEvent = newEventName
 
@@ -465,6 +469,16 @@ function changeCurrentEvent(newEventName) {
     bubbles[k].classList.remove('active');
     if (bubbles[k].id == selectedEvent + '-monitor-bubble') {
       bubbles[k].classList.add('active');
+    }
+  }
+
+  let modalBubbles = document.getElementsByClassName('modal-bubble');
+  // This for loop is asyncronous, but who cares, doesnt affect the aage wala code.
+  // First removes active class from all the bubbles and then adds it to the desired class.
+  for (let l = 0; l < modalBubbles.length; l++) {
+    modalBubbles[l].classList.remove('active');
+    if (modalBubbles[l].id == selectedEvent + '-modal-bubble') {
+      modalBubbles[l].classList.add('active');
     }
   }
 
@@ -523,8 +537,11 @@ function changeCurrentEvent(newEventName) {
 // Deletes(hides) an event completely.
 function deleteMonitorEvent(eventName) {
   document.getElementById('close-modal').click();
-  document.getElementById(eventName + '-monitor-bubble').style.display = 'none';
-  document.getElementById(eventName + '-dropdown-item').style.display = 'none';
+  let monitorBubble = document.getElementById(eventName + '-monitor-bubble');
+  if(monitorBubble) {
+    monitorBubble.style.display = 'none';
+  }
+  document.getElementById(eventName + '-modal-bubble').style.display = 'none';
   let eventDiv = document.getElementById(eventName + '-div');
   if(eventDiv) {
     eventDiv.style.display = 'none';
