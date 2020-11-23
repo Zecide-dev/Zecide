@@ -17,6 +17,54 @@
 </head>
 
 <body>
+  <!-- Modal -->
+  <!-- Modal for deletion of each monitor-bubble -->
+  <div class="modal fade" id="delete-monitor-bubble-modal" tabindex="-1"
+    aria-labelledby="delete-monitor-bubble-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Attention!!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id='close-modal'>Cancel</button>
+          <button type="button" class="btn btn-outline-danger" id='confirm-delete-button'>Yes, I'm Sure</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Show all events -->
+  <div class="modal fade" id="show-all-events-modal" tabindex="-1" aria-labelledby="show-all-events-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">All Events</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='container row'>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>ORB</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Breakout RSI</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Pivot Touch</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 1</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 2</a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble'>Event 3</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Side Navbar -->
   <div id="side-nav" class="container-fluid side-nav">
     <div id='side-nav-logo' class="side-nav-logo">
@@ -201,30 +249,115 @@
         </div>
       </div>
       <div class='col-sm-4'>
-        <div class="card">
+        <div class="card monitor-create-card">
           <div class="card-header">
             Monitor
           </div>
           <div class="card-body">
-            <h5 class="card-title">Lorem Ipsum</h5>
-            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam excepturi possimus est
-              omnis ipsa consequuntur nesciunt impedit debitis corrupti voluptate aut doloribus numquam saepe tempore
-              cumque, molestiae deserunt aliquam necessitatibus.</p>
+            <div id='outer-screen-div'>
+              <div id='ORB-div'>
+                <ul class="nav nav-tabs screen-nav-tabs custom-scrollbar" id="ORB-screenTab" role="tablist">
+                  <li class="nav-item" id="ORB-screen1-tab" role="presentation">
+                    <a class="nav-link active" data-toggle="tab" href="#ORB-screen1" role="tab"
+                      aria-controls="ORB-screen1" aria-selected="true">
+                      Screen 1 <button onclick="deleteScreen(1)"><i class="fas fa-times"></i></button>
+                    </a>
+                  </li>
+                  <li class="nav-item" id="ORB-screen2-tab" role="presentation">
+                    <a class="nav-link" data-toggle="tab" href="#ORB-screen2" role="tab" aria-controls="ORB-screen2"
+                      aria-selected="false">
+                      Screen 2 <button onclick="deleteScreen(2)"><i class="fas fa-times"></i></button>
+                    </a>
+                  </li>
+                  <li class="nav-item" id="ORB-screen3-tab" role="presentation">
+                    <a class="nav-link" data-toggle="tab" href="#ORB-screen3" role="tab" aria-controls="ORB-screen3"
+                      aria-selected="false">
+                      Screen 3 <button onclick="deleteScreen(3)"><i class="fas fa-times"></i></button>
+                    </a>
+                  </li>
+                  <button id='ORB-add-screen-button' class='add-screen-button' onclick="addScreen()">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </ul>
+                <div class="tab-content" id="ORB-myTabContent">
+                  <div class="tab-pane screen fade show active" id="ORB-screen1" role="tabpanel"
+                    aria-labelledby="ORB-screen1-tab">
+                    Screen 1
+                    <div class='company-tabs'>
+                      <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                          class='chng-percent'>Chng%</span></div>
+                      <div class='company-tab'><span class='symbol'>MINDTREE</span> <span
+                          class='chng-percent'>1.23%</span>
+                      </div>
+                      <div class='company-tab'><span class='symbol'>RELIANCE</span> <span
+                          class='chng-percent'>8.39%</span>
+                      </div>
+                      <div class='company-tab'><span class='symbol'>TATA STEEL</span> <span
+                          class='chng-percent'>2.53%</span></div>
+                      <div class='company-tab'><span class='symbol'>BAJAJ FINSV</span> <span
+                          class='chng-percent'>0.01%</span></div>
+                    </div>
+                  </div>
+                  <div class="tab-pane screen fade" id="ORB-screen2" role="tabpanel" aria-labelledby="ORB-screen2-tab">
+                    Screen 2
+                    <div class='company-tabs'>
+                      <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                          class='chng-percent'>Chng%</span></div>
+                    </div>
+                  </div>
+                  <div class="tab-pane screen fade" id="ORB-screen3" role="tabpanel" aria-labelledby="ORB-screen3-tab">
+                    Screen 3
+                    <div class='company-tabs'>
+                      <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                          class='chng-percent'>Chng%</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='monitor-bottom-section'>
+              <div class='monitor-bottom-section-buttons-div'>
+                <button type="button" class='monitor-bottom-section-buttons' id='show-all-events' data-toggle="modal"
+                  data-target="#show-all-events-modal">Show All Events</button>
+                <button class='monitor-bottom-section-buttons' id='show-watchlist'>Show Watchlist</button>
+              </div>
+              <div class='monitor-bubbles row'>
+                <a class='monitor-bubble active' id='ORB-monitor-bubble' onclick="changeCurrentEvent('ORB')">
+                  ORB
+                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                    data-bubblename="ORB">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </a>
+                <a class='monitor-bubble' id='Breakout-RSI-monitor-bubble' onclick="changeCurrentEvent('Breakout-RSI')">
+                  Breakout RSI
+                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                    data-bubblename="Breakout-RSI">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </a>
+                <a class='monitor-bubble' id='Pivot-Touch-monitor-bubble' onclick="changeCurrentEvent('Pivot-Touch')">
+                  Pivot Touch
+                  <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                    data-bubblename="Pivot-Touch">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="card-footer">
-            <button>Monitor Event</button>
-            <button>Create Event</button>
+          <div class="card-footer monitor-create-buttons-div">
+            <button class='monitor-create-buttons'>Monitor Event</button>
+            <button class='monitor-create-buttons'>Create Event</button>
           </div>
         </div>
         <div class="card">
           <div class="card-header">
             Order
           </div>
-          <div class="card-footer">
-            <div class='order-buttons'>
-              <button type="button" class="btn btn-outline-success order-button">Buy</button>
-              <button type="button" class="btn btn-outline-danger order-button">Sell</button>
-            </div>
+          <div class="card-footer order-buttons">
+            <button type="button" id='buy-button' class="order-button">Buy</button>
+            <button type="button" id='sell-button' class="order-button">Sell</button>
           </div>
         </div>
         <div class="card">

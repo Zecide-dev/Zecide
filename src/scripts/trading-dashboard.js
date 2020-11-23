@@ -282,7 +282,7 @@ addChecklistButton.addEventListener('click', () => {
     });
 
     checklistInput.addEventListener('keypress', (e) => {
-      if(e.key === 'Enter') {
+      if (e.key === 'Enter') {
         checklistInput.style.display = 'none';
         checklistP.style.display = 'initial';
       }
@@ -359,4 +359,184 @@ resetChecklistButton.addEventListener('click', () => {
   }
   numChecklists = 0;
   addChecklistButton.classList.remove('disabled');
+})
+
+
+// MONITOR SCREEN
+
+// Defined the initial number of screens for each event.
+let numScreens = {
+  'ORB': 3,
+  'Breakout-RSI': 2,
+  'Pivot-Touch': 1,
+  'Event-1': 1,
+  'Event-2': 1
+}
+
+// Currently selected event, 'ORB' by default
+let selectedEvent = 'ORB';
+
+// This function created and returns a new li element (for a given eventName and a screen number)
+// used for making screen tab in the navbar of the monitor card.
+function createNewScreenTab(eventName, num) {
+  let li = document.createElement('li');
+  li.setAttribute('class', 'nav-item');
+  li.setAttribute('role', 'presentation');
+  li.setAttribute('id', eventName + '-screen' + num + '-tab');
+
+  let a = document.createElement('a');
+  a.setAttribute('class', 'nav-link');
+  a.setAttribute('data-toggle', 'tab');
+  a.setAttribute('href', '#' + eventName + '-screen' + num);
+  a.setAttribute('role', 'tab');
+  a.setAttribute('aria-controls', eventName + '-screen' + num);
+  a.setAttribute('aria-selected', 'false');
+  a.innerText = 'Screen ' + num;
+
+  let btn = document.createElement('button');
+  btn.innerHTML = '<i class="fas fa-times"></i>';
+  btn.setAttribute('onclick', 'deleteScreen(' + num + ')');
+
+  a.append(btn);
+  li.append(a);
+  return (li);
+}
+
+// This function creates and returns a new screen div, for a given event name and screen number.
+function createNewScreenDiv(eventName, num) {
+  let screenDiv = document.createElement('div');
+  let companyTabs = document.createElement('div');
+  let companyTabHeading = document.createElement('div');
+  let symbolSpan = document.createElement('span');
+  let chngPercentSpan = document.createElement('span');
+
+  screenDiv.setAttribute('class', "tab-pane screen fade");
+  screenDiv.setAttribute('id', eventName + '-screen' + num);
+  screenDiv.setAttribute('role', 'tabpanel');
+  screenDiv.setAttribute('aria-labelledby', eventName + '-screen' + num + '-tab');
+  companyTabs.setAttribute('class', 'company-tabs');
+  companyTabHeading.setAttribute('class', 'company-tab-heading');
+  symbolSpan.setAttribute('class', 'symbol');
+  chngPercentSpan.setAttribute('class', 'chng-percent');
+
+  symbolSpan.innerText = 'Symbol';
+  chngPercentSpan.innerText = 'Chng%';
+  screenDiv.innerText = 'Screen ' + num;
+  companyTabHeading.append(symbolSpan);
+  companyTabHeading.append(chngPercentSpan);
+  companyTabs.append(companyTabHeading);
+  screenDiv.append(companyTabs);
+
+  return (screenDiv);
+}
+
+// When adding a screen, first the numscreens[selectedEvent] is increased by one.
+// Then a screentab is created using the function and appended and same for the screendiv.
+function addScreen() {
+  numScreens[selectedEvent]++;
+
+  let li = createNewScreenTab(selectedEvent, numScreens[selectedEvent]);
+  let addScreenButton = document.getElementById(selectedEvent + '-add-screen-button');
+  let screenTab = document.getElementById(selectedEvent + '-screenTab');
+  screenTab.insertBefore(li, addScreenButton);
+
+  let screenDiv = createNewScreenDiv(selectedEvent, numScreens[selectedEvent]);
+  document.getElementById(selectedEvent + '-myTabContent').append(screenDiv);
+  li.childNodes[0].click();
+}
+
+// This function deletes (hides) the screen with the given screen number, for the selectedEvent.
+function deleteScreen(num) {
+  let screenTab = document.getElementById(selectedEvent + '-screen' + num + '-tab');
+  let screenDiv = document.getElementById(selectedEvent + '-screen' + num);
+  screenTab.style.display = 'none';
+  screenDiv.style.display = 'none';
+}
+
+// Chaging the event
+function changeCurrentEvent(newEventName) {
+  document.getElementById(selectedEvent + '-div').style.display = 'none';
+  selectedEvent = newEventName
+
+  let bubbles = document.getElementsByClassName('monitor-bubble');
+  // This for loop is asyncronous, but who cares, doesnt affect the aage wala code.
+  // First removes active class from all the bubbles and then adds it to the desired class.
+  for (let k = 0; k < bubbles.length; k++) {
+    bubbles[k].classList.remove('active');
+    if (bubbles[k].id == selectedEvent + '-monitor-bubble') {
+      bubbles[k].classList.add('active');
+    }
+  }
+
+  let eventDiv = document.getElementById(selectedEvent + '-div');
+  // If element has already been created, then simply display it, else create the element.
+  if (eventDiv) {
+    eventDiv.style.display = 'initial';
+  } else {
+    let eventDiv = document.createElement('div');
+    eventDiv.setAttribute('id', selectedEvent + '-div');
+
+    // Creating the UL element.
+    let ul = document.createElement('ul');
+    ul.setAttribute('class', 'nav nav-tabs screen-nav-tabs custom-scrollbar');
+    ul.setAttribute('id', selectedEvent + '-screenTab');
+    ul.setAttribute('role', 'tablist');
+
+    // For loop for creating the required number of screenTabs
+    for (let i = 1; i <= numScreens[selectedEvent]; i++) {
+      let li = createNewScreenTab(selectedEvent, i);
+      ul.append(li);
+
+      // As the createElement and other  functions are async, to keep them in sync,
+      // I've added them in this if statement so that this code runs only when the last loop is completed.
+      if (i === numScreens[selectedEvent]) {
+        let addScreenButton = document.createElement('button');
+        addScreenButton.setAttribute('id', selectedEvent + '-add-screen-button');
+        addScreenButton.setAttribute('class', 'add-screen-button');
+        addScreenButton.setAttribute('onclick', 'addScreen()');
+        addScreenButton.innerHTML = '<i class="fas fa-plus"></i>';
+        ul.append(addScreenButton);
+        eventDiv.append(ul);
+
+        let screensDiv = document.createElement('div');
+        screensDiv.setAttribute('class', 'tab-content');
+        screensDiv.setAttribute('id', selectedEvent + '-myTabContent');
+
+        // For loop for creating screendiv
+        for (let j = 1; j <= numScreens[selectedEvent]; j++) {
+          let screenDiv = createNewScreenDiv(selectedEvent, j);
+          screensDiv.append(screenDiv);
+
+          // Same reason for creating this if statement.
+          // This code executes only after the last loop is completed.
+          if (j === numScreens[selectedEvent]) {
+            eventDiv.append(screensDiv);
+            document.getElementById('outer-screen-div').append(eventDiv);
+            ul.childNodes[0].childNodes[0].click();
+          }
+        }
+      }
+    }
+  }
+}
+
+// Deletes(hides) an event completely.
+function deleteMonitorEvent(eventName) {
+  document.getElementById('close-modal').click();
+  document.getElementById(eventName + '-monitor-bubble').style.display = 'none';
+  document.getElementById(eventName + '-dropdown-item').style.display = 'none';
+  let eventDiv = document.getElementById(eventName + '-div');
+  if(eventDiv) {
+    eventDiv.style.display = 'none';
+  }
+}
+
+// Code for dynamic modal on confirming event deletion
+// Check bootstrap-modals docs for more info
+$('#delete-monitor-bubble-modal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var recipient = button.data('bubblename')
+  var modal = $(this)
+  modal.find('.modal-body').text('This will delete the ' + recipient + ' event permanantly. Are you sure?')
+  modal.find('#confirm-delete-button').attr('onclick', "deleteMonitorEvent('" +  recipient + "')");
 })
