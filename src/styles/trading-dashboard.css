@@ -438,3 +438,18 @@ a:hover {
 .modal-bubble.active {
   background-color: #cae9ff;
 }
+
+#event-name {
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px dashed #ccc;
+  outline: none;
+}
+
+#event-name:focus {
+  outline: none;
+}
+
+#delete-create-event {
+  float: right;
+}
