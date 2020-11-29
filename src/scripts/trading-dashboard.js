@@ -194,28 +194,6 @@ const chartCreation = () => {
     });
   })
 
-  document.getElementById('side-nav').addEventListener('mouseenter', () => {
-    const elements = document.getElementsByClassName('side-nav-text');
-    setTimeout(() => {
-      for (let element of elements) {
-        element.style.display = 'initial';
-      }
-      document.getElementById('side-nav-logo-text').style.display = 'initial';
-      document.getElementById('side-nav-help').style.display = 'initial';
-      document.getElementById('side-nav-z').classList.toggle('nav-z-part');
-    }, 350);
-  })
-
-  document.getElementById('side-nav').addEventListener('mouseleave', () => {
-    const elements = document.getElementsByClassName('side-nav-text')
-    for (let element of elements) {
-      element.style.display = 'none';
-    }
-    document.getElementById('side-nav-logo-text').style.display = 'none';
-    document.getElementById('side-nav-help').style.display = 'none';
-    document.getElementById('side-nav-z').classList.toggle('nav-z-part');
-  })
-
   var bubbleChart = new CanvasJS.Chart("bubble-chart",
     {
       title: {
