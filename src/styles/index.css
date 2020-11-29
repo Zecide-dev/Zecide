@@ -146,14 +146,14 @@ button {
   height: 100vh;
 }
 
-.top .navbar {
+.top .my-navbar {
   grid-column: 2/12;
   grid-row: 1/2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  width: 83.6%;
+  width: 100%;
   padding: 4vh 8.2% 4vh 8.2%;
   z-index: 1000;
   background-color: #ffffff;
@@ -305,6 +305,96 @@ button:active {
   font-weight: 600;
 }
 
+#mid-section-wrapper {
+  margin: 5% 0;
+  padding: 0 2%;
+}
+
+.mid-section-div {
+  box-shadow: 0 2px 10px #ccc;
+  padding: 3%;
+  margin: 10px 0;
+  border: 1px solid  #3b98ff;
+}
+
+.mid-section-subheading {
+  font-size: 1.25rem;
+}
+
+.mid-section-div p {
+  padding: 0 3%;
+  text-align: justify;
+}
+
+.mid-section-div h3 {
+  padding: 0 3%;
+  text-align: justify;
+}
+
+.glow-on-hover {
+  float: right;
+  background: #fff;
+  padding: 5px 10px;
+  border: 1px solid #59C2FE;
+  outline: none;
+  color: #3b98ff;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #3b98ff, #287ccf, #6ec5ff, #287ccf, #3b98ff);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:hover {
+  text-decoration: none;
+}
+
+.glow-on-hover:after {
+  background: #fff;
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
 .mid {
   background-color: #ffffff;
   /* background-image: url(../images/mid-bg.svg); */
@@ -316,7 +406,7 @@ button:active {
   height: 80vh;
 }
 
-.mid .navbar {
+.mid .my-navbar {
   grid-column: 2/17;
   grid-row: 1/2;
   display: flex;
@@ -572,7 +662,7 @@ button:active {
   height: 5vh;
 }
 
-.bottom .navbar {
+.bottom .my-navbar {
   grid-column: 2/8;
   grid-row: 1/3;
   display: flex;
@@ -812,9 +902,12 @@ body::-webkit-scrollbar-thumb
     overflow-x: hidden;
   }
 
-  .top,
-  .bottom {
+  .top {
     height: 95vh !important;
+    width: 100vw !important;
+  }
+
+  .bottom {
     width: 100vw !important;
   }
 
@@ -838,7 +931,7 @@ body::-webkit-scrollbar-thumb
     height: 5vh;
   }
 
-  .navbar {
+  .my-navbar {
     display: none !important;
   }
 
@@ -886,7 +979,7 @@ body::-webkit-scrollbar-thumb
     width: 40px !important;
   }
 
-  .navbar span:hover,
+  .my-navbar span:hover,
   .dropdown:hover .dropbtn, .dropbtn:active, .dropbtn:focus{
     background-color: #ffffff !important;
   }
@@ -1153,6 +1246,17 @@ body::-webkit-scrollbar-thumb
     cursor: pointer;
   }
   
+  #mid-section-wrapper {
+    margin: 20% 0 0 0;
+  }
+
+  #mid-section-wrapper h3 {
+    font-size: 1.3rem;
+  }
+
+  .mid-section-subheading {
+    font-size: 1rem;
+  }
 
   .mid {
     background-color: #ffffff;
@@ -1419,7 +1523,7 @@ body::-webkit-scrollbar-thumb
     height: 5vh;
   }
 
-  .bottom .navbar {
+  .bottom .my-navbar {
     grid-column: 2/8;
     grid-row: 1/3;
     display: flex;
@@ -1481,6 +1585,7 @@ body::-webkit-scrollbar-thumb
   }
 
   .bottom-text {
+    margin-top: 60px;
     text-align: center;
   }
 
@@ -1508,11 +1613,11 @@ body::-webkit-scrollbar-thumb
   }
 
   .bottom .download-links {
-    width: 75vw;
+    width: 100%;
     text-align: center;
     display: flex;
-    margin: auto;
-    justify-content: space-between;
+    margin: 10px 0;
+    justify-content: space-around;
   }
 
   .gplaystr {
@@ -1534,7 +1639,7 @@ body::-webkit-scrollbar-thumb
     background: linear-gradient(to right, #3B98FF 0%, #3B98FF 60%);
     padding: 4vh 10vw 4vw 10vw;
     color: #ffffff;
-    height: 50vh;
+    height: 100%;
     margin-top: 2vh;
   }
   

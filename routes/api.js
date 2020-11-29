@@ -42,7 +42,7 @@ router.get('/Tools',function(req,res){
     res.sendFile(path.join(__dirname, "../public/tools.html"))
 })
 
-router.get('/Tools/tb',function(req,res){
+router.get('/Tools/Dashboard',function(req,res){
   res.sendFile(path.join(__dirname, "../public/trading-dashboard.html"))
 })
 
