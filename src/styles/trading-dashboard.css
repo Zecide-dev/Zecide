@@ -124,44 +124,53 @@ a:hover {
 
 .side-nav {
   /* Changing the transition duration, then look into the js file for text addition */
-  transition-duration: 0.5s; 
+  transition: 0.5s;
+  position: absolute;
+  overflow: hidden;
+  text-align: center;
   height: 100%;
   padding-top: 2vw;
-  padding-right: 0.5vw;
+  padding-right: 1vw;
   padding-left: 1vw;
   position: fixed;
   background-color: #F3FAFf;
   z-index: 100;
   margin-top: 0;
-  width: 5vw;
+  width: 4.5vw;
   border-right: 2px solid #7acdf0;
 }
 
 .side-nav:hover {
-  transform: translateX(0);
-  width: 18vw;
+  width: 14vw;
 }
 
 .side-nav-logo {
-  display: block;
+  display: flex;
   margin: 0 2vw 15vh 0;
 }
 
 #side-nav-logo-text {
-  display: none;
+  padding-left: 1.5vw;
 }
 
 .side-nav-img {
-  width: calc(10px + 1.7vw);
+  width: calc(10px + 1.3vw);
 }
 
 .side-nav-text {
   padding-left: 1.5vw;
-  font-size: 1.2vw;
-  display: none;
+  font-size: 0.9rem;
+}
+
+#side-nav-z {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 7px rgba(79, 172, 255, 0.3);
+  border-radius: 28px;
+  padding: 10px 4px;
 }
 
 .nav-item {
+  display: flex;
   margin-bottom: 5vh;
   border-radius: 50px;
 }
@@ -403,12 +412,12 @@ a:hover {
   cursor: pointer;
 }
 
-.monitor-bubble button {
+.monitor-bubble button, .modal-bubble button {
   border: none;
   background-color: transparent;
 }
 
-.monitor-bubble button:focus {
+.monitor-bubble button:focus, .modal-bubble button:focus {
   outline: none;
 }
 
@@ -433,4 +442,23 @@ a:hover {
   border-radius: 40px;
   font-size: 1rem;
   display: flex;
+}
+
+.modal-bubble.active {
+  background-color: #cae9ff;
+}
+
+#event-name {
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px dashed #ccc;
+  outline: none;
+}
+
+#event-name:focus {
+  outline: none;
+}
+
+#delete-create-event {
+  float: right;
 }
