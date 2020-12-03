@@ -340,6 +340,20 @@ resetChecklistButton.addEventListener('click', () => {
 })
 
 
+// MONITOR-CREATE-EVENT
+
+// Monitor-create-event-toggler
+
+document.getElementById('monitor-event-button').addEventListener('click', function() {
+  document.getElementById('monitor-event').style.display = 'initial';
+  document.getElementById('create-event').style.display = 'none';
+})
+
+document.getElementById('create-event-button').addEventListener('click', function() {
+  document.getElementById('monitor-event').style.display = 'none';
+  document.getElementById('create-event').style.display = 'initial';
+})
+
 // MONITOR SCREEN
 
 // Defined the initial number of screens for each event.

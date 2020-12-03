@@ -96,7 +96,7 @@ a:hover {
 
 #body-container {
   padding-left: 7vw;
-  padding-right: 5vw;
+  padding-right: 2vw;
 }
 
 .card {
@@ -432,6 +432,11 @@ a:hover {
   background-color: #F3FAFf;
   width: 50%;
   text-align: center;
+  outline: none;
+}
+
+.monitor-create-buttons:focus{
+  outline: none;
 }
 
 .modal-bubble {
