@@ -323,20 +323,9 @@ let resetChecklistButton = document.getElementById('reset-checklist');
 
 resetChecklistButton.addEventListener('click', () => {
   for (let i = 1; i <= numChecklists; i++) {
-    let checklistItem = document.getElementById('checklist-item-' + i);
-    let checklistInput = document.getElementById('checklist-input-' + i);
-    let checklistP = document.getElementById('checklist-p-' + i);
     let checkbox = document.getElementById('checkbox' + i);
-
-    checklistInput.value = '';
-    checklistInput.style.display = 'initial';
-    checklistP.innerText = '';
-    checklistP.style.display = 'none';
-    checklistItem.style.display = 'none';
     checkbox.checked = false;
   }
-  numChecklists = 0;
-  addChecklistButton.classList.remove('disabled');
 })
 
 
