@@ -39,6 +39,7 @@ app.use(express.json());
 //listen for requests
 app.listen(PORT, function(){
     console.log("Server started at port 8080!");
+    console.log("http://localhost:8080/");
 })
 
 app.use(function(req, res, next) {
