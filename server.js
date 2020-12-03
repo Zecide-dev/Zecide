@@ -17,7 +17,7 @@ const routes = require('./routes/api');
 const jwt = require('jsonwebtoken');
 const fetch = require("node-fetch");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -38,7 +38,7 @@ app.use(express.json());
 
 //listen for requests
 app.listen(PORT, function(){
-    console.log("Server started at port 3000!");
+    console.log("Server started at port 8080!");
 })
 
 app.use(function(req, res, next) {

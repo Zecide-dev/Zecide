@@ -42,6 +42,10 @@ router.get('/Tools',function(req,res){
     res.sendFile(path.join(__dirname, "../public/tools.html"))
 })
 
+router.get('/Tools/Dashboard',function(req,res){
+  res.sendFile(path.join(__dirname, "../public/trading-dashboard.html"))
+})
+
 router.get('/Tools/Portfolio',function(req,res){
     res.sendFile(path.join(__dirname, "../public/portfolio.html"))
 })

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <title>Trading Dashboard</title>
+  <link rel="icon" href="/src/images/logo.svg" />
+  <link rel="stylesheet" href="/src/styles/trading-dashboard.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+    integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
+    type="text/javascript"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+
+<body>
+  <!-- Modal -->
+  <!-- Modal for deletion of each monitor-bubble -->
+  <div class="modal fade" id="delete-monitor-bubble-modal" tabindex="-1"
+    aria-labelledby="delete-monitor-bubble-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Attention!!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id='close-modal'>Cancel</button>
+          <button type="button" class="btn btn-outline-danger" id='confirm-delete-button'>Yes, I'm Sure</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Show all events -->
+  <div class="modal fade" id="show-all-events-modal" tabindex="-1" aria-labelledby="show-all-events-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">All Events</h5>
+          <button id='close-show-all-events-modal' type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='container row'>
+            <a class='modal-bubble active' id='ORB-modal-bubble' onclick="changeCurrentEvent('ORB')">
+              ORB
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="ORB">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Breakout-RSI-modal-bubble' onclick="changeCurrentEvent('Breakout-RSI')">
+              Breakout RSI
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Breakout-RSI">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Pivot-Touch-modal-bubble' onclick="changeCurrentEvent('Pivot-Touch')">
+              Pivot Touch
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Pivot-Touch">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Event-1-modal-bubble' onclick="changeCurrentEvent('Event-1')">
+              Event 1
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Event-1">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+            <a class='modal-bubble' id='Event-2-modal-bubble' onclick="changeCurrentEvent('Event-2')">
+              Event 2
+              <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                data-bubblename="Event-2">
+                <i class="fas fa-times"></i>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side Navbar -->
+  <div id="side-nav" class="container-fluid side-nav">
+    <div id='side-nav-logo' class="side-nav-logo">
+      <img id='side-nav-logo-img' class="logo-img" src="/src/images/logo.svg" alt="">
+      <span id='side-nav-logo-text' class="logo-text">Zecide</span>
+    </div>
+    <a href="/posts/0">
+      <div class="nav-item">
+        <img class="side-nav-img" src="/src/images/feed.svg" alt="" />
+        <span class="side-nav-text">Feed</span>
+      </div>
+    </a>
+    <a href="/insights">
+      <div class="nav-item">
+        <img class="side-nav-img" src="/src/images/insights.svg" alt="" />
+        <span class="side-nav-text">Insights</span>
+      </div>
+    </a>
+    <a href="/z">
+      <div id='side-nav-z' class="nav-item">
+        <img class="side-nav-img" src="/src/images/z-part.svg" alt="" />
+        <span class="side-nav-text">Z&#8209;Part</span>
+      </div>
+    </a>
+    <a href="/tools">
+      <div class="nav-item nav-item-active">
+        <img class="side-nav-img" src="/src/images/tools-active.svg" alt="" />
+        <span class="side-nav-text">Tools</span>
+      </div>
+    </a>
+    <a href="/users/current">
+      <div class="nav-item">
+        <img class="side-nav-img" src="/src/images/profile.svg" alt="" />
+        <span class="side-nav-text">Profile</span>
+      </div>
+    </a>
+    <!-- <div class="nav-item nav-about-us">
+      <img class="side-nav-img" src="/src/images/about.svg" alt="" />
+      <span class="side-nav-text">About Us</span>
+    </div>
+    <div id='side-nav-help' class="nav-item nav-help" style="display: none;">
+      <img class="side-nav-img" src="/src/images/help.svg" alt="" />
+      <span class="side-nav-text">Help & Support</span>
+    </div> -->
+  </div>
+
+  <!-- NAVBAR -->
+  <div class="upper-nav">
+    <div class="logo">
+      <span id='upper-nav-logo-text' class="logo-text">Zecide</span>
+    </div>
+    <div class="search">
+      <input class="search-input" placeholder="Search.." />
+      <img src="/src/images/search.svg" />
+    </div>
+    <button class="download-btn">App Coming Soon!</button>
+    <div class="dropdown">
+      <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <img src="/src/images/default-profile-picture.jpg" class="profile-img" alt="">
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Logout</a>
+        <a class="dropdown-item" href="#">Settings</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div id="body-container" class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="candlestick-chart-div">
+              <div id="candlestick-chart"></div>
+            </div>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-sm-6'>
+            <div class="card">
+              <div class="card-header">
+                Risk Management
+              </div>
+              <div class="card-body">
+                <h5 class="card-text">Scrip: Reliance</h5>
+                <label for="formControlRange">Confidence</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+                <label for="formControlRange">Risk Reward</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+                <button>Go</button>
+              </div>
+              <div class="card-footer">
+                Setting
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-6'>
+            <div class="card">
+              <div class="card-header">
+                Checklist
+              </div>
+              <div class="card-body">
+                <div>
+                  <button type='button' id='add-checklist' class='header-buttons btn btn-outline-primary'>Add
+                    Checklist</button>
+                  <button type='button' id='reset-checklist' class='header-buttons btn btn-outline-danger'>Reset <i
+                      class="fas fa-sync-alt"></i></button>
+                </div>
+                <div style="margin-top: 10px;">
+                  <div class='checklist-item row' id='checklist-item-1'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox1" value="option1">
+                    <input class='checklist-input' id='checklist-input-1' type="text">
+                    <p id='checklist-p-1' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-1'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-1'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-1'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-2'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox2" value="option2">
+                    <input class='checklist-input' id='checklist-input-2' type="text">
+                    <p id='checklist-p-2' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-2'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-2'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-2'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-3'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox3" value="option3">
+                    <input class='checklist-input' id='checklist-input-3' type="text">
+                    <p id='checklist-p-3' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-3'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-3'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-3'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-4'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox4" value="option4">
+                    <input class='checklist-input' id='checklist-input-4' type="text">
+                    <p id='checklist-p-4' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-4'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-4'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-4'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class='checklist-item row' id='checklist-item-5'>
+                    <input class="checklist-checkbox" type="checkbox" id="checkbox5" value="option5">
+                    <input class='checklist-input' id='checklist-input-5' type="text">
+                    <p id='checklist-p-5' class='checklist-p'></p>
+                    <div class='hoverable-buttons' id='hoverable-buttons-5'>
+                      <button type='button' class='checklist-buttons btn btn-outline-primary edit-checklist'
+                        id='edit-checklist-5'><i class="fas fa-pencil-alt"></i></button>
+                      <button type='button' class='checklist-buttons btn btn-outline-danger remove-checklist'
+                        id='remove-checklist-5'><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="bubble-chart-div">
+              <div id="bubble-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-4'>
+        <div class="card monitor-create-card">
+          <div id='monitor-event' style="display: none;">
+            <div class="card-header">
+              MONITOR
+            </div>
+            <div class="card-body">
+              <div id='outer-screen-div'>
+                <div id='ORB-div'>
+                  <ul class="nav nav-tabs screen-nav-tabs custom-scrollbar" id="ORB-screenTab" role="tablist">
+                    <li class="nav-item" id="ORB-screen1-tab" role="presentation">
+                      <a class="nav-link active" data-toggle="tab" href="#ORB-screen1" role="tab"
+                        aria-controls="ORB-screen1" aria-selected="true">
+                        Screen 1 <button onclick="deleteScreen(1)"><i class="fas fa-times"></i></button>
+                      </a>
+                    </li>
+                    <li class="nav-item" id="ORB-screen2-tab" role="presentation">
+                      <a class="nav-link" data-toggle="tab" href="#ORB-screen2" role="tab" aria-controls="ORB-screen2"
+                        aria-selected="false">
+                        Screen 2 <button onclick="deleteScreen(2)"><i class="fas fa-times"></i></button>
+                      </a>
+                    </li>
+                    <li class="nav-item" id="ORB-screen3-tab" role="presentation">
+                      <a class="nav-link" data-toggle="tab" href="#ORB-screen3" role="tab" aria-controls="ORB-screen3"
+                        aria-selected="false">
+                        Screen 3 <button onclick="deleteScreen(3)"><i class="fas fa-times"></i></button>
+                      </a>
+                    </li>
+                    <button id='ORB-add-screen-button' class='add-screen-button' onclick="addScreen()">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </ul>
+                  <div class="tab-content" id="ORB-myTabContent">
+                    <div class="tab-pane screen fade show active" id="ORB-screen1" role="tabpanel"
+                      aria-labelledby="ORB-screen1-tab">
+                      Screen 1
+                      <div class='company-tabs'>
+                        <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                            class='chng-percent'>Chng%</span></div>
+                        <div class='company-tab'><span class='symbol'>MINDTREE</span> <span
+                            class='chng-percent'>1.23%</span>
+                        </div>
+                        <div class='company-tab'><span class='symbol'>RELIANCE</span> <span
+                            class='chng-percent'>8.39%</span>
+                        </div>
+                        <div class='company-tab'><span class='symbol'>TATA STEEL</span> <span
+                            class='chng-percent'>2.53%</span></div>
+                        <div class='company-tab'><span class='symbol'>BAJAJ FINSV</span> <span
+                            class='chng-percent'>0.01%</span></div>
+                      </div>
+                    </div>
+                    <div class="tab-pane screen fade" id="ORB-screen2" role="tabpanel"
+                      aria-labelledby="ORB-screen2-tab">
+                      Screen 2
+                      <div class='company-tabs'>
+                        <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                            class='chng-percent'>Chng%</span></div>
+                      </div>
+                    </div>
+                    <div class="tab-pane screen fade" id="ORB-screen3" role="tabpanel"
+                      aria-labelledby="ORB-screen3-tab">
+                      Screen 3
+                      <div class='company-tabs'>
+                        <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
+                            class='chng-percent'>Chng%</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='monitor-bottom-section'>
+                <div class='monitor-bottom-section-buttons-div'>
+                  <button type="button" class='monitor-bottom-section-buttons' id='show-all-events' data-toggle="modal"
+                    data-target="#show-all-events-modal">Show All Events</button>
+                  <button class='monitor-bottom-section-buttons' id='show-watchlist'>Show Watchlist</button>
+                </div>
+                <div class='monitor-bubbles row'>
+                  <a class='monitor-bubble active' id='ORB-monitor-bubble' onclick="changeCurrentEvent('ORB')">
+                    ORB
+                    <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                      data-bubblename="ORB">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </a>
+                  <a class='monitor-bubble' id='Breakout-RSI-monitor-bubble'
+                    onclick="changeCurrentEvent('Breakout-RSI')">
+                    Breakout RSI
+                    <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                      data-bubblename="Breakout-RSI">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </a>
+                  <a class='monitor-bubble' id='Pivot-Touch-monitor-bubble' onclick="changeCurrentEvent('Pivot-Touch')">
+                    Pivot Touch
+                    <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
+                      data-bubblename="Pivot-Touch">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id='create-event'>
+            <div class="card-header">
+              CREATE
+            </div>
+            <div class="card-body">
+              <input type="text" name="event-name" id="event-name" placeholder="Event Name">
+              <p>
+                RSI
+                <button type="button" class="btn btn-outline-danger" id='delete-create-event'><i
+                    class="fas fa-trash-alt"></i></button>
+              </p>
+              <div>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#price-action-div" aria-expanded="false" aria-controls="price-action-div">Price Action</button>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#indicator-div" aria-expanded="false" aria-controls="indicator-div">Indicator</button>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#price-div" aria-expanded="false" aria-controls="price-div">Price</button>
+              </div>
+              <div>
+                <div class="collapse" id='price-action-div'>
+                  <h5>Price Action</h5>
+                </div>
+                <div class="collapse" id='indicator-div'>
+                  <h5>Indicator</h5>
+                </div>
+                <div class="collapse" id='price-div'>
+                  <h5>Price</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer monitor-create-buttons-div">
+            <button class='monitor-create-buttons'>Monitor Event</button>
+            <button class='monitor-create-buttons'>Create Event</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            Order
+          </div>
+          <div class="card-footer order-buttons">
+            <button type="button" id='buy-button' class="order-button">Buy</button>
+            <button type="button" id='sell-button' class="order-button">Sell</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            Market
+          </div>
+          <div class="card-body">
+            <h5>Uptrend</h5>
+            <p class="card-text">
+            <ol>
+              <li>Item1</li>
+              <li>Item2</li>
+              <li>Item3</li>
+            </ol>
+            </p>
+            <h5>Downtrend</h5>
+            <p class="card-text">
+            <ol>
+              <li>Item1</li>
+              <li>Item2</li>
+              <li>Item3</li>
+            </ol>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script src="/src/scripts/trading-dashboard.js"></script>
+</body>
+
+</html>
