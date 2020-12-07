@@ -279,7 +279,7 @@
       </div>
       <div class='col-sm-4'>
         <div class="card monitor-create-card">
-          <div id='monitor-event' style="display: none;">
+          <div id='monitor-event' class='monitor-create-div'>
             <div class="card-header">
               MONITOR
             </div>
@@ -380,7 +380,7 @@
               </div>
             </div>
           </div>
-          <div id='create-event'>
+          <div class='monitor-create-div' id='create-event'>
             <div class="card-header">
               CREATE
             </div>
@@ -392,18 +392,48 @@
                     class="fas fa-trash-alt"></i></button>
               </p>
               <div>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#price-action-div" aria-expanded="false" aria-controls="price-action-div">Price Action</button>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#indicator-div" aria-expanded="false" aria-controls="indicator-div">Indicator</button>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#price-div" aria-expanded="false" aria-controls="price-div">Price</button>
+                <button class="btn btn-outline-primary" id='price-action-button'>Price Action</button>
+                <button class="btn btn-outline-primary" id='indicator-button'>Indicator</button>
+                <button class="btn btn-outline-primary" id='price-button'>Price</button>
               </div>
               <div>
-                <div class="collapse" id='price-action-div'>
+                <div class="inner-create-event-div" id='price-action-div'>
                   <h5>Price Action</h5>
                 </div>
-                <div class="collapse" id='indicator-div'>
-                  <h5>Indicator</h5>
+                <div class="inner-create-event-div" id='indicator-div'>
+                  <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'>
+                    <option value="ema">EMA</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                  <div class='indicator-tools-div' id='ema-div'>
+                    <select name="ema-choices-dropdown" id="ema-choices-dropdown" value='ema-with-close-price'>
+                      <option value="ema-with-close-price">EMA with Close Price</option>
+                      <option value="ema-crossovers">EMA Crossovers</option>
+                    </select>
+                    <div class='ema-choices-div' id='ema-with-close-price-div'>
+                      <label for="ema-length">Length</label>
+                      <input type="number" value=20 id='ema-length' name='ema-length'>
+                    </div>
+                    <div class='ema-choices-div' id='ema-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="ema-len1">Length of Shorter EMA</label>
+                        <input type="number" value=20 id='ema-len1' name='ema-len1'>
+                      </div>
+                      <div>
+                        <label for="ema-len2">Length of Longer EMA</label>
+                        <input type="number" value=200 id='ema-len2' name='ema-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='ema-cross' id='ema-cross' class='checkbox'>
+                    <label for="ema-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm">Create EMA Event</button>
+                  </div>
                 </div>
-                <div class="collapse" id='price-div'>
+                <div class="inner-create-event-div" id='price-div'>
                   <h5>Price</h5>
                 </div>
               </div>

@@ -270,6 +270,10 @@ a:hover {
   margin: 8px 12px;
 }
 
+.card.monitor-create-card {
+  min-height: 506px;
+}
+
 .card.monitor-create-card .card-body {
   padding: 10px;
 }
@@ -424,6 +428,9 @@ a:hover {
 .monitor-create-buttons-div {
   padding: 0;
   display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .monitor-create-buttons {
@@ -466,4 +473,34 @@ a:hover {
 
 #delete-create-event {
   float: right;
+}
+
+#create-event {
+  display: none;
+}
+
+.inner-create-event-div {
+  margin-top: 10px;
+}
+
+.inner-create-event-div select {
+  min-width: 12vw;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.inner-create-event-div input {
+  width: 5vw;
+  margin-right: 5vw;
+  float: right;
+}
+
+.inner-create-event-div .checkbox {
+  width: auto;
+  margin: 5px;
+  float: left;
+}
+
+#indicator-div, #price-div {
+  display: none;
 }

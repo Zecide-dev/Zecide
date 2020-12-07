@@ -333,14 +333,23 @@ resetChecklistButton.addEventListener('click', () => {
 
 // Monitor-create-event-toggler
 
-document.getElementById('monitor-event-button').addEventListener('click', function() {
-  document.getElementById('monitor-event').style.display = 'initial';
-  document.getElementById('create-event').style.display = 'none';
+let monitorEventButton = document.getElementById('monitor-event-button');
+let createEventButton = document.getElementById('create-event-button');
+let monitorEvent = document.getElementById('monitor-event');
+let createEvent = document.getElementById('create-event');
+
+monitorEventButton.addEventListener('click', function (event) {
+  monitorEvent.style.display = 'initial';
+  // monitorEvent.style.height = 'auto';
+  createEvent.style.display = 'none';
+  // createEvent.style.height = '0';
 })
 
-document.getElementById('create-event-button').addEventListener('click', function() {
-  document.getElementById('monitor-event').style.display = 'none';
-  document.getElementById('create-event').style.display = 'initial';
+createEventButton.addEventListener('click', function () {
+  monitorEvent.style.display = 'none';
+  // monitorEvent.style.height = '0';
+  createEvent.style.display = 'initial';
+  // createEvent.style.height = 'auto'
 })
 
 // MONITOR SCREEN
@@ -519,12 +528,12 @@ function changeCurrentEvent(newEventName) {
 function deleteMonitorEvent(eventName) {
   document.getElementById('close-modal').click();
   let monitorBubble = document.getElementById(eventName + '-monitor-bubble');
-  if(monitorBubble) {
+  if (monitorBubble) {
     monitorBubble.style.display = 'none';
   }
   document.getElementById(eventName + '-modal-bubble').style.display = 'none';
   let eventDiv = document.getElementById(eventName + '-div');
-  if(eventDiv) {
+  if (eventDiv) {
     eventDiv.style.display = 'none';
   }
 }
@@ -536,5 +545,59 @@ $('#delete-monitor-bubble-modal').on('show.bs.modal', function (event) {
   var recipient = button.data('bubblename')
   var modal = $(this)
   modal.find('.modal-body').text('This will delete the ' + recipient + ' event permanantly. Are you sure?')
-  modal.find('#confirm-delete-button').attr('onclick', "deleteMonitorEvent('" +  recipient + "')");
+  modal.find('#confirm-delete-button').attr('onclick', "deleteMonitorEvent('" + recipient + "')");
+})
+
+
+// CREATE EVENT
+
+// Price-action / Indicator / Price div toggle
+
+let priceActionButton = document.getElementById('price-action-button');
+let indicatorButton = document.getElementById('indicator-button');
+let priceButton = document.getElementById('price-button');
+let priceActionDiv = document.getElementById('price-action-div');
+let indicatorDiv = document.getElementById('indicator-div');
+let priceDiv = document.getElementById('price-div');
+
+priceActionButton.addEventListener('click', function () {
+  priceActionDiv.style.display = 'block';
+  indicatorDiv.style.display = 'none';
+  priceDiv.style.display = 'none';
+})
+
+indicatorButton.addEventListener('click', function () {
+  priceActionDiv.style.display = 'none';
+  indicatorDiv.style.display = 'block';
+  priceDiv.style.display = 'none';
+})
+
+priceButton.addEventListener('click', function () {
+  priceActionDiv.style.display = 'none';
+  indicatorDiv.style.display = 'none';
+  priceDiv.style.display = 'block';
+})
+
+// Displaying different Indicator tools
+
+let indicatorToolsDropdown = document.getElementById('indicator-tools-dropdown');
+let indicatorToolsDiv = document.getElementsByClassName('indicator-tools-div');
+
+indicatorToolsDropdown.addEventListener('change', function () {
+  for (let i = 0; i < indicatorToolsDiv.length; i++) {
+    indicatorToolsDiv[i].style.display = 'none';
+  }
+  document.getElementById(indicatorToolsDropdown.value + '-div').style.display = 'block';
+})
+
+// Displaying different EMA choices
+
+let EMAChoicesDropdown = document.getElementById('ema-choices-dropdown');
+let EMAChoicesDiv = document.getElementsByClassName('ema-choices-div');
+
+EMAChoicesDropdown.addEventListener('change', function () {
+  for (let i = 0; i < EMAChoicesDiv.length; i++) {
+    EMAChoicesDiv[i].style.display = 'none';
+  }
+  document.getElementById(EMAChoicesDropdown.value + '-div').style.display = 'block';
 })
