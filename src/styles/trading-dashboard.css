@@ -504,3 +504,18 @@ a:hover {
 #indicator-div, #price-div {
   display: none;
 }
+
+#creating-event-loader {
+  justify-content: space-around;
+  padding-top: 150px;
+  display: none;
+}
+
+#creating-event-loader h4 {
+  text-align: center;
+}
+
+.spinner-grow.text-primary {
+  margin-left: 45%;
+  margin-top: 20px;
+}

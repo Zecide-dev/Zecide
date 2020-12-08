@@ -340,16 +340,12 @@ let createEvent = document.getElementById('create-event');
 
 monitorEventButton.addEventListener('click', function (event) {
   monitorEvent.style.display = 'initial';
-  // monitorEvent.style.height = 'auto';
   createEvent.style.display = 'none';
-  // createEvent.style.height = '0';
 })
 
 createEventButton.addEventListener('click', function () {
   monitorEvent.style.display = 'none';
-  // monitorEvent.style.height = '0';
   createEvent.style.display = 'initial';
-  // createEvent.style.height = 'auto'
 })
 
 // MONITOR SCREEN
@@ -405,6 +401,7 @@ function createNewScreenDiv(eventName, num) {
   screenDiv.setAttribute('role', 'tabpanel');
   screenDiv.setAttribute('aria-labelledby', eventName + '-screen' + num + '-tab');
   companyTabs.setAttribute('class', 'company-tabs');
+  companyTabs.setAttribute('id', eventName + '-screen' + num + '-company-tabs');
   companyTabHeading.setAttribute('class', 'company-tab-heading');
   symbolSpan.setAttribute('class', 'symbol');
   chngPercentSpan.setAttribute('class', 'chng-percent');
@@ -443,6 +440,53 @@ function deleteScreen(num) {
   screenDiv.style.display = 'none';
 }
 
+// Create new event monitor div
+function createNewEventMonitorDiv(eventName) {
+  let eventDiv = document.createElement('div');
+  eventDiv.setAttribute('id', eventName + '-div');
+
+  // Creating the UL element.
+  let ul = document.createElement('ul');
+  ul.setAttribute('class', 'nav nav-tabs screen-nav-tabs custom-scrollbar');
+  ul.setAttribute('id', eventName + '-screenTab');
+  ul.setAttribute('role', 'tablist');
+
+  // For loop for creating the required number of screenTabs
+  for (let i = 1; i <= numScreens[eventName]; i++) {
+    let li = createNewScreenTab(eventName, i);
+    ul.append(li);
+
+    // As the createElement and other  functions are async, to keep them in sync,
+    // I've added them in this if statement so that this code runs only when the last loop is completed.
+    if (i === numScreens[eventName]) {
+      let addScreenButton = document.createElement('button');
+      addScreenButton.setAttribute('id', eventName + '-add-screen-button');
+      addScreenButton.setAttribute('class', 'add-screen-button');
+      addScreenButton.setAttribute('onclick', 'addScreen()');
+      addScreenButton.innerHTML = '<i class="fas fa-plus"></i>';
+      ul.append(addScreenButton);
+      eventDiv.append(ul);
+
+      let screensDiv = document.createElement('div');
+      screensDiv.setAttribute('class', 'tab-content');
+      screensDiv.setAttribute('id', eventName + '-myTabContent');
+
+      // For loop for creating screendiv
+      for (let j = 1; j <= numScreens[eventName]; j++) {
+        let screenDiv = createNewScreenDiv(eventName, j);
+        screensDiv.append(screenDiv);
+
+        // Same reason for creating this if statement.
+        // This code executes only after the last loop is completed.
+        if (j === numScreens[eventName]) {
+          eventDiv.append(screensDiv);
+          return (eventDiv);
+        }
+      }
+    }
+  }
+}
+
 // Chaging the event
 function changeCurrentEvent(newEventName) {
   // If we are changing/deleting event from the show-all-events-modal, then this will close that modal.
@@ -477,50 +521,9 @@ function changeCurrentEvent(newEventName) {
   if (eventDiv) {
     eventDiv.style.display = 'initial';
   } else {
-    let eventDiv = document.createElement('div');
-    eventDiv.setAttribute('id', selectedEvent + '-div');
-
-    // Creating the UL element.
-    let ul = document.createElement('ul');
-    ul.setAttribute('class', 'nav nav-tabs screen-nav-tabs custom-scrollbar');
-    ul.setAttribute('id', selectedEvent + '-screenTab');
-    ul.setAttribute('role', 'tablist');
-
-    // For loop for creating the required number of screenTabs
-    for (let i = 1; i <= numScreens[selectedEvent]; i++) {
-      let li = createNewScreenTab(selectedEvent, i);
-      ul.append(li);
-
-      // As the createElement and other  functions are async, to keep them in sync,
-      // I've added them in this if statement so that this code runs only when the last loop is completed.
-      if (i === numScreens[selectedEvent]) {
-        let addScreenButton = document.createElement('button');
-        addScreenButton.setAttribute('id', selectedEvent + '-add-screen-button');
-        addScreenButton.setAttribute('class', 'add-screen-button');
-        addScreenButton.setAttribute('onclick', 'addScreen()');
-        addScreenButton.innerHTML = '<i class="fas fa-plus"></i>';
-        ul.append(addScreenButton);
-        eventDiv.append(ul);
-
-        let screensDiv = document.createElement('div');
-        screensDiv.setAttribute('class', 'tab-content');
-        screensDiv.setAttribute('id', selectedEvent + '-myTabContent');
-
-        // For loop for creating screendiv
-        for (let j = 1; j <= numScreens[selectedEvent]; j++) {
-          let screenDiv = createNewScreenDiv(selectedEvent, j);
-          screensDiv.append(screenDiv);
-
-          // Same reason for creating this if statement.
-          // This code executes only after the last loop is completed.
-          if (j === numScreens[selectedEvent]) {
-            eventDiv.append(screensDiv);
-            document.getElementById('outer-screen-div').append(eventDiv);
-            ul.childNodes[0].childNodes[0].click();
-          }
-        }
-      }
-    }
+    eventDiv = createNewEventMonitorDiv(selectedEvent);
+    document.getElementById('outer-screen-div').append(eventDiv);
+    eventDiv.childNodes[0].childNodes[0].childNodes[0].click();
   }
 }
 
@@ -550,6 +553,8 @@ $('#delete-monitor-bubble-modal').on('show.bs.modal', function (event) {
 
 
 // CREATE EVENT
+
+let numCustomEvents = 1;
 
 // Price-action / Indicator / Price div toggle
 
@@ -601,3 +606,105 @@ EMAChoicesDropdown.addEventListener('change', function () {
   }
   document.getElementById(EMAChoicesDropdown.value + '-div').style.display = 'block';
 })
+
+// Creating an EMA Event
+
+let createEmaEvent = document.getElementById('create-ema-event');
+let creatingEventLoader = document.getElementById('creating-event-loader');
+
+createEmaEvent.addEventListener('click', function () {
+  console.log('clicked');
+
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Creating The EMA event with the name given
+  let eventName = document.getElementById('event-name').value.toString().split(' ').join('-');
+  if (eventName === '') {
+    eventName = 'Custom-Event-' + numCustomEvents;
+    numCustomEvents++;
+  }
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = document.createElement('a');
+  let button = document.createElement('button');
+  let icon = document.createElement('i');
+
+  a.setAttribute('class', 'modal-bubble');
+  a.setAttribute('id', eventName + '-modal-bubble');
+  a.setAttribute('onClick', 'changeCurrentEvent(' + eventName + ')');
+  a.innerText = eventName.split('-').join(' ');
+  button.setAttribute('type', 'button');
+  button.setAttribute('data-toggle', 'modal');
+  button.setAttribute('data-target', '#delete-monitor-bubble-modal');
+  button.setAttribute('data-bubblename', eventName);
+  icon.setAttribute('class', 'fa fa-times');
+
+  button.append(icon);
+  a.append(button);
+  modalBubblesContainer.append(a);
+
+  // Adding the new event into the numScreens object;
+  numScreens[eventName] = 2;
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+  console.log(monitorDiv);
+  // document.getElementById(eventName + '-screen1').innerText = 'Bullish';
+  // document.getElementById(eventName + '-screen2').innerText = 'Bearish';
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = 'http://localhost:8000/Dashboard/ema?choice=1&cross=1&data=0&length=20&len1=20&len2=200&detectAtCrossing=1';
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      let screen1CompanyTabs = document.getElementById(eventName + '-screen1-company-tabs');
+      for (let i = 0; i < fetchedData['bullish'].length; i++) {
+        let div = document.createElement('div');
+        let span = document.createElement('span');
+
+        div.setAttribute('class', 'company-tab');
+        span.setAttribute('class', 'symbol');
+        span.innerText = fetchedData['bullish'][i].toString().substr(0, fetchedData['bullish'][i].toString().length - 3);
+        div.append(span);
+        screen1CompanyTabs.append(div);
+
+        if (i === fetchedData['bullish'].length - 1) {
+          let screen2CompanyTabs = document.getElementById(eventName + '-screen2-company-tabs');
+          for (let j = 0; j < fetchedData['bearish'].length; j++) {
+            let div = document.createElement('div');
+            let span = document.createElement('span');
+
+            div.setAttribute('class', 'company-tab');
+            span.setAttribute('class', 'symbol');
+            span.innerText = fetchedData['bearish'][j].toString().substr(0, fetchedData['bearish'][j].toString().length - 3);
+            div.append(span);
+            screen2CompanyTabs.append(div);
+
+            if (j === fetchedData['bearish'].length - 1) {
+              console.log('Final click');
+              // Opening the first Screen tab of the created monitor screens
+              changeCurrentEvent(eventName);
+              document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+            }
+          }
+        }
+      }
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+// Things to do
+// 1) Add screen title, i.e., Bullish Bearish etc.
+// 2) Change url to have custom query params.
+// 3) Pass on personalized jwt token.

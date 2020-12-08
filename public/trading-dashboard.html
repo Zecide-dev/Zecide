@@ -52,7 +52,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class='container row'>
+          <div class='container row' id='modal-bubbles-container'>
             <a class='modal-bubble active' id='ORB-modal-bubble' onclick="changeCurrentEvent('ORB')">
               ORB
               <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
@@ -313,7 +313,7 @@
                     <div class="tab-pane screen fade show active" id="ORB-screen1" role="tabpanel"
                       aria-labelledby="ORB-screen1-tab">
                       Screen 1
-                      <div class='company-tabs'>
+                      <div class='company-tabs' id='ORB-Screen1-company-tabs'>
                         <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
                             class='chng-percent'>Chng%</span></div>
                         <div class='company-tab'><span class='symbol'>MINDTREE</span> <span
@@ -331,7 +331,7 @@
                     <div class="tab-pane screen fade" id="ORB-screen2" role="tabpanel"
                       aria-labelledby="ORB-screen2-tab">
                       Screen 2
-                      <div class='company-tabs'>
+                      <div class='company-tabs' id='ORB-Screen2-company-tabs'>
                         <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
                             class='chng-percent'>Chng%</span></div>
                       </div>
@@ -339,7 +339,7 @@
                     <div class="tab-pane screen fade" id="ORB-screen3" role="tabpanel"
                       aria-labelledby="ORB-screen3-tab">
                       Screen 3
-                      <div class='company-tabs'>
+                      <div class='company-tabs' id='ORB-Screen3-company-tabs'>
                         <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
                             class='chng-percent'>Chng%</span></div>
                       </div>
@@ -430,13 +430,19 @@
                     <label for="ema-cross">Detect at Crossing</label>
                     <br>
                     <br>
-                    <button type='button' class="btn btn-outline-dark btn-sm">Create EMA Event</button>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ema-event'>Create EMA Event</button>
                   </div>
                 </div>
                 <div class="inner-create-event-div" id='price-div'>
                   <h5>Price</h5>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class='monitor-create-div' id='creating-event-loader'>
+            <h4>Creating Event...</h4>
+            <div class="spinner-grow text-primary" role="status">
+              <span class="sr-only">Loading...</span>
             </div>
           </div>
           <div class="card-footer monitor-create-buttons-div">
