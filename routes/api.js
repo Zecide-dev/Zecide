@@ -90,9 +90,6 @@ router.get('/Z/Snippet/Edit/:SnipId',function(req,res){
 router.get('/Z/Snippet/delete/:SnipId',function(req,res){
     res.sendFile(path.join(__dirname, "../public/snippets-delete.html"))
 })
-router.get('/learn',function(req,res){
-    res.sendFile(path.join(__dirname, "../public/learn.html"))
-})
 
 /* GET blog home page */
 router.get('/blog', function(req, res, next) {
