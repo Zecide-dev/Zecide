@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="icon" href="/src/images/logo.svg" />
-    <link rel="stylesheet" href="/public/varsity.css">
+    <!-- <link rel="stylesheet" href="/public/varsity.css"> -->
     <!-- <link rel="stylesheet" href="/public/var2.css"> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -36,6 +36,7 @@
     <meta property="og:description" content="<%= data.object.metadata.description %>">
 
 </head>
+<!-- to do - 1sside bar -->
 
 <body>
     <!-- Preloader -->
@@ -92,14 +93,19 @@
                         <a href="/users/login"><button>Login</button></a>
                     </div>
                 </div>
+
                 <div>
 
-                    <div  class="flex-container">
+
+
+                    <div class="flex-container outer">
                         <div style="width: 100vw;">
                             <!-- Header -->
                             <header class="w3-container w3-theme w3-padding" id="myHeader">
                                 <div class="w3-center">
-                                    <h1 class="w3-animate-bottom"> <%= data.object.title %></h1>
+                                    <h1 class="w3-animate-bottom">
+                                        <%= data.object.title %>
+                                    </h1>
 
 
                                     <div class="w3-padding-32">
@@ -109,10 +115,9 @@
                         </div>
                         <br>
 
-                        
-                        <div style="margin-right: 10%;margin-left: 22%;padding: 10%;padding-top: 0vw;margin-bottom: 200px;"
-                            id="content">
-                            <h3><%= data.object.title %></h3>
+
+                        <div id="content" class="flex-item">
+                            <!-- <h3><%= data.object.title %></h3> -->
 
                             <div class="blog-content markdown-body">
                                 <p class="blog-post-text" id="md">
@@ -127,117 +132,192 @@
                             Chapters⟶</button>
                         <br>
                         <br>
-                        <div class="flex-item" id="sidebar">
+                        <div class="flex-item1 box" id="sidebar">
                             <div
-                                style="border: #3b98ff solid; width: 20%;position: fixed;padding: 30px;z-index: 9;border-radius: 20px;">
+                                style="border: #3b98ff solid;padding: 10px; width: 20%;position: fixed;border-radius: 20px;bottom: 10px ;background-color: white;top: 150px;">
 
-
-                                <a href="#" onclick="myFunction()" class="hide btn btn-light" id="hide"> ←
-                                    Hide</a>
-                                <br>
-                                <br>
-                                <ol class="noul chapter-list">
-                                    <li class="selected">
-                                        <span class="num">
-                                            1 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/the-need-to-invest/">
-                                            The Need to Invest </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            2 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/regulators/">
-                                            Regulators </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            3 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/financial-intermediaries/">
-                                            Financial Intermediaries </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            4 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/the-ipo-markets-part-1/">
-                                            The IPO Markets – Part 1 </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            5 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/the-ipo-markets-part-2/">
-                                            The IPO Markets – Part 2 </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            6 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/the-stock-markets/">
-                                            The Stock Markets </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            7 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/the-stock-markets-index/">
-                                            The Stock Markets Index </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            8 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/commonly-used-jargons/">
-                                            Commonly Used Jargons </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            9 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/the-trading-terminal/">
-                                            The Trading Terminal </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            10 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/clearing-and-settlement-process/">
-                                            Clearing and Settlement Process </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            11 </span>
-                                        <a
-                                            href="https://zerodha.com/varsity/chapter/five-corporate-actions-and-its-impact-on-stock-prices/">
-                                            Five Corporate Actions and Its Impact on Stock Prices </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            12 </span>
-                                        <a
-                                            href="https://zerodha.com/varsity/chapter/key-events-and-their-impact-on-markets/">
-                                            Key Events and Their Impact on Markets </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            13 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/getting-started/">
-                                            Getting started! </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            14 </span>
-                                        <a href="https://zerodha.com/varsity/chapter/supplementary-note-ipo-ofs-fpo/">
-                                            Supplementary note – Rights, OFS, FPO </a>
-                                    </li>
-                                    <li class="">
-                                        <span class="num">
-                                            15 </span>
-                                        <a
-                                            href="https://zerodha.com/varsity/chapter/supplementary-note-the-20-market-depth/">
-                                            Supplementary note – The 20 market depth or level 3 data </a>
-                                    </li>
-                                </ol>
+                                <div style="margin: 10px;">
+                                    <a href="#" onclick="myFunction()" class="hide btn btn-light" id="hide"> ←
+                                        Hide</a>
+                                    <br>
+                                    <br>
+                                    <ol class="noul chapter-list">
+                                        <li class="selected">
+                                            <span class="num">
+                                                1 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-need-to-invest/">
+                                                The Need to Invest </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                2 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/regulators/">
+                                                Regulators </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                3 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/financial-intermediaries/">
+                                                Financial Intermediaries </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                4 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-ipo-markets-part-1/">
+                                                The IPO Markets – Part 1 </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                5 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-ipo-markets-part-2/">
+                                                The IPO Markets – Part 2 </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                6 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-stock-markets/">
+                                                The Stock Markets </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                7 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-stock-markets-index/">
+                                                The Stock Markets Index </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                8 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/commonly-used-jargons/">
+                                                Commonly Used Jargons </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                9 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-trading-terminal/">
+                                                The Trading Terminal </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                10 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/clearing-and-settlement-process/">
+                                                Clearing and Settlement Process </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                11 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/five-corporate-actions-and-its-impact-on-stock-prices/">
+                                                Five Corporate Actions and Its Impact on Stock Prices </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                12 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/key-events-and-their-impact-on-markets/">
+                                                Key Events and Their Impact on Markets </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                13 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/getting-started/">
+                                                Getting started! </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                14 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/supplementary-note-ipo-ofs-fpo/">
+                                                Supplementary note – Rights, OFS, FPO </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                15 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/supplementary-note-the-20-market-depth/">
+                                                Supplementary note – The 20 market depth or level 3 data </a>
+                                        </li>
+                                    </ol>
+                                </div>
                             </div>
                         </div>
+
 
                     </div>
 
 
+                    <div class="disqus">
+                        <div id="disqus_thread"></div>
+                        <script>
+
+                            /**
+                            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                            var disqus_config = function () {
+                                this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+                                this.page.identifier = window.location.href; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+
+                            (function () { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://zecideweb.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a
+                                href="https://disqus.com/?ref_noscript">comments powered by
+                                Disqus.</a></noscript>
+
+                    </div>
+
+                    <div class="footer" id="footer">
+                        <div class="footer-left">
+                            <div class="address-section">
+                                <img src="../src/images/footer-art.svg" alt="" srcset="" />
+                                <div class="address">
+                                    <h3>Office</h3>
+                                    <p>
+                                        LGF, 416, Sector 45 <br />
+                                        Gurgaon, Haryana <br />
+                                        Ph: 9003711038
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="copyright">© 2020 Zecide</div>
+                        </div>
+                        <div class="footer-right">
+                            <img src="../src/images/footer-art.svg" alt="" srcset="" />
+                            <div class="waitlist-social-links">
+                                <div class="waitlist-f">
+                                    <p>Drop your email to request early access
+
+                                    </p>
+                                    <form action="">
+                                        <input class="waitlist-f-mail" type="text" name=""
+                                            placeholder="Enter your email" id="" />
+                                        <input class="waitlist-f-button" type="button" value="→" />
+                                    </form>
+                                </div>
+                                <div class="social-links">
+                                    <p>Follow us on:</p>
+                                    <a
+                                        href="https://in.linkedin.com/organization-guest/company/zecide?challengeId=AQGpOFqGGj1DUwAAAXNrC1Pkp19OLI5XXj9N9Gr3wrdOf3nlcCTPcYnBXKKVQYamgrwqVsdgclAoee3q_hJQlAAOg1wQPjyWvw&submissionId=a0de508d-1d64-2316-1e84-ee5457b8a74a"><img
+                                            src="/src/images/linkedin-footer.svg" alt="" srcset="" /></a>
+                                    <a href="https://www.facebook.com/Zecide-105162521280091"><img
+                                            src="/src/images/facebook-footer.svg" alt="face" srcset="" /></a>
+                                    <a href="https://twitter.com/zecide?lang=en"><img
+                                            src="/src/images/twitter-footer.svg" alt="" srcset="" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copyright-m">© 2020 Zecide</div>
+                    </div>
+
+
                 </div>
+
 
 
 
@@ -338,7 +418,7 @@
             </div> -->
 
             <!-- module -->
-            
+
 
 
 
@@ -352,50 +432,10 @@
                     </div>
                 </div>
             </header> -->
-        </div>
-            <div class="footer " id="footer" style="position: relative;bottom: 0;" >
-                <div class="w3-center">
-                    <div class="address-section">
-                        <img style="margin: 10px;" src="../src/images/footer-art.svg" alt="" srcset="" />
-                        <div class="address">
-                            <h3>Office</h3>
-                            <p>
-                                LGF, 416, Sector 45 <br />
-                                Gurgaon, Haryana <br />
-                                Ph: 9003711038
-                            </p>
-                        </div>
-                    </div>
-                    <div class="copyright">© 2020 Zecide</div>
-                </div>
-                <div class="footer-right">
-                    <img src="../src/images/footer-art.svg" alt="" srcset="" />
-                    <div class="waitlist-social-links">
-                        <div class="waitlist-f">
-                            <p>Drop your email to request early access
 
-                            </p>
-                            <form action="">
-                                <input class="waitlist-f-mail" type="text" name="" placeholder="Enter your email"
-                                    id="" />
-                                <input class="waitlist-f-button" type="button" value="→" />
-                            </form>
-                        </div>
-                        <div class="social-links">
-                            <p>Follow us on:</p>
-                            <a
-                                href="https://in.linkedin.com/organization-guest/company/zecide?challengeId=AQGpOFqGGj1DUwAAAXNrC1Pkp19OLI5XXj9N9Gr3wrdOf3nlcCTPcYnBXKKVQYamgrwqVsdgclAoee3q_hJQlAAOg1wQPjyWvw&submissionId=a0de508d-1d64-2316-1e84-ee5457b8a74a"><img
-                                    src="/src/images/linkedin-footer.svg" alt="" srcset="" /></a>
-                            <a href="https://www.facebook.com/Zecide-105162521280091"><img
-                                    src="/src/images/facebook-footer.svg" alt="face" srcset="" /></a>
-                            <a href="https://twitter.com/zecide?lang=en"><img src="/src/images/twitter-footer.svg"
-                                    alt="" srcset="" /></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="copyright-m">© 2020 Zecide</div>
-            </div>
-        
+        </div>
+
+
     </div>
     <script src="/src/scripts/index.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -468,9 +508,10 @@
         if (sidebar.style.display === "none") {
             sidebar.style.display = "inline";
             // sidebar.style.border = "aliceblue solid";
-            sidebar.style.width = "20%";
+            sidebar.style.width = "20vw";
             // style="margin-right: 10%;margin-left: 22%;padding: 10%;padding-top: 0vw;"
-            content.style.marginLeft = "22%";
+            // content.style.width = "100%";
+
 
 
 
@@ -485,8 +526,8 @@
             // btnText.innerHTML = "hide";
             bimg.style.display = "inline";
             // sidebar.style.border = "aliceblue solid";
-            sidebar.style.width = "20%";
-            content.style.marginLeft = "0%";
+            // sidebar.style.width = "20%";
+            // content.style.marginLeft = "0%";
 
 
             // moreText.style.display = "inline";
@@ -496,6 +537,12 @@
 
 </script>
 <style>
+    /* @media screen (max-width: 700px;) {
+        .flex-item1{
+            display: none;
+        }
+        
+    } */
     .flex-container {
         /* We first create a flex layout context */
         display: flex;
@@ -518,7 +565,7 @@
     .flex-item {
         /* background: tomato; */
         /* padding: 5px; */
-        width: 200px;
+        width: 75%;
         /* height: 150px; */
         /* margin-top: 10px; */
         /* line-height: 150px; */
@@ -526,6 +573,25 @@
         /* font-weight: bold; */
         /* font-size: 3em; */
         /* text-align: center; */
+    }
+
+    .flex-item1 {
+        width: 15%;
+        position: relative;
+        bottom: 0px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .flex-item1{
+            display: none;
+        }
+        .flex-item{
+            width: 100%;
+        }
     }
 </style>
 

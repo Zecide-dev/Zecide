@@ -125,9 +125,9 @@ body {
   height: 5vh;
 }
 .text-tiny {
-  font-size: 1.2rem;
-  line-height: 1.8rem;
-  color: #777;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    color: #777;
 }
 button {
   outline: none;
