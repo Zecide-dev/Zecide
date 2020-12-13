@@ -19,10 +19,10 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel='stylesheet' href='../src/styles/blog-index.css' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/src/styles/blog-index.css'>
 </head>
 
 <body>
@@ -108,25 +108,30 @@
 
 
             </div>
-            <div style="margin: 10vw;">
+
+            <div class="module1" style="margin: 10vw;">
                 <h2 style="    font-size: 3rem;">Modules</h2>
                 <br>
                 <br>
                 <div class="row row-cols-1 row-cols-md-3">
                     <% data.objects.forEach(function (post) { %>
 
-                    <div class="col mb-4">
-                        <div class="card h-100">
-                            <!-- <img src="..." class="card-img-top" alt="..."> -->
-                            <div class="card-body">
-                                <a href="/learn2/<%= post.slug %>">
-                                    <h2 class="card-title top-heading"><%= post.title %></h2>
-                                </a>
-                                <p class="card-text"><%= post.metadata.description %></p>
+                        <div class="col mb-4">
+                            <div class="card h-100">
+                                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                                <div class="card-body">
+                                    <a href="/learn2/<%= post.slug %>">
+                                        <h2 class="card-title top-heading">
+                                            <%= post.title %>
+                                        </h2>
+                                    </a>
+                                    <p class="card-text">
+                                        <%= post.metadata.description %>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <% })%>
+                        <% })%>
                 </div>
                 <br>
                 <br>
@@ -176,7 +181,16 @@
 
             </div>
             <!-- module -->
+            <style>
+                @media only screen and (max-width: 768px) {
+                    .module1 {
 
+                        /* For mobile phones: */
+                        padding-top: 40vw;
+                    }
+
+                }
+            </style>
 
 
 
