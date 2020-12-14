@@ -391,6 +391,7 @@ function createNewScreenTab(eventName, num) {
 // This function creates and returns a new screen div, for a given event name and screen number.
 function createNewScreenDiv(eventName, num) {
   let screenDiv = document.createElement('div');
+  let screenTitle = document.createElement('div');
   let companyTabs = document.createElement('div');
   let companyTabHeading = document.createElement('div');
   let symbolSpan = document.createElement('span');
@@ -400,6 +401,8 @@ function createNewScreenDiv(eventName, num) {
   screenDiv.setAttribute('id', eventName + '-screen' + num);
   screenDiv.setAttribute('role', 'tabpanel');
   screenDiv.setAttribute('aria-labelledby', eventName + '-screen' + num + '-tab');
+  screenTitle.setAttribute('class', 'screen-title');
+  screenTitle.setAttribute('id', eventName + '-screen' + num + '-title');
   companyTabs.setAttribute('class', 'company-tabs');
   companyTabs.setAttribute('id', eventName + '-screen' + num + '-company-tabs');
   companyTabHeading.setAttribute('class', 'company-tab-heading');
@@ -408,7 +411,8 @@ function createNewScreenDiv(eventName, num) {
 
   symbolSpan.innerText = 'Symbol';
   chngPercentSpan.innerText = 'Chng%';
-  screenDiv.innerText = 'Screen ' + num;
+  screenTitle.innerText = 'Screen ' + num;
+  screenDiv.append(screenTitle);
   companyTabHeading.append(symbolSpan);
   companyTabHeading.append(chngPercentSpan);
   companyTabs.append(companyTabHeading);
@@ -634,7 +638,7 @@ createEmaEvent.addEventListener('click', function () {
 
   a.setAttribute('class', 'modal-bubble');
   a.setAttribute('id', eventName + '-modal-bubble');
-  a.setAttribute('onClick', 'changeCurrentEvent(' + eventName + ')');
+  a.setAttribute('onClick', 'changeCurrentEvent(\'' + eventName + '\')');
   a.innerText = eventName.split('-').join(' ');
   button.setAttribute('type', 'button');
   button.setAttribute('data-toggle', 'modal');
@@ -652,12 +656,28 @@ createEmaEvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  console.log(monitorDiv);
-  // document.getElementById(eventName + '-screen1').innerText = 'Bullish';
-  // document.getElementById(eventName + '-screen2').innerText = 'Bearish';
+  document.getElementById(eventName + '-screen1-title').innerText = 'Bullish';
+  document.getElementById(eventName + '-screen2-title').innerText = 'Bearish';
+
+
+  // Customizing the URL
+
+  // EMAChoicesDropdown have already been declared
+  let EMALength = document.getElementById('ema-length');
+  let EMALen1 = document.getElementById('ema-len1');
+  let EMALen2 = document.getElementById('ema-len2');
+  let EMACross = document.getElementById('ema-cross');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = 'http://localhost:8000/Dashboard/ema?choice=1&cross=1&data=0&length=20&len1=20&len2=200&detectAtCrossing=1';
+  let url = 'http://localhost:8000/Dashboard/ema?';
+  url += ('choice=' + (EMAChoicesDropdown.value === 'ema-crossovers' ? 2 : 1));
+  url += ('&cross=' + (EMACross.checked ? 1 : 0));
+  url += ('&data=0');
+  url += ('&length=' + EMALength.value.toString());
+  url += ('&len1=' + EMALen1.value.toString());
+  url += ('&len2=' + EMALen2.value.toString());
+  console.log(url);
+
   xmlHttp.onreadystatechange = function () {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
       creatingEventLoader.style.display = 'none';
@@ -705,6 +725,4 @@ createEmaEvent.addEventListener('click', function () {
 })
 
 // Things to do
-// 1) Add screen title, i.e., Bullish Bearish etc.
-// 2) Change url to have custom query params.
-// 3) Pass on personalized jwt token.
+// 1) Pass on personalized jwt token.
