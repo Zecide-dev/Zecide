@@ -400,14 +400,26 @@
                   <h5>Price Action</h5>
                 </div>
                 <div class="inner-create-event-div" id='indicator-div'>
-                  <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'>
-                    <option value="ema">EMA</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                  <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'
+                    onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option value="ema">EMA - Exponential Moving Average</option>
+                    <option value="dema">DEMA - Double Exponential Moving Average</option>
+                    <option value="hma">HMA - Hull Moving Average</option>
+                    <option value="kama">KAMA - Kaufman's Adaptive Moving Average</option>
+                    <option value="sma">SMA - Simple Moving Average</option>
+                    <option value="rma">RMA - WildeR's Moving Average</option>
+                    <option value="sinwma">SINWMA - Sine Weighted Moving Average</option>
+                    <option value="swma">SMA - Symmetric Weighted Moving Average</option>
+                    <option value="t3ma">T3MA - T3 Moving Average</option>
+                    <option value="tema">TEMA - Triple Exponential Moving Average</option>
+                    <option value="trima">TRIMA - Triangular Moving Average</option>
+                    <option value="vwma">VWMA - Volume Weighted Moving Average</option>
+                    <option value="zlma">ZLMA - Zero Lag Moving Average</option>
                   </select>
-                  <div class='tools-div ema-tools-div' id='ema-div'>
-                    <select class='tools-choices-dropdown' name="ema-choices-dropdown" id="ema-choices-dropdown" value='ema-with-close-price'>
+                  <!-- EMA div -->
+                  <div class='tools-div indicator-tools-div' id='ema-div'>
+                    <select class='tools-choices-dropdown' name="ema-choices-dropdown" id="ema-choices-dropdown"
+                      value='ema-with-close-price'>
                       <option value="ema-with-close-price">EMA with Close Price</option>
                       <option value="ema-crossovers">EMA Crossovers</option>
                     </select>
@@ -432,6 +444,343 @@
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-ema-event'>Create EMA
                       Event</button>
                   </div>
+                  <!-- DEMA div -->
+                  <div class='tools-div indicator-tools-div' id='dema-div'>
+                    <select class='tools-choices-dropdown' name="dema-choices-dropdown" id="dema-choices-dropdown"
+                      value='dema-with-close-price'>
+                      <option value="dema-with-close-price">DEMA with Close Price</option>
+                      <option value="dema-crossovers">DEMA Crossovers</option>
+                    </select>
+                    <div class='dema-choices-div' id='dema-with-close-price-div'>
+                      <label for="dema-length">Length</label>
+                      <input type="number" value=20 id='dema-length' name='dema-length'>
+                    </div>
+                    <div class='dema-choices-div' id='dema-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="dema-len1">Length of Shorter DEMA</label>
+                        <input type="number" value=20 id='dema-len1' name='dema-len1'>
+                      </div>
+                      <div>
+                        <label for="dema-len2">Length of Longer DEMA</label>
+                        <input type="number" value=200 id='dema-len2' name='dema-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='dema-cross' id='dema-cross' class='checkbox'>
+                    <label for="dema-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-dema-event'>Create DEMA
+                      Event</button>
+                  </div>
+                  <!-- HMA div -->
+                  <div class='tools-div indicator-tools-div' id='hma-div'>
+                    <select class='tools-choices-dropdown' name="hma-choices-dropdown" id="hma-choices-dropdown"
+                      value='hma-with-close-price'>
+                      <option value="hma-with-close-price">HMA with Close Price</option>
+                      <option value="hma-crossovers">HMA Crossovers</option>
+                    </select>
+                    <div class='hma-choices-div' id='hma-with-close-price-div'>
+                      <label for="hma-length">Length</label>
+                      <input type="number" value=20 id='hma-length' name='hma-length'>
+                    </div>
+                    <div class='hma-choices-div' id='hma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="hma-len1">Length of Shorter HMA</label>
+                        <input type="number" value=20 id='hma-len1' name='hma-len1'>
+                      </div>
+                      <div>
+                        <label for="hma-len2">Length of Longer HMA</label>
+                        <input type="number" value=200 id='hma-len2' name='hma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='hma-cross' id='hma-cross' class='checkbox'>
+                    <label for="hma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-hma-event'>Create HMA
+                      Event</button>
+                  </div>
+                  <!-- KAMA div -->
+                  <div class='tools-div indicator-tools-div' id='kama-div'>
+                    <select class='tools-choices-dropdown' name="kama-choices-dropdown" id="kama-choices-dropdown"
+                      value='kama-with-close-price'>
+                      <option value="kama-with-close-price">KAMA with Close Price</option>
+                      <option value="kama-crossovers">KAMA Crossovers</option>
+                    </select>
+                    <div class='kama-choices-div' id='kama-with-close-price-div'>
+                      <label for="kama-length">Length</label>
+                      <input type="number" value=20 id='kama-length' name='kama-length'>
+                    </div>
+                    <div class='kama-choices-div' id='kama-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="kama-len1">Length of Shorter KAMA</label>
+                        <input type="number" value=20 id='kama-len1' name='kama-len1'>
+                      </div>
+                      <div>
+                        <label for="kama-len2">Length of Longer KAMA</label>
+                        <input type="number" value=200 id='kama-len2' name='kama-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='kama-cross' id='kama-cross' class='checkbox'>
+                    <label for="kama-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-kama-event'>Create KAMA
+                      Event</button>
+                  </div>
+                  <!-- SMA div -->
+                  <div class='tools-div indicator-tools-div' id='sma-div'>
+                    <select class='tools-choices-dropdown' name="sma-choices-dropdown" id="sma-choices-dropdown"
+                      value='sma-with-close-price'>
+                      <option value="sma-with-close-price">SMA with Close Price</option>
+                      <option value="sma-crossovers">SMA Crossovers</option>
+                    </select>
+                    <div class='sma-choices-div' id='sma-with-close-price-div'>
+                      <label for="sma-length">Length</label>
+                      <input type="number" value=20 id='sma-length' name='sma-length'>
+                    </div>
+                    <div class='sma-choices-div' id='sma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="sma-len1">Length of Shorter SMA</label>
+                        <input type="number" value=20 id='sma-len1' name='sma-len1'>
+                      </div>
+                      <div>
+                        <label for="sma-len2">Length of Longer SMA</label>
+                        <input type="number" value=200 id='sma-len2' name='sma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='sma-cross' id='sma-cross' class='checkbox'>
+                    <label for="sma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-sma-event'>Create SMA
+                      Event</button>
+                  </div>
+                  <!-- RMA div -->
+                  <div class='tools-div indicator-tools-div' id='rma-div'>
+                    <select class='tools-choices-dropdown' name="rma-choices-dropdown" id="rma-choices-dropdown"
+                      value='rma-with-close-price'>
+                      <option value="rma-with-close-price">RMA with Close Price</option>
+                      <option value="rma-crossovers">RMA Crossovers</option>
+                    </select>
+                    <div class='rma-choices-div' id='rma-with-close-price-div'>
+                      <label for="rma-length">Length</label>
+                      <input type="number" value=20 id='rma-length' name='rma-length'>
+                    </div>
+                    <div class='rma-choices-div' id='rma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="rma-len1">Length of Shorter RMA</label>
+                        <input type="number" value=20 id='rma-len1' name='rma-len1'>
+                      </div>
+                      <div>
+                        <label for="rma-len2">Length of Longer RMA</label>
+                        <input type="number" value=200 id='rma-len2' name='rma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='rma-cross' id='rma-cross' class='checkbox'>
+                    <label for="rma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-rma-event'>Create RMA
+                      Event</button>
+                  </div>
+                  <!-- SINWMA div -->
+                  <div class='tools-div indicator-tools-div' id='sinwma-div'>
+                    <select class='tools-choices-dropdown' name="sinwma-choices-dropdown" id="sinwma-choices-dropdown"
+                      value='sinwma-with-close-price'>
+                      <option value="sinwma-with-close-price">SINWMA with Close Price</option>
+                      <option value="sinwma-crossovers">SINWMA Crossovers</option>
+                    </select>
+                    <div class='sinwma-choices-div' id='sinwma-with-close-price-div'>
+                      <label for="sinwma-length">Length</label>
+                      <input type="number" value=20 id='sinwma-length' name='sinwma-length'>
+                    </div>
+                    <div class='sinwma-choices-div' id='sinwma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="sinwma-len1">Length of Shorter SINWMA</label>
+                        <input type="number" value=20 id='sinwma-len1' name='sinwma-len1'>
+                      </div>
+                      <div>
+                        <label for="sinwma-len2">Length of Longer SINWMA</label>
+                        <input type="number" value=200 id='sinwma-len2' name='sinwma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='sinwma-cross' id='sinwma-cross' class='checkbox'>
+                    <label for="sinwma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-sinwma-event'>Create SINWMA
+                      Event</button>
+                  </div>
+                  <!-- SWMA div -->
+                  <div class='tools-div indicator-tools-div' id='swma-div'>
+                    <select class='tools-choices-dropdown' name="swma-choices-dropdown" id="swma-choices-dropdown"
+                      value='swma-with-close-price'>
+                      <option value="swma-with-close-price">SWMA with Close Price</option>
+                      <option value="swma-crossovers">SWMA Crossovers</option>
+                    </select>
+                    <div class='swma-choices-div' id='swma-with-close-price-div'>
+                      <label for="swma-length">Length</label>
+                      <input type="number" value=20 id='swma-length' name='swma-length'>
+                    </div>
+                    <div class='swma-choices-div' id='swma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="swma-len1">Length of Shorter SWMA</label>
+                        <input type="number" value=20 id='swma-len1' name='swma-len1'>
+                      </div>
+                      <div>
+                        <label for="swma-len2">Length of Longer SWMA</label>
+                        <input type="number" value=200 id='swma-len2' name='swma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='swma-cross' id='swma-cross' class='checkbox'>
+                    <label for="swma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-swma-event'>Create SWMA
+                      Event</button>
+                  </div>
+                  <!-- T3MA div -->
+                  <div class='tools-div indicator-tools-div' id='t3ma-div'>
+                    <select class='tools-choices-dropdown' name="t3ma-choices-dropdown" id="t3ma-choices-dropdown"
+                      value='t3ma-with-close-price'>
+                      <option value="t3ma-with-close-price">T3MA with Close Price</option>
+                      <option value="t3ma-crossovers">T3MA Crossovers</option>
+                    </select>
+                    <div class='t3ma-choices-div' id='t3ma-with-close-price-div'>
+                      <label for="t3ma-length">Length</label>
+                      <input type="number" value=20 id='t3ma-length' name='t3ma-length'>
+                    </div>
+                    <div class='t3ma-choices-div' id='t3ma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="t3ma-len1">Length of Shorter T3MA</label>
+                        <input type="number" value=20 id='t3ma-len1' name='t3ma-len1'>
+                      </div>
+                      <div>
+                        <label for="t3ma-len2">Length of Longer T3MA</label>
+                        <input type="number" value=200 id='t3ma-len2' name='t3ma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='t3ma-cross' id='t3ma-cross' class='checkbox'>
+                    <label for="t3ma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-t3ma-event'>Create T3MA
+                      Event</button>
+                  </div>
+                  <!-- TEMA div -->
+                  <div class='tools-div indicator-tools-div' id='tema-div'>
+                    <select class='tools-choices-dropdown' name="tema-choices-dropdown" id="tema-choices-dropdown"
+                      value='tema-with-close-price'>
+                      <option value="tema-with-close-price">TEMA with Close Price</option>
+                      <option value="tema-crossovers">TEMA Crossovers</option>
+                    </select>
+                    <div class='tema-choices-div' id='tema-with-close-price-div'>
+                      <label for="tema-length">Length</label>
+                      <input type="number" value=20 id='tema-length' name='tema-length'>
+                    </div>
+                    <div class='tema-choices-div' id='tema-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="tema-len1">Length of Shorter TEMA</label>
+                        <input type="number" value=20 id='tema-len1' name='tema-len1'>
+                      </div>
+                      <div>
+                        <label for="tema-len2">Length of Longer TEMA</label>
+                        <input type="number" value=200 id='tema-len2' name='tema-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='tema-cross' id='tema-cross' class='checkbox'>
+                    <label for="tema-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-tema-event'>Create TEMA
+                      Event</button>
+                  </div>
+                  <!-- TRIMA div -->
+                  <div class='tools-div indicator-tools-div' id='trima-div'>
+                    <select class='tools-choices-dropdown' name="trima-choices-dropdown" id="trima-choices-dropdown"
+                      value='trima-with-close-price'>
+                      <option value="trima-with-close-price">TRIMA with Close Price</option>
+                      <option value="trima-crossovers">TRIMA Crossovers</option>
+                    </select>
+                    <div class='trima-choices-div' id='trima-with-close-price-div'>
+                      <label for="trima-length">Length</label>
+                      <input type="number" value=20 id='trima-length' name='trima-length'>
+                    </div>
+                    <div class='trima-choices-div' id='trima-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="trima-len1">Length of Shorter TRIMA</label>
+                        <input type="number" value=20 id='trima-len1' name='trima-len1'>
+                      </div>
+                      <div>
+                        <label for="trima-len2">Length of Longer TRIMA</label>
+                        <input type="number" value=200 id='trima-len2' name='trima-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='trima-cross' id='trima-cross' class='checkbox'>
+                    <label for="trima-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-trima-event'>Create TRIMA
+                      Event</button>
+                  </div>
+                  <!-- VWMA div -->
+                  <div class='tools-div indicator-tools-div' id='vwma-div'>
+                    <select class='tools-choices-dropdown' name="vwma-choices-dropdown" id="vwma-choices-dropdown"
+                      value='vwma-with-close-price'>
+                      <option value="vwma-with-close-price">VWMA with Close Price</option>
+                      <option value="vwma-crossovers">VWMA Crossovers</option>
+                    </select>
+                    <div class='vwma-choices-div' id='vwma-with-close-price-div'>
+                      <label for="vwma-length">Length</label>
+                      <input type="number" value=20 id='vwma-length' name='vwma-length'>
+                    </div>
+                    <div class='vwma-choices-div' id='vwma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="vwma-len1">Length of Shorter VWMA</label>
+                        <input type="number" value=20 id='vwma-len1' name='vwma-len1'>
+                      </div>
+                      <div>
+                        <label for="vwma-len2">Length of Longer VWMA</label>
+                        <input type="number" value=200 id='vwma-len2' name='vwma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='vwma-cross' id='vwma-cross' class='checkbox'>
+                    <label for="vwma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-vwma-event'>Create VWMA
+                      Event</button>
+                  </div>
+                  <!-- ZLMA div -->
+                  <div class='tools-div indicator-tools-div' id='zlma-div'>
+                    <select class='tools-choices-dropdown' name="zlma-choices-dropdown" id="zlma-choices-dropdown"
+                      value='zlma-with-close-price'>
+                      <option value="zlma-with-close-price">ZLMA with Close Price</option>
+                      <option value="zlma-crossovers">ZLMA Crossovers</option>
+                    </select>
+                    <div class='zlma-choices-div' id='zlma-with-close-price-div'>
+                      <label for="zlma-length">Length</label>
+                      <input type="number" value=20 id='zlma-length' name='zlma-length'>
+                    </div>
+                    <div class='zlma-choices-div' id='zlma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="zlma-len1">Length of Shorter ZLMA</label>
+                        <input type="number" value=20 id='zlma-len1' name='zlma-len1'>
+                      </div>
+                      <div>
+                        <label for="zlma-len2">Length of Longer ZLMA</label>
+                        <input type="number" value=200 id='zlma-len2' name='zlma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='zlma-cross' id='zlma-cross' class='checkbox'>
+                    <label for="zlma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-zlma-event'>Create ZLMA
+                      Event</button>
+                  </div>
+
                 </div>
                 <div class="inner-create-event-div" id='price-div'>
                   <h5>Price</h5>

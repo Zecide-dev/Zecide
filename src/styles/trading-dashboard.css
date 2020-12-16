@@ -501,6 +501,14 @@ a:hover {
   float: left;
 }
 
+.tools-div {
+  display: none;
+}
+
+#ema-div {
+  display: block;
+}
+
 #indicator-div, #price-div {
   display: none;
 }

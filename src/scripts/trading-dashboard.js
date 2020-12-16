@@ -589,6 +589,7 @@ priceButton.addEventListener('click', function () {
   priceDiv.style.display = 'block';
 })
 
+
 // Displaying different Indicator tools
 
 let indicatorToolsDropdown = document.getElementById('indicator-tools-dropdown');
@@ -597,12 +598,14 @@ let indicatorToolsDiv = document.getElementsByClassName('indicator-tools-div');
 indicatorToolsDropdown.addEventListener('change', function () {
   for (let i = 0; i < indicatorToolsDiv.length; i++) {
     indicatorToolsDiv[i].style.display = 'none';
+    if (indicatorToolsDiv[i].id == (indicatorToolsDropdown.value + '-div')) {
+      indicatorToolsDiv[i].style.display = 'block';
+    }
   }
-  document.getElementById(indicatorToolsDropdown.value + '-div').style.display = 'block';
 })
 
-// Displaying different Tools choices
 
+// Displaying different Tools choices
 let toolsChoicesDropdown = document.getElementsByClassName('tools-choices-dropdown');
 
 for (let i = 0; i < toolsChoicesDropdown.length; i++) {
@@ -658,6 +661,7 @@ function createNewBubbleForModal(eventName) {
   return a;
 }
 
+
 // Adding fetchedData into their respective screens tab
 function addFetchedData(eventName, fetchedData) {
   let screenNum = 1;
@@ -679,17 +683,70 @@ function addFetchedData(eventName, fetchedData) {
 }
 
 
-// Creating a Event
-
-
-
-// Creating an EMA Event
-
-let createEmaEvent = document.getElementById('create-ema-event');
+// Creating Events
 let creatingEventLoader = document.getElementById('creating-event-loader');
 
-createEmaEvent.addEventListener('click', function () {
-  console.log('clicked');
+// KEEPING THIS COMMENTED FOR REFERENCE
+// // Creating an EMA Event
+// let createEmaEvent = document.getElementById('create-ema-event');
+
+// createEmaEvent.addEventListener('click', function () {
+//   console.log('clicked');
+//   // Showing the creating event spinner
+//   createEvent.style.display = 'none';
+//   creatingEventLoader.style.display = 'block';
+
+//   // Initialising the event
+//   let eventName = newEventInitialiser(2);
+
+//   // Creating a bubble in the show all events modal
+//   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+//   let a = createNewBubbleForModal(eventName);
+//   modalBubblesContainer.append(a);
+
+//   // Creating new Monitor Div
+//   let monitorDiv = createNewEventMonitorDiv(eventName);
+//   document.getElementById('outer-screen-div').append(monitorDiv);
+  
+//   // Customizing the URL
+//   let EMAChoicesDropdown = document.getElementById('ema-choices-dropdown');
+//   let EMALength = document.getElementById('ema-length');
+//   let EMALen1 = document.getElementById('ema-len1');
+//   let EMALen2 = document.getElementById('ema-len2');
+//   let EMACross = document.getElementById('ema-cross');
+
+//   var xmlHttp = new XMLHttpRequest();
+//   let url = backendBaseURL +  'Dashboard/MovingAverage?type=ema';
+//   url += ('&choice=' + (EMAChoicesDropdown.value === 'ema-crossovers' ? 2 : 1));
+//   url += ('&cross=' + (EMACross.checked ? 1 : 0));
+//   url += ('&length=' + EMALength.value.toString());
+//   url += ('&len1=' + EMALen1.value.toString());
+//   url += ('&len2=' + EMALen2.value.toString());
+//   console.log(url);
+
+//   xmlHttp.onreadystatechange = function () {
+//     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+//       creatingEventLoader.style.display = 'none';
+//       monitorEvent.style.display = 'block';
+
+//       let fetchedData = JSON.parse(xmlHttp.responseText);
+//       addFetchedData(eventName, fetchedData);
+
+//       console.log('Final click');
+//       // Opening the first Screen tab of the created monitor screens
+//       changeCurrentEvent(eventName);
+//       document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+//       document.getElementById(eventName + '-screen1-title').innerText = 'Bullish';
+//       document.getElementById(eventName + '-screen2-title').innerText = 'Bearish';
+//     }
+//   }
+//   console.log('getting');
+//   xmlHttp.open("GET", url, true); // true for asynchronous 
+//   xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+//   xmlHttp.send(null);
+// })
+
+function createMovingAverage(type) {
   // Showing the creating event spinner
   createEvent.style.display = 'none';
   creatingEventLoader.style.display = 'block';
@@ -705,22 +762,22 @@ createEmaEvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  
+
   // Customizing the URL
-  let EMAChoicesDropdown = document.getElementById('ema-choices-dropdown');
-  let EMALength = document.getElementById('ema-length');
-  let EMALen1 = document.getElementById('ema-len1');
-  let EMALen2 = document.getElementById('ema-len2');
-  let EMACross = document.getElementById('ema-cross');
+  let MAChoicesDropdown = document.getElementById(type + '-choices-dropdown');
+  let MALength = document.getElementById(type + '-length');
+  let MALen1 = document.getElementById(type + '-len1');
+  let MALen2 = document.getElementById(type + '-len2');
+  let MACross = document.getElementById(type + '-cross');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = 'http://localhost:8000/Dashboard/MovingAverage?type=ema';
-  url += ('&choice=' + (EMAChoicesDropdown.value === 'ema-crossovers' ? 2 : 1));
-  url += ('&cross=' + (EMACross.checked ? 1 : 0));
-  url += ('&data=0');
-  url += ('&length=' + EMALength.value.toString());
-  url += ('&len1=' + EMALen1.value.toString());
-  url += ('&len2=' + EMALen2.value.toString());
+  let url = backendBaseURL +  'Dashboard/MovingAverage?';
+  url += ('type=' + type);
+  url += ('&choice=' + (MAChoicesDropdown.value === (type  + '-crossovers') ? 2 : 1));
+  url += ('&cross=' + (MACross.checked ? 1 : 0));
+  url += ('&length=' + MALength.value.toString());
+  url += ('&len1=' + MALen1.value.toString());
+  url += ('&len2=' + MALen2.value.toString());
   console.log(url);
 
   xmlHttp.onreadystatechange = function () {
@@ -735,15 +792,32 @@ createEmaEvent.addEventListener('click', function () {
       // Opening the first Screen tab of the created monitor screens
       changeCurrentEvent(eventName);
       document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
-      document.getElementById(eventName + '-screen1-title').innerText = 'Bullish';
-      document.getElementById(eventName + '-screen2-title').innerText = 'Bearish';
+      document.getElementById(eventName + '-screen1-title').innerText = type.toUpperCase() + ' Bullish';
+      document.getElementById(eventName + '-screen2-title').innerText = type.toUpperCase() + ' Bearish';
     }
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
   xmlHttp.send(null);
-})
+}
+
+// Creating Moving Average Events
+document.getElementById('create-ema-event').addEventListener('click', () => createMovingAverage('ema'))
+document.getElementById('create-dema-event').addEventListener('click', () => createMovingAverage('dema'))
+document.getElementById('create-hma-event').addEventListener('click', () => createMovingAverage('hma'))
+document.getElementById('create-kama-event').addEventListener('click', () => createMovingAverage('kama'))
+document.getElementById('create-sma-event').addEventListener('click', () => createMovingAverage('sma'))
+document.getElementById('create-rma-event').addEventListener('click', () => createMovingAverage('rma'))
+document.getElementById('create-sinwma-event').addEventListener('click', () => createMovingAverage('sinwma'))
+document.getElementById('create-swma-event').addEventListener('click', () => createMovingAverage('swma'))
+document.getElementById('create-t3ma-event').addEventListener('click', () => createMovingAverage('t3ma'))
+document.getElementById('create-tema-event').addEventListener('click', () => createMovingAverage('tema'))
+document.getElementById('create-trima-event').addEventListener('click', () => createMovingAverage('trima'))
+document.getElementById('create-vwma-event').addEventListener('click', () => createMovingAverage('vwma'))
+document.getElementById('create-zlma-event').addEventListener('click', () => createMovingAverage('zlma'))
+
+// TO DO - BOTH EMA AND DEMA ARE VISIBLE CURRENTLY
 
 // Things to do
 // 1) Pass on personalized jwt token.
