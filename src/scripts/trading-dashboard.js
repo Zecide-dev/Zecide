@@ -1,3 +1,5 @@
+let backendBaseURL = 'http://localhost:8000/';
+
 const chartCreation = () => {
   var chart = LightweightCharts.createChart(document.getElementById('candlestick-chart'), {
     // width: 600,
@@ -599,39 +601,44 @@ indicatorToolsDropdown.addEventListener('change', function () {
   document.getElementById(indicatorToolsDropdown.value + '-div').style.display = 'block';
 })
 
-// Displaying different EMA choices
+// Displaying different Tools choices
 
-let EMAChoicesDropdown = document.getElementById('ema-choices-dropdown');
-let EMAChoicesDiv = document.getElementsByClassName('ema-choices-div');
+let toolsChoicesDropdown = document.getElementsByClassName('tools-choices-dropdown');
 
-EMAChoicesDropdown.addEventListener('change', function () {
-  for (let i = 0; i < EMAChoicesDiv.length; i++) {
-    EMAChoicesDiv[i].style.display = 'none';
-  }
-  document.getElementById(EMAChoicesDropdown.value + '-div').style.display = 'block';
-})
+for (let i = 0; i < toolsChoicesDropdown.length; i++) {
+  // name will contain the tool name such as 'ema'
+  let toolName = toolsChoicesDropdown[i].id.toString().split('-')[0];
+  let toolChoicesDropdown = document.getElementById(toolName + '-choices-dropdown');
+  let toolChoicesDiv = document.getElementsByClassName(toolName + '-choices-div');
 
-// Creating an EMA Event
+  // Changing the choices of each tool
+  toolChoicesDropdown.addEventListener('change', function () {
+    for (let j = 0; j < toolChoicesDiv.length; j++) {
+      toolChoicesDiv[j].style.display = 'none';
 
-let createEmaEvent = document.getElementById('create-ema-event');
-let creatingEventLoader = document.getElementById('creating-event-loader');
+      if (toolChoicesDiv[j].id == (toolChoicesDropdown.value + '-div')) {
+        toolChoicesDiv[j].style.display = 'block';
+      }
+    }
+  })
+}
 
-createEmaEvent.addEventListener('click', function () {
-  console.log('clicked');
 
-  // Showing the creating event spinner
-  createEvent.style.display = 'none';
-  creatingEventLoader.style.display = 'block';
-
-  // Creating The EMA event with the name given
+// Initialising an event
+// This function will create the eventName, add it into the numScreens Variable with the given number of screens and return the eventName
+function newEventInitialiser(num) {
   let eventName = document.getElementById('event-name').value.toString().split(' ').join('-');
   if (eventName === '') {
     eventName = 'Custom-Event-' + numCustomEvents;
     numCustomEvents++;
   }
+  numScreens[eventName] = num;
+  return eventName;
+}
 
-  // Creating a bubble in the show all events modal
-  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+
+// Creating a bubble for the givent eventName in the modal
+function createNewBubbleForModal(eventName) {
   let a = document.createElement('a');
   let button = document.createElement('button');
   let icon = document.createElement('i');
@@ -648,29 +655,67 @@ createEmaEvent.addEventListener('click', function () {
 
   button.append(icon);
   a.append(button);
-  modalBubblesContainer.append(a);
+  return a;
+}
 
-  // Adding the new event into the numScreens object;
-  numScreens[eventName] = 2;
+// Adding fetchedData into their respective screens tab
+function addFetchedData(eventName, fetchedData) {
+  let screenNum = 1;
+  for (let screen in fetchedData) {
+    let screenCompanyTabs = document.getElementById(eventName + '-screen' + screenNum + '-company-tabs');
+    for (let i = 0; i < fetchedData[screen].length; i++) {
+      let div = document.createElement('div');
+      let span = document.createElement('span');
+
+      div.setAttribute('class', 'company-tab');
+      span.setAttribute('class', 'symbol');
+      span.innerText = fetchedData[screen][i].toString().substr(0, fetchedData[screen][i].toString().length - 3);
+      div.append(span);
+      screenCompanyTabs.append(div);
+
+      if (i == fetchedData[screen].length - 1) screenNum++;
+    }
+  }
+}
+
+
+// Creating a Event
+
+
+
+// Creating an EMA Event
+
+let createEmaEvent = document.getElementById('create-ema-event');
+let creatingEventLoader = document.getElementById('creating-event-loader');
+
+createEmaEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let eventName = newEventInitialiser(2);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
 
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  document.getElementById(eventName + '-screen1-title').innerText = 'Bullish';
-  document.getElementById(eventName + '-screen2-title').innerText = 'Bearish';
-
-
+  
   // Customizing the URL
-
-  // EMAChoicesDropdown have already been declared
+  let EMAChoicesDropdown = document.getElementById('ema-choices-dropdown');
   let EMALength = document.getElementById('ema-length');
   let EMALen1 = document.getElementById('ema-len1');
   let EMALen2 = document.getElementById('ema-len2');
   let EMACross = document.getElementById('ema-cross');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = 'http://localhost:8000/Dashboard/ema?';
-  url += ('choice=' + (EMAChoicesDropdown.value === 'ema-crossovers' ? 2 : 1));
+  let url = 'http://localhost:8000/Dashboard/MovingAverage?type=ema';
+  url += ('&choice=' + (EMAChoicesDropdown.value === 'ema-crossovers' ? 2 : 1));
   url += ('&cross=' + (EMACross.checked ? 1 : 0));
   url += ('&data=0');
   url += ('&length=' + EMALength.value.toString());
@@ -684,38 +729,14 @@ createEmaEvent.addEventListener('click', function () {
       monitorEvent.style.display = 'block';
 
       let fetchedData = JSON.parse(xmlHttp.responseText);
-      let screen1CompanyTabs = document.getElementById(eventName + '-screen1-company-tabs');
-      for (let i = 0; i < fetchedData['bullish'].length; i++) {
-        let div = document.createElement('div');
-        let span = document.createElement('span');
+      addFetchedData(eventName, fetchedData);
 
-        div.setAttribute('class', 'company-tab');
-        span.setAttribute('class', 'symbol');
-        span.innerText = fetchedData['bullish'][i].toString().substr(0, fetchedData['bullish'][i].toString().length - 3);
-        div.append(span);
-        screen1CompanyTabs.append(div);
-
-        if (i === fetchedData['bullish'].length - 1) {
-          let screen2CompanyTabs = document.getElementById(eventName + '-screen2-company-tabs');
-          for (let j = 0; j < fetchedData['bearish'].length; j++) {
-            let div = document.createElement('div');
-            let span = document.createElement('span');
-
-            div.setAttribute('class', 'company-tab');
-            span.setAttribute('class', 'symbol');
-            span.innerText = fetchedData['bearish'][j].toString().substr(0, fetchedData['bearish'][j].toString().length - 3);
-            div.append(span);
-            screen2CompanyTabs.append(div);
-
-            if (j === fetchedData['bearish'].length - 1) {
-              console.log('Final click');
-              // Opening the first Screen tab of the created monitor screens
-              changeCurrentEvent(eventName);
-              document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
-            }
-          }
-        }
-      }
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      document.getElementById(eventName + '-screen1-title').innerText = 'Bullish';
+      document.getElementById(eventName + '-screen2-title').innerText = 'Bearish';
     }
   }
   console.log('getting');

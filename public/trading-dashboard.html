@@ -387,7 +387,6 @@
             <div class="card-body">
               <input type="text" name="event-name" id="event-name" placeholder="Event Name">
               <p>
-                RSI
                 <button type="button" class="btn btn-outline-danger" id='delete-create-event'><i
                     class="fas fa-trash-alt"></i></button>
               </p>
@@ -407,8 +406,8 @@
                     <option value="mercedes">Mercedes</option>
                     <option value="audi">Audi</option>
                   </select>
-                  <div class='indicator-tools-div' id='ema-div'>
-                    <select name="ema-choices-dropdown" id="ema-choices-dropdown" value='ema-with-close-price'>
+                  <div class='tools-div ema-tools-div' id='ema-div'>
+                    <select class='tools-choices-dropdown' name="ema-choices-dropdown" id="ema-choices-dropdown" value='ema-with-close-price'>
                       <option value="ema-with-close-price">EMA with Close Price</option>
                       <option value="ema-crossovers">EMA Crossovers</option>
                     </select>
@@ -430,7 +429,8 @@
                     <label for="ema-cross">Detect at Crossing</label>
                     <br>
                     <br>
-                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ema-event'>Create EMA Event</button>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ema-event'>Create EMA
+                      Event</button>
                   </div>
                 </div>
                 <div class="inner-create-event-div" id='price-div'>
