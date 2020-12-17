@@ -415,6 +415,7 @@
                     <option value="trima">TRIMA - Triangular Moving Average</option>
                     <option value="vwma">VWMA - Volume Weighted Moving Average</option>
                     <option value="zlma">ZLMA - Zero Lag Moving Average</option>
+                    <option value="vwap">VWAP - Volume Weighted Average Price</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -778,6 +779,15 @@
                     <br>
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-zlma-event'>Create ZLMA
+                      Event</button>
+                  </div>
+                  <!-- VWAP div -->
+                  <div class='tools-div indicator-tools-div' id='vwap-div'>
+                    <input type="checkbox" name='vwap-cross' id='vwap-cross' class='checkbox'>
+                    <label for="vwap-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-vwap-event'>Create VWAP
                       Event</button>
                   </div>
 

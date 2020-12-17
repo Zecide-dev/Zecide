@@ -686,65 +686,6 @@ function addFetchedData(eventName, fetchedData) {
 // Creating Events
 let creatingEventLoader = document.getElementById('creating-event-loader');
 
-// KEEPING THIS COMMENTED FOR REFERENCE
-// // Creating an EMA Event
-// let createEmaEvent = document.getElementById('create-ema-event');
-
-// createEmaEvent.addEventListener('click', function () {
-//   console.log('clicked');
-//   // Showing the creating event spinner
-//   createEvent.style.display = 'none';
-//   creatingEventLoader.style.display = 'block';
-
-//   // Initialising the event
-//   let eventName = newEventInitialiser(2);
-
-//   // Creating a bubble in the show all events modal
-//   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
-//   let a = createNewBubbleForModal(eventName);
-//   modalBubblesContainer.append(a);
-
-//   // Creating new Monitor Div
-//   let monitorDiv = createNewEventMonitorDiv(eventName);
-//   document.getElementById('outer-screen-div').append(monitorDiv);
-  
-//   // Customizing the URL
-//   let EMAChoicesDropdown = document.getElementById('ema-choices-dropdown');
-//   let EMALength = document.getElementById('ema-length');
-//   let EMALen1 = document.getElementById('ema-len1');
-//   let EMALen2 = document.getElementById('ema-len2');
-//   let EMACross = document.getElementById('ema-cross');
-
-//   var xmlHttp = new XMLHttpRequest();
-//   let url = backendBaseURL +  'Dashboard/MovingAverage?type=ema';
-//   url += ('&choice=' + (EMAChoicesDropdown.value === 'ema-crossovers' ? 2 : 1));
-//   url += ('&cross=' + (EMACross.checked ? 1 : 0));
-//   url += ('&length=' + EMALength.value.toString());
-//   url += ('&len1=' + EMALen1.value.toString());
-//   url += ('&len2=' + EMALen2.value.toString());
-//   console.log(url);
-
-//   xmlHttp.onreadystatechange = function () {
-//     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-//       creatingEventLoader.style.display = 'none';
-//       monitorEvent.style.display = 'block';
-
-//       let fetchedData = JSON.parse(xmlHttp.responseText);
-//       addFetchedData(eventName, fetchedData);
-
-//       console.log('Final click');
-//       // Opening the first Screen tab of the created monitor screens
-//       changeCurrentEvent(eventName);
-//       document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
-//       document.getElementById(eventName + '-screen1-title').innerText = 'Bullish';
-//       document.getElementById(eventName + '-screen2-title').innerText = 'Bearish';
-//     }
-//   }
-//   console.log('getting');
-//   xmlHttp.open("GET", url, true); // true for asynchronous 
-//   xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
-//   xmlHttp.send(null);
-// })
 
 function createMovingAverage(type) {
   // Showing the creating event spinner
@@ -817,7 +758,58 @@ document.getElementById('create-trima-event').addEventListener('click', () => cr
 document.getElementById('create-vwma-event').addEventListener('click', () => createMovingAverage('vwma'))
 document.getElementById('create-zlma-event').addEventListener('click', () => createMovingAverage('zlma'))
 
-// TO DO - BOTH EMA AND DEMA ARE VISIBLE CURRENTLY
+
+// Creating an VWAP Event
+let createVWAPEvent = document.getElementById('create-vwap-event');
+
+createVWAPEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let eventName = newEventInitialiser(2);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+  
+  // Customizing the URL
+  let VWAPCross = document.getElementById('vwap-cross');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL +  'Dashboard/vwap?';
+  url += ('&cross=' + (VWAPCross.checked ? 1 : 0));
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      document.getElementById(eventName + '-screen1-title').innerText = 'VWAP Bullish';
+      document.getElementById(eventName + '-screen2-title').innerText = 'VWAP Bearish';
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
 
 // Things to do
 // 1) Pass on personalized jwt token.
