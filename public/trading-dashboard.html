@@ -416,6 +416,8 @@
                     <option value="vwma">VWMA - Volume Weighted Moving Average</option>
                     <option value="zlma">ZLMA - Zero Lag Moving Average</option>
                     <option value="vwap">VWAP - Volume Weighted Average Price</option>
+                    <option value="supertrend">SUPERTREND</option>
+                    <option value="ichimoku">ICHIMOKU - Kinko Hyo</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -789,6 +791,48 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-vwap-event'>Create VWAP
                       Event</button>
+                  </div>
+                  <!-- SUPERTREND div -->
+                  <div class='tools-div indicator-tools-div' id='supertrend-div'>
+                    <div>
+                      <label for="supertrend-length">Length</label>
+                      <input type="number" value=7 id='supertrend-length' name='supertrend-length'>
+                    </div>
+                    <div>
+                      <label for="supertrend-multiplier">Multiplier</label>
+                      <input type="number" value=3.0 step='0.1' id='supertrend-multiplier' name='supertrend-multiplier'>
+                    </div>
+                    <div>
+                      <label for="supertrend-offset">Offset</label>
+                      <input type="number" value=0 id='supertrend-offset' name='supertrend-offset'>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='supertrend-cross' id='supertrend-cross' class='checkbox'>
+                      <label for="supertrend-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-supertrend-event'>Create
+                      Supertrend Event</button>
+                  </div>
+                  <!-- ICHIMOKU div -->
+                  <div class='tools-div indicator-tools-div' id='ichimoku-div'>
+                    <select class='tools-choices-dropdown' name="ichimoku-choices-dropdown" id="ichimoku-choices-dropdown"
+                      value='ichimoku-choice-1'>
+                      <option value="ichimoku-choice-1">Tenkan and Kijun Crossover</option>
+                      <option value="ichimoku-choice-2">Tenkan and Kijun Crossover outside Kumo Cloud</option>
+                      <option value="ichimoku-choice-3">Kumo Cloud and Close Crossover</option>
+                      <option value="ichimoku-choice-4">Kumo Cloud changing color</option>
+                      <option value="ichimoku-choice-5">Tenkan and Kijun Crossover outside Kumo Cloud in accordance with ahead-looking Kumo Cloud</option>
+                    </select>
+                    <div>
+                      <input type="checkbox" name='ichimoku-cross' id='ichimoku-cross' class='checkbox'>
+                      <label for="ichimoku-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ichimoku-event'>Create
+                      ICHIMOKU Event</button>
                   </div>
 
                 </div>

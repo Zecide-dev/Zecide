@@ -761,7 +761,6 @@ document.getElementById('create-zlma-event').addEventListener('click', () => cre
 
 // Creating an VWAP Event
 let createVWAPEvent = document.getElementById('create-vwap-event');
-
 createVWAPEvent.addEventListener('click', function () {
   console.log('clicked');
   // Showing the creating event spinner
@@ -802,6 +801,115 @@ createVWAPEvent.addEventListener('click', function () {
       document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
       document.getElementById(eventName + '-screen1-title').innerText = 'VWAP Bullish';
       document.getElementById(eventName + '-screen2-title').innerText = 'VWAP Bearish';
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// Creating a SUPERTREND Event
+let createSupertrendEvent = document.getElementById('create-supertrend-event');
+createSupertrendEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let eventName = newEventInitialiser(2);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+  
+  // Customizing the URL
+  let SupertrendCross = document.getElementById('supertrend-cross');
+  let SupertrendLength = document.getElementById('supertrend-length');
+  let SupertrendMultiplier = document.getElementById('supertrend-multiplier');
+  let SupertrendOffset = document.getElementById('supertrend-offset');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL +  'Dashboard/supertrend?';
+  url += ('&cross=' + (SupertrendCross.checked ? 1 : 0));
+  url += ('&length=' + SupertrendLength.value.toString());
+  url += ('&multiplier=' + SupertrendMultiplier.value.toString());
+  url += ('&offset=' + SupertrendOffset.value.toString());
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      document.getElementById(eventName + '-screen1-title').innerText = 'Supertrend Bullish';
+      document.getElementById(eventName + '-screen2-title').innerText = 'Supertrend Bearish';
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+// Creating a ICHIMOKU Event
+let createIchimokuEvent = document.getElementById('create-ichimoku-event');
+createIchimokuEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let eventName = newEventInitialiser(2);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+  
+  // Customizing the URL
+  let IchimokuCross = document.getElementById('ichimoku-cross');
+  let IchimokuChoicesDropdown = document.getElementById('ichimoku-choices-dropdown');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL +  'Dashboard/ichimoku?';
+  url += ('&cross=' + (IchimokuCross.checked ? 1 : 0));
+  url += ('&choice=' + IchimokuChoicesDropdown.value.toString().substr(IchimokuChoicesDropdown.value.toString().length - 1));
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      document.getElementById(eventName + '-screen1-title').innerText = 'Ichimoku Bullish';
+      document.getElementById(eventName + '-screen2-title').innerText = 'Ichimoku Bearish';
     }
   }
   console.log('getting');
