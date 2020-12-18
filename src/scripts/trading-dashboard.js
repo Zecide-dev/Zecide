@@ -606,6 +606,7 @@ indicatorToolsDropdown.addEventListener('change', function () {
 
 
 // Displaying different Tools choices
+// ADX IS A BIT DIFFERENT, SO ITS CHOICE DISPLAY IS JUST ABOVE ITS BACKEND CALL.
 let toolsChoicesDropdown = document.getElementsByClassName('tools-choices-dropdown');
 
 for (let i = 0; i < toolsChoicesDropdown.length; i++) {
@@ -641,7 +642,7 @@ for (let i = 0; i < toolsChoicesDropdown.length; i++) {
 // This function will create the eventName, add it into the numScreens Variable with the given number of screens and return the eventName
 function newEventInitialiser(num) {
   let eventName = document.getElementById('event-name').value.toString().split(' ').join('-');
-  if (eventName === '') {
+  if (eventName == '') {
     eventName = 'Custom-Event-' + numCustomEvents;
     numCustomEvents++;
   }
@@ -1090,9 +1091,9 @@ createCHOPEvent.addEventListener('click', function () {
   let CHOPChoicesDropdown = document.getElementById('chop-choices-dropdown');
   let choice = CHOPChoicesDropdown.value.toString().substr(CHOPChoicesDropdown.value.toString().length - 1);
   let eventName;
-  if(choice == '1') eventName = newEventInitialiser(2);
+  if (choice == '1') eventName = newEventInitialiser(2);
   else eventName = newEventInitialiser(1);
-  
+
 
   // Creating a bubble in the show all events modal
   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
@@ -1189,6 +1190,104 @@ createAroonEvent.addEventListener('click', function () {
       document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
       document.getElementById(eventName + '-screen1-title').innerText = 'Aroon Bullish';
       document.getElementById(eventName + '-screen2-title').innerText = 'Aroon Bearish';
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// ADX CHOICES DISPLAY
+let ADXChoicesDropdown = document.getElementById('adx-choices-dropdown');
+let ADXThresholdADXDiv = document.getElementById('adx-threshold-adx-div');
+let ADXBufferDiv = document.getElementById('adx-buffer-div');
+let ADXCrossDiv = document.getElementById('adx-cross-div');
+
+// Initial
+ADXBufferDiv.style.display = 'none';
+ADXCrossDiv.style.display = 'none';
+
+ADXChoicesDropdown.addEventListener('change', function () {
+  if (ADXChoicesDropdown.value == 'adx-choice-1') {
+    ADXThresholdADXDiv.style.display = 'block';
+    ADXBufferDiv.style.display = 'none';
+    ADXCrossDiv.style.display = 'none';
+  } else if (ADXChoicesDropdown.value == 'adx-choice-2') {
+    ADXThresholdADXDiv.style.display = 'none';
+    ADXBufferDiv.style.display = 'none';
+    ADXCrossDiv.style.display = 'block';
+  } else if (ADXChoicesDropdown.value == 'adx-choice-3') {
+    ADXThresholdADXDiv.style.display = 'block';
+    ADXBufferDiv.style.display = 'none';
+    ADXCrossDiv.style.display = 'block';
+  } else {
+    ADXThresholdADXDiv.style.display = 'block';
+    ADXBufferDiv.style.display = 'block';
+    ADXCrossDiv.style.display = 'none';
+  }
+})
+
+// Creating a ADX Event
+let createADXEvent = document.getElementById('create-adx-event');
+createADXEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let ADXChoicesDropdown = document.getElementById('adx-choices-dropdown');
+  let choice = ADXChoicesDropdown.value.toString().substr(ADXChoicesDropdown.value.toString().length - 1);
+  let eventName;
+  if (choice == '1') eventName = newEventInitialiser(1);
+  else if (choice == '2' || choice == '3') eventName = newEventInitialiser(2);
+  else eventName = newEventInitialiser(1);
+
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let ADXCross = document.getElementById('adx-cross');
+  let ADXThresholdADX = document.getElementById('adx-threshold-adx');
+  let ADXBuffer = document.getElementById('adx-buffer');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/adx?';
+  url += ('&choice=' + choice);
+  url += ('&thresholdADX=' + ADXThresholdADX.value.toString());
+  url += ('&buffer=' + ADXBuffer.value.toString());
+  url += ('&cross=' + (ADXCross.checked ? 1 : 0));
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'Above Threshold';
+      } else if (choice == '2' || choice == '3') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'ADX Bullish';
+        document.getElementById(eventName + '-screen2-title').innerText = 'ADX Bearish';
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'Around Threshold';
+      }
     }
   }
   console.log('getting');

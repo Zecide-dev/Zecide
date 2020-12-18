@@ -423,6 +423,7 @@
                     <option value="cksp">CKSP - Chande Kroll Stop</option>
                     <option value="chop">CHOP - Choppiness Index</option>
                     <option value="aroon">AROON - Aroon and Aroon Oscillator</option>
+                    <option value="adx">ADX - Average Directional Movement Index</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -916,6 +917,32 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-aroon-event'>Create
                       Aroon Event</button>
+                  </div>
+                  <!-- ADX div -->
+                  <div class='tools-div indicator-tools-div' id='adx-div'>
+                    <select class='tools-choices-dropdown' name="adx-choices-dropdown" id="adx-choices-dropdown"
+                      value='adx-choice-1'>
+                      <option value="adx-choice-1">ADX Above Threshold</option>
+                      <option value="adx-choice-2">DI+ & DI- Crossover</option>
+                      <option value="adx-choice-3">DI+ & DI- Crossover with ADX above Threshold</option>
+                      <option value="adx-choice-4">ADX Around Threshold Limit</option>
+                    </select>
+                    <div id='adx-threshold-adx-div'>
+                      <label for="adx-threshold-adx">Threshold ADX</label>
+                      <input type="number" value=20 id='adx-threshold-adx' name='adx-threshold-adx'>
+                    </div>
+                    <div id='adx-buffer-div'>
+                      <label for="adx-buffer">Buffer</label>
+                      <input type="number" value=2 id='adx-buffer' name='adx-buffer'>
+                    </div>
+                    <div id='adx-cross-div'>
+                      <input type="checkbox" name='adx-cross' id='adx-cross' class='checkbox'>
+                      <label for="adx-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-adx-event'>Create
+                      adx Event</button>
                   </div>
 
                 </div>
