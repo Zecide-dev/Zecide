@@ -429,6 +429,7 @@
                     <option value="donchian">DONCHIAN - Donchian Channel</option>
                     <option value="bbands">BBANDS - Bollinger Bands</option>
                     <option value="obv">OBV - On Balance Volume</option>
+                    <option value="cmf">CMF - Chaikin Money Flow</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1063,6 +1064,22 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-obv-event'>Create
                       OBV Event</button>
+                  </div>
+                  <!-- CMF div -->
+                  <div class='tools-div indicator-tools-div' id='cmf-div'>
+                    <select class='tools-choices-dropdown' name="cmf-choices-dropdown" id="cmf-choices-dropdown"
+                      value='cmf-choice-1'>
+                      <option value="cmf-choice-1">Chaikin Above/Below Zero</option>
+                      <option value="cmf-choice-2">Chaikin Switching Above/Below Zero</option>
+                    </select>
+                    <!-- <div>
+                      <label for="cmf-window">Window</label>
+                      <input type="number" value=20 id='cmf-window' name='cmf-window'>
+                    </div> -->
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cmf-event'>Create
+                      CMF Event</button>
                   </div>
 
                 </div>
