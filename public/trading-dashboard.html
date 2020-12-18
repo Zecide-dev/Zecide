@@ -426,6 +426,7 @@
                     <option value="adx">ADX - Average Directional Movement Index</option>
                     <option value="kc">KC - Keltner Channel</option>
                     <option value="accbands">ACCBANDS - Acceleration Bands</option>
+                    <option value="donchian">DONCHIAN - Donchian Channel</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -995,6 +996,25 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-accbands-event'>Create
                       Acc Bands Event</button>
+                  </div>
+                  <!-- DONCHIAN div -->
+                  <div class='tools-div indicator-tools-div' id='donchian-div'>
+                    <select class='tools-choices-dropdown' name="donchian-choices-dropdown" id="donchian-choices-dropdown"
+                      value='donchian-choice-1'>
+                      <option value="donchian-choice-1">Midline and Price Crossover</option>
+                      <option value="donchian-choice-2">Lower Band Touch</option>
+                      <option value="donchian-choice-3">Upper Band Touch</option>
+                    </select>
+                    <div class='donchian-choices-div' id='donchian-choice-1-div'>
+                      <div>
+                        <input type="checkbox" name='donchian-cross' id='donchian-cross' class='checkbox'>
+                        <label for="donchian-cross">Detect at Crossing</label>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-donchian-event'>Create
+                      Donchian Event</button>
                   </div>
 
                 </div>

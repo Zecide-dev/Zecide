@@ -1094,7 +1094,6 @@ createCHOPEvent.addEventListener('click', function () {
   if (choice == '1') eventName = newEventInitialiser(2);
   else eventName = newEventInitialiser(1);
 
-
   // Creating a bubble in the show all events modal
   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
   let a = createNewBubbleForModal(eventName);
@@ -1245,7 +1244,6 @@ createADXEvent.addEventListener('click', function () {
   else if (choice == '2' || choice == '3') eventName = newEventInitialiser(2);
   else eventName = newEventInitialiser(1);
 
-
   // Creating a bubble in the show all events modal
   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
   let a = createNewBubbleForModal(eventName);
@@ -1312,7 +1310,6 @@ createKCEvent.addEventListener('click', function () {
   if (choice == '1') eventName = newEventInitialiser(2);
   else eventName = newEventInitialiser(1);
 
-
   // Creating a bubble in the show all events modal
   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
   let a = createNewBubbleForModal(eventName);
@@ -1377,7 +1374,6 @@ createAccBandsEvent.addEventListener('click', function () {
   if (choice == '1') eventName = newEventInitialiser(2);
   else eventName = newEventInitialiser(1);
 
-
   // Creating a bubble in the show all events modal
   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
   let a = createNewBubbleForModal(eventName);
@@ -1413,6 +1409,66 @@ createAccBandsEvent.addEventListener('click', function () {
       if (choice == '1') {
         document.getElementById(eventName + '-screen1-title').innerText = 'Acc Bands Bullish';
         document.getElementById(eventName + '-screen2-title').innerText = 'Acc Bands Bearish';
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'Touching Band';
+      }
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// Creating a DONCHIAN Event
+let createDonchianEvent = document.getElementById('create-donchian-event');
+createDonchianEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let DonchianChoicesDropdown = document.getElementById('donchian-choices-dropdown');
+  let choice = DonchianChoicesDropdown.value.toString().substr(DonchianChoicesDropdown.value.toString().length - 1);
+  let eventName;
+  if (choice == '1') eventName = newEventInitialiser(2);
+  else eventName = newEventInitialiser(1);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let DonchianCross = document.getElementById('donchian-cross');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/donchian?';
+  url += ('&choice=' + choice);
+  url += ('&cross=' + (DonchianCross.checked ? 1 : 0));
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'Donchian Bullish';
+        document.getElementById(eventName + '-screen2-title').innerText = 'Donchian Bearish';
       } else {
         document.getElementById(eventName + '-screen1-title').innerText = 'Touching Band';
       }
