@@ -434,6 +434,7 @@
                     <option value="ao">AO - Awesome Oscillator</option>
                     <option value="stoch">STOCH - Stochastic Oscillator</option>
                     <option value="stochrsi">STOCHRSI - Stochastic RSI</option>
+                    <option value="cci">CCI - Commodity Channel Index</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1159,6 +1160,28 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-stochrsi-event'>Create
                       Stoch RSI Event</button>
+                  </div>
+                  <!-- CCI div -->
+                  <div class='tools-div indicator-tools-div' id='cci-div'>
+                    <select class='tools-choices-dropdown' name="cci-choices-dropdown" id="cci-choices-dropdown"
+                      value='cci-choice-1'>
+                      <option value="cci-choice-1">CCI Crossing Over Threshold</option>
+                      <option value="cci-choice-2">CCI Crossing Above/Below Zero</option>
+                    </select>
+                    <div class='cci-choices-div' id='cci-choice-1-div'>
+                      <div>
+                        <label for="cci-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='cci-upper-threshold' name='cci-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="cci-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=20 id='cci-lower-threshold' name='cci-lower-threshold'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cci-event'>Create
+                      CCI Event</button>
                   </div>
 
                 </div>
