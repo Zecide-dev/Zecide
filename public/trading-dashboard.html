@@ -428,6 +428,7 @@
                     <option value="accbands">ACCBANDS - Acceleration Bands</option>
                     <option value="donchian">DONCHIAN - Donchian Channel</option>
                     <option value="bbands">BBANDS - Bollinger Bands</option>
+                    <option value="obv">OBV - On Balance Volume</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1051,6 +1052,17 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-bbands-event'>Create
                       BBands Event</button>
+                  </div>
+                  <!-- OBV div -->
+                  <div class='tools-div indicator-tools-div' id='obv-div'>
+                    <div>
+                      <label for="obv-window">Window</label>
+                      <input type="number" value=20 id='obv-window' name='obv-window'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-obv-event'>Create
+                      OBV Event</button>
                   </div>
 
                 </div>
