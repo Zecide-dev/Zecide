@@ -614,6 +614,15 @@ for (let i = 0; i < toolsChoicesDropdown.length; i++) {
   let toolChoicesDropdown = document.getElementById(toolName + '-choices-dropdown');
   let toolChoicesDiv = document.getElementsByClassName(toolName + '-choices-div');
 
+  // Hiding all not-selected-divs and displaying the selected div, on window load
+  for (let j = 0; j < toolChoicesDiv.length; j++) {
+    toolChoicesDiv[j].style.display = 'none';
+
+    if (toolChoicesDiv[j].id == (toolChoicesDropdown.value + '-div')) {
+      toolChoicesDiv[j].style.display = 'block';
+    }
+  }
+
   // Changing the choices of each tool
   toolChoicesDropdown.addEventListener('change', function () {
     for (let j = 0; j < toolChoicesDiv.length; j++) {
@@ -624,6 +633,7 @@ for (let i = 0; i < toolsChoicesDropdown.length; i++) {
       }
     }
   })
+
 }
 
 
@@ -712,9 +722,9 @@ function createMovingAverage(type) {
   let MACross = document.getElementById(type + '-cross');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/MovingAverage?';
+  let url = backendBaseURL + 'Dashboard/MovingAverage?';
   url += ('type=' + type);
-  url += ('&choice=' + (MAChoicesDropdown.value === (type  + '-crossovers') ? 2 : 1));
+  url += ('&choice=' + (MAChoicesDropdown.value === (type + '-crossovers') ? 2 : 1));
   url += ('&cross=' + (MACross.checked ? 1 : 0));
   url += ('&length=' + MALength.value.toString());
   url += ('&len1=' + MALen1.value.toString());
@@ -778,12 +788,12 @@ createVWAPEvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  
+
   // Customizing the URL
   let VWAPCross = document.getElementById('vwap-cross');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/vwap?';
+  let url = backendBaseURL + 'Dashboard/vwap?';
   url += ('&cross=' + (VWAPCross.checked ? 1 : 0));
   console.log(url);
 
@@ -829,7 +839,7 @@ createSupertrendEvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  
+
   // Customizing the URL
   let SupertrendCross = document.getElementById('supertrend-cross');
   let SupertrendLength = document.getElementById('supertrend-length');
@@ -837,7 +847,7 @@ createSupertrendEvent.addEventListener('click', function () {
   let SupertrendOffset = document.getElementById('supertrend-offset');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/supertrend?';
+  let url = backendBaseURL + 'Dashboard/supertrend?';
   url += ('&cross=' + (SupertrendCross.checked ? 1 : 0));
   url += ('&length=' + SupertrendLength.value.toString());
   url += ('&multiplier=' + SupertrendMultiplier.value.toString());
@@ -885,13 +895,13 @@ createIchimokuEvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  
+
   // Customizing the URL
   let IchimokuCross = document.getElementById('ichimoku-cross');
   let IchimokuChoicesDropdown = document.getElementById('ichimoku-choices-dropdown');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/ichimoku?';
+  let url = backendBaseURL + 'Dashboard/ichimoku?';
   url += ('&cross=' + (IchimokuCross.checked ? 1 : 0));
   url += ('&choice=' + IchimokuChoicesDropdown.value.toString().substr(IchimokuChoicesDropdown.value.toString().length - 1));
   console.log(url);
@@ -938,12 +948,12 @@ createVortexEvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  
+
   // Customizing the URL
   let VortexCross = document.getElementById('vortex-cross');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/vortex?';
+  let url = backendBaseURL + 'Dashboard/vortex?';
   url += ('&cross=' + (VortexCross.checked ? 1 : 0));
   console.log(url);
 
@@ -989,12 +999,12 @@ createPSAREvent.addEventListener('click', function () {
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-  
+
   // Customizing the URL
   let PSARLast = document.getElementById('psar-last');
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/psar?';
+  let url = backendBaseURL + 'Dashboard/psar?';
   url += ('&last=' + PSARLast.value.toString());
   console.log(url);
 
@@ -1042,7 +1052,7 @@ createCKSPEvent.addEventListener('click', function () {
   document.getElementById('outer-screen-div').append(monitorDiv);
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL +  'Dashboard/cksp';
+  let url = backendBaseURL + 'Dashboard/cksp';
   console.log(url);
 
   xmlHttp.onreadystatechange = function () {
@@ -1059,6 +1069,69 @@ createCKSPEvent.addEventListener('click', function () {
       document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
       document.getElementById(eventName + '-screen1-title').innerText = 'CKSP Touching Lower';
       document.getElementById(eventName + '-screen2-title').innerText = 'CKSP Touching Upper';
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// Creating a CHOP Event
+let createCHOPEvent = document.getElementById('create-chop-event');
+createCHOPEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let CHOPChoicesDropdown = document.getElementById('chop-choices-dropdown');
+  let choice = CHOPChoicesDropdown.value.toString().substr(CHOPChoicesDropdown.value.toString().length - 1);
+  let eventName;
+  if(choice == '1') eventName = newEventInitialiser(2);
+  else eventName = newEventInitialiser(1);
+  
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let CHOPUpper = document.getElementById('chop-upper');
+  let CHOPLower = document.getElementById('chop-lower');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/chop?';
+  url += ('&choice=' + choice);
+  url += ('&upper=' + CHOPUpper.value.toString());
+  url += ('&lower=' + CHOPLower.value.toString());
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'CHOP Oversold';
+        document.getElementById(eventName + '-screen2-title').innerText = 'CHOP Overbought';
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'CHOP Trending';
+      }
     }
   }
   console.log('getting');

@@ -421,6 +421,7 @@
                     <option value="vortex">VORTEX</option>
                     <option value="psar">PSAR - Parabloic SAR</option>
                     <option value="cksp">CKSP - Chande Kroll Stop</option>
+                    <option value="chop">CHOP - Choppiness Index</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -865,6 +866,28 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-cksp-event'>Create
                       CKSP Event</button>
+                  </div>
+                  <!-- CHOP div -->
+                  <div class='tools-div indicator-tools-div' id='chop-div'>
+                    <select class='tools-choices-dropdown' name="chop-choices-dropdown" id="chop-choices-dropdown"
+                      value='chop-choice-2'>
+                      <option value="chop-choice-1">Detecting Oversold or Overbought</option>
+                      <option value="chop-choice-2">Detect Trending Behaviour</option>
+                    </select>
+                    <div class='chop-choices-div' id='chop-choice-2-div'>
+                      <div>
+                        <label for="chop-upper">Upper</label>
+                        <input type="number" value=50.0 step="0.1" id='chop-upper' name='chop-upper'>
+                      </div>
+                      <div>
+                        <label for="chop-lower">Lower</label>
+                        <input type="number" value=40.0 step="0.1" id='chop-lower' name='chop-lower'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-chop-event'>Create
+                      CHOP Event</button>
                   </div>
 
                 </div>
