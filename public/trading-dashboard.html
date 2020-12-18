@@ -432,6 +432,7 @@
                     <option value="cmf">CMF - Chaikin Money Flow</option>
                     <option value="mfi">MFI - Money Flow Index</option>
                     <option value="ao">AO - Awesome Oscillator</option>
+                    <option value="stoch">STOCH - Stochastic Oscillator</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -981,8 +982,8 @@
                   </div>
                   <!-- ACCBANDS div -->
                   <div class='tools-div indicator-tools-div' id='accbands-div'>
-                    <select class='tools-choices-dropdown' name="accbands-choices-dropdown" id="accbands-choices-dropdown"
-                      value='accbands-choice-1'>
+                    <select class='tools-choices-dropdown' name="accbands-choices-dropdown"
+                      id="accbands-choices-dropdown" value='accbands-choice-1'>
                       <option value="accbands-choice-1">Midline and Price Crossover</option>
                       <option value="accbands-choice-2">Lower Band Touch</option>
                       <option value="accbands-choice-3">Upper Band Touch</option>
@@ -1004,8 +1005,8 @@
                   </div>
                   <!-- DONCHIAN div -->
                   <div class='tools-div indicator-tools-div' id='donchian-div'>
-                    <select class='tools-choices-dropdown' name="donchian-choices-dropdown" id="donchian-choices-dropdown"
-                      value='donchian-choice-1'>
+                    <select class='tools-choices-dropdown' name="donchian-choices-dropdown"
+                      id="donchian-choices-dropdown" value='donchian-choice-1'>
                       <option value="donchian-choice-1">Midline and Price Crossover</option>
                       <option value="donchian-choice-2">Lower Band Touch</option>
                       <option value="donchian-choice-3">Upper Band Touch</option>
@@ -1113,6 +1114,28 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-ao-event'>Create
                       AO Event</button>
+                  </div>
+                  <!-- STOCH div -->
+                  <div class='tools-div indicator-tools-div' id='stoch-div'>
+                    <select class='tools-choices-dropdown' name="stoch-choices-dropdown" id="stoch-choices-dropdown"
+                      value='stoch-choice-1'>
+                      <option value="stoch-choice-1">Stochastic Crossover of K% and D%</option>
+                      <option value="stoch-choice-2">Stochastic Above/Below Threshold Level</option>
+                    </select>
+                    <div class='stoch-choices-div' id='stoch-choice-2-div'>
+                      <div>
+                        <label for="stoch-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='stoch-upper-threshold' name='stoch-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="stoch-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=20 id='stoch-lower-threshold' name='stoch-lower-threshold'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-stoch-event'>Create
+                      Stoch Event</button>
                   </div>
 
                 </div>
