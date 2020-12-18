@@ -1297,5 +1297,70 @@ createADXEvent.addEventListener('click', function () {
 })
 
 
+// Creating an KC Event
+let createKCEvent = document.getElementById('create-kc-event');
+createKCEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let KCChoicesDropdown = document.getElementById('kc-choices-dropdown');
+  let choice = KCChoicesDropdown.value.toString().substr(KCChoicesDropdown.value.toString().length - 1);
+  let eventName;
+  if (choice == '1') eventName = newEventInitialiser(2);
+  else eventName = newEventInitialiser(1);
+
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let KCCross = document.getElementById('kc-cross');
+  let KCLength = document.getElementById('kc-length');
+  let KCScalar = document.getElementById('kc-scalar');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/kc?';
+  url += ('&choice=' + choice);
+  url += ('&length=' + KCLength.value.toString());
+  url += ('&scalar=' + KCScalar.value.toString());
+  url += ('&cross=' + (KCCross.checked ? 1 : 0));
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'KC Bullish';
+        document.getElementById(eventName + '-screen2-title').innerText = 'KC Bearish';
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'Touching Band';
+      }
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
 // Things to do
 // 1) Pass on personalized jwt token.

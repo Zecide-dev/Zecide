@@ -424,6 +424,7 @@
                     <option value="chop">CHOP - Choppiness Index</option>
                     <option value="aroon">AROON - Aroon and Aroon Oscillator</option>
                     <option value="adx">ADX - Average Directional Movement Index</option>
+                    <option value="kc">KC - Keltner Channel</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -942,7 +943,34 @@
                     <br>
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-adx-event'>Create
-                      adx Event</button>
+                      ADX Event</button>
+                  </div>
+                  <!-- KC div -->
+                  <div class='tools-div indicator-tools-div' id='kc-div'>
+                    <select class='tools-choices-dropdown' name="kc-choices-dropdown" id="kc-choices-dropdown"
+                      value='kc-choice-1'>
+                      <option value="kc-choice-1">Midline and Price Crossover</option>
+                      <option value="kc-choice-2">Lower Band Touch</option>
+                      <option value="kc-choice-3">Upper Band Touch</option>
+                    </select>
+                    <div>
+                      <label for="kc-length">Length</label>
+                      <input type="number" value=20 id='kc-length' name='kc-length'>
+                    </div>
+                    <div>
+                      <label for="kc-scalar">Lower</label>
+                      <input type="number" value=2 id='kc-scalar' name='kc-scalar'>
+                    </div>
+                    <div class='kc-choices-div' id='kc-choice-1-div'>
+                      <div>
+                        <input type="checkbox" name='kc-cross' id='kc-cross' class='checkbox'>
+                        <label for="kc-cross">Detect at Crossing</label>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-kc-event'>Create
+                      KC Event</button>
                   </div>
 
                 </div>
