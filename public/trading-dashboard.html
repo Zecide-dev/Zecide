@@ -427,6 +427,7 @@
                     <option value="kc">KC - Keltner Channel</option>
                     <option value="accbands">ACCBANDS - Acceleration Bands</option>
                     <option value="donchian">DONCHIAN - Donchian Channel</option>
+                    <option value="bbands">BBANDS - Bollinger Bands</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1015,6 +1016,41 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-donchian-event'>Create
                       Donchian Event</button>
+                  </div>
+                  <!-- BBANDS div -->
+                  <div class='tools-div indicator-tools-div' id='bbands-div'>
+                    <select class='tools-choices-dropdown' name="bbands-choices-dropdown" id="bbands-choices-dropdown"
+                      value='bbands-choice-1'>
+                      <option value="bbands-choice-1">Midline and Price Crossover</option>
+                      <option value="bbands-choice-2">Lower Band Touch</option>
+                      <option value="bbands-choice-3">Upper Band Touch</option>
+                      <option value="bbands-choice-4">Volatility Contraction</option>
+                      <option value="bbands-choice-5">Volatility Expansion after Contraction</option>
+                    </select>
+                    <div id='bbands-length-div'>
+                      <label for="bbands-length">Length</label>
+                      <input type="number" value=20 id='bbands-length' name='bbands-length'>
+                    </div>
+                    <div id='bbands-threshold-div'>
+                      <label for="bbands-threshold">Threshold</label>
+                      <input type="number" value=0.005 step="0.001" id='bbands-threshold' name='bbands-threshold'>
+                    </div>
+                    <div id='bbands-expansion-div'>
+                      <label for="bbands-expansion">Expansion</label>
+                      <input type="number" value=0.012 step="0.001" id='bbands-expansion' name='bbands-expansion'>
+                    </div>
+                    <div id='bbands-std-div'>
+                      <label for="bbands-std">Std</label>
+                      <input type="number" value=2 id='bbands-std' name='bbands-std'>
+                    </div>
+                    <div id='bbands-cross-div'>
+                      <input type="checkbox" name='bbands-cross' id='bbands-cross' class='checkbox'>
+                      <label for="bbands-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-bbands-event'>Create
+                      BBands Event</button>
                   </div>
 
                 </div>

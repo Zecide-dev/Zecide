@@ -606,7 +606,7 @@ indicatorToolsDropdown.addEventListener('change', function () {
 
 
 // Displaying different Tools choices
-// ADX IS A BIT DIFFERENT, SO ITS CHOICE DISPLAY IS JUST ABOVE ITS BACKEND CALL.
+// ADX and BBANDS ARE A BIT DIFFERENT, SO ITS CHOICE DISPLAY IS JUST ABOVE ITS BACKEND CALL.
 let toolsChoicesDropdown = document.getElementsByClassName('tools-choices-dropdown');
 
 for (let i = 0; i < toolsChoicesDropdown.length; i++) {
@@ -1471,6 +1471,104 @@ createDonchianEvent.addEventListener('click', function () {
         document.getElementById(eventName + '-screen2-title').innerText = 'Donchian Bearish';
       } else {
         document.getElementById(eventName + '-screen1-title').innerText = 'Touching Band';
+      }
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// BBands CHOICES DISPLAY
+let BBandsChoicesDropdown = document.getElementById('bbands-choices-dropdown');
+let BBandsThresholdDiv = document.getElementById('bbands-threshold-div');
+let BBandsExpansionDiv = document.getElementById('bbands-expansion-div');
+let BBandsCrossDiv = document.getElementById('bbands-cross-div');
+
+// Initial
+BBandsExpansionDiv.style.display = 'none';
+BBandsThresholdDiv.style.display = 'none'
+
+BBandsChoicesDropdown.addEventListener('change', function () {
+  if (BBandsChoicesDropdown.value == 'bbands-choice-1') {
+    BBandsThresholdDiv.style.display = 'none';
+    BBandsExpansionDiv.style.display = 'none';
+    BBandsCrossDiv.style.display = 'block';
+  } else if (BBandsChoicesDropdown.value == 'bbands-choice-2' || BBandsChoicesDropdown.value == 'bbands-choice-3') {
+    BBandsThresholdDiv.style.display = 'none';
+    BBandsExpansionDiv.style.display = 'none';
+    BBandsCrossDiv.style.display = 'none';
+  } else if (BBandsChoicesDropdown.value == 'bbands-choice-4') {
+    BBandsThresholdDiv.style.display = 'block';
+    BBandsExpansionDiv.style.display = 'none';
+    BBandsCrossDiv.style.display = 'none';
+  } else {
+    BBandsThresholdDiv.style.display = 'block';
+    BBandsExpansionDiv.style.display = 'block';
+    BBandsCrossDiv.style.display = 'none';
+  }
+})
+
+// Creating a BBands Event
+let createBBandsEvent = document.getElementById('create-bbands-event');
+createBBandsEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let BBandsChoicesDropdown = document.getElementById('bbands-choices-dropdown');
+  let choice = BBandsChoicesDropdown.value.toString().substr(BBandsChoicesDropdown.value.toString().length - 1);
+  let eventName;
+  if (choice == '1') eventName = newEventInitialiser(2);
+  else eventName = newEventInitialiser(1);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let BBandsCross = document.getElementById('bbands-cross');
+  let BBandsLength = document.getElementById('bbands-length');
+  let BBandsThreshold = document.getElementById('bbands-threshold');
+  let BBandsExpansion = document.getElementById('bbands-expansion');
+  let BBandsStd = document.getElementById('bbands-std');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/bbands?';
+  url += ('&choice=' + choice);
+  url += ('&cross=' + (BBandsCross.checked ? 1 : 0));
+  url += ('&length=' + BBandsLength.value.toString());
+  url += ('&threshold=' + BBandsThreshold.value.toString());
+  url += ('&expansion=' + BBandsExpansion.value.toString());
+  url += ('&std=' + BBandsStd.value.toString());
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'BBands Bullish';
+        document.getElementById(eventName + '-screen2-title').innerText = 'BBands Bearish';
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'Condition True';
       }
     }
   }
