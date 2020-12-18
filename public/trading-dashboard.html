@@ -425,6 +425,7 @@
                     <option value="aroon">AROON - Aroon and Aroon Oscillator</option>
                     <option value="adx">ADX - Average Directional Movement Index</option>
                     <option value="kc">KC - Keltner Channel</option>
+                    <option value="accbands">ACCBANDS - Acceleration Bands</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -971,6 +972,29 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-kc-event'>Create
                       KC Event</button>
+                  </div>
+                  <!-- ACCBANDS div -->
+                  <div class='tools-div indicator-tools-div' id='accbands-div'>
+                    <select class='tools-choices-dropdown' name="accbands-choices-dropdown" id="accbands-choices-dropdown"
+                      value='accbands-choice-1'>
+                      <option value="accbands-choice-1">Midline and Price Crossover</option>
+                      <option value="accbands-choice-2">Lower Band Touch</option>
+                      <option value="accbands-choice-3">Upper Band Touch</option>
+                    </select>
+                    <div>
+                      <label for="accbands-length">Length</label>
+                      <input type="number" value=10 id='accbands-length' name='accbands-length'>
+                    </div>
+                    <div class='accbands-choices-div' id='accbands-choice-1-div'>
+                      <div>
+                        <input type="checkbox" name='accbands-cross' id='accbands-cross' class='checkbox'>
+                        <label for="accbands-cross">Detect at Crossing</label>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-accbands-event'>Create
+                      Acc Bands Event</button>
                   </div>
 
                 </div>
