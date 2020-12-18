@@ -422,6 +422,7 @@
                     <option value="psar">PSAR - Parabloic SAR</option>
                     <option value="cksp">CKSP - Chande Kroll Stop</option>
                     <option value="chop">CHOP - Choppiness Index</option>
+                    <option value="aroon">AROON - Aroon and Aroon Oscillator</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -821,13 +822,14 @@
                   </div>
                   <!-- ICHIMOKU div -->
                   <div class='tools-div indicator-tools-div' id='ichimoku-div'>
-                    <select class='tools-choices-dropdown' name="ichimoku-choices-dropdown" id="ichimoku-choices-dropdown"
-                      value='ichimoku-choice-1'>
+                    <select class='tools-choices-dropdown' name="ichimoku-choices-dropdown"
+                      id="ichimoku-choices-dropdown" value='ichimoku-choice-1'>
                       <option value="ichimoku-choice-1">Tenkan and Kijun Crossover</option>
                       <option value="ichimoku-choice-2">Tenkan and Kijun Crossover outside Kumo Cloud</option>
                       <option value="ichimoku-choice-3">Kumo Cloud and Close Crossover</option>
                       <option value="ichimoku-choice-4">Kumo Cloud changing color</option>
-                      <option value="ichimoku-choice-5">Tenkan and Kijun Crossover outside Kumo Cloud in accordance with ahead-looking Kumo Cloud</option>
+                      <option value="ichimoku-choice-5">Tenkan and Kijun Crossover outside Kumo Cloud in accordance with
+                        ahead-looking Kumo Cloud</option>
                     </select>
                     <div>
                       <input type="checkbox" name='ichimoku-cross' id='ichimoku-cross' class='checkbox'>
@@ -870,7 +872,7 @@
                   <!-- CHOP div -->
                   <div class='tools-div indicator-tools-div' id='chop-div'>
                     <select class='tools-choices-dropdown' name="chop-choices-dropdown" id="chop-choices-dropdown"
-                      value='chop-choice-2'>
+                      value='chop-choice-1'>
                       <option value="chop-choice-1">Detecting Oversold or Overbought</option>
                       <option value="chop-choice-2">Detect Trending Behaviour</option>
                     </select>
@@ -888,6 +890,32 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-chop-event'>Create
                       CHOP Event</button>
+                  </div>
+                  <!-- AROON div -->
+                  <div class='tools-div indicator-tools-div' id='aroon-div'>
+                    <select class='tools-choices-dropdown' name="aroon-choices-dropdown" id="aroon-choices-dropdown"
+                      value='aroon-choice-1'>
+                      <option value="aroon-choice-1">Aroon Signal</option>
+                      <option value="aroon-choice-2">Aroon Oscillator</option>
+                    </select>
+                    <div class='aroon-choices-div' id='aroon-choice-1-div'>
+                      <div>
+                        <label for="aroon-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='aroon-upper-threshold' name='aroon-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="aroon-lower-threshold">Lower</label>
+                        <input type="number" value=30 id='aroon-lower-threshold' name='aroon-lower-threshold'>
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='aroon-cross' id='aroon-cross' class='checkbox'>
+                      <label for="aroon-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-aroon-event'>Create
+                      Aroon Event</button>
                   </div>
 
                 </div>
