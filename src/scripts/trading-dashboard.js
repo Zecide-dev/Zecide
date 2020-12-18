@@ -2054,5 +2054,68 @@ createMACDEvent.addEventListener('click', function () {
 })
 
 
+// Creating a RSI Event
+let createRSIEvent = document.getElementById('create-rsi-event');
+createRSIEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let eventName = newEventInitialiser(2);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let RSICross = document.getElementById('rsi-cross');
+  let RSIChoicesDropdown = document.getElementById('rsi-choices-dropdown');
+  let RSIUpperThreshold = document.getElementById('rsi-upper-threshold');
+  let RSILowerThreshold = document.getElementById('rsi-lower-threshold');
+  let choice = RSIChoicesDropdown.value.toString().substr(RSIChoicesDropdown.value.toString().length - 1);
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/rsi?';
+  url += ('cross=' + (RSICross.checked ? 1 : 0));
+  url += ('&choice=' + choice);
+  url += ('&upperThreshold=' + RSIUpperThreshold.value.toString());
+  url += ('&lowerThreshold=' + RSILowerThreshold.value.toString());
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        document.getElementById(eventName + '-screen1-title').innerText = 'RSI Oversold';
+        document.getElementById(eventName + '-screen2-title').innerText = 'RSI Overbought';
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'RSI Bullish';
+        document.getElementById(eventName + '-screen2-title').innerText = 'RSI Bearish';
+      }
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
 // Things to do
 // 1) Pass on personalized jwt token.

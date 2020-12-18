@@ -437,6 +437,7 @@
                     <option value="cci">CCI - Commodity Channel Index</option>
                     <option value="roc">ROC - Rate of Change</option>
                     <option value="macd">MACD - Moving Average Convergence Divergence</option>
+                    <option value="rsi">RSI - Relative Strength Index</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1202,6 +1203,32 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-macd-event'>Create
                       MACD Event</button>
+                  </div>
+                  <!-- RSI div -->
+                  <div class='tools-div indicator-tools-div' id='rsi-div'>
+                    <select class='tools-choices-dropdown' name="rsi-choices-dropdown" id="rsi-choices-dropdown"
+                      value='rsi-choice-1'>
+                      <option value="rsi-choice-1">RSI Oversold/Overbought</option>
+                      <option value="rsi-choice-2">RSI Trend Strength</option>
+                    </select>
+                    <div class='rsi-choices-div' id='rsi-choice-1-div'>
+                      <div>
+                        <label for="rsi-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=90 id='rsi-upper-threshold' name='rsi-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="rsi-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=10 id='rsi-lower-threshold' name='rsi-lower-threshold'>
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='rsi-cross' id='rsi-cross' class='checkbox'>
+                      <label for="rsi-cross">Detect at Crossing</label>
+                    </div>                    
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-rsi-event'>Create
+                      RSI Event</button>
                   </div>
 
                 </div>
