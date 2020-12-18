@@ -1765,6 +1765,7 @@ createAOEvent.addEventListener('click', function () {
   var xmlHttp = new XMLHttpRequest();
   let url = backendBaseURL + 'Dashboard/ao?';
   url += ('choice=' + AOChoicesDropdown.value.toString().substr(AOChoicesDropdown.value.toString().length - 1));
+  console.log(url);
 
   xmlHttp.onreadystatechange = function () {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
@@ -1819,6 +1820,62 @@ createStochEvent.addEventListener('click', function () {
   url += ('choice=' + StochChoicesDropdown.value.toString().substr(StochChoicesDropdown.value.toString().length - 1));
   url += ('&upperThreshold=' + StochUpperThreshold.value.toString());
   url += ('&lowerThreshold=' + StochLowerThreshold.value.toString());
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      document.getElementById(eventName + '-screen1-title').innerText = 'Stochastic Bullish';
+      document.getElementById(eventName + '-screen2-title').innerText = 'Stochastic Bearish';
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// Creating a STOCHRSI Event
+let createStochRSIEvent = document.getElementById('create-stochrsi-event');
+createStochRSIEvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let eventName = newEventInitialiser(2);
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  let StochRSIChoicesDropdown = document.getElementById('stochrsi-choices-dropdown');
+  let StochRSIUpperThreshold = document.getElementById('stochrsi-upper-threshold');
+  let StochRSILowerThreshold = document.getElementById('stochrsi-lower-threshold');
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/stochrsi?';
+  url += ('choice=' + StochRSIChoicesDropdown.value.toString().substr(StochRSIChoicesDropdown.value.toString().length - 1));
+  url += ('&upperThreshold=' + StochRSIUpperThreshold.value.toString());
+  url += ('&lowerThreshold=' + StochRSILowerThreshold.value.toString());
+  console.log(url);
 
   xmlHttp.onreadystatechange = function () {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {

@@ -433,6 +433,7 @@
                     <option value="mfi">MFI - Money Flow Index</option>
                     <option value="ao">AO - Awesome Oscillator</option>
                     <option value="stoch">STOCH - Stochastic Oscillator</option>
+                    <option value="stochrsi">STOCHRSI - Stochastic RSI</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1136,6 +1137,28 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-stoch-event'>Create
                       Stoch Event</button>
+                  </div>
+                  <!-- STOCHRSI div -->
+                  <div class='tools-div indicator-tools-div' id='stochrsi-div'>
+                    <select class='tools-choices-dropdown' name="stochrsi-choices-dropdown" id="stochrsi-choices-dropdown"
+                      value='stochrsi-choice-1'>
+                      <option value="stochrsi-choice-1">Stochastic Crossover of K% and D%</option>
+                      <option value="stochrsi-choice-2">Stochastic Above/Below Threshold Level</option>
+                    </select>
+                    <div class='stochrsi-choices-div' id='stochrsi-choice-2-div'>
+                      <div>
+                        <label for="stochrsi-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='stochrsi-upper-threshold' name='stochrsi-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="stochrsi-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=20 id='stochrsi-lower-threshold' name='stochrsi-lower-threshold'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-stochrsi-event'>Create
+                      Stoch RSI Event</button>
                   </div>
 
                 </div>
