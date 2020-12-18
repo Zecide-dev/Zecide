@@ -430,6 +430,7 @@
                     <option value="bbands">BBANDS - Bollinger Bands</option>
                     <option value="obv">OBV - On Balance Volume</option>
                     <option value="cmf">CMF - Chaikin Money Flow</option>
+                    <option value="mfi">MFI - Money Flow Index</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1080,6 +1081,25 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-cmf-event'>Create
                       CMF Event</button>
+                  </div>
+                  <!-- MFI div -->
+                  <div class='tools-div indicator-tools-div' id='mfi-div'>
+                    <div>
+                      <label for="mfi-upper-threshold">Upper Threshold</label>
+                      <input type="number" value=80 id='mfi-upper-threshold' name='mfi-upper-threshold'>
+                    </div>
+                    <div>
+                      <label for="mfi-lower-threshold">Lower Threshold</label>
+                      <input type="number" value=20 id='mfi-lower-threshold' name='mfi-lower-threshold'>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='mfi-cross' id='mfi-cross' class='checkbox'>
+                      <label for="mfi-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-mfi-event'>Create
+                      MFI Event</button>
                   </div>
 
                 </div>
