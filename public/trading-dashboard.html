@@ -436,6 +436,7 @@
                     <option value="stochrsi">STOCHRSI - Stochastic RSI</option>
                     <option value="cci">CCI - Commodity Channel Index</option>
                     <option value="roc">ROC - Rate of Change</option>
+                    <option value="macd">MACD - Moving Average Convergence Divergence</option>
                   </select>
                   <!-- EMA div -->
                   <div class='tools-div indicator-tools-div' id='ema-div'>
@@ -1190,6 +1191,17 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-roc-event'>Create
                       ROC Event</button>
+                  </div>
+                  <!-- MACD div -->
+                  <div class='tools-div indicator-tools-div' id='macd-div'>
+                    <div>
+                      <input type="checkbox" name='macd-cross' id='macd-cross' class='checkbox'>
+                      <label for="macd-cross">Detect at Crossing</label>
+                    </div>                    
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-macd-event'>Create
+                      MACD Event</button>
                   </div>
 
                 </div>
