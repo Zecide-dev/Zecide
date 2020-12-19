@@ -402,6 +402,7 @@
                     <option value="cpr">CPR - Central Pivot Range</option>
                     <option value="orb">ORB - Opening Range Breakout</option>
                     <option value="structure">STRUCTURE - Market Structure Detection</option>
+                    <option value="pullback">PULLBACK - Pullback Detection</option>
                   </select>
                   <!-- CPR div -->
                   <div class='tools-div price-action-tools-div' id='cpr-div'>
@@ -517,6 +518,17 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-structure-event'>Create
                       Structure Event</button>
+                  </div>
+                  <!-- PULLBACK div -->
+                  <div class='tools-div price-action-tools-div' id='pullback-div'>
+                    <div>
+                      <label for="pullback-big-window">Past Candles to Consider</label>
+                      <input type="number" value=40 id='pullback-big-window' name='pullback-big-window'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-pullback-event'>Create
+                      Pullback Event</button>
                   </div>
 
                 </div>
