@@ -590,8 +590,21 @@ priceButton.addEventListener('click', function () {
 })
 
 
-// Displaying different Indicator tools
+// Displaying different Price Action tools
+let priceActionToolsDropdown = document.getElementById('price-action-tools-dropdown');
+let priceActionToolsDiv = document.getElementsByClassName('price-action-tools-div');
 
+priceActionToolsDropdown.addEventListener('change', function () {
+  for (let i = 0; i < priceActionToolsDiv.length; i++) {
+    priceActionToolsDiv[i].style.display = 'none';
+    if (priceActionToolsDiv[i].id == (priceActionToolsDropdown.value + '-div')) {
+      priceActionToolsDiv[i].style.display = 'block';
+    }
+  }
+})
+
+
+// Displaying different Indicator tools
 let indicatorToolsDropdown = document.getElementById('indicator-tools-dropdown');
 let indicatorToolsDiv = document.getElementsByClassName('indicator-tools-div');
 
@@ -2107,6 +2120,84 @@ createRSIEvent.addEventListener('click', function () {
       } else {
         document.getElementById(eventName + '-screen1-title').innerText = 'RSI Bullish';
         document.getElementById(eventName + '-screen2-title').innerText = 'RSI Bearish';
+      }
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.send(null);
+})
+
+
+// Creating an CPR Event
+let createCPREvent = document.getElementById('create-cpr-event');
+createCPREvent.addEventListener('click', function () {
+  console.log('clicked');
+  // Showing the creating event spinner
+  createEvent.style.display = 'none';
+  creatingEventLoader.style.display = 'block';
+
+  // Initialising the event
+  let CPRChoicesDropdown = document.getElementById('cpr-choices-dropdown');
+  let choice = CPRChoicesDropdown.value.toString().substr(CPRChoicesDropdown.value.toString().length - 1);
+  let selectedScreens = [], numSelectedScreens = 0, selectedScreensString = '';
+
+  // Finding the selected screens and the number of selected screens.
+  for (let i = 1; i < 11; i++) {
+    let CPRScreenCheckbox = document.getElementById('cpr-screens-checkbox-' + i);
+    if (CPRScreenCheckbox.checked) {
+      selectedScreens.push(i);
+      numSelectedScreens++;
+      selectedScreensString += (i + '-');
+    }
+  }
+
+  let eventName
+  if (choice == '1') eventName = newEventInitialiser(10);
+  else if (choice == '2') eventName = newEventInitialiser(numSelectedScreens);
+  else eventName = newEventInitialiser(1);
+
+  let screenNames = ['Candle Engulfing CPR', 'Touching Upper CPR', 'Touching Lower CPR', 'Candle Inside CPR', 'Candle Between Upper CPR and R1', 'Touching R1', 'Outside R1', 'Candle Between Lower CPR and S1', 'Touching S1', 'Outside S1'];
+
+  // Creating a bubble in the show all events modal
+  let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+  let a = createNewBubbleForModal(eventName);
+  modalBubblesContainer.append(a);
+
+  // Creating new Monitor Div
+  let monitorDiv = createNewEventMonitorDiv(eventName);
+  document.getElementById('outer-screen-div').append(monitorDiv);
+
+  // Customizing the URL
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/cpr?';
+  url += ('choice=' + choice);
+  url += ('&screens=' + selectedScreensString);
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      creatingEventLoader.style.display = 'none';
+      monitorEvent.style.display = 'block';
+
+      let fetchedData = JSON.parse(xmlHttp.responseText);
+      addFetchedData(eventName, fetchedData);
+
+      console.log('Final click');
+      // Opening the first Screen tab of the created monitor screens
+      changeCurrentEvent(eventName);
+      document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+      if (choice == '1') {
+        for (let i = 0; i < 10; i++) {
+          document.getElementById(eventName + '-screen' + (i+1) + '-title').innerText = screenNames[i];
+        }
+      } else if (choice == '2') {
+        for (let i = 0; i < numSelectedScreens; i++) {
+          document.getElementById(eventName + '-screen' + (i+1) + '-title').innerText = screenNames[selectedScreens[i] - 1];
+        }
+      } else {
+        document.getElementById(eventName + '-screen1-title').innerText = 'CPR Squeeze';
       }
     }
   }

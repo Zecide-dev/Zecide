@@ -271,11 +271,12 @@ a:hover {
 }
 
 .card.monitor-create-card {
-  min-height: 506px;
+  min-height: 520px;
 }
 
 .card.monitor-create-card .card-body {
   padding: 10px;
+  padding-bottom: 50px;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -505,7 +506,7 @@ a:hover {
   display: none;
 }
 
-#ema-div {
+#ema-div, #cpr-div {
   display: block;
 }
 

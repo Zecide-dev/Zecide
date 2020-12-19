@@ -283,7 +283,7 @@
             <div class="card-header">
               MONITOR
             </div>
-            <div class="card-body">
+            <div class="card-body monitor-create-card-body">
               <div id='outer-screen-div'>
                 <div id='ORB-div'>
                   <ul class="nav nav-tabs screen-nav-tabs custom-scrollbar" id="ORB-screenTab" role="tablist">
@@ -384,7 +384,7 @@
             <div class="card-header">
               CREATE
             </div>
-            <div class="card-body">
+            <div class="card-body monitor-create-card-body">
               <input type="text" name="event-name" id="event-name" placeholder="Event Name">
               <p>
                 <button type="button" class="btn btn-outline-danger" id='delete-create-event'><i
@@ -397,7 +397,63 @@
               </div>
               <div>
                 <div class="inner-create-event-div" id='price-action-div'>
-                  <h5>Price Action</h5>
+                  <select name="price-action-tools-dropdown" id="price-action-tools-dropdown" value='ema'
+                    onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option value="cpr">CPR - Central Pivot Range</option>
+                  </select>
+                  <!-- CPR div -->
+                  <div class='tools-div price-action-tools-div' id='cpr-div'>
+                    <select class='tools-choices-dropdown' name="cpr-choices-dropdown"
+                      id="cpr-choices-dropdown" value='cpr-choice-1'>
+                      <option value="cpr-choice-1">All CPR Screens</option>
+                      <option value="cpr-choice-2">Detecting a Particular Scenario</option>
+                      <option value="cpr-choice-3">CPR Squeeze</option>
+                    </select>
+                    <div class='cpr-choices-div' id='cpr-choice-2-div'>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-1' id='cpr-screens-checkbox-1' class='checkbox'>
+                        <label for="cpr-screens-checkbox-1">Candle Engulfing CPR</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-2' id='cpr-screens-checkbox-2' class='checkbox'>
+                        <label for="cpr-screens-checkbox-2">Touching Upper CPR</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-3' id='cpr-screens-checkbox-3' class='checkbox'>
+                        <label for="cpr-screens-checkbox-3">Touching Lower CPR</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-4' id='cpr-screens-checkbox-4' class='checkbox'>
+                        <label for="cpr-screens-checkbox-4">Candle Inside CPR</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-5' id='cpr-screens-checkbox-5' class='checkbox'>
+                        <label for="cpr-screens-checkbox-5">Candle Between Upper CPR and R1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-6' id='cpr-screens-checkbox-6' class='checkbox'>
+                        <label for="cpr-screens-checkbox-6">Touching R1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-7' id='cpr-screens-checkbox-7' class='checkbox'>
+                        <label for="cpr-screens-checkbox-7">Outside R1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-8' id='cpr-screens-checkbox-8' class='checkbox'>
+                        <label for="cpr-screens-checkbox-8">Candle Between Lower CPR and S1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-9' id='cpr-screens-checkbox-9' class='checkbox'>
+                        <label for="cpr-screens-checkbox-9">Touching S1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='cpr-screens-checkbox-10' id='cpr-screens-checkbox-10' class='checkbox'>
+                        <label for="cpr-screens-checkbox-10">Outside S1</label>
+                      </div>
+                    </div>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cpr-event'>Create
+                      CPR Event</button>
+                  </div>
                 </div>
                 <div class="inner-create-event-div" id='indicator-div'>
                   <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'
