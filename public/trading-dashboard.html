@@ -400,6 +400,7 @@
                   <select name="price-action-tools-dropdown" id="price-action-tools-dropdown" value='ema'
                     onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option value="cpr">CPR - Central Pivot Range</option>
+                    <option value="orb">ORB - Opening Range Breakout</option>
                   </select>
                   <!-- CPR div -->
                   <div class='tools-div price-action-tools-div' id='cpr-div'>
@@ -454,6 +455,58 @@
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-cpr-event'>Create
                       CPR Event</button>
                   </div>
+                  <!-- PIVOTFIBO div -->
+                  <div class='tools-div price-action-tools-div' id='pivotfibo-div'>
+                    <select class='tools-choices-dropdown' name="pivotfibo-choices-dropdown"
+                      id="pivotfibo-choices-dropdown" value='pivotfibo-choice-1'>
+                      <option value="pivotfibo-choice-1">Touching Pivot Levels</option>
+                      <option value="pivotfibo-choice-2">Detection for Touching a Particular Pivot Level</option>
+                    </select>
+                    <div class='pivotfibo-choices-div' id='pivotfibo-choice-2-div'>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-1' id='pivotfibo-screens-checkbox-1' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-1">Touching Pivot</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-2' id='pivotfibo-screens-checkbox-2' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-2">Touching R1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-3' id='pivotfibo-screens-checkbox-3' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-3">Touching R2</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-4' id='pivotfibo-screens-checkbox-4' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-4">Touching R3</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-5' id='pivotfibo-screens-checkbox-5' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-5">Touching S1</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-6' id='pivotfibo-screens-checkbox-6' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-6">Touching S2</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" name='pivotfibo-screens-checkbox-7' id='pivotfibo-screens-checkbox-7' class='checkbox'>
+                        <label for="pivotfibo-screens-checkbox-7">Touching S3</label>
+                      </div>
+                    </div>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-pivotfibo-event'>Create
+                      pivotfibo Event</button>
+                  </div>
+                  <!-- ORB div -->
+                  <div class='tools-div price-action-tools-div' id='orb-div'>
+                    <div>
+                      <label for="orb-time">Time</label>
+                      <input type="number" value=5 step="5" id='orb-time' name='orb-time'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-orb-event'>Create
+                      ORB Event</button>
+                  </div>
+
                 </div>
                 <div class="inner-create-event-div" id='indicator-div'>
                   <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'
