@@ -403,6 +403,7 @@
                     <option value="orb">ORB - Opening Range Breakout</option>
                     <option value="structure">STRUCTURE - Market Structure Detection</option>
                     <option value="pullback">PULLBACK - Pullback Detection</option>
+                    <option value="rangebound">RANGE BOUND - Range Bound Detection</option>
                   </select>
                   <!-- CPR div -->
                   <div class='tools-div price-action-tools-div' id='cpr-div'>
@@ -529,6 +530,21 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-pullback-event'>Create
                       Pullback Event</button>
+                  </div>
+                  <!-- RANGEBOUND div -->
+                  <div class='tools-div price-action-tools-div' id='rangebound-div'>
+                    <div>
+                      <label for="rangebound-window">Past Candles to Consider</label>
+                      <input type="number" value=15 id='rangebound-window' name='rangebound-window'>
+                    </div>
+                    <div>
+                      <label for="rangebound-percentage">Range Percentage</label>
+                      <input type="number" value=1 id='rangebound-percentage' name='rangebound-percentage'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-rangebound-event'>Create
+                      Range Bound Event</button>
                   </div>
 
                 </div>
