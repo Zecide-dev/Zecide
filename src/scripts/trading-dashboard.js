@@ -2139,41 +2139,32 @@ createCPREvent.addEventListener('click', function () {
   creatingEventLoader.style.display = 'block';
 
   // Initialising the event
+  
+  // Finding the selected screens and the number of selected screens.
   let CPRChoicesDropdown = document.getElementById('cpr-choices-dropdown');
   let choice = CPRChoicesDropdown.value.toString().substr(CPRChoicesDropdown.value.toString().length - 1);
-  let selectedScreens = [], numSelectedScreens = 0, selectedScreensString = '';
-
-  // Finding the selected screens and the number of selected screens.
-  for (let i = 1; i < 11; i++) {
-    let CPRScreenCheckbox = document.getElementById('cpr-screens-checkbox-' + i);
-    if (CPRScreenCheckbox.checked) {
-      selectedScreens.push(i);
-      numSelectedScreens++;
-      selectedScreensString += (i + '-');
-    }
-  }
-
-  let eventName
+  let eventName;
   if (choice == '1') eventName = newEventInitialiser(10);
-  else if (choice == '2') eventName = newEventInitialiser(numSelectedScreens);
   else eventName = newEventInitialiser(1);
-
+  
   let screenNames = ['Candle Engulfing CPR', 'Touching Upper CPR', 'Touching Lower CPR', 'Candle Inside CPR', 'Candle Between Upper CPR and R1', 'Touching R1', 'Outside R1', 'Candle Between Lower CPR and S1', 'Touching S1', 'Outside S1'];
-
+  
   // Creating a bubble in the show all events modal
   let modalBubblesContainer = document.getElementById('modal-bubbles-container');
   let a = createNewBubbleForModal(eventName);
   modalBubblesContainer.append(a);
-
+  
   // Creating new Monitor Div
   let monitorDiv = createNewEventMonitorDiv(eventName);
   document.getElementById('outer-screen-div').append(monitorDiv);
-
+  
   // Customizing the URL
+  let CPRScreenChoice = document.getElementById('cpr-choice2-select-points');
+  let point = CPRScreenChoice.value.toString().substr(CPRScreenChoice.value.toString().length - 1);
   var xmlHttp = new XMLHttpRequest();
   let url = backendBaseURL + 'Dashboard/cpr?';
   url += ('choice=' + choice);
-  url += ('&screens=' + selectedScreensString);
+  url += ('&point=' + point);
   console.log(url);
 
   xmlHttp.onreadystatechange = function () {
@@ -2193,9 +2184,7 @@ createCPREvent.addEventListener('click', function () {
           document.getElementById(eventName + '-screen' + (i+1) + '-title').innerText = screenNames[i];
         }
       } else if (choice == '2') {
-        for (let i = 0; i < numSelectedScreens; i++) {
-          document.getElementById(eventName + '-screen' + (i+1) + '-title').innerText = screenNames[selectedScreens[i] - 1];
-        }
+          document.getElementById(eventName + '-screen1-title').innerText = screenNames[point - 1];
       } else {
         document.getElementById(eventName + '-screen1-title').innerText = 'CPR Squeeze';
       }
