@@ -401,6 +401,7 @@
                     onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option value="cpr">CPR - Central Pivot Range</option>
                     <option value="orb">ORB - Opening Range Breakout</option>
+                    <option value="structure">STRUCTURE - Market Structure Detection</option>
                   </select>
                   <!-- CPR div -->
                   <div class='tools-div price-action-tools-div' id='cpr-div'>
@@ -505,6 +506,17 @@
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-orb-event'>Create
                       ORB Event</button>
+                  </div>
+                  <!-- STRUCTURE div -->
+                  <div class='tools-div price-action-tools-div' id='structure-div'>
+                    <div>
+                      <label for="structure-window">Past Candles to Consider</label>
+                      <input type="number" value=15 id='structure-window' name='structure-window'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-structure-event'>Create
+                      Structure Event</button>
                   </div>
 
                 </div>
