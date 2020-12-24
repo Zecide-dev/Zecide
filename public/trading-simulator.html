@@ -49,69 +49,18 @@
     </div>
 
     <!-- Modal for Show all events -->
-    <div class="modal fade" id="show-all-events-modal" tabindex="-1" aria-labelledby="show-all-events-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">All Events</h5>
-                    <button id='close-show-all-events-modal' type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class='container row'>
-                        <a class='modal-bubble active' id='ORB-modal-bubble' onclick="changeCurrentEvent('ORB')">
-                            ORB
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="ORB">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Breakout-RSI-modal-bubble'
-                            onclick="changeCurrentEvent('Breakout-RSI')">
-                            Breakout RSI
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Breakout-RSI">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Pivot-Touch-modal-bubble'
-                            onclick="changeCurrentEvent('Pivot-Touch')">
-                            Pivot Touch
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Pivot-Touch">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Event-1-modal-bubble' onclick="changeCurrentEvent('Event-1')">
-                            Event 1
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Event-1">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Event-2-modal-bubble' onclick="changeCurrentEvent('Event-2')">
-                            Event 2
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Event-2">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Side Navbar -->
 
 
     <!-- NAVBAR -->
-    <div class="upper-nav">
-        <div class="logo">
-            <span id='upper-nav-logo-text' class="logo-text">Zecide</span>
+    <div class="upper-nav"> 
+        <div class="logo" style="padding-left: 1vw;">
+            <a href="/learn2">
+                <img class="alogo" src="/src/images/logo.svg" alt="zecide-logo" />
+                <span>Zecide Learn</span>
+            </a>
         </div>
         <div class="search">
             <input class="search-input" placeholder="Search.." />

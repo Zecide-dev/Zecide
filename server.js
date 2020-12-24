@@ -9,6 +9,7 @@ const secure = require("ssl-express-www");
 //app.use(secure);
 
 const env = require('dotenv').config();
+// console.log(process.env.token);
 const bodyParser = require('body-parser');
 
 //initialize routes
@@ -49,73 +50,73 @@ app.use(function(req, res, next) {
     res.status(404).sendFile(path.join(__dirname, "/public/404.html"));
 });
 
-// var users = [
-//     {
-//         username: 'ankitanshu',
-//         password: 'xyz123',
-//         name: 'Ankitanshu',
-//         email: 'ankitanshu22@gmail.com'
-//     }, {
-//         username: 'anna',
-//         password: 'password123member',
-//         Name: 'Anna',
-//         email: 'anna@gmail.com'
-//     }
-// ];
+var users = [
+    {
+        username: 'ankitanshu',
+        password: 'xyz123',
+        name: 'Ankitanshu',
+        email: 'ankitanshu22@gmail.com'
+    }, {
+        username: 'anna',
+        password: 'password123member',
+        Name: 'Anna',
+        email: 'anna@gmail.com'
+    }
+];
 
-// var newUser = {
-//     username: '',
-//     password: '',
-//     name: '',
-//     email: ''
-// }
+var newUser = {
+    username: '',
+    password: '',
+    name: '',
+    email: ''
+}
 
-// const accessTokenSecret = process.env.SECRET_KEY;
+const accessTokenSecret = process.env.SECRET_KEY;
 
-// app.post("/users/login", function(req,res){
-//     // Read username and password from request body
-//     const username = req.body.user.UserName;
-//     const password = req.body.user.password;
-//     // Filter user from the users array by username and password
-//     const user = users.find(u => { return u.username === username && u.password === password });
+app.post("/users/login", function(req,res){
+    // Read username and password from request body
+    const username = req.body.user.UserName;
+    const password = req.body.user.password;
+    // Filter user from the users array by username and password
+    const user = users.find(u => { return u.username === username && u.password === password });
 
-//     if (user) {
-//         // Generate an access token
-//         const accessToken = jwt.sign({ username: user.username,  name: user.name }, accessTokenSecret);
+    if (user) {
+        // Generate an access token
+        const accessToken = jwt.sign({ username: user.username,  name: user.name }, accessTokenSecret);
 
-//         res.json({
-//             accessToken
-//         });
-//     } else {
-//         res.send('Username or password incorrect');
-//     }
+        res.json({
+            accessToken
+        });
+    } else {
+        res.send('Username or password incorrect');
+    }
     
-// });
+});
 
 
-// app.post("/users", function(req,res){
-//     // Read name, email, username and password from request body
-//     const username = req.body.user.UserName;
-//     const password = req.body.user.password;
-//     const email = req.body.user.Email;
-//     const name = req.body.user.Name;
+app.post("/users", function(req,res){
+    // Read name, email, username and password from request body
+    const username = req.body.user.UserName;
+    const password = req.body.user.password;
+    const email = req.body.user.Email;
+    const name = req.body.user.Name;
 
-//     newUser.username=username;
-//     newUser.password=password;
-//     newUser.email=email;
-//     newUser.name=name;
+    newUser.username=username;
+    newUser.password=password;
+    newUser.email=email;
+    newUser.name=name;
 
-//     users.push(newUser);
-//     // Filter user from the users array by username and password
-//     const user = users.find(u => { return u.username === username && u.password === password });
+    users.push(newUser);
+    // Filter user from the users array by username and password
+    const user = users.find(u => { return u.username === username && u.password === password });
 
-//     if (user) {
-//         // Generate an access token
-//         const accessToken = jwt.sign({ username: user.username,  name: user.name }, accessTokenSecret);
+    if (user) {
+        // Generate an access token
+        const accessToken = jwt.sign({ username: user.username,  name: user.name }, accessTokenSecret);
 
-//     } else {
-//         res.send('Username or password incorrect');
-//     }
+    } else {
+        res.send('Username or password incorrect');
+    }
   
-// });
+});
 
