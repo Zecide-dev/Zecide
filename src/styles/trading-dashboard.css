@@ -96,7 +96,7 @@ a:hover {
 
 #body-container {
   padding-left: 7vw;
-  padding-right: 5vw;
+  padding-right: 2vw;
 }
 
 .card {
@@ -115,6 +115,11 @@ a:hover {
 
 .candlestick-chart-div {
   height: 65vh;
+}
+
+#creating-candlestick-chart {
+  display: none;
+  padding-top: 150px;
 }
 
 #candlestick-chart {
@@ -270,12 +275,18 @@ a:hover {
   margin: 8px 12px;
 }
 
+.card.monitor-create-card {
+  min-height: 520px;
+}
+
 .card.monitor-create-card .card-body {
   padding: 10px;
+  padding-bottom: 50px;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
   height: 5px;
+  width: 5px;
   background-color: #F5F5F5;
 }
 
@@ -358,6 +369,10 @@ a:hover {
   padding: 4px;
 }
 
+.company-tab:hover {
+  cursor: pointer;
+}
+
 .monitor-bottom-section {
   margin-top: 5px;
   border-top: 1px dashed black;
@@ -424,6 +439,9 @@ a:hover {
 .monitor-create-buttons-div {
   padding: 0;
   display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .monitor-create-buttons {
@@ -432,6 +450,11 @@ a:hover {
   background-color: #F3FAFf;
   width: 50%;
   text-align: center;
+  outline: none;
+}
+
+.monitor-create-buttons:focus{
+  outline: none;
 }
 
 .modal-bubble {
@@ -442,6 +465,10 @@ a:hover {
   border-radius: 40px;
   font-size: 1rem;
   display: flex;
+}
+
+.modal-bubble:hover {
+  cursor: pointer;
 }
 
 .modal-bubble.active {
@@ -461,4 +488,61 @@ a:hover {
 
 #delete-create-event {
   float: right;
+}
+
+#create-event {
+  display: none;
+}
+
+.inner-create-event-div {
+  margin-top: 10px;
+}
+
+.inner-create-event-div select {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  max-width: 100%;
+}
+
+.inner-create-event-div select:focus {
+  max-width: 100%;
+}
+
+.inner-create-event-div input {
+  width: 5vw;
+  margin-right: 5vw;
+  float: right;
+}
+
+.inner-create-event-div .checkbox {
+  width: auto;
+  margin: 5px;
+  float: left;
+}
+
+.tools-div {
+  display: none;
+}
+
+#ema-div, #cpr-div {
+  display: block;
+}
+
+#indicator-div, #price-div {
+  display: none;
+}
+
+#creating-event-loader {
+  justify-content: space-around;
+  padding-top: 150px;
+  display: none;
+}
+
+#creating-event-loader h4 {
+  text-align: center;
+}
+
+.spinner-grow.text-primary {
+  margin-left: 45%;
+  margin-top: 20px;
 }

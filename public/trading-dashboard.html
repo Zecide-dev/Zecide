@@ -52,7 +52,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class='container row'>
+          <div class='container row' id='modal-bubbles-container'>
             <a class='modal-bubble active' id='ORB-modal-bubble' onclick="changeCurrentEvent('ORB')">
               ORB
               <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
@@ -169,6 +169,12 @@
         <div class="card">
           <div class="card-body">
             <div class="candlestick-chart-div">
+              <div id='creating-candlestick-chart'>
+                <h4 style="text-align: center;">Creating Chart...</h4>
+                <div class="spinner-grow text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
               <div id="candlestick-chart"></div>
             </div>
           </div>
@@ -279,11 +285,11 @@
       </div>
       <div class='col-sm-4'>
         <div class="card monitor-create-card">
-          <div id='monitor-event' style="display: none;">
+          <div id='monitor-event' class='monitor-create-div'>
             <div class="card-header">
               MONITOR
             </div>
-            <div class="card-body">
+            <div class="card-body monitor-create-card-body">
               <div id='outer-screen-div'>
                 <div id='ORB-div'>
                   <ul class="nav nav-tabs screen-nav-tabs custom-scrollbar" id="ORB-screenTab" role="tablist">
@@ -312,8 +318,8 @@
                   <div class="tab-content" id="ORB-myTabContent">
                     <div class="tab-pane screen fade show active" id="ORB-screen1" role="tabpanel"
                       aria-labelledby="ORB-screen1-tab">
-                      Screen 1
-                      <div class='company-tabs'>
+                      <div class='screen-title' id='ORB-screen1-title'>Screen 1</div>
+                      <div class='company-tabs' id='ORB-Screen1-company-tabs'>
                         <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
                             class='chng-percent'>Chng%</span></div>
                         <div class='company-tab'><span class='symbol'>MINDTREE</span> <span
@@ -330,16 +336,16 @@
                     </div>
                     <div class="tab-pane screen fade" id="ORB-screen2" role="tabpanel"
                       aria-labelledby="ORB-screen2-tab">
-                      Screen 2
-                      <div class='company-tabs'>
+                      <div class='screen-title' id='ORB-screen2-title'>Screen 2</div>
+                      <div class='company-tabs' id='ORB-Screen2-company-tabs'>
                         <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
                             class='chng-percent'>Chng%</span></div>
                       </div>
                     </div>
                     <div class="tab-pane screen fade" id="ORB-screen3" role="tabpanel"
                       aria-labelledby="ORB-screen3-tab">
-                      Screen 3
-                      <div class='company-tabs'>
+                      <div class='screen-title' id='ORB-screen3-title'>Screen 3</div>
+                      <div class='company-tabs' id='ORB-Screen3-company-tabs'>
                         <div class='company-tab-heading'><span class='symbol'>Symbol</span> <span
                             class='chng-percent'>Chng%</span></div>
                       </div>
@@ -380,42 +386,1011 @@
               </div>
             </div>
           </div>
-          <div id='create-event'>
+          <div class='monitor-create-div' id='create-event'>
             <div class="card-header">
               CREATE
             </div>
-            <div class="card-body">
+            <div class="card-body monitor-create-card-body">
               <input type="text" name="event-name" id="event-name" placeholder="Event Name">
               <p>
-                RSI
                 <button type="button" class="btn btn-outline-danger" id='delete-create-event'><i
                     class="fas fa-trash-alt"></i></button>
               </p>
               <div>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
-                  data-target="#price-action-div" aria-expanded="false" aria-controls="price-action-div">Price
-                  Action</button>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
-                  data-target="#indicator-div" aria-expanded="false" aria-controls="indicator-div">Indicator</button>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#price-div"
-                  aria-expanded="false" aria-controls="price-div">Price</button>
+                <button class="btn btn-outline-primary" id='price-action-button'>Price Action</button>
+                <button class="btn btn-outline-primary" id='indicator-button'>Indicator</button>
+                <button class="btn btn-outline-primary" id='price-button'>Price</button>=
               </div>
               <div>
-                <div class="collapse" id='price-action-div'>
-                  <h5>Price Action</h5>
+                <div class="inner-create-event-div" id='price-action-div'>
+                  <select name="price-action-tools-dropdown custom-scrollbar" id="price-action-tools-dropdown" value='ema'
+                    onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option value="cpr">CPR - Central Pivot Range</option>
+                    <option value="pivotfibo">PIVOT FIBO - Fibonacci Pivot Points</option>
+                    <option value="orb">ORB - Opening Range Breakout</option>
+                    <option value="structure">STRUCTURE - Market Structure Detection</option>
+                    <option value="pullback">PULLBACK - Pullback Detection</option>
+                    <option value="rangebound"><div>RANGE BOUND - Range Bound Detection</div></option>
+                    <option value="breakout">BREAKOUT - Breakout Detection</option>
+                    <option value="reversal">REVERSAL - Reversal Detection</option>
+                  </select>
+                  <!-- CPR div -->
+                  <div class='tools-div price-action-tools-div' id='cpr-div'>
+                    <select class='tools-choices-dropdown' name="cpr-choices-dropdown" id="cpr-choices-dropdown"
+                      value='cpr-choice-1'>
+                      <option value="cpr-choice-1">All CPR Screens</option>
+                      <option value="cpr-choice-2">Detecting a Particular Scenario</option>
+                      <option value="cpr-choice-3">CPR Squeeze</option>
+                    </select>
+                    <div class='cpr-choices-div' id='cpr-choice-2-div'>
+                      <select name="cpr-choice2-select-points" id="cpr-choice2-select-points"
+                        value='cpr-screens-option-1'>
+                        <option value="cpr-screens-option-1">Candle Engulfing CPR</option>
+                        <option value="cpr-screens-option-2">Touching Upper CPR</option>
+                        <option value="cpr-screens-option-3">Touching Lower CPR</option>
+                        <option value="cpr-screens-option-4">Candle Inside CPR</option>
+                        <option value="cpr-screens-option-5">Candle Between Upper CPR and R1</option>
+                        <option value="cpr-screens-option-6">Touching R1</option>
+                        <option value="cpr-screens-option-7">Outside R1</option>
+                        <option value="cpr-screens-option-8">Candle Between Lower CPR and S1</option>
+                        <option value="cpr-screens-option-9">ouching S1</option>
+                        <option value="cpr-screens-option-10">Outside S1</option>
+                      </select>
+                    </div>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cpr-event'>Create
+                      CPR Event</button>
+                  </div>
+                  <!-- PIVOTFIBO div -->
+                  <div class='tools-div price-action-tools-div' id='pivotfibo-div'>
+                    <select class='tools-choices-dropdown' name="pivotfibo-choices-dropdown"
+                      id="pivotfibo-choices-dropdown" value='pivotfibo-choice-1'>
+                      <option value="pivotfibo-choice-1">Touching Pivot Levels</option>
+                      <option value="pivotfibo-choice-2">Detection for Touching a Particular Pivot Level</option>
+                    </select>
+                    <div class='pivotfibo-choices-div' id='pivotfibo-choice-2-div'>
+                      <select name="pivotfibo-choice2-select-points" id="pivotfibo-choice2-select-points"
+                        value='pivotfibo-screens-option-1'>
+                        <option value="pivotfibo-screens-option-1">Touching Pivot</option>
+                        <option value="pivotfibo-screens-option-2">Touching R1</option>
+                        <option value="pivotfibo-screens-option-3">Touching R2</option>
+                        <option value="pivotfibo-screens-option-4">Touching R3</option>
+                        <option value="pivotfibo-screens-option-5">Touching S1</option>
+                        <option value="pivotfibo-screens-option-6">Touching S2</option>
+                        <option value="pivotfibo-screens-option-7">Touching S3</option>
+                      </select>
+                    </div>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-pivotfibo-event'>Create
+                      Pivot Fibo Event</button>
+                  </div>
+                  <!-- ORB div -->
+                  <div class='tools-div price-action-tools-div' id='orb-div'>
+                    <div>
+                      <label for="orb-time">Time</label>
+                      <input type="number" value=5 step="5" id='orb-time' name='orb-time'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-orb-event'>Create
+                      ORB Event</button>
+                  </div>
+                  <!-- STRUCTURE div -->
+                  <div class='tools-div price-action-tools-div' id='structure-div'>
+                    <div>
+                      <label for="structure-window">Past Candles to Consider</label>
+                      <input type="number" value=15 id='structure-window' name='structure-window'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-structure-event'>Create
+                      Structure Event</button>
+                  </div>
+                  <!-- PULLBACK div -->
+                  <div class='tools-div price-action-tools-div' id='pullback-div'>
+                    <div>
+                      <label for="pullback-big-window">Past Candles to Consider</label>
+                      <input type="number" value=40 id='pullback-big-window' name='pullback-big-window'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-pullback-event'>Create
+                      Pullback Event</button>
+                  </div>
+                  <!-- RANGEBOUND div -->
+                  <div class='tools-div price-action-tools-div' id='rangebound-div'>
+                    <div>
+                      <label for="rangebound-window">Past Candles to Consider</label>
+                      <input type="number" value=15 id='rangebound-window' name='rangebound-window'>
+                    </div>
+                    <div>
+                      <label for="rangebound-percentage">Range Percentage</label>
+                      <input type="number" value=1 id='rangebound-percentage' name='rangebound-percentage'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-rangebound-event'>Create
+                      Range Bound Event</button>
+                  </div>
+                  <!-- BREAKOUT div -->
+                  <div class='tools-div price-action-tools-div' id='breakout-div'>
+                    <div>
+                      <label for="breakout-window">Past Candles to Consider</label>
+                      <input type="number" value=15 id='breakout-window' name='breakout-window'>
+                    </div>
+                    <div>
+                      <label for="breakout-percentage">Range Percentage</label>
+                      <input type="number" value=1 id='breakout-percentage' name='breakout-percentage'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-breakout-event'>Create
+                      Breakout Event</button>
+                  </div>
+                  <!-- REVERSAL div -->
+                  <div class='tools-div price-action-tools-div' id='reversal-div'>
+                    <div>
+                      <label for="reversal-window">Past Candles to Consider</label>
+                      <input type="number" value=60 id='reversal-window' name='reversal-window'>
+                    </div>
+                    <div>
+                      <label for="reversal-exclude">Number of Candles since the Revesal started taking place</label>
+                      <input type="number" value=5 id='reversal-exclude' name='reversal-exclude'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-reversal-event'>Create
+                      Reversal Event</button>
+                  </div>
+
                 </div>
-                <div class="collapse" id='indicator-div'>
-                  <h5>Indicator</h5>
+                <div class="inner-create-event-div custom-scrollbar" id='indicator-div'>
+                  <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'
+                    onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option value="ema">EMA - Exponential Moving Average</option>
+                    <option value="dema">DEMA - Double Exponential Moving Average</option>
+                    <option value="hma">HMA - Hull Moving Average</option>
+                    <option value="kama">KAMA - Kaufman's Adaptive Moving Average</option>
+                    <option value="sma">SMA - Simple Moving Average</option>
+                    <option value="rma">RMA - WildeR's Moving Average</option>
+                    <option value="sinwma">SINWMA - Sine Weighted Moving Average</option>
+                    <option value="swma">SMA - Symmetric Weighted Moving Average</option>
+                    <option value="t3ma">T3MA - T3 Moving Average</option>
+                    <option value="tema">TEMA - Triple Exponential Moving Average</option>
+                    <option value="trima">TRIMA - Triangular Moving Average</option>
+                    <option value="vwma">VWMA - Volume Weighted Moving Average</option>
+                    <option value="zlma">ZLMA - Zero Lag Moving Average</option>
+                    <option value="vwap">VWAP - Volume Weighted Average Price</option>
+                    <option value="supertrend">SUPERTREND</option>
+                    <option value="ichimoku">ICHIMOKU - Kinko Hyo</option>
+                    <option value="vortex">VORTEX</option>
+                    <option value="psar">PSAR - Parabloic SAR</option>
+                    <option value="cksp">CKSP - Chande Kroll Stop</option>
+                    <option value="chop">CHOP - Choppiness Index</option>
+                    <option value="aroon">AROON - Aroon and Aroon Oscillator</option>
+                    <option value="adx">ADX - Average Directional Movement Index</option>
+                    <option value="kc">KC - Keltner Channel</option>
+                    <option value="accbands">ACCBANDS - Acceleration Bands</option>
+                    <option value="donchian">DONCHIAN - Donchian Channel</option>
+                    <option value="bbands">BBANDS - Bollinger Bands</option>
+                    <option value="obv">OBV - On Balance Volume</option>
+                    <option value="cmf">CMF - Chaikin Money Flow</option>
+                    <option value="mfi">MFI - Money Flow Index</option>
+                    <option value="ao">AO - Awesome Oscillator</option>
+                    <option value="stoch">STOCH - Stochastic Oscillator</option>
+                    <option value="stochrsi">STOCHRSI - Stochastic RSI</option>
+                    <option value="cci">CCI - Commodity Channel Index</option>
+                    <option value="roc">ROC - Rate of Change</option>
+                    <option value="macd">MACD - Moving Average Convergence Divergence</option>
+                    <option value="rsi">RSI - Relative Strength Index</option>
+                  </select>
+                  <!-- EMA div -->
+                  <div class='tools-div indicator-tools-div' id='ema-div'>
+                    <select class='tools-choices-dropdown' name="ema-choices-dropdown" id="ema-choices-dropdown"
+                      value='ema-with-close-price'>
+                      <option value="ema-with-close-price">EMA with Close Price</option>
+                      <option value="ema-crossovers">EMA Crossovers</option>
+                    </select>
+                    <div class='ema-choices-div' id='ema-with-close-price-div'>
+                      <label for="ema-length">Length</label>
+                      <input type="number" value=20 id='ema-length' name='ema-length'>
+                    </div>
+                    <div class='ema-choices-div' id='ema-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="ema-len1">Length of Shorter EMA</label>
+                        <input type="number" value=20 id='ema-len1' name='ema-len1'>
+                      </div>
+                      <div>
+                        <label for="ema-len2">Length of Longer EMA</label>
+                        <input type="number" value=200 id='ema-len2' name='ema-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='ema-cross' id='ema-cross' class='checkbox'>
+                    <label for="ema-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ema-event'>Create EMA
+                      Event</button>
+                  </div>
+                  <!-- DEMA div -->
+                  <div class='tools-div indicator-tools-div' id='dema-div'>
+                    <select class='tools-choices-dropdown' name="dema-choices-dropdown" id="dema-choices-dropdown"
+                      value='dema-with-close-price'>
+                      <option value="dema-with-close-price">DEMA with Close Price</option>
+                      <option value="dema-crossovers">DEMA Crossovers</option>
+                    </select>
+                    <div class='dema-choices-div' id='dema-with-close-price-div'>
+                      <label for="dema-length">Length</label>
+                      <input type="number" value=20 id='dema-length' name='dema-length'>
+                    </div>
+                    <div class='dema-choices-div' id='dema-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="dema-len1">Length of Shorter DEMA</label>
+                        <input type="number" value=20 id='dema-len1' name='dema-len1'>
+                      </div>
+                      <div>
+                        <label for="dema-len2">Length of Longer DEMA</label>
+                        <input type="number" value=200 id='dema-len2' name='dema-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='dema-cross' id='dema-cross' class='checkbox'>
+                    <label for="dema-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-dema-event'>Create DEMA
+                      Event</button>
+                  </div>
+                  <!-- HMA div -->
+                  <div class='tools-div indicator-tools-div' id='hma-div'>
+                    <select class='tools-choices-dropdown' name="hma-choices-dropdown" id="hma-choices-dropdown"
+                      value='hma-with-close-price'>
+                      <option value="hma-with-close-price">HMA with Close Price</option>
+                      <option value="hma-crossovers">HMA Crossovers</option>
+                    </select>
+                    <div class='hma-choices-div' id='hma-with-close-price-div'>
+                      <label for="hma-length">Length</label>
+                      <input type="number" value=20 id='hma-length' name='hma-length'>
+                    </div>
+                    <div class='hma-choices-div' id='hma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="hma-len1">Length of Shorter HMA</label>
+                        <input type="number" value=20 id='hma-len1' name='hma-len1'>
+                      </div>
+                      <div>
+                        <label for="hma-len2">Length of Longer HMA</label>
+                        <input type="number" value=200 id='hma-len2' name='hma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='hma-cross' id='hma-cross' class='checkbox'>
+                    <label for="hma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-hma-event'>Create HMA
+                      Event</button>
+                  </div>
+                  <!-- KAMA div -->
+                  <div class='tools-div indicator-tools-div' id='kama-div'>
+                    <select class='tools-choices-dropdown' name="kama-choices-dropdown" id="kama-choices-dropdown"
+                      value='kama-with-close-price'>
+                      <option value="kama-with-close-price">KAMA with Close Price</option>
+                      <option value="kama-crossovers">KAMA Crossovers</option>
+                    </select>
+                    <div class='kama-choices-div' id='kama-with-close-price-div'>
+                      <label for="kama-length">Length</label>
+                      <input type="number" value=20 id='kama-length' name='kama-length'>
+                    </div>
+                    <div class='kama-choices-div' id='kama-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="kama-len1">Length of Shorter KAMA</label>
+                        <input type="number" value=20 id='kama-len1' name='kama-len1'>
+                      </div>
+                      <div>
+                        <label for="kama-len2">Length of Longer KAMA</label>
+                        <input type="number" value=200 id='kama-len2' name='kama-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='kama-cross' id='kama-cross' class='checkbox'>
+                    <label for="kama-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-kama-event'>Create KAMA
+                      Event</button>
+                  </div>
+                  <!-- SMA div -->
+                  <div class='tools-div indicator-tools-div' id='sma-div'>
+                    <select class='tools-choices-dropdown' name="sma-choices-dropdown" id="sma-choices-dropdown"
+                      value='sma-with-close-price'>
+                      <option value="sma-with-close-price">SMA with Close Price</option>
+                      <option value="sma-crossovers">SMA Crossovers</option>
+                    </select>
+                    <div class='sma-choices-div' id='sma-with-close-price-div'>
+                      <label for="sma-length">Length</label>
+                      <input type="number" value=20 id='sma-length' name='sma-length'>
+                    </div>
+                    <div class='sma-choices-div' id='sma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="sma-len1">Length of Shorter SMA</label>
+                        <input type="number" value=20 id='sma-len1' name='sma-len1'>
+                      </div>
+                      <div>
+                        <label for="sma-len2">Length of Longer SMA</label>
+                        <input type="number" value=200 id='sma-len2' name='sma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='sma-cross' id='sma-cross' class='checkbox'>
+                    <label for="sma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-sma-event'>Create SMA
+                      Event</button>
+                  </div>
+                  <!-- RMA div -->
+                  <div class='tools-div indicator-tools-div' id='rma-div'>
+                    <select class='tools-choices-dropdown' name="rma-choices-dropdown" id="rma-choices-dropdown"
+                      value='rma-with-close-price'>
+                      <option value="rma-with-close-price">RMA with Close Price</option>
+                      <option value="rma-crossovers">RMA Crossovers</option>
+                    </select>
+                    <div class='rma-choices-div' id='rma-with-close-price-div'>
+                      <label for="rma-length">Length</label>
+                      <input type="number" value=20 id='rma-length' name='rma-length'>
+                    </div>
+                    <div class='rma-choices-div' id='rma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="rma-len1">Length of Shorter RMA</label>
+                        <input type="number" value=20 id='rma-len1' name='rma-len1'>
+                      </div>
+                      <div>
+                        <label for="rma-len2">Length of Longer RMA</label>
+                        <input type="number" value=200 id='rma-len2' name='rma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='rma-cross' id='rma-cross' class='checkbox'>
+                    <label for="rma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-rma-event'>Create RMA
+                      Event</button>
+                  </div>
+                  <!-- SINWMA div -->
+                  <div class='tools-div indicator-tools-div' id='sinwma-div'>
+                    <select class='tools-choices-dropdown' name="sinwma-choices-dropdown" id="sinwma-choices-dropdown"
+                      value='sinwma-with-close-price'>
+                      <option value="sinwma-with-close-price">SINWMA with Close Price</option>
+                      <option value="sinwma-crossovers">SINWMA Crossovers</option>
+                    </select>
+                    <div class='sinwma-choices-div' id='sinwma-with-close-price-div'>
+                      <label for="sinwma-length">Length</label>
+                      <input type="number" value=20 id='sinwma-length' name='sinwma-length'>
+                    </div>
+                    <div class='sinwma-choices-div' id='sinwma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="sinwma-len1">Length of Shorter SINWMA</label>
+                        <input type="number" value=20 id='sinwma-len1' name='sinwma-len1'>
+                      </div>
+                      <div>
+                        <label for="sinwma-len2">Length of Longer SINWMA</label>
+                        <input type="number" value=200 id='sinwma-len2' name='sinwma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='sinwma-cross' id='sinwma-cross' class='checkbox'>
+                    <label for="sinwma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-sinwma-event'>Create SINWMA
+                      Event</button>
+                  </div>
+                  <!-- SWMA div -->
+                  <div class='tools-div indicator-tools-div' id='swma-div'>
+                    <select class='tools-choices-dropdown' name="swma-choices-dropdown" id="swma-choices-dropdown"
+                      value='swma-with-close-price'>
+                      <option value="swma-with-close-price">SWMA with Close Price</option>
+                      <option value="swma-crossovers">SWMA Crossovers</option>
+                    </select>
+                    <div class='swma-choices-div' id='swma-with-close-price-div'>
+                      <label for="swma-length">Length</label>
+                      <input type="number" value=20 id='swma-length' name='swma-length'>
+                    </div>
+                    <div class='swma-choices-div' id='swma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="swma-len1">Length of Shorter SWMA</label>
+                        <input type="number" value=20 id='swma-len1' name='swma-len1'>
+                      </div>
+                      <div>
+                        <label for="swma-len2">Length of Longer SWMA</label>
+                        <input type="number" value=200 id='swma-len2' name='swma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='swma-cross' id='swma-cross' class='checkbox'>
+                    <label for="swma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-swma-event'>Create SWMA
+                      Event</button>
+                  </div>
+                  <!-- T3MA div -->
+                  <div class='tools-div indicator-tools-div' id='t3ma-div'>
+                    <select class='tools-choices-dropdown' name="t3ma-choices-dropdown" id="t3ma-choices-dropdown"
+                      value='t3ma-with-close-price'>
+                      <option value="t3ma-with-close-price">T3MA with Close Price</option>
+                      <option value="t3ma-crossovers">T3MA Crossovers</option>
+                    </select>
+                    <div class='t3ma-choices-div' id='t3ma-with-close-price-div'>
+                      <label for="t3ma-length">Length</label>
+                      <input type="number" value=20 id='t3ma-length' name='t3ma-length'>
+                    </div>
+                    <div class='t3ma-choices-div' id='t3ma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="t3ma-len1">Length of Shorter T3MA</label>
+                        <input type="number" value=20 id='t3ma-len1' name='t3ma-len1'>
+                      </div>
+                      <div>
+                        <label for="t3ma-len2">Length of Longer T3MA</label>
+                        <input type="number" value=200 id='t3ma-len2' name='t3ma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='t3ma-cross' id='t3ma-cross' class='checkbox'>
+                    <label for="t3ma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-t3ma-event'>Create T3MA
+                      Event</button>
+                  </div>
+                  <!-- TEMA div -->
+                  <div class='tools-div indicator-tools-div' id='tema-div'>
+                    <select class='tools-choices-dropdown' name="tema-choices-dropdown" id="tema-choices-dropdown"
+                      value='tema-with-close-price'>
+                      <option value="tema-with-close-price">TEMA with Close Price</option>
+                      <option value="tema-crossovers">TEMA Crossovers</option>
+                    </select>
+                    <div class='tema-choices-div' id='tema-with-close-price-div'>
+                      <label for="tema-length">Length</label>
+                      <input type="number" value=20 id='tema-length' name='tema-length'>
+                    </div>
+                    <div class='tema-choices-div' id='tema-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="tema-len1">Length of Shorter TEMA</label>
+                        <input type="number" value=20 id='tema-len1' name='tema-len1'>
+                      </div>
+                      <div>
+                        <label for="tema-len2">Length of Longer TEMA</label>
+                        <input type="number" value=200 id='tema-len2' name='tema-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='tema-cross' id='tema-cross' class='checkbox'>
+                    <label for="tema-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-tema-event'>Create TEMA
+                      Event</button>
+                  </div>
+                  <!-- TRIMA div -->
+                  <div class='tools-div indicator-tools-div' id='trima-div'>
+                    <select class='tools-choices-dropdown' name="trima-choices-dropdown" id="trima-choices-dropdown"
+                      value='trima-with-close-price'>
+                      <option value="trima-with-close-price">TRIMA with Close Price</option>
+                      <option value="trima-crossovers">TRIMA Crossovers</option>
+                    </select>
+                    <div class='trima-choices-div' id='trima-with-close-price-div'>
+                      <label for="trima-length">Length</label>
+                      <input type="number" value=20 id='trima-length' name='trima-length'>
+                    </div>
+                    <div class='trima-choices-div' id='trima-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="trima-len1">Length of Shorter TRIMA</label>
+                        <input type="number" value=20 id='trima-len1' name='trima-len1'>
+                      </div>
+                      <div>
+                        <label for="trima-len2">Length of Longer TRIMA</label>
+                        <input type="number" value=200 id='trima-len2' name='trima-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='trima-cross' id='trima-cross' class='checkbox'>
+                    <label for="trima-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-trima-event'>Create TRIMA
+                      Event</button>
+                  </div>
+                  <!-- VWMA div -->
+                  <div class='tools-div indicator-tools-div' id='vwma-div'>
+                    <select class='tools-choices-dropdown' name="vwma-choices-dropdown" id="vwma-choices-dropdown"
+                      value='vwma-with-close-price'>
+                      <option value="vwma-with-close-price">VWMA with Close Price</option>
+                      <option value="vwma-crossovers">VWMA Crossovers</option>
+                    </select>
+                    <div class='vwma-choices-div' id='vwma-with-close-price-div'>
+                      <label for="vwma-length">Length</label>
+                      <input type="number" value=20 id='vwma-length' name='vwma-length'>
+                    </div>
+                    <div class='vwma-choices-div' id='vwma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="vwma-len1">Length of Shorter VWMA</label>
+                        <input type="number" value=20 id='vwma-len1' name='vwma-len1'>
+                      </div>
+                      <div>
+                        <label for="vwma-len2">Length of Longer VWMA</label>
+                        <input type="number" value=200 id='vwma-len2' name='vwma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='vwma-cross' id='vwma-cross' class='checkbox'>
+                    <label for="vwma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-vwma-event'>Create VWMA
+                      Event</button>
+                  </div>
+                  <!-- ZLMA div -->
+                  <div class='tools-div indicator-tools-div' id='zlma-div'>
+                    <select class='tools-choices-dropdown' name="zlma-choices-dropdown" id="zlma-choices-dropdown"
+                      value='zlma-with-close-price'>
+                      <option value="zlma-with-close-price">ZLMA with Close Price</option>
+                      <option value="zlma-crossovers">ZLMA Crossovers</option>
+                    </select>
+                    <div class='zlma-choices-div' id='zlma-with-close-price-div'>
+                      <label for="zlma-length">Length</label>
+                      <input type="number" value=20 id='zlma-length' name='zlma-length'>
+                    </div>
+                    <div class='zlma-choices-div' id='zlma-crossovers-div' style="display: none;">
+                      <div>
+                        <label for="zlma-len1">Length of Shorter ZLMA</label>
+                        <input type="number" value=20 id='zlma-len1' name='zlma-len1'>
+                      </div>
+                      <div>
+                        <label for="zlma-len2">Length of Longer ZLMA</label>
+                        <input type="number" value=200 id='zlma-len2' name='zlma-len2'>
+                      </div>
+                    </div>
+                    <input type="checkbox" name='zlma-cross' id='zlma-cross' class='checkbox'>
+                    <label for="zlma-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-zlma-event'>Create ZLMA
+                      Event</button>
+                  </div>
+                  <!-- VWAP div -->
+                  <div class='tools-div indicator-tools-div' id='vwap-div'>
+                    <input type="checkbox" name='vwap-cross' id='vwap-cross' class='checkbox'>
+                    <label for="vwap-cross">Detect at Crossing</label>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-vwap-event'>Create VWAP
+                      Event</button>
+                  </div>
+                  <!-- SUPERTREND div -->
+                  <div class='tools-div indicator-tools-div' id='supertrend-div'>
+                    <div>
+                      <label for="supertrend-length">Length</label>
+                      <input type="number" value=7 id='supertrend-length' name='supertrend-length'>
+                    </div>
+                    <div>
+                      <label for="supertrend-multiplier">Multiplier</label>
+                      <input type="number" value=3.0 step='0.1' id='supertrend-multiplier' name='supertrend-multiplier'>
+                    </div>
+                    <div>
+                      <label for="supertrend-offset">Offset</label>
+                      <input type="number" value=0 id='supertrend-offset' name='supertrend-offset'>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='supertrend-cross' id='supertrend-cross' class='checkbox'>
+                      <label for="supertrend-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-supertrend-event'>Create
+                      Supertrend Event</button>
+                  </div>
+                  <!-- ICHIMOKU div -->
+                  <div class='tools-div indicator-tools-div' id='ichimoku-div'>
+                    <select class='tools-choices-dropdown' name="ichimoku-choices-dropdown"
+                      id="ichimoku-choices-dropdown" value='ichimoku-choice-1'>
+                      <option value="ichimoku-choice-1">Tenkan and Kijun Crossover</option>
+                      <option value="ichimoku-choice-2">Tenkan and Kijun Crossover outside Kumo Cloud</option>
+                      <option value="ichimoku-choice-3">Kumo Cloud and Close Crossover</option>
+                      <option value="ichimoku-choice-4">Kumo Cloud changing color</option>
+                      <option value="ichimoku-choice-5">Tenkan and Kijun Crossover outside Kumo Cloud in accordance with
+                        ahead-looking Kumo Cloud</option>
+                    </select>
+                    <div>
+                      <input type="checkbox" name='ichimoku-cross' id='ichimoku-cross' class='checkbox'>
+                      <label for="ichimoku-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ichimoku-event'>Create
+                      ICHIMOKU Event</button>
+                  </div>
+                  <!-- VORTEX div -->
+                  <div class='tools-div indicator-tools-div' id='vortex-div'>
+                    <div>
+                      <input type="checkbox" name='vortex-cross' id='vortex-cross' class='checkbox'>
+                      <label for="vortex-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-vortex-event'>Create
+                      vortex Event</button>
+                  </div>
+                  <!-- PSAR div -->
+                  <div class='tools-div indicator-tools-div' id='psar-div'>
+                    <div>
+                      <label for="psar-last">Last</label>
+                      <input type="number" value=2 id='psar-last' name='last-offset'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-psar-event'>Create
+                      PSAR Event</button>
+                  </div>
+                  <!-- CKSP div -->
+                  <div class='tools-div indicator-tools-div' id='cksp-div'>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cksp-event'>Create
+                      CKSP Event</button>
+                  </div>
+                  <!-- CHOP div -->
+                  <div class='tools-div indicator-tools-div' id='chop-div'>
+                    <select class='tools-choices-dropdown' name="chop-choices-dropdown" id="chop-choices-dropdown"
+                      value='chop-choice-1'>
+                      <option value="chop-choice-1">Detecting Oversold or Overbought</option>
+                      <option value="chop-choice-2">Detect Trending Behaviour</option>
+                    </select>
+                    <div class='chop-choices-div' id='chop-choice-2-div'>
+                      <div>
+                        <label for="chop-upper">Upper</label>
+                        <input type="number" value=50.0 step="0.1" id='chop-upper' name='chop-upper'>
+                      </div>
+                      <div>
+                        <label for="chop-lower">Lower</label>
+                        <input type="number" value=40.0 step="0.1" id='chop-lower' name='chop-lower'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-chop-event'>Create
+                      CHOP Event</button>
+                  </div>
+                  <!-- AROON div -->
+                  <div class='tools-div indicator-tools-div' id='aroon-div'>
+                    <select class='tools-choices-dropdown' name="aroon-choices-dropdown" id="aroon-choices-dropdown"
+                      value='aroon-choice-1'>
+                      <option value="aroon-choice-1">Aroon Signal</option>
+                      <option value="aroon-choice-2">Aroon Oscillator</option>
+                    </select>
+                    <div class='aroon-choices-div' id='aroon-choice-1-div'>
+                      <div>
+                        <label for="aroon-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='aroon-upper-threshold' name='aroon-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="aroon-lower-threshold">Lower</label>
+                        <input type="number" value=30 id='aroon-lower-threshold' name='aroon-lower-threshold'>
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='aroon-cross' id='aroon-cross' class='checkbox'>
+                      <label for="aroon-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-aroon-event'>Create
+                      Aroon Event</button>
+                  </div>
+                  <!-- ADX div -->
+                  <div class='tools-div indicator-tools-div' id='adx-div'>
+                    <select class='tools-choices-dropdown' name="adx-choices-dropdown" id="adx-choices-dropdown"
+                      value='adx-choice-1'>
+                      <option value="adx-choice-1">ADX Above Threshold</option>
+                      <option value="adx-choice-2">DI+ & DI- Crossover</option>
+                      <option value="adx-choice-3">DI+ & DI- Crossover with ADX above Threshold</option>
+                      <option value="adx-choice-4">ADX Around Threshold Limit</option>
+                    </select>
+                    <div id='adx-threshold-adx-div'>
+                      <label for="adx-threshold-adx">Threshold ADX</label>
+                      <input type="number" value=20 id='adx-threshold-adx' name='adx-threshold-adx'>
+                    </div>
+                    <div id='adx-buffer-div'>
+                      <label for="adx-buffer">Buffer</label>
+                      <input type="number" value=2 id='adx-buffer' name='adx-buffer'>
+                    </div>
+                    <div id='adx-cross-div'>
+                      <input type="checkbox" name='adx-cross' id='adx-cross' class='checkbox'>
+                      <label for="adx-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-adx-event'>Create
+                      ADX Event</button>
+                  </div>
+                  <!-- KC div -->
+                  <div class='tools-div indicator-tools-div' id='kc-div'>
+                    <select class='tools-choices-dropdown' name="kc-choices-dropdown" id="kc-choices-dropdown"
+                      value='kc-choice-1'>
+                      <option value="kc-choice-1">Midline and Price Crossover</option>
+                      <option value="kc-choice-2">Lower Band Touch</option>
+                      <option value="kc-choice-3">Upper Band Touch</option>
+                    </select>
+                    <div>
+                      <label for="kc-length">Length</label>
+                      <input type="number" value=20 id='kc-length' name='kc-length'>
+                    </div>
+                    <div>
+                      <label for="kc-scalar">Lower</label>
+                      <input type="number" value=2 id='kc-scalar' name='kc-scalar'>
+                    </div>
+                    <div class='kc-choices-div' id='kc-choice-1-div'>
+                      <div>
+                        <input type="checkbox" name='kc-cross' id='kc-cross' class='checkbox'>
+                        <label for="kc-cross">Detect at Crossing</label>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-kc-event'>Create
+                      KC Event</button>
+                  </div>
+                  <!-- ACCBANDS div -->
+                  <div class='tools-div indicator-tools-div' id='accbands-div'>
+                    <select class='tools-choices-dropdown' name="accbands-choices-dropdown"
+                      id="accbands-choices-dropdown" value='accbands-choice-1'>
+                      <option value="accbands-choice-1">Midline and Price Crossover</option>
+                      <option value="accbands-choice-2">Lower Band Touch</option>
+                      <option value="accbands-choice-3">Upper Band Touch</option>
+                    </select>
+                    <div>
+                      <label for="accbands-length">Length</label>
+                      <input type="number" value=10 id='accbands-length' name='accbands-length'>
+                    </div>
+                    <div class='accbands-choices-div' id='accbands-choice-1-div'>
+                      <div>
+                        <input type="checkbox" name='accbands-cross' id='accbands-cross' class='checkbox'>
+                        <label for="accbands-cross">Detect at Crossing</label>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-accbands-event'>Create
+                      Acc Bands Event</button>
+                  </div>
+                  <!-- DONCHIAN div -->
+                  <div class='tools-div indicator-tools-div' id='donchian-div'>
+                    <select class='tools-choices-dropdown' name="donchian-choices-dropdown"
+                      id="donchian-choices-dropdown" value='donchian-choice-1'>
+                      <option value="donchian-choice-1">Midline and Price Crossover</option>
+                      <option value="donchian-choice-2">Lower Band Touch</option>
+                      <option value="donchian-choice-3">Upper Band Touch</option>
+                    </select>
+                    <div class='donchian-choices-div' id='donchian-choice-1-div'>
+                      <div>
+                        <input type="checkbox" name='donchian-cross' id='donchian-cross' class='checkbox'>
+                        <label for="donchian-cross">Detect at Crossing</label>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-donchian-event'>Create
+                      Donchian Event</button>
+                  </div>
+                  <!-- BBANDS div -->
+                  <div class='tools-div indicator-tools-div' id='bbands-div'>
+                    <select class='tools-choices-dropdown' name="bbands-choices-dropdown" id="bbands-choices-dropdown"
+                      value='bbands-choice-1'>
+                      <option value="bbands-choice-1">Midline and Price Crossover</option>
+                      <option value="bbands-choice-2">Lower Band Touch</option>
+                      <option value="bbands-choice-3">Upper Band Touch</option>
+                      <option value="bbands-choice-4">Volatility Contraction</option>
+                      <option value="bbands-choice-5">Volatility Expansion after Contraction</option>
+                    </select>
+                    <div id='bbands-length-div'>
+                      <label for="bbands-length">Length</label>
+                      <input type="number" value=20 id='bbands-length' name='bbands-length'>
+                    </div>
+                    <div id='bbands-threshold-div'>
+                      <label for="bbands-threshold">Threshold</label>
+                      <input type="number" value=0.005 step="0.001" id='bbands-threshold' name='bbands-threshold'>
+                    </div>
+                    <div id='bbands-expansion-div'>
+                      <label for="bbands-expansion">Expansion</label>
+                      <input type="number" value=0.012 step="0.001" id='bbands-expansion' name='bbands-expansion'>
+                    </div>
+                    <div id='bbands-std-div'>
+                      <label for="bbands-std">Std</label>
+                      <input type="number" value=2 id='bbands-std' name='bbands-std'>
+                    </div>
+                    <div id='bbands-cross-div'>
+                      <input type="checkbox" name='bbands-cross' id='bbands-cross' class='checkbox'>
+                      <label for="bbands-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-bbands-event'>Create
+                      BBands Event</button>
+                  </div>
+                  <!-- OBV div -->
+                  <div class='tools-div indicator-tools-div' id='obv-div'>
+                    <div>
+                      <label for="obv-window">Window</label>
+                      <input type="number" value=20 id='obv-window' name='obv-window'>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-obv-event'>Create
+                      OBV Event</button>
+                  </div>
+                  <!-- CMF div -->
+                  <div class='tools-div indicator-tools-div' id='cmf-div'>
+                    <select class='tools-choices-dropdown' name="cmf-choices-dropdown" id="cmf-choices-dropdown"
+                      value='cmf-choice-1'>
+                      <option value="cmf-choice-1">Chaikin Above/Below Zero</option>
+                      <option value="cmf-choice-2">Chaikin Switching Above/Below Zero</option>
+                    </select>
+                    <!-- <div>
+                      <label for="cmf-window">Window</label>
+                      <input type="number" value=20 id='cmf-window' name='cmf-window'>
+                    </div> -->
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cmf-event'>Create
+                      CMF Event</button>
+                  </div>
+                  <!-- MFI div -->
+                  <div class='tools-div indicator-tools-div' id='mfi-div'>
+                    <div>
+                      <label for="mfi-upper-threshold">Upper Threshold</label>
+                      <input type="number" value=80 id='mfi-upper-threshold' name='mfi-upper-threshold'>
+                    </div>
+                    <div>
+                      <label for="mfi-lower-threshold">Lower Threshold</label>
+                      <input type="number" value=20 id='mfi-lower-threshold' name='mfi-lower-threshold'>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='mfi-cross' id='mfi-cross' class='checkbox'>
+                      <label for="mfi-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-mfi-event'>Create
+                      MFI Event</button>
+                  </div>
+                  <!-- AO div -->
+                  <div class='tools-div indicator-tools-div' id='ao-div'>
+                    <select class='tools-choices-dropdown' name="ao-choices-dropdown" id="ao-choices-dropdown"
+                      value='ao-choice-1'>
+                      <option value="ao-choice-1">AO Trend</option>
+                      <option value="ao-choice-2">AO Switching Above/Below Zero</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-ao-event'>Create
+                      AO Event</button>
+                  </div>
+                  <!-- STOCH div -->
+                  <div class='tools-div indicator-tools-div' id='stoch-div'>
+                    <select class='tools-choices-dropdown' name="stoch-choices-dropdown" id="stoch-choices-dropdown"
+                      value='stoch-choice-1'>
+                      <option value="stoch-choice-1">Stochastic Crossover of K% and D%</option>
+                      <option value="stoch-choice-2">Stochastic Above/Below Threshold Level</option>
+                    </select>
+                    <div class='stoch-choices-div' id='stoch-choice-2-div'>
+                      <div>
+                        <label for="stoch-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='stoch-upper-threshold' name='stoch-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="stoch-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=20 id='stoch-lower-threshold' name='stoch-lower-threshold'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-stoch-event'>Create
+                      Stoch Event</button>
+                  </div>
+                  <!-- STOCHRSI div -->
+                  <div class='tools-div indicator-tools-div' id='stochrsi-div'>
+                    <select class='tools-choices-dropdown' name="stochrsi-choices-dropdown"
+                      id="stochrsi-choices-dropdown" value='stochrsi-choice-1'>
+                      <option value="stochrsi-choice-1">Stochastic Crossover of K% and D%</option>
+                      <option value="stochrsi-choice-2">Stochastic Above/Below Threshold Level</option>
+                    </select>
+                    <div class='stochrsi-choices-div' id='stochrsi-choice-2-div'>
+                      <div>
+                        <label for="stochrsi-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='stochrsi-upper-threshold' name='stochrsi-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="stochrsi-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=20 id='stochrsi-lower-threshold' name='stochrsi-lower-threshold'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-stochrsi-event'>Create
+                      Stoch RSI Event</button>
+                  </div>
+                  <!-- CCI div -->
+                  <div class='tools-div indicator-tools-div' id='cci-div'>
+                    <select class='tools-choices-dropdown' name="cci-choices-dropdown" id="cci-choices-dropdown"
+                      value='cci-choice-1'>
+                      <option value="cci-choice-1">CCI Crossing Over Threshold</option>
+                      <option value="cci-choice-2">CCI Crossing Above/Below Zero</option>
+                    </select>
+                    <div class='cci-choices-div' id='cci-choice-1-div'>
+                      <div>
+                        <label for="cci-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=80 id='cci-upper-threshold' name='cci-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="cci-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=20 id='cci-lower-threshold' name='cci-lower-threshold'>
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-cci-event'>Create
+                      CCI Event</button>
+                  </div>
+                  <!-- ROC div -->
+                  <div class='tools-div indicator-tools-div' id='roc-div'>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-roc-event'>Create
+                      ROC Event</button>
+                  </div>
+                  <!-- MACD div -->
+                  <div class='tools-div indicator-tools-div' id='macd-div'>
+                    <div>
+                      <input type="checkbox" name='macd-cross' id='macd-cross' class='checkbox'>
+                      <label for="macd-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-macd-event'>Create
+                      MACD Event</button>
+                  </div>
+                  <!-- RSI div -->
+                  <div class='tools-div indicator-tools-div' id='rsi-div'>
+                    <select class='tools-choices-dropdown' name="rsi-choices-dropdown" id="rsi-choices-dropdown"
+                      value='rsi-choice-1'>
+                      <option value="rsi-choice-1">RSI Oversold/Overbought</option>
+                      <option value="rsi-choice-2">RSI Trend Strength</option>
+                    </select>
+                    <div class='rsi-choices-div' id='rsi-choice-1-div'>
+                      <div>
+                        <label for="rsi-upper-threshold">Upper Threshold</label>
+                        <input type="number" value=90 id='rsi-upper-threshold' name='rsi-upper-threshold'>
+                      </div>
+                      <div>
+                        <label for="rsi-lower-threshold">Lower Threshold</label>
+                        <input type="number" value=10 id='rsi-lower-threshold' name='rsi-lower-threshold'>
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" name='rsi-cross' id='rsi-cross' class='checkbox'>
+                      <label for="rsi-cross">Detect at Crossing</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button type='button' class="btn btn-outline-dark btn-sm" id='create-rsi-event'>Create
+                      RSI Event</button>
+                  </div>
+
                 </div>
-                <div class="collapse" id='price-div'>
+                <div class="inner-create-event-div" id='price-div'>
                   <h5>Price</h5>
                 </div>
               </div>
             </div>
           </div>
+          <div class='monitor-create-div' id='creating-event-loader'>
+            <h4>Creating Event...</h4>
+            <div class="spinner-grow text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
           <div class="card-footer monitor-create-buttons-div">
-            <button class='monitor-create-buttons'>Monitor Event</button>
-            <button class='monitor-create-buttons'>Create Event</button>
+            <button id='monitor-event-button' class='monitor-create-buttons'>Monitor Event</button>
+            <button id='create-event-button' class='monitor-create-buttons'>Create Event</button>
           </div>
         </div>
         <div class="card">
@@ -427,7 +1402,7 @@
             <button type="button" id='sell-button' class="order-button">Sell</button>
           </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-header">
             Market
           </div>
@@ -449,7 +1424,7 @@
             </ol>
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
