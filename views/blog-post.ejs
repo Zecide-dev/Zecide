@@ -2,7 +2,9 @@
 <html>
 
 <head>
-  <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f22113ff31097001243b5c5&product=sticky-share-buttons' async='async'></script>
+  <script type='text/javascript'
+    src='https://platform-api.sharethis.com/js/sharethis.js#property=5f22113ff31097001243b5c5&product=sticky-share-buttons'
+    async='async'></script>
   <title>Zecide Blogs</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -112,8 +114,8 @@
 
 
 
-<!-- Social Icons -->
-<!-- <ul id="social_side_links">
+  <!-- Social Icons -->
+  <!-- <ul id="social_side_links">
 	<li><a class="fb-share" style="background-color: #3c5a96;" href="https://www.facebook.com/sharer/sharer.php?u=zecide.com/blog/" target="_blank"><img src="https://www.dropbox.com/s/xk5pdj8nks1ymdh/facebook-icon.png?raw=1" alt="" /></a></li>
 	<li><a class="t-share" style="background-color: #1dadeb;" href="https://twitter.com" target="_blank"><img src="https://www.dropbox.com/s/c8in3qcf1uqsqrb/twitter-icon.png?raw=1" alt="" /></a></li>
 	<li><a class="li-share" style="background-color: #1178b3;" href="https://linkedin.com" target="_blank"><img src="https://www.dropbox.com/s/pb0a0p7p1pwprue/linkedin-icon.png?raw=1" alt="" /></a></li>
@@ -127,46 +129,47 @@
     <p class="blog-post-text" id="md">
       <%- data.object.metadata.markdown_content %>
     </p>
-    
-    
+
+
   </div>
 
 
-<div class="author-card">
-  <img class="author-photo" src="<%= data.object.metadata.authorphoto.url%>" alt="">
-  <div class="author-info">
-    <div class="author-name"> <big> <%= data.object.metadata.author %> </big> </div>
-    <div class="author-about"><%= data.object.metadata.about_author %></div>
+  <div class="author-card">
+    <img class="author-photo" src="<%= data.object.metadata.authorphoto.url%>" alt="">
+    <div class="author-info">
+      <div class="author-name"> <big> <%= data.object.metadata.author %> </big> </div>
+      <div class="author-about"><%= data.object.metadata.about_author %></div>
+    </div>
+    <div class="author-social-links">
+      <a href="<%= data.object.metadata.author_linkedin_url%>"><img src="/src/images/linkedin-author.svg" alt=""></a>
+      <a href="<%= data.object.metadata.author_twitter_url%>"><img src="/src/images/twitter_author.svg" alt=""></a>
+    </div>
   </div>
-  <div class="author-social-links">
-    <a href="<%= data.object.metadata.author_linkedin_url%>"><img src="/src/images/linkedin-author.svg" alt=""></a>
-    <a href="<%= data.object.metadata.author_twitter_url%>"><img src="/src/images/twitter_author.svg" alt=""></a>
-  </div>
-</div>
 
 
   <div class="disqus">
     <div id="disqus_thread"></div>
-<script>
+    <script>
 
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 
-var disqus_config = function () {
-this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = window.location.href; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
+      var disqus_config = function () {
+        this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = window.location.href; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
 
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://zecideweb.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zecideweb.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+
   </div>
 
   <div class="footer" id="footer">
@@ -203,8 +206,7 @@ s.setAttribute('data-timestamp', +new Date());
               src="/src/images/linkedin-footer.svg" alt="" srcset="" /></a>
           <a href="https://www.facebook.com/Zecide-105162521280091"><img src="/src/images/facebook-footer.svg"
               alt="face" srcset="" /></a>
-          <a href="https://twitter.com/zecide?lang=en"><img src="/src/images/twitter-footer.svg" alt=""
-              srcset="" /></a>
+          <a href="https://twitter.com/zecide?lang=en"><img src="/src/images/twitter-footer.svg" alt="" srcset="" /></a>
         </div>
       </div>
     </div>
@@ -212,7 +214,7 @@ s.setAttribute('data-timestamp', +new Date());
   </div>
   <script id="dsq-count-scr" src="//zecideweb.disqus.com/count.js" async></script>
   <script src="../src/scripts/blog-post.js"></script>
-  
+
 </body>
 
 </html>

@@ -75,7 +75,7 @@ a:hover {
   padding: 5px 15px;
 }
 
-.dropdown-toggle {
+.dropdown-toggle1 {
   margin-left: calc(3vw - 15px);
   float: right;
   border: none;
@@ -316,7 +316,7 @@ a:hover {
 .screen-nav-tabs .nav-link button {
   font-size: 0.7rem;
   border: none;
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 
 .add-screen-button {
@@ -429,7 +429,7 @@ a:hover {
 
 .monitor-bubble button, .modal-bubble button {
   border: none;
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 
 .monitor-bubble button:focus, .modal-bubble button:focus {

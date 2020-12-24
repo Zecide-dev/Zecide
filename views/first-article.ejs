@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zecide Learn</title>
+    <script type='text/javascript'
+        src='https://platform-api.sharethis.com/js/sharethis.js#property=5f22113ff31097001243b5c5&product=sticky-share-buttons'
+        async='async'></script>
+    <link rel="stylesheet" href="/src/styles/learn.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="/src/styles/pageable.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="icon" href="/src/images/logo.svg" />
+    <!-- <link rel="stylesheet" href="/public/varsity.css"> -->
+    <!-- <link rel="stylesheet" href="/public/var2.css"> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='../src/styles/blog-post.css' />
+    <meta property="og:title" content="<%= data.object.title %>">
+    <meta property="og:type" content="website">
+    <meta name="url" property="og:url" content="www.zecide.com" />
+    <!-- <script>
+      document.querySelector("meta[name=\"url\"]").setAttribute("content", window.location.href);
+  </script> -->
+    <meta property="og:description" content="<%= data.object.metadata.description %>">
+
+</head>
+<!-- to do - 1sside bar -->
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <svg class="pl-svg" width="200" height="200" viewBox="0 0 100 100">
+            <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+            </polyline>
+            <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+            </polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+            </polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+            </polyline>
+        </svg>
+    </div>
+    <!-- Preloader -->
+
+    <div class="pg-wrapper">
+        <div id="container" class="pg-container">
+            <div class="navbar-m">
+                <div class="logo-m">
+                    <a href="/blog">
+                        <img class="alogo" src="/src/images/logo.svg" alt="zecide-logo" />
+                        <span>Zecide Learn</span>
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <img class="burger" id="burger" src="/src/images/burger.svg" alt="burger" />
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/"> <span>Home</span> </a>
+                        <a href="#features"><span>Features</span></a>
+                        <a href="/blog"><span>Blogs</span></a>
+
+                        <a href="#footer"><span>Contact</span></a>
+                        <a href=""><span>Download the App</span></a>
+                        <a href="/users/login"><span>Login</span></a>
+                    </div>
+                </div>
+            </div>
+            <div data-anchor="page-1" id="page-1" class="pg-page pg-active top">
+                <div class="my-navbar">
+                    <a href="/learn2">
+                        <div style="font-size: xx-large;">
+                            <img src="/src/images/logo.svg" alt="" />
+                            <span>Zecide Learn</span>
+                            <!-- <span>Learn</span> -->
+                        </div>
+                    </a>
+                    <div class="nav-links">
+                        <a href="#features"><span>Features</span></a>
+                        <a href="/blog"><span>Blogs</span></a>
+                        <a href="/users/login"><button>Login</button></a>
+                    </div>
+                </div>
+
+                <div>
+
+
+
+                    <div class="flex-container outer">
+                        <div style="width: 100vw;">
+                            <!-- Header -->
+                            <header class="w3-container w3-theme w3-padding" id="myHeader">
+                                <div class="w3-center">
+                                    <h1 class="w3-animate-bottom">
+                                        <%= data.object.title %>
+                                    </h1>
+
+
+                                    <div class="w3-padding-32">
+                                    </div>
+                                </div>
+                            </header>
+                        </div>
+                        <br>
+
+
+                        <div id="content" class="flex-item">
+                            <!-- <h3><%= data.object.title %></h3> -->
+
+                            <div class="blog-content markdown-body">
+                                <p class="blog-post-text" id="md">
+                                    <%- data.object.metadata.markdown_content %>
+                                </p>
+
+
+                            </div>
+
+                        </div>
+                        <button style="display: none;" onclick="myFunction()" class="btn-outline-primary" id="bimg">View
+                            Chapters⟶</button>
+                        <br>
+                        <br>
+                        <div class="flex-item1 box" id="sidebar">
+                            <div
+                                style="border: #3b98ff solid;padding: 10px; width: 20%;position: fixed;border-radius: 20px;bottom: 10px ;background-color: white;top: 150px;">
+
+                                <div style="margin: 10px;">
+                                    <a href="#" onclick="myFunction()" class="hide btn btn-light" id="hide"> ←
+                                        Hide</a>
+                                    <br>
+                                    <br>
+                                    <ol class="noul chapter-list">
+                                        <li class="selected">
+                                            <span class="num">
+                                                1 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-need-to-invest/">
+                                                The Need to Invest </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                2 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/regulators/">
+                                                Regulators </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                3 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/financial-intermediaries/">
+                                                Financial Intermediaries </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                4 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-ipo-markets-part-1/">
+                                                The IPO Markets – Part 1 </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                5 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-ipo-markets-part-2/">
+                                                The IPO Markets – Part 2 </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                6 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-stock-markets/">
+                                                The Stock Markets </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                7 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-stock-markets-index/">
+                                                The Stock Markets Index </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                8 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/commonly-used-jargons/">
+                                                Commonly Used Jargons </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                9 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/the-trading-terminal/">
+                                                The Trading Terminal </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                10 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/clearing-and-settlement-process/">
+                                                Clearing and Settlement Process </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                11 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/five-corporate-actions-and-its-impact-on-stock-prices/">
+                                                Five Corporate Actions and Its Impact on Stock Prices </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                12 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/key-events-and-their-impact-on-markets/">
+                                                Key Events and Their Impact on Markets </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                13 </span>
+                                            <a href="https://zerodha.com/varsity/chapter/getting-started/">
+                                                Getting started! </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                14 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/supplementary-note-ipo-ofs-fpo/">
+                                                Supplementary note – Rights, OFS, FPO </a>
+                                        </li>
+                                        <li class="">
+                                            <span class="num">
+                                                15 </span>
+                                            <a
+                                                href="https://zerodha.com/varsity/chapter/supplementary-note-the-20-market-depth/">
+                                                Supplementary note – The 20 market depth or level 3 data </a>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="disqus">
+                        <div id="disqus_thread"></div>
+                        <script>
+
+                            /**
+                            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                            var disqus_config = function () {
+                                this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+                                this.page.identifier = window.location.href; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+
+                            (function () { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://zecideweb.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a
+                                href="https://disqus.com/?ref_noscript">comments powered by
+                                Disqus.</a></noscript>
+
+                    </div>
+
+                    <div class="footer" id="footer">
+                        <div class="footer-left">
+                            <div class="address-section">
+                                <img src="../src/images/footer-art.svg" alt="" srcset="" />
+                                <div class="address">
+                                    <h3>Office</h3>
+                                    <p>
+                                        LGF, 416, Sector 45 <br />
+                                        Gurgaon, Haryana <br />
+                                        Ph: 9003711038
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="copyright">© 2020 Zecide</div>
+                        </div>
+                        <div class="footer-right">
+                            <img src="../src/images/footer-art.svg" alt="" srcset="" />
+                            <div class="waitlist-social-links">
+                                <div class="waitlist-f">
+                                    <p>Drop your email to request early access
+
+                                    </p>
+                                    <form action="">
+                                        <input class="waitlist-f-mail" type="text" name=""
+                                            placeholder="Enter your email" id="" />
+                                        <input class="waitlist-f-button" type="button" value="→" />
+                                    </form>
+                                </div>
+                                <div class="social-links">
+                                    <p>Follow us on:</p>
+                                    <a
+                                        href="https://in.linkedin.com/organization-guest/company/zecide?challengeId=AQGpOFqGGj1DUwAAAXNrC1Pkp19OLI5XXj9N9Gr3wrdOf3nlcCTPcYnBXKKVQYamgrwqVsdgclAoee3q_hJQlAAOg1wQPjyWvw&submissionId=a0de508d-1d64-2316-1e84-ee5457b8a74a"><img
+                                            src="/src/images/linkedin-footer.svg" alt="" srcset="" /></a>
+                                    <a href="https://www.facebook.com/Zecide-105162521280091"><img
+                                            src="/src/images/facebook-footer.svg" alt="face" srcset="" /></a>
+                                    <a href="https://twitter.com/zecide?lang=en"><img
+                                            src="/src/images/twitter-footer.svg" alt="" srcset="" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copyright-m">© 2020 Zecide</div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+            <!-- <div style="margin: 10vw;">
+                <h2 style="    font-size: 3rem;">Module</h2>
+                <br>
+                <br>
+                <div class="row row-cols-1 row-cols-md-3">
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a short card.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural
+                                    lead-in to additional content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <ul id="menu">
+                    <li style="border-color: #69c969;border-top: 5px solid #69c969;
+                    margin-bottom: 30px;
+                    break-inside: avoid;
+                    page-break-inside: avoid;
+                    padding-top: 15px;
+                    min-height: 200px;display: list-item;
+                    text-align: -webkit-match-parent;float: left;
+                                                        ">
+                        <h4>First Article</h4>
+                        <div class="description text-tiny">
+                            Investing ensures financial security, and the Stock market plays a pivotal role in
+                            this domain, it is a place where people buy/sell shares of publicly listed
+                            companies. In this module, you will learn about the fundamentals of the stock
+                            market, how to get started, how it functions and the various intermediaries that
+                            appertain it. </div>
+
+
+                    </li>
+                    <li style="border-color: #69c969;border-top: 5px solid #69c969;
+                    margin-bottom: 30px;
+                    break-inside: avoid;
+                    page-break-inside: avoid;
+                    padding-top: 15px;
+                    min-height: 200px;display: list-item;
+                    text-align: -webkit-match-parent;float: left;
+                                                        ">
+                        <h4>First Article</h4>
+                        <div class="description text-tiny">
+                            Investing ensures financial security, and the Stock market plays a pivotal role in
+                            this domain, it is a place where people buy/sell shares of publicly listed
+                            companies. In this module, you will learn about the fundamentals of the stock
+                            market, how to get started, how it functions and the various intermediaries that
+                            appertain it. </div>
+
+
+                    </li>
+                </ul>
+
+
+
+
+
+
+            </div> -->
+
+            <!-- module -->
+
+
+
+
+
+            <!-- <header class="w3-container w3-theme w3-padding" id="myHeader">
+                <div class="w3-center">
+                    <h1 class="w3-animate-bottom"> <%= data.object.title %></h1>
+
+
+                    <div class="w3-padding-32">
+                    </div>
+                </div>
+            </header> -->
+
+        </div>
+
+
+    </div>
+    <script src="/src/scripts/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <!-- <script src="/src/scripts/pageable.min.js"></script>
+    <script>
+      //Pageable
+      if (document.documentElement.clientWidth > 650) {
+        new Pageable("#container", {
+          childSelector: "[data-anchor]", // CSS3 selector string for the pages
+          anchors: ["page-1", "page-2", "page-3"], // define the page anchors
+          pips: true, // display the pips
+          animation: 600, // the duration in ms of the scroll animation
+          throttle: 1000, // the interval in ms that the resize callback is fired
+          orientation: "vertical", // or horizontal
+          swipeThreshold: 300, // swipe / mouse drag distance (px) before firing the page change event
+          events: {
+            wheel: true, // enable / disable mousewheel scrolling
+            mouse: false, // enable / disable mouse drag scrolling
+            touch: true, // enable / disable touch / swipe scrolling
+            keydown: true, // enable / disable keyboard navigation
+          },
+        });
+      }
+    </script> -->
+</body>
+<!-- <script type="text/javascript">
+	function toggleChapterList() {
+		var el = document.querySelector(".chapter-body");
+		if (el.classList.contains("visible")) {
+			el.classList.remove("visible");
+			el.classList.add("hidden");
+		} else {
+			el.classList.add("visible");
+			el.classList.remove("hidden");
+		}
+		return false;
+    }
+    
+
+	(function() {
+		document.querySelector(".chapter-toggle").onclick = toggleChapterList();
+        document.querySelector(".chapter-sidebar .hide").onclick = toggleChapterList();
+        document.querySelector("#hide").onclick = toggleChapterList();
+        $("#hide").onclick = toggleChapterList();
+
+		// On mobile, hide the chapter by default.
+		if(screen.width <= 700) {
+			toggleChapterList();
+		}
+    })();
+    
+</script> -->
+<script>
+    if (screen.width <= 700) {
+        myFunction();
+    }
+    function myFunction() {
+        var sidebar = document.getElementById("sidebar");
+        //   var moreText = document.getElementById("more");
+        var btnText = document.getElementById("hide");
+        var bimg = document.getElementById("bimg");
+        var content = document.getElementById("content");
+
+
+        if (sidebar.style.display === "none") {
+            sidebar.style.display = "inline";
+            // sidebar.style.border = "aliceblue solid";
+            sidebar.style.width = "20vw";
+            // style="margin-right: 10%;margin-left: 22%;padding: 10%;padding-top: 0vw;"
+            // content.style.width = "100%";
+
+
+
+
+            // style=" width: 20%; border: aliceblue solid;"
+            // btnText.innerHTML = "view";
+            bimg.style.display = "none";
+            // moreText.style.display = "none";
+
+        } else {
+
+            sidebar.style.display = "none";
+            // btnText.innerHTML = "hide";
+            bimg.style.display = "inline";
+            // sidebar.style.border = "aliceblue solid";
+            // sidebar.style.width = "20%";
+            // content.style.marginLeft = "0%";
+
+
+            // moreText.style.display = "inline";
+
+        }
+    }
+
+</script>
+<style>
+    /* @media screen (max-width: 700px;) {
+        .flex-item1{
+            display: none;
+        }
+        
+    } */
+    .flex-container {
+        /* We first create a flex layout context */
+        display: flex;
+
+        /* Then we define the flow direction 
+     and if we allow the items to wrap 
+   * Remember this is the same as:
+   * flex-direction: row;
+   * flex-wrap: wrap;
+   */
+        flex-flow: row wrap;
+
+        /* Then we define how is distributed the remaining space */
+        justify-content: flex-start;
+
+
+        list-style: none;
+    }
+
+    .flex-item {
+        /* background: tomato; */
+        /* padding: 5px; */
+        width: 75%;
+        /* height: 150px; */
+        /* margin-top: 10px; */
+        /* line-height: 150px; */
+        /* color: white; */
+        /* font-weight: bold; */
+        /* font-size: 3em; */
+        /* text-align: center; */
+    }
+
+    .flex-item1 {
+        width: 15%;
+        position: relative;
+        bottom: 0px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .flex-item1{
+            display: none;
+        }
+        .flex-item{
+            width: 100%;
+        }
+    }
+</style>
+
+</html>

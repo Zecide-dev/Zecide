@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 
 //initialize routes
 const routes = require('./routes/api');
+const routes2 = require('./routes/api2')
 
 const jwt = require('jsonwebtoken');
 const fetch = require("node-fetch");
@@ -23,11 +24,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var path = require('path');
 var indexRouter = require('./routes/api');
+var indexRouter2 = require('./routes/api2')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use('/', indexRouter);
+app.use('/',indexRouter2);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -39,6 +42,7 @@ app.use(express.json());
 //listen for requests
 app.listen(PORT, function(){
     console.log("Server started at port 8080!");
+    console.log("http://localhost:8080/");
 })
 
 app.use(function(req, res, next) {
