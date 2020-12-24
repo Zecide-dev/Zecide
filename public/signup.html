@@ -1,59 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
-    <title>Zecide Login</title>
-    <link rel="stylesheet" href="/src/styles/signup.css" />
-     <link rel="icon" href="/src/images/logo.svg" />
-  </head>
-  <body class="login">
-    <div class="logo"><a href="/">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+  <title>Zecide Login</title>
+  <link rel="stylesheet" href="/src/styles/signup.css" />
+  <link rel="icon" href="/src/images/logo.svg" />
+</head>
+
+<body class="login">
+  <div class="logo"><a href="/">
       <img class="back" src="/src/images/back.svg" alt="" srcset="">
       <img src="/src/images/logo.svg" alt="" />
       <span>Zecide</span></a>
+  </div>
+  <img class="login-image" src="/src/images/login.svg" alt="" />
+  <img class="login-bg" src="/src/images/login-bg.svg" alt="" />
+  <div class="content">
+    <h1>Let's Get Started</h1>
+    <h2>Sign up and get access to all the features of Zecide.</h2>
+    <div>
+      <a href="/users/login"><button class="log-btn">Log In</button></a>
+      <button class="sign-btn">Sign Up</button>
     </div>
-    <img class="login-image" src="/src/images/login.svg" alt="" />
-    <img class="login-bg" src="/src/images/login-bg.svg" alt="" />
-    <div class="content">
-      <h1>Let's Get Started</h1>
-      <h2>Sign up and get access to all the features of Zecide.</h2>
-      <div>
-        <a href="/users/login"><button class="log-btn">Log In</button></a>
-        <button class="sign-btn">Sign Up</button>
-      </div>
-      <form id="signUpForm">
-        <input
-          class="form-input"
-          type="email"
-          id="Email"
-          name="Email"
-          placeholder="Email Address"
-        /><br />
-        <input
-          class="form-input"
-          type="text"
-          id="UserName"
-          name="UserName"
-          placeholder="Username"
-        />
-        <input
-          class="form-input"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-        /><br />
-        <input class="submit-btn" type="submit" value="Sign Up" />
-      </form>
-         
-        <div class="google-login"> 
-          <img src="/src/images/google.svg" alt="">
-          <span>Signup with Google</span>
-        </div>
-      
+    <form id="signUpForm">
+      <input class="form-input" type="email" id="Email" name="Email" placeholder="Email Address" /><br />
+      <input class="form-input" type="text" id="UserName" name="UserName" placeholder="Username" />
+      <input class="form-input" type="password" id="password" name="password" placeholder="Password" /><br />
+      <input class="submit-btn" type="submit" value="Sign Up" />
+    </form>
+
+    <div class="google-login">
+      <img src="/src/images/google.svg" alt="">
+      <span>Signup with Google</span>
     </div>
-    <script src="/src/scripts/signup.js"></script>
-  </body>
+
+  </div>
+  <script src="/src/scripts/signup.js"></script>
+</body>
+
 </html>

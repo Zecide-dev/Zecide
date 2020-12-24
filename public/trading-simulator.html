@@ -13,7 +13,7 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <link rel="icon" href="/src/images/logo.svg" />
-    <link rel="stylesheet" href="/src/styles/trading-dashboard.css">
+    <link rel="stylesheet" href="/src/styles/trading-simulator.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
@@ -49,69 +49,18 @@
     </div>
 
     <!-- Modal for Show all events -->
-    <div class="modal fade" id="show-all-events-modal" tabindex="-1" aria-labelledby="show-all-events-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">All Events</h5>
-                    <button id='close-show-all-events-modal' type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class='container row'>
-                        <a class='modal-bubble active' id='ORB-modal-bubble' onclick="changeCurrentEvent('ORB')">
-                            ORB
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="ORB">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Breakout-RSI-modal-bubble'
-                            onclick="changeCurrentEvent('Breakout-RSI')">
-                            Breakout RSI
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Breakout-RSI">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Pivot-Touch-modal-bubble'
-                            onclick="changeCurrentEvent('Pivot-Touch')">
-                            Pivot Touch
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Pivot-Touch">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Event-1-modal-bubble' onclick="changeCurrentEvent('Event-1')">
-                            Event 1
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Event-1">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                        <a class='modal-bubble' id='Event-2-modal-bubble' onclick="changeCurrentEvent('Event-2')">
-                            Event 2
-                            <button type="button" data-toggle="modal" data-target="#delete-monitor-bubble-modal"
-                                data-bubblename="Event-2">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Side Navbar -->
 
 
     <!-- NAVBAR -->
-    <div class="upper-nav">
-        <div class="logo">
-            <span id='upper-nav-logo-text' class="logo-text">Zecide</span>
+    <div class="upper-nav"> 
+        <div class="logo" style="padding-left: 1vw;">
+            <a href="/learn2">
+                <img class="alogo" src="/src/images/logo.svg" alt="zecide-logo" />
+                <span>Zecide Learn</span>
+            </a>
         </div>
         <div class="search">
             <input class="search-input" placeholder="Search.." />
@@ -275,7 +224,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
-    <script src="/src/scripts/trading-dashboard.js"></script>
+    <script src="/src/scripts/trading-simulator.js"></script>
 </body>
 
 
