@@ -169,6 +169,12 @@
         <div class="card">
           <div class="card-body">
             <div class="candlestick-chart-div">
+              <div id='creating-candlestick-chart'>
+                <h4 style="text-align: center;">Creating Chart...</h4>
+                <div class="spinner-grow text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
               <div id="candlestick-chart"></div>
             </div>
           </div>
@@ -397,26 +403,28 @@
               </div>
               <div>
                 <div class="inner-create-event-div" id='price-action-div'>
-                  <select name="price-action-tools-dropdown" id="price-action-tools-dropdown" value='ema'
+                  <select name="price-action-tools-dropdown custom-scrollbar" id="price-action-tools-dropdown" value='ema'
                     onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option value="cpr">CPR - Central Pivot Range</option>
+                    <option value="pivotfibo">PIVOT FIBO - Fibonacci Pivot Points</option>
                     <option value="orb">ORB - Opening Range Breakout</option>
                     <option value="structure">STRUCTURE - Market Structure Detection</option>
                     <option value="pullback">PULLBACK - Pullback Detection</option>
-                    <option value="rangebound">RANGE BOUND - Range Bound Detection</option>
+                    <option value="rangebound"><div>RANGE BOUND - Range Bound Detection</div></option>
                     <option value="breakout">BREAKOUT - Breakout Detection</option>
                     <option value="reversal">REVERSAL - Reversal Detection</option>
                   </select>
                   <!-- CPR div -->
                   <div class='tools-div price-action-tools-div' id='cpr-div'>
-                    <select class='tools-choices-dropdown' name="cpr-choices-dropdown"
-                      id="cpr-choices-dropdown" value='cpr-choice-1'>
+                    <select class='tools-choices-dropdown' name="cpr-choices-dropdown" id="cpr-choices-dropdown"
+                      value='cpr-choice-1'>
                       <option value="cpr-choice-1">All CPR Screens</option>
                       <option value="cpr-choice-2">Detecting a Particular Scenario</option>
                       <option value="cpr-choice-3">CPR Squeeze</option>
                     </select>
                     <div class='cpr-choices-div' id='cpr-choice-2-div'>
-                      <select name="cpr-choice2-select-points" id="cpr-choice2-select-points" value='cpr-screens-option-1'>
+                      <select name="cpr-choice2-select-points" id="cpr-choice2-select-points"
+                        value='cpr-screens-option-1'>
                         <option value="cpr-screens-option-1">Candle Engulfing CPR</option>
                         <option value="cpr-screens-option-2">Touching Upper CPR</option>
                         <option value="cpr-screens-option-3">Touching Lower CPR</option>
@@ -441,37 +449,19 @@
                       <option value="pivotfibo-choice-2">Detection for Touching a Particular Pivot Level</option>
                     </select>
                     <div class='pivotfibo-choices-div' id='pivotfibo-choice-2-div'>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-1' id='pivotfibo-screens-checkbox-1' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-1">Touching Pivot</label>
-                      </div>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-2' id='pivotfibo-screens-checkbox-2' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-2">Touching R1</label>
-                      </div>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-3' id='pivotfibo-screens-checkbox-3' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-3">Touching R2</label>
-                      </div>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-4' id='pivotfibo-screens-checkbox-4' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-4">Touching R3</label>
-                      </div>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-5' id='pivotfibo-screens-checkbox-5' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-5">Touching S1</label>
-                      </div>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-6' id='pivotfibo-screens-checkbox-6' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-6">Touching S2</label>
-                      </div>
-                      <div>
-                        <input type="checkbox" name='pivotfibo-screens-checkbox-7' id='pivotfibo-screens-checkbox-7' class='checkbox'>
-                        <label for="pivotfibo-screens-checkbox-7">Touching S3</label>
-                      </div>
+                      <select name="pivotfibo-choice2-select-points" id="pivotfibo-choice2-select-points"
+                        value='pivotfibo-screens-option-1'>
+                        <option value="pivotfibo-screens-option-1">Touching Pivot</option>
+                        <option value="pivotfibo-screens-option-2">Touching R1</option>
+                        <option value="pivotfibo-screens-option-3">Touching R2</option>
+                        <option value="pivotfibo-screens-option-4">Touching R3</option>
+                        <option value="pivotfibo-screens-option-5">Touching S1</option>
+                        <option value="pivotfibo-screens-option-6">Touching S2</option>
+                        <option value="pivotfibo-screens-option-7">Touching S3</option>
+                      </select>
                     </div>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-pivotfibo-event'>Create
-                      pivotfibo Event</button>
+                      Pivot Fibo Event</button>
                   </div>
                   <!-- ORB div -->
                   <div class='tools-div price-action-tools-div' id='orb-div'>
@@ -553,7 +543,7 @@
                   </div>
 
                 </div>
-                <div class="inner-create-event-div" id='indicator-div'>
+                <div class="inner-create-event-div custom-scrollbar" id='indicator-div'>
                   <select name="indicator-tools-dropdown" id="indicator-tools-dropdown" value='ema'
                     onfocus='this.size=8;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option value="ema">EMA - Exponential Moving Average</option>
@@ -1298,8 +1288,8 @@
                   </div>
                   <!-- STOCHRSI div -->
                   <div class='tools-div indicator-tools-div' id='stochrsi-div'>
-                    <select class='tools-choices-dropdown' name="stochrsi-choices-dropdown" id="stochrsi-choices-dropdown"
-                      value='stochrsi-choice-1'>
+                    <select class='tools-choices-dropdown' name="stochrsi-choices-dropdown"
+                      id="stochrsi-choices-dropdown" value='stochrsi-choice-1'>
                       <option value="stochrsi-choice-1">Stochastic Crossover of K% and D%</option>
                       <option value="stochrsi-choice-2">Stochastic Above/Below Threshold Level</option>
                     </select>
@@ -1352,7 +1342,7 @@
                     <div>
                       <input type="checkbox" name='macd-cross' id='macd-cross' class='checkbox'>
                       <label for="macd-cross">Detect at Crossing</label>
-                    </div>                    
+                    </div>
                     <br>
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-macd-event'>Create
@@ -1378,7 +1368,7 @@
                     <div>
                       <input type="checkbox" name='rsi-cross' id='rsi-cross' class='checkbox'>
                       <label for="rsi-cross">Detect at Crossing</label>
-                    </div>                    
+                    </div>
                     <br>
                     <br>
                     <button type='button' class="btn btn-outline-dark btn-sm" id='create-rsi-event'>Create
@@ -1412,7 +1402,7 @@
             <button type="button" id='sell-button' class="order-button">Sell</button>
           </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-header">
             Market
           </div>
@@ -1434,7 +1424,7 @@
             </ol>
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
