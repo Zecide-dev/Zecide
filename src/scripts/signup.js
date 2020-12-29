@@ -28,9 +28,10 @@ form.addEventListener('submit', function (e) {
     console.log(email);
     var username = form.elements[1].value;
     var password = form.elements[2].value;
+    var registrationtoken = "abcdef";
     //to append registration token
     var stat;
-    var infoObject = { "UserName": username, "Email": email, "password": password };
+    var infoObject = { "UserName": username, "Email": email, "password": password , "registrationToken" : registrationtoken};
     var info = JSON.stringify(infoObject);
     formData.append("user", info);
     fetch('https://ec2-13-233-183-42.ap-south-1.compute.amazonaws.com:8010/Users', {
