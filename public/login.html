@@ -23,19 +23,19 @@
         <button class="log-btn">Log In</button>
         <a href="/users"><button class="sign-btn">Sign Up</button></a>
       </div>
-      <form action="http://ec2-13-233-183-42.ap-south-1.compute.amazonaws.com:8010/users/login" method="POST" id="logInForm" target="result">
+      <form action="http://localhost:8000/users/login" method="POST" id="logInForm" target="result">
         <input
           class="form-input"
           type="text"
           id="UserName"
-          name="user[UserName]"
+          name="UserName"
           placeholder="Username"
         />
         <input
           class="form-input"
           type="password"
           id="password"
-          name="user[password]"
+          name="password"
           placeholder="Password"
         /><br/>
         <input class="submit-btn" type="submit" value="Log In" />

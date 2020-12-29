@@ -34,7 +34,7 @@ form.addEventListener('submit', function (e) {
     var infoObject = { "UserName": username, "Email": email, "password": password , "registrationToken" : registrationtoken};
     var info = JSON.stringify(infoObject);
     formData.append("user", info);
-    fetch('https://ec2-13-233-183-42.ap-south-1.compute.amazonaws.com:8010/Users', {
+    fetch('http://localhost:8000/Users', {
         method: 'POST',
         body: formData
     }).then(function (response) {
@@ -53,16 +53,16 @@ form.addEventListener('submit', function (e) {
 
 
 
-        // var usc = getCookie("UserName");
-        // var uic = getCookie("UserID");
-        // var tc = getCookie("token");
+        var usc = getCookie("UserName");
+        var uic = getCookie("UserID");
+        var tc = getCookie("token");
 
-        // console.log(usc);
-        // console.log(uic);
-        // console.log(tc);
+        console.log(usc);
+        console.log(uic);
+        console.log(tc);
 
         if (stat == 200) {
-            window.location.pathname = '/posts/0';
+            window.location.pathname = '/users/login';
         }
         else {
             alert('An error occured!')
