@@ -29,6 +29,7 @@ form.addEventListener('submit', function (e) {
     var username = form.elements[1].value;
     var password = form.elements[2].value;
     var registrationtoken = "abcdef";
+    
     //to append registration token
     var stat;
     var infoObject = { "UserName": username, "Email": email, "password": password , "registrationToken" : registrationtoken};
