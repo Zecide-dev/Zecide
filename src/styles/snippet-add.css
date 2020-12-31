@@ -109,6 +109,19 @@ input, textarea, option{
   font-weight: 400;
 }
 
+#questions {
+  margin-top: 20px;
+}
+
+input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+.spinner-grow.text-primary {
+  height: 20px;
+  width: 20px;
+}
+
 @media screen and (max-width: 600px) {
 
 html,
