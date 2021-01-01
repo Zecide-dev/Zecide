@@ -1,10 +1,12 @@
 const myHeaders = new Headers();
-var token = getCookie('token');
+
+// var token = getCookie('token');
+var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6InF3ZXJ0eUBtbmJ2YyIsImlkIjoiNWU5OTU3YzI4ZDdkNjA1NzE1ODg2Mjk1IiwiZXhwIjozMTcxMjU1OTgwNzIsImlhdCI6MTU5MDMyNTUwOH0.3xtOT9SbnAdf1Q3letgZb5g7m3NFlTYc-KvhmKcUPyM";
 myHeaders.append('authorization', 'Token ' + token);
 
 function fetchPostData(){
     var dataset;
-    fetch('http://ec2-15-206-1-218.ap-south-1.compute.amazonaws.com:8000/posts/0',{
+    fetch('https://ec2-13-233-183-42.ap-south-1.compute.amazonaws.com:8010/Posts/0',{
       method: 'get',
       headers: myHeaders,
   })
@@ -17,27 +19,27 @@ var data;
 var cardContainer = document.querySelector('.card-container');
 
 
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-      }
-  }
-  return "";
-  }
+// function getCookie(cname) {
+//   var name = cname + "=";
+//   var decodedCookie = decodeURIComponent(document.cookie);
+//   var ca = decodedCookie.split(';');
+//   for(var i = 0; i <ca.length; i++) {
+//       var c = ca[i];
+//       while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//       }
+//       if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//       }
+//   }
+//   return "";
+//   }
 
-console.log(token);
+// console.log(token);
 
 function getUsername(){
   var userName = document.getElementById('user-name');
-  userName.innerHTML = getCookie("UserName");
+  // userName.innerHTML = getCookie("UserName");
 }
 
 getUsername();
