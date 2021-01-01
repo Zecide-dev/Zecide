@@ -22,10 +22,10 @@ body {
 
 body {
     animation: fadein 0.5s;
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(15, 1fr);
     grid-template-rows: repeat(7, 1fr);
-    grid-gap: 20px;
+    grid-gap: 20px; */
 }
 
 a{
@@ -258,6 +258,29 @@ a{
     flex-direction: column;
     width: 42vw;
     margin: 0 auto;
+}
+
+#question-card {
+  min-height: 400px;
+}
+
+#mid-content {
+  margin-top: 20vh;
+  margin-left: 20vw;
+}
+
+#fetching-data {
+  text-align: center;
+  margin-top: 150px;
+}
+
+#snippet-div {
+  display: none;
+  margin: 20px;
+}
+
+#show-question {
+  float: right;
 }
 
 .question-card{

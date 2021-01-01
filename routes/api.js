@@ -83,6 +83,10 @@ router.get('/Z/Feed',function(req,res){
     res.sendFile(path.join(__dirname, "../public/snippets.html"))
 })
 
+router.get('/Z/Snippet/Add',function(req,res){
+  res.sendFile(path.join(__dirname, "../public/snippet-add.html"))
+})
+
 router.get('/Z/Snippet/Edit/:SnipId',function(req,res){
     res.sendFile(path.join(__dirname, "../public/snippets-edit.html"))
 })

@@ -113,18 +113,19 @@ a:hover {
   background-color: #F3FAFf;
 }
 
-.candlestick-chart-div {
+#candlestick-chart-div {
   height: 65vh;
 }
 
 #creating-candlestick-chart {
   display: none;
+  height: 65vh;
   padding-top: 150px;
 }
 
 #candlestick-chart {
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
 
 .side-nav {
@@ -275,13 +276,28 @@ a:hover {
   margin: 8px 12px;
 }
 
-.card.monitor-create-card {
-  min-height: 520px;
+.monitor-create-card-body {
+  min-height: 460px;
+}
+
+#nifty-companies-div {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+#monitor-event {
+  display: none;
 }
 
 .card.monitor-create-card .card-body {
   padding: 10px;
   padding-bottom: 50px;
+  position: relative;
+}
+
+#no-event-monitor-div {
+  padding-top: 120px;
+  text-align: center;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -316,7 +332,7 @@ a:hover {
 .screen-nav-tabs .nav-link button {
   font-size: 0.7rem;
   border: none;
-  /* background-color: transparent; */
+  background-color: transparent;
 }
 
 .add-screen-button {
@@ -376,6 +392,9 @@ a:hover {
 .monitor-bottom-section {
   margin-top: 5px;
   border-top: 1px dashed black;
+  bottom: 40px;
+  width: 95%;
+  position: absolute;
 }
 
 .monitor-bottom-section-buttons-div {
@@ -429,7 +448,7 @@ a:hover {
 
 .monitor-bubble button, .modal-bubble button {
   border: none;
-  /* background-color: transparent; */
+  background-color: transparent;
 }
 
 .monitor-bubble button:focus, .modal-bubble button:focus {
@@ -536,6 +555,7 @@ a:hover {
   justify-content: space-around;
   padding-top: 150px;
   display: none;
+  height: 500px;
 }
 
 #creating-event-loader h4 {
@@ -545,4 +565,35 @@ a:hover {
 .spinner-grow.text-primary {
   margin-left: 45%;
   margin-top: 20px;
+}
+
+#risk-management-card-body input[type=range]{
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#risk-management-card-body input[type=number]{
+  width: 30%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#risk-management-settings {
+  display: none;
+}
+
+#risk-management-settings-button, #risk-management-reset-button {
+  float: right;
+  height: 22px;
+  padding: 0 5px 5px 5px;
+  border-radius: 10px;
+}
+
+#calculating-risk-management {
+  display: none;
+}
+
+#risk-management-result {
+  display: none;
 }
