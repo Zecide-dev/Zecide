@@ -26,11 +26,11 @@
     <div class="snippet-container">
       <form id="modify" action="http://localhost:8000/Z/Snippet/New" method="POST">
         <label for="title">Title</label>
-        <input type="text" id="title" name="Title" value="Title">
+        <input type="text" id="title" name="Title">
         <label for="Content">Content</label>
         <textarea id="content" name="Content" form="modify" style="height:200px"></textarea>
         <label for="MagicNo">MagicNo</label>
-        <input type="text" id="magicno" name="MagicNo" value="MagicNo">
+        <input type="number" id="magicno" name="MagicNo" value="7">
 
         <div id='questions'>
           <div id='fetching-questions'>
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <input type="submit" id="submit" value="Modify">
+        <input type="submit" id="submit" value="Add Snippet">
 
       </form>
     </div>
