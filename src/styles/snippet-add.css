@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  font-family: "Quicksand";
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  margin: 3vh auto;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+.logo img{
+  width: 2.5vw;
+}
+
+.logo span{
+  font-size: 1.5vw;
+  margin-left: 1vw;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links button{
+  font-family: 'Quicksand';
+  border: none;
+  font-size: 1.1vw;
+  color: #ffffff;
+  background-color: #3b98ff;
+  border-radius: 2vw;
+  padding: 5px 15px;
+}
+
+.main-container{
+  width: 50vw;
+  margin: 7vh auto 5vh auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2vw;
+}
+
+.snippet-container{
+  min-width: 100%;
+  border: solid 1px #9ccaff;
+  border-radius: 1vw;
+  padding: 1vw 1vw;
+  box-shadow: 5px 10px 8px rgba(110, 110, 110, 0.1);
+  word-wrap: break-word;
+}
+
+.snippet-container{
+    min-width: 100%;
+    border: solid 1px #9ccaff;
+    border-radius: 1vw;
+    padding: 1vw 1vw;
+    box-shadow: 5px 10px 8px rgba(110, 110, 110, 0.1);
+    word-wrap: break-word;
+  }
+
+.snippet-container button{
+  font-family: 'Quicksand';
+  background-color: #e45454;
+  color: #ffffff;
+  border-radius: 1vw;
+  border: none;
+  padding: 1vh 1.5vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+input, textarea, option{
+  font-family: 'Quicksand';
+}
+
+#submit{
+  margin-top: 4vh;
+  padding: 0.7vh 0;
+  background-color: #3b98ff;
+  color: white;
+  border: none;
+  border-radius: 2vw;
+}
+
+.snippet-container h2{
+  font-weight: 400;
+}
+
+#questions {
+  margin-top: 20px;
+}
+
+input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+.spinner-grow.text-primary {
+  height: 20px;
+  width: 20px;
+}
+
+@media screen and (max-width: 600px) {
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  font-family: "Quicksand";
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  margin: 3vh auto;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+.logo img{
+  width: 3.5vw;
+}
+
+.logo span{
+  font-size: 3vw;
+  margin-left: 1vw;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links button{
+  font-family: 'Quicksand';
+  border: none;
+  font-size: 2.7vw;
+  color: #ffffff;
+  background-color: #3b98ff;
+  border-radius: 2vw;
+  padding: 5px 15px;
+}
+
+.main-container{
+  width: 80vw;
+  margin: 4vh auto 5vh auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2vw;
+}
+
+.snippet-container{
+  min-width: 100%;
+  border: solid 1px #9ccaff;
+  border-radius: 1vw;
+  padding: 1vw 1vw;
+  box-shadow: 5px 10px 8px rgba(110, 110, 110, 0.1);
+  word-wrap: break-word;
+}
+
+.snippet-container{
+    min-width: 100%;
+    border: solid 1px #9ccaff;
+    border-radius: 1vw;
+    padding: 1vw 1vw;
+    box-shadow: 5px 10px 8px rgba(110, 110, 110, 0.1);
+    word-wrap: break-word;
+  }
+
+.snippet-container button{
+  font-family: 'Quicksand';
+  background-color: #e45454;
+  color: #ffffff;
+  border-radius: 1vw;
+  border: none;
+  padding: 1vh 1.5vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+input, textarea, option{
+  font-family: 'Quicksand';
+}
+
+#submit{
+  margin-top: 4vh;
+  padding: 0.7vh 0;
+  background-color: #3b98ff;
+  color: white;
+  border: none;
+  border-radius: 2vw;
+}
+
+.snippet-container h2{
+  font-weight: 400;
+}
+}
