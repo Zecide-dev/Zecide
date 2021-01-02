@@ -1,23 +1,24 @@
 const form = document.getElementById('logInForm');
 
+
 function setCookie(cname, cvalue) {
     document.cookie = cname + "=" + cvalue;
-  }
+}
 
 function getCookie(cname) {
-var name = cname + "=";
-var decodedCookie = decodeURIComponent(document.cookie);
-var ca = decodedCookie.split(';');
-for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-    c = c.substring(1);
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
-    if (c.indexOf(name) == 0) {
-    return c.substring(name.length, c.length);
-    }
-}
-return "";
+    return "";
 }
 
 
@@ -29,7 +30,7 @@ form.addEventListener('submit', (event) => {
         body: new URLSearchParams(new FormData(event.target))
     }).then((resp) => {
         stat = resp.status;
-        return resp.json(); 
+        return resp.json();
     }).then((body) => {
         console.log(body);
         console.log(body.UserName);
@@ -38,14 +39,40 @@ form.addEventListener('submit', (event) => {
         setCookie("UserName", body.UserName);
         setCookie("UserID", body._id);
         setCookie("token", body.token);
-        
-        if(stat==200){
-                        window.location.pathname = '/posts/0';
-                    }
-                    else{
-                        alert('Wrong Credentials!')
-                    }
-                
+        localStorage.setItem('jwttoken', body.token);
+        var authToken = localStorage.getItem('jwttoken');
+        var bodytoken = body.token;
+        console.log(bodytoken)
+
+        var formData = new FormData();
+        var infoObject = { "bodytoken": bodytoken };
+        var info = JSON.stringify(infoObject);
+        formData.append("user", info);
+
+
+
+
+        if (stat == 200) {
+
+            console.log('token')
+            fetch('http://localhost:8080/login-post', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => {
+                    window.location = /user-feed/;
+
+
+
+
+                })
+
+
+        }
+        else {
+            alert('Wrong Credentials!')
+        }
+
 
     }).catch((error) => {
         console.error(error);
