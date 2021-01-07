@@ -40,6 +40,8 @@ form.addEventListener('submit', (event) => {
         setCookie("UserID", body._id);
         setCookie("token", body.token);
         localStorage.setItem('jwttoken', body.token);
+        localStorage.setItem('usernam',body.UserName)
+        localStorage.setItem('userid',body._id)
         var authToken = localStorage.getItem('jwttoken');
         var bodytoken = body.token;
         console.log(bodytoken)

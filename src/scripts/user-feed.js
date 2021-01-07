@@ -1,20 +1,56 @@
 const myHeaders = new Headers();
 
 // var token = getCookie('token');
-var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6InF3ZXJ0eUBtbmJ2YyIsImlkIjoiNWU5OTU3YzI4ZDdkNjA1NzE1ODg2Mjk1IiwiZXhwIjozMTcxMjU1OTgwNzIsImlhdCI6MTU5MDMyNTUwOH0.3xtOT9SbnAdf1Q3letgZb5g7m3NFlTYc-KvhmKcUPyM";
+var token = localStorage.getItem("jwttoken");
 myHeaders.append('authorization', 'Token ' + token);
 
-function fetchPostData(){
+console.log(myHeaders)
+
+function fetchPostData() {
     var dataset;
-    fetch('http://localhost:8000/Posts/0',{
-      method: 'get',
-      headers: myHeaders,
-  })
-    .then(response => response.json())
-    .then(data => useData(data))
+    fetch('http://localhost:8000/Posts/0', {
+        method: 'get',
+        headers: myHeaders
+    })
+        .then(response => response.json())
+        .then(data => useData(data))
 }
 
 fetchPostData();
+
+// console.log(postBody)
+
+function postButton() {
+    var postBody = document.getElementById('postBody').value;
+
+
+    var formData = new FormData();
+
+    // var stat;
+    var infoObject = { "message": postBody };
+    var info = JSON.stringify(infoObject);
+    formData.append("user", info);
+
+    // const data = { message : postBody }
+    // var message = JSON.stringify(data)
+    // console.log(message);
+    fetch('http://localhost:8000/Posts/create', {
+        method: 'POST',
+        headers: myHeaders,
+        body: formData
+    }).then(function (response) {
+        stat = response.status;
+
+        console.log(stat)
+
+
+        if (stat == 200) {
+            window.location.pathname = '/user-feed';
+        }
+
+    })
+
+}
 var data;
 var cardContainer = document.querySelector('.card-container');
 
@@ -37,18 +73,27 @@ var cardContainer = document.querySelector('.card-container');
 
 // console.log(token);
 
-function getUsername(){
-  var userName = document.getElementById('user-name');
-  // userName.innerHTML = getCookie("UserName");
+function getUsername() {
+    var userName = document.getElementById('user-name');
+    // userName.innerHTML = getCookie("UserName");
 }
 
 getUsername();
 
-function useData(d){
-    data= d;
+// function upvotefun(){
+
+// }
+
+function useData(d) {
+    data = d;
     console.log(d);
-    len= data.length;
-    for(var i=0; i<len; i++){
+    len = data.length;
+    console.log(len)
+    let upvoteCount = new Array(len)
+    for (let i = 0; i < len; i++) {
+        
+        
+        
         var feedCard = document.createElement('div');
         var feedCardTop = document.createElement('div');
         var feedCardTopLeft = document.createElement('div');
@@ -70,7 +115,7 @@ function useData(d){
         var upAndDown = document.createElement('div');
         var upvote = document.createElement('div');
         var upvoteImg = document.createElement('img');
-        var upvoteCount = document.createElement('span');
+        upvoteCount[i] = document.createElement('span');
         var downvote = document.createElement('div');
         var downvoteImg = document.createElement('img');
         var downvoteCount = document.createElement('span');
@@ -106,7 +151,7 @@ function useData(d){
         upAndDown.append(upvote);
         upAndDown.append(downvote);
         upvote.append(upvoteImg);
-        upvote.append(upvoteCount);
+        upvote.append(upvoteCount[i]);
         downvote.append(downvoteImg);
         downvote.append(downvoteCount);
         comments.append(commentsImg);
@@ -136,7 +181,7 @@ function useData(d){
         upAndDown.className = 'upanddown';
         upvote.className = 'upvote';
         upvoteImg.className = 'upvote-img';
-        upvoteCount.className = 'upvote-count';
+        upvoteCount[i].className = 'upvote-count';
         downvote.className = 'downvote';
         downvoteImg.className = 'downvote-img';
         downvoteCount.className = 'downvote-count';
@@ -148,64 +193,94 @@ function useData(d){
         commentInput.className = 'comment-input';
         commentPost.className = 'comment-post';
 
-        if (d[i].Content===undefined){     
+        if (d[i].Content === undefined) {
             feedProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
-            name.innerHTML=d[i].Author.Name;
+            name.innerHTML = d[i].Author.UserName;
             var dateData = d[i].date;
             var date1 = Date.parse(dateData);
             var date2 = Date.now();
-            var dateDiff = date2-date1;
-            postedOn.innerHTML= timeSince(dateDiff) + " ago";
+            var dateDiff = date2 - date1;
+            postedOn.innerHTML = timeSince(dateDiff) + " ago";
             feedVerified.setAttribute('src', '/src/images/verified.svg');
             // zScoreImg.setAttribute('src', '/src/images/z-score.svg');
-            // zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
+            // zScore.innerHTML = d[i].Author.WeightNum.toPrecision(3);
             // zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
-            // zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
-            feedCardMid.innerHTML=d[i].Post;
+            // zHeat.innerHTML = d[i].Author.Weightage.toPrecision(3);
+            feedCardMid.innerHTML = d[i].Post;
             upvoteImg.setAttribute('src', '/src/images/upvote.svg');
-            upvoteCount.innerHTML=d[i].UpVote.length;
+            upvoteCount[i].innerHTML = d[i].UpVote.length;
             downvoteImg.setAttribute('src', '/src/images/downvote.svg');
-            downvoteCount.innerHTML=d[i].DownVote.length;
+            downvoteCount.innerHTML = d[i].DownVote.length;
             commentsImg.setAttribute('src', '/src/images/comments.svg');
-            commentsCount.innerHTML=d[i].comments.length + " comments";
+            commentsCount.innerHTML = d[i].comments.length + " comments";
             userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
             commentInput.setAttribute('placeholder', 'Write a comment..');
             commentPost.setAttribute('src', '/src/images/send.svg');
+            // var postno = d[i];
+            upvoteImg.addEventListener("click", upvotefun);
+            function upvotefun() {
+
+                console.log('upvoted');
+                
+                let postid = data[i]._id;
+                // upvoteCount[i] = upvoteCount[i]+1;
+                data[i].UpVote.length  = data[i].UpVote.length + 1;
+                let upcount = data[i].UpVote.length;
+                upvoteCount[i].innerHTML = upcount;
+
+                
+                
+                // console.log(data[i].UpVote.length)
+                fetch('http://localhost:8000/Posts/' + postid + '/Up', {
+                    method: 'get',
+                    headers: myHeaders
+                })
+                    .then(response => response.json())
+                    .then(()=>{
+
+                        
+                    })
+                    
+                // console.log(myHeaders)
+                // d[i].UpVote.length++;
+
+
+            }
         }
-        else{        
+        else {
             feedProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
-            name.innerHTML=d[i].NewsSource;
+            name.innerHTML = d[i].NewsSource;
             var dateData = d[i].PublishedAt;
             var date1 = Date.parse(dateData);
             var date2 = Date.now();
-            var dateDiff = date2-date1;
-            postedOn.innerHTML= timeSince(dateDiff) + " ago";
+            var dateDiff = date2 - date1;
+            postedOn.innerHTML = timeSince(dateDiff) + " ago";
             feedVerified.setAttribute('src', '/src/images/verified.svg');
             //zScoreImg.setAttribute('src', '/src/images/z-score.svg');
             //zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
             //zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
             //zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
             feedPostLink.setAttribute('href', d[i].Url);
-            feedPostText.innerHTML=d[i].Content;
+            feedPostText.innerHTML = d[i].Content;
             feedPostImg.setAttribute('src', d[i].UrlToImage);
             upvoteImg.setAttribute('src', '/src/images/upvote.svg');
-            upvoteCount.innerHTML=d[i].UpVote.length;
+            upvoteCount[i].innerHTML = d[i].UpVote.length;
             downvoteImg.setAttribute('src', '/src/images/downvote.svg');
-            downvoteCount.innerHTML=d[i].DownVote.length;
+            downvoteCount.innerHTML = d[i].DownVote.length;
             commentsImg.setAttribute('src', '/src/images/comments.svg');
-            commentsCount.innerHTML=d[i].comments.length + " comments";
+            commentsCount.innerHTML = d[i].comments.length + " comments";
             userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
             commentInput.setAttribute('placeholder', 'Write a comment..');
             commentPost.setAttribute('src', '/src/images/send.svg');
-            feedVerified.style.visibility="hidden";
-            zScore.style.visibility="hidden";
-            zScoreImg.style.visibility="hidden";
-            zHeat.style.visibility="hidden";
-            zHeatImg.style.visibility="hidden";
+            feedVerified.style.visibility = "hidden";
+            zScore.style.visibility = "hidden";
+            zScoreImg.style.visibility = "hidden";
+            zHeat.style.visibility = "hidden";
+            zHeatImg.style.visibility = "hidden";
         }
-  
 
-        
+
+
         // const h1a = document.createElement('h1');
         // const h1b = document.createElement('h1');
         // const body = document.querySelector('body');
@@ -221,29 +296,29 @@ function useData(d){
 }
 
 function timeSince(date) {
-    var seconds = date/1000;  
+    var seconds = date / 1000;
     var interval = Math.floor(seconds / 31536000);
     if (interval > 1) {
-      return interval + " years";
+        return interval + " years";
     }
     interval = Math.floor(seconds / 2592000);
     if (interval > 1) {
-      return interval + " months";
+        return interval + " months";
     }
     interval = Math.floor(seconds / 86400);
     if (interval > 1) {
-      return interval + " days";
+        return interval + " days";
     }
     interval = Math.floor(seconds / 3600);
     if (interval > 1) {
-      return interval + " hours";
+        return interval + " hours";
     }
     interval = Math.floor(seconds / 60);
     if (interval > 1) {
-      return interval + " minutes";
+        return interval + " minutes";
     }
     return Math.floor(seconds) + " seconds";
-  }
+}
 //   var aDay = 24*60*60*1000;
 //   return(timeSince(new Date(Date.now()-aDay)));
 //   (timeSince(new Date(Date.now()-aDay*2)));
@@ -261,12 +336,12 @@ function timeSince(date) {
 // };
 
 const navToggle = () => {
-  var e = document.getElementById("burger"),
-    t = document.querySelector(".dropdown-content"),
-    n = "/src/images/dropdown-button.svg";
-  e.addEventListener("click", () => {
-    t.classList.toggle("dropdown-content-active");
-    e.src === n ? (e.src = "/src/images/dropdown-button.svg") : (e.src = n);
-  });
+    var e = document.getElementById("burger"),
+        t = document.querySelector(".dropdown-content"),
+        n = "/src/images/dropdown-button.svg";
+    e.addEventListener("click", () => {
+        t.classList.toggle("dropdown-content-active");
+        e.src === n ? (e.src = "/src/images/dropdown-button.svg") : (e.src = n);
+    });
 };
 navToggle();
