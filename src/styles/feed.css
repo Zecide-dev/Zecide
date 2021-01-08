@@ -107,7 +107,9 @@ a {
   padding-right: 3.2vw;
   padding-bottom: 1.7vh;
 }
-
+li{
+  vertical-align: middle;
+}
 
 .search {
   display: flex;
@@ -935,6 +937,8 @@ a {
   }
 
   .feed-card-comments input {
+    display: flex;
+    flex-direction: row;
     width: 50vw;
     border: none;
     border-bottom: 1px solid #e4e4e4;
@@ -994,3 +998,9 @@ a {
     margin-bottom: 2vh;
   }
 }
+
+ul{
+  list-style-type: none;
+}
+
+
