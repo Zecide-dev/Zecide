@@ -8,6 +8,7 @@ const secure = require("ssl-express-www");
 const session = require('express-session')
 
 
+
 //app.use(secure);
 
 const env = require('dotenv').config();
@@ -27,7 +28,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var path = require('path');
 var indexRouter = require('./routes/api');
-var indexRouter2 = require('./routes/api2')
+var indexRouter2 = require('./routes/api2');
+const { response } = require("express");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
@@ -61,6 +63,16 @@ app.get('/user-feed', async (req, res) => {
         res.render('user-feed')
     }
 })
+
+// app.get('/user-profile',(req,res)=>{
+//     // var userData = req.body;
+//     // console.log(userData)
+    
+
+  
+        
+//     res.render('user-profile',{abc: 'hello abu'})
+// })
 app.get('/logout', (req, res) => {
     session.userId = null
     res.redirect('http://localhost:8080/users/login')

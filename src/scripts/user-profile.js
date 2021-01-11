@@ -1,5 +1,4 @@
-// const { default: fetch } = require("node-fetch");
-
+// const { load } = require("dotenv/types");
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
@@ -11,27 +10,30 @@ document.getElementsByTagName('head')[0].appendChild(script);
 var token = localStorage.getItem("jwttoken");
 // myHeaders.append('Content-Type', 'application/json');
 myHeaders.append('authorization', 'Token ' + token);
-// var userData;
+var userData;
 
-// // console.log(myHeaders)
+// console.log(myHeaders)
 // var userInfo;
 
-// function userBio() {
-   
-//     fetch('http://localhost:8000/users/current', {
-//         method: 'get',
-//         headers: myHeaders
-//     }).then((res)=>{
-//         userInfo = res;
-//     }
-//     )
-//     return userInfo;
-        
+function userBio() {
 
-    
-// }
-// userBio();
+    fetch('http://localhost:8000/users/current', {
+        method: 'get',
+        headers: myHeaders
+    }).then(response => response.json())
+        .then((usr) => {
+            userData = usr;
+            console.log(userData)
+            document.getElementById('firstName').innerHTML = userData.user.UserName;
 
+        }
+        )
+    // return userInfo;
+
+
+
+}
+userBio();
 function fetchPostData() {
     var dataset;
     fetch('http://localhost:8000/Posts/0', {
@@ -43,73 +45,6 @@ function fetchPostData() {
 }
 
 fetchPostData();
-
-// console.log(postBody)
-
-function postButton() {
-    var postBody = document.getElementById('postBody').value;
-
-
-    var formData = new FormData();
-
-    // var stat;
-    var infoObject = { "message": postBody };
-    var info = JSON.stringify(infoObject);
-    formData.append("user", info);
-
-    // const data = { message : postBody }
-    // var message = JSON.stringify(data)
-    // console.log(message);
-    fetch('http://localhost:8000/Posts/create', {
-        method: 'POST',
-        headers: myHeaders,
-        body: formData
-    }).then(function (response) {
-        stat = response.status;
-
-        console.log(stat)
-
-
-        if (stat == 200) {
-            window.location.pathname = '/user-feed';
-        }
-
-    })
-
-}
-var data;
-var cardContainer = document.querySelector('.card-container');
-
-
-// function getCookie(cname) {
-//   var name = cname + "=";
-//   var decodedCookie = decodeURIComponent(document.cookie);
-//   var ca = decodedCookie.split(';');
-//   for(var i = 0; i <ca.length; i++) {
-//       var c = ca[i];
-//       while (c.charAt(0) == ' ') {
-//       c = c.substring(1);
-//       }
-//       if (c.indexOf(name) == 0) {
-//       return c.substring(name.length, c.length);
-//       }
-//   }
-//   return "";
-//   }
-
-// console.log(token);
-
-function getUsername() {
-    var userName = document.getElementById('user-name');
-    // userName.innerHTML = getCookie("UserName");
-}
-
-getUsername();
-
-// function upvotefun(){
-
-// }
-
 function useData(d) {
     data = d;
     console.log(d);
@@ -524,29 +459,3 @@ function timeSince(date) {
     }
     return Math.floor(seconds) + " seconds";
 }
-//   var aDay = 24*60*60*1000;
-//   return(timeSince(new Date(Date.now()-aDay)));
-//   (timeSince(new Date(Date.now()-aDay*2)));
-
-
-// var sideNav = document.querySelector('.side-nav');
-// window.onscroll = function () { 
-//     "use strict";
-//     if (document.body.scrollTop >= 20 && document.documentElement.clientWidth<600) {
-//       sideNav.style.paddingTop= '88.9vh';
-//     } 
-//     else {
-//       sideNav.style.paddingTop= '88.9vh';
-//     }
-// };
-
-const navToggle = () => {
-    var e = document.getElementById("burger"),
-        t = document.querySelector(".dropdown-content"),
-        n = "/src/images/dropdown-button.svg";
-    e.addEventListener("click", () => {
-        t.classList.toggle("dropdown-content-active");
-        e.src === n ? (e.src = "/src/images/dropdown-button.svg") : (e.src = n);
-    });
-};
-navToggle();

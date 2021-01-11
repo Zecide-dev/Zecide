@@ -1,5 +1,8 @@
 // const { default: fetch } = require("node-fetch");
 
+// const { response } = require("express");
+// const { default: fetch } = require("node-fetch");
+
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
@@ -17,7 +20,7 @@ myHeaders.append('authorization', 'Token ' + token);
 // var userInfo;
 
 // function userBio() {
-   
+
 //     fetch('http://localhost:8000/users/current', {
 //         method: 'get',
 //         headers: myHeaders
@@ -26,11 +29,41 @@ myHeaders.append('authorization', 'Token ' + token);
 //     }
 //     )
 //     return userInfo;
-        
 
-    
+
+
 // }
 // userBio();
+
+function userBio() {
+
+    fetch('http://localhost:8000/users/current', {
+        method: 'get',
+        headers: myHeaders
+    }).then(response => response.json())
+        .then((usr) => {
+            userData = usr;
+            console.log(userData)
+            document.getElementById('firstName').innerHTML = userData.user.UserName;
+            document.getElementById('tagLine').innerHTML = userData.userInfo.TagLine;
+            document.getElementById('profileBio').innerHTML = userData.userInfo.UserBio;
+            document.getElementById('profession').innerHTML = userData.userInfo.Work;
+            document.getElementById('education').innerHTML = userData.userInfo.Education;
+            document.getElementById('place').innerHTML = userData.userInfo.Place;
+
+
+        }
+        )
+    // return userInfo;
+
+
+
+}
+userBio();
+var userid = localStorage.getItem("userid");
+
+console.log(userid)
+var filter = new Object();
 
 function fetchPostData() {
     var dataset;
@@ -39,44 +72,23 @@ function fetchPostData() {
         headers: myHeaders
     })
         .then(response => response.json())
-        .then(data => useData(data))
+        .then(data => {
+            // console.log(data[0].Author.UserID)
+            // data = JSON.stringify(data);
+            console.log((data))
+            len = data.length;
+
+
+
+            useData(data);
+        })
 }
 
 fetchPostData();
 
 // console.log(postBody)
 
-function postButton() {
-    var postBody = document.getElementById('postBody').value;
 
-
-    var formData = new FormData();
-
-    // var stat;
-    var infoObject = { "message": postBody };
-    var info = JSON.stringify(infoObject);
-    formData.append("user", info);
-
-    // const data = { message : postBody }
-    // var message = JSON.stringify(data)
-    // console.log(message);
-    fetch('http://localhost:8000/Posts/create', {
-        method: 'POST',
-        headers: myHeaders,
-        body: formData
-    }).then(function (response) {
-        stat = response.status;
-
-        console.log(stat)
-
-
-        if (stat == 200) {
-            window.location.pathname = '/user-feed';
-        }
-
-    })
-
-}
 var data;
 var cardContainer = document.querySelector('.card-container');
 
@@ -109,7 +121,6 @@ getUsername();
 // function upvotefun(){
 
 // }
-
 function useData(d) {
     data = d;
     console.log(d);
@@ -225,7 +236,7 @@ function useData(d) {
         commentInput[i].className = 'comment-input';
         commentPost.className = 'comment-post';
 
-        if (d[i].Content === undefined) {
+        if (d[i].Content === undefined && (d[i].Author.UserID == userid)) {
             feedProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
             name.innerHTML = d[i].Author.UserName;
             var dateData = d[i].date;
@@ -234,8 +245,8 @@ function useData(d) {
             var dateDiff = date2 - date1;
             postedOn.innerHTML = timeSince(dateDiff) + " ago";
             feedVerified.setAttribute('src', '/src/images/verified.svg');
-            // zScoreImg.setAttribute('src', '/src/images/z-score.svg');
-            // zScore.innerHTML = d[i].Author.WeightNum.toPrecision(3);
+            zScoreImg.setAttribute('src', 'https://img.icons8.com/material/24/000000/delete-trash.png');
+            zScore.innerHTML = 'DELETE '
             // zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
             // zHeat.innerHTML = d[i].Author.Weightage.toPrecision(3);
             feedCardMid.innerHTML = d[i].Post;
@@ -253,6 +264,7 @@ function useData(d) {
             downvoteImg.addEventListener("click", downvotefun);
             commentPost.addEventListener("click", commentfun);
             comments.addEventListener('click', showcomm);
+            feedCardTopRight.addEventListener('click',deletePost);
 
             let receivedComments = document.createElement('div')
             receivedComments.className = "list-group"
@@ -262,6 +274,23 @@ function useData(d) {
             hide[i] = 1;
             var resC = 1;
             var commentCounter = d[i].comments.length;
+
+
+            function deletePost(){
+                let postid = data[i]._id;
+                if (window.confirm("You will delete this post")) {
+                    // window.open("exit.html", "Thanks for Visiting!");
+                  
+                fetch('http://localhost:8000/Posts/' + postid + '/delete',{
+                    method:'delete',
+                    headers:myHeaders
+                }).then(response=>response.json)
+                .then((res)=>{
+                   window.location.pathname = '/user-profile'
+                }).catch(err => {
+                    res.status(err.status || 500).json({ error: err })
+                })
+            }}
 
 
             function showcomm() {
@@ -453,37 +482,39 @@ function useData(d) {
             }
         }
         else {
-            feedProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
-            name.innerHTML = d[i].NewsSource;
-            var dateData = d[i].PublishedAt;
-            var date1 = Date.parse(dateData);
-            var date2 = Date.now();
-            var dateDiff = date2 - date1;
-            postedOn.innerHTML = timeSince(dateDiff) + " ago";
-            feedVerified.setAttribute('src', '/src/images/verified.svg');
-            //zScoreImg.setAttribute('src', '/src/images/z-score.svg');
-            //zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
-            //zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
-            //zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
-            feedPostLink.setAttribute('href', d[i].Url);
-            feedPostText.innerHTML = d[i].Content;
-            feedPostImg.setAttribute('src', d[i].UrlToImage);
-            upvoteImg.setAttribute('src', '/src/images/upvote.svg');
-            upvoteCount[i].innerHTML = d[i].UpVote.length;
-            downvoteImg.setAttribute('src', '/src/images/downvote.svg');
-            downvoteCount[i].innerHTML = d[i].DownVote.length;
-            commentsImg.setAttribute('src', '/src/images/comments.svg');
-            commentsCount[i].innerHTML = d[i].comments.length + " comments";
-            userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
-            commentInput[i].setAttribute('placeholder', 'Write a comment..');
-            commentPost.setAttribute('src', '/src/images/send.svg');
-            feedVerified.style.visibility = "hidden";
-            zScore.style.visibility = "hidden";
-            zScoreImg.style.visibility = "hidden";
-            zHeat.style.visibility = "hidden";
-            zHeatImg.style.visibility = "hidden";
+            console.log('not displayes')
+            feedCard.style.display = "none";
+        //     feedProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
+        //     name.innerHTML = d[i].NewsSource;
+        //     var dateData = d[i].PublishedAt;
+        //     var date1 = Date.parse(dateData);
+        //     var date2 = Date.now();
+        //     var dateDiff = date2 - date1;
+        //     postedOn.innerHTML = timeSince(dateDiff) + " ago";
+        //     feedVerified.setAttribute('src', '/src/images/verified.svg');
+        //     //zScoreImg.setAttribute('src', '/src/images/z-score.svg');
+        //     //zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
+        //     //zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
+        //     //zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
+        //     feedPostLink.setAttribute('href', d[i].Url);
+        //     feedPostText.innerHTML = d[i].Content;
+        //     feedPostImg.setAttribute('src', d[i].UrlToImage);
+        //     upvoteImg.setAttribute('src', '/src/images/upvote.svg');
+        //     upvoteCount[i].innerHTML = d[i].UpVote.length;
+        //     downvoteImg.setAttribute('src', '/src/images/downvote.svg');
+        //     downvoteCount[i].innerHTML = d[i].DownVote.length;
+        //     commentsImg.setAttribute('src', '/src/images/comments.svg');
+        //     commentsCount[i].innerHTML = d[i].comments.length + " comments";
+        //     userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+        //     commentInput[i].setAttribute('placeholder', 'Write a comment..');
+        //     commentPost.setAttribute('src', '/src/images/send.svg');
+        //     feedVerified.style.visibility = "hidden";
+        //     zScore.style.visibility = "hidden";
+        //     zScoreImg.style.visibility = "hidden";
+        //     zHeat.style.visibility = "hidden";
+        //     zHeatImg.style.visibility = "hidden";
+        // }
         }
-
 
 
         // const h1a = document.createElement('h1');
@@ -499,6 +530,267 @@ function useData(d) {
 
     }
 }
+// function useData(d) {
+//     var data = d;
+//     console.log(data)
+//     len = data.length;
+//     console.log(len)
+//     var cfetch = new Array()
+//     var hide = new Array()
+//     for (var i = 0; i < len; i++) {
+//         var profileCard = document.createElement('div');
+//         var profileCardTop = document.createElement('div');
+//         var profileCardTopLeft = document.createElement('div');
+//         var profileProfilePic = document.createElement('img');
+//         var profileCardTopLeft1 = document.createElement('div');
+//         var name = document.createElement('span');
+//         var postedOn = document.createElement('p');
+//         var profileVerified = document.createElement('img');
+//         var profileCardTopRight = document.createElement('div');
+//         var zScoreImg = document.createElement('img');
+//         var zScore = document.createElement('span');
+//         var zHeatImg = document.createElement('img');
+//         var zHeat = document.createElement('span');
+//         var profileCardMid = document.createElement('div');
+//         var profileCardBottom = document.createElement('div');
+//         var upAndDown = document.createElement('div');
+//         var upvote = document.createElement('div');
+//         var upvoteImg = document.createElement('img');
+//         var upvoteCount = document.createElement('span');
+//         var downvote = document.createElement('div');
+//         var downvoteImg = document.createElement('img');
+//         var downvoteCount = document.createElement('span');
+//         var comments = document.createElement('div');
+//         var commentsImg = document.createElement('img');
+//         var commentsCount = document.createElement('span');
+//         var profileCardComments = document.createElement('div');
+//         var userImg = document.createElement('img');
+//         var commentInput = document.createElement('input');
+//         var commentPost = document.createElement('img');
+
+//         cardContainer.append(profileCard);
+//         profileCard.append(profileCardTop);
+//         profileCard.append(profileCardMid);
+//         profileCard.append(profileCardBottom);
+//         profileCard.append(profileCardComments);
+//         profileCardTop.append(profileCardTopLeft);
+//         profileCardTop.append(profileCardTopRight);
+//         profileCardTopLeft.append(profileProfilePic);
+//         profileCardTopLeft.append(profileCardTopLeft1);
+//         profileCardTopLeft.append(profileVerified);
+//         profileCardTopLeft1.append(name);
+//         profileCardTopLeft1.append(postedOn);
+//         profileCardTopRight.append(zScoreImg);
+//         profileCardTopRight.append(zScore);
+//         profileCardTopRight.append(zHeatImg);
+//         profileCardTopRight.append(zHeat);
+//         profileCardBottom.append(upAndDown);
+//         profileCardBottom.append(comments);
+//         upAndDown.append(upvote);
+//         upAndDown.append(downvote);
+//         upvote.append(upvoteImg);
+//         upvote.append(upvoteCount);
+//         downvote.append(downvoteImg);
+//         downvote.append(downvoteCount);
+//         comments.append(commentsImg);
+//         comments.append(commentsCount);
+//         profileCardComments.append(userImg);
+//         profileCardComments.append(commentInput);
+//         profileCardComments.append(commentPost);
+
+//         profileCard.className = 'profile-card';
+//         profileCardTop.className = 'profile-card-top';
+//         profileCardTopLeft.className = 'profile-card-top-left';
+//         profileProfilePic.className = 'profile-profile-pic';
+//         profileCardTopLeft1.className = 'profile-card-top-left-1';
+//         name.className = 'name';
+//         postedOn.className = 'posted-on';
+//         profileVerified.className = 'profile-verified';
+//         profileCardTopRight.className = 'profile-card-top-right';
+//         zScoreImg.className = 'z-score-img';
+//         zScore.className = 'z-score';
+//         zHeatImg.className = 'z-heat-img';
+//         zHeat.className = 'z-heat';
+//         profileCardMid.className = 'profile-card-mid';
+//         profileCardBottom.className = 'profile-card-bottom';
+//         upAndDown.className = 'upanddown';
+//         upvote.className = 'upvote';
+//         upvoteImg.className = 'upvote-img';
+//         upvoteCount.className = 'upvote-count';
+//         downvote.className = 'downvote';
+//         downvoteImg.className = 'downvote-img';
+//         downvoteCount.className = 'downvote-count';
+//         comments.className = 'comments';
+//         commentsImg.className = 'comments-img';
+//         commentsCount.className = 'comments-count';
+//         profileCardComments.className = 'profile-card-comments';
+//         userImg.className = 'user-img';
+//         commentInput.className = 'comment-input';
+//         commentPost.className = 'comment-post';
+
+//         if (d[i].Content === undefined && (d[i].Author.UserID == userid)) {
+//             console.log(d[i])
+            
+//                 let postid = d[i]._id;
+//             profileProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
+//             name.innerHTML = d[i].Author.Name;
+//             var dateData = d[i].date;
+//             var date1 = Date.parse(dateData);
+//             var date2 = Date.now();
+//             var dateDiff = date2 - date1;
+//             postedOn.innerHTML = timeSince(dateDiff) + " ago";
+//             profileVerified.setAttribute('src', '/src/images/verified.svg');
+//             // zScoreImg.setAttribute('src', '/src/images/z-score.svg');
+//             // zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
+//             // zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
+//             // zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
+//             profileCardMid.innerHTML = d[i].Post;
+//             upvoteImg.setAttribute('src', '/src/images/upvote.svg');
+//             upvoteCount.innerHTML = d[i].UpVote.length;
+//             downvoteImg.setAttribute('src', '/src/images/downvote.svg');
+//             downvoteCount.innerHTML = d[i].DownVote.length;
+//             commentsImg.setAttribute('src', '/src/images/comments.svg');
+//             commentsCount.innerHTML = d[i].comments.length + " comments";
+//             userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+//             commentInput.setAttribute('placeholder', 'Write a comment..');
+//             commentPost.setAttribute('src', '/src/images/send.svg');
+//             comments.addEventListener('click', showcomm);
+//             let receivedComments = document.createElement('div')
+//             receivedComments.className = "list-group"
+//             receivedComments.setAttribute('id', 'recCom');
+//             cfetch[i] = 1;
+//             hide[i] = 1;
+//             var resC = 1;
+//             function showcomm() {
+//                 console.log('show comm');
+                
+
+
+
+//                 if (hide[i] == 1) {
+//                     receivedComments.style.display = "inline";
+//                     hide[i] = 0;
+//                     if (cfetch[i] == 1) {
+//                         fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+//                             method: 'get',
+//                             headers: myHeaders
+//                         })
+//                             .then(response => response.json())
+//                             .then((usr) => {
+//                                 console.log('response recieved');
+
+//                                 if (resC == 1) {
+//                                     cfetch[i] = 0;
+//                                     console.log(usr.usr.comments.length);
+//                                     let commentOutput = new Array(usr.usr.comments.length)
+
+//                                     var breakB = document.createElement('br')
+//                                     // feedCardComments[i].append(breakB)
+//                                     feedCardComments[i].parentNode.insertBefore(breakB, feedCardComments[i].nextSibling)
+
+//                                     // breakB.insertAdjacentElement(receivedComments)
+//                                     breakB.parentNode.insertBefore(receivedComments, breakB.nextSibling)
+
+
+
+
+//                                     for (let j = 0; j < usr.usr.comments.length; j++) {
+//                                         commentOutput[j] = document.createElement('li');
+//                                         // commentOutput[j].className = 'li';
+//                                         // console.log(usr.usr.comments[j].comment)
+//                                         let item = (usr.usr.comments[j].comment);
+
+//                                         var test = document.createElement('section');
+//                                         test.setAttribute('id', 'test');
+
+//                                         var ul = document.createElement('ul');
+
+
+//                                         receivedComments.appendChild(test);
+//                                         test.appendChild(ul);
+//                                         var li = document.createElement('li');
+//                                         li.className = 'list-group-item list-group-item-secondary';
+//                                         ul.appendChild(li);
+//                                         li.innerHTML = li.innerHTML + item
+//                                         // feedCardComments[i].append(
+//                                         //     commentOutput[j].innerHTML = item
+
+//                                         // $("<li></li>").text(`[${usr.usr.comments[j].comment}]`)
+//                                         // var listOfCom = document.createComment('li');
+//                                         // );
+//                                     }
+//                                     c = 0;
+
+
+
+//                                 }
+//                             })
+//                     }
+//                     else {
+//                         cfetch[i] = 0;
+//                     }
+//                 }
+//                 else {
+//                     receivedComments.style.display = "none"
+//                     hide[i] = 1;
+
+
+//                 }
+
+//             }
+//         }
+//         else {
+//             profileCard.style.display = "none";
+//             // profileProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
+//             // name.innerHTML=d[i].NewsSource;
+//             // var dateData = d[i].PublishedAt;
+//             // var date1 = Date.parse(dateData);
+//             // var date2 = Date.now();
+//             // var dateDiff = date2-date1;
+//             // postedOn.innerHTML= timeSince(dateDiff) + " ago";
+//             // profileVerified.setAttribute('src', '/src/images/verified.svg');
+
+
+
+//             // //zScoreImg.setAttribute('src', '/src/images/z-score.svg');
+//             // //zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
+//             // //zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
+//             // //zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
+
+
+
+//             // profileCardMid.innerHTML=d[i].Content;
+//             // upvoteImg.setAttribute('src', '/src/images/upvote.svg');
+//             // upvoteCount.innerHTML=d[i].UpVote.length;
+//             // downvoteImg.setAttribute('src', '/src/images/downvote.svg');
+//             // downvoteCount.innerHTML=d[i].DownVote.length;
+//             // commentsImg.setAttribute('src', '/src/images/comments.svg');
+//             // commentsCount.innerHTML=d[i].comments.length + " comments";
+//             // userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+//             // commentInput.setAttribute('placeholder', 'Write a comment..');
+//             // commentPost.setAttribute('src', '/src/images/send.svg');
+//             // profileVerified.style.visibility="hidden";
+//             // zScore.style.visibility="hidden";
+//             // zScoreImg.style.visibility="hidden";
+//             // zHeat.style.visibility="hidden";
+//             // zHeatImg.style.visibility="hidden";
+//         }
+
+
+
+//         // const h1a = document.createElement('h1');
+//         // const h1b = document.createElement('h1');
+//         // const body = document.querySelector('body');
+//         // body.append(h1a);
+//         // body.append(h1b);
+//         // h1a.className = 'heading';
+//         // h1a.innerHTML= g[i];
+//         // h1b.className = 'heading2';
+//         // h1b.innerHTML= 'xyz';
+//         // const heading = document.querySelector('.heading');
+
+//     }
+// }
 
 function timeSince(date) {
     var seconds = date / 1000;
@@ -550,3 +842,4 @@ const navToggle = () => {
     });
 };
 navToggle();
+

@@ -4,21 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zecide - Feed</title>
+    <title>Zecide - My Profile</title>
     <link rel="icon" href="/src/images/logo.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/styles/profile.css">
     <link rel="stylesheet" href="/src/styles/feed.css">
 
 </head>
 
 <body>
-
-
-
+   
+    
+    
 
 
 
@@ -54,14 +55,9 @@
                         </button>
                         <div class="dropdown-content">
                             <ul>
-                                <li><a href="/logout" onclick="logout()"> <span>Logout</span> </a></li>
+                                <li><a href="/logout"> <span>Logout</span> </a></li>
                                 <li><a href="#"> <span>Settings</span> </a></li>
                             </ul>
-                            <script>
-                                function logout() {
-                                    localStorage.clear();
-                                }
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -122,88 +118,38 @@
         </div>
     </div>
     <div class="card-container">
-        <div class="status-card">
-            <textarea placeholder="What's on your mind?" id="postBody"
-                style="height: 15vh;margin-bottom: 1vh;"></textarea>
-            <!-- <span>What's on your mind?</span> -->
-            <div class="status-card-lower">
-                <!-- <div>
-                    <img src="/src/images/photo-upload.svg" alt="">
-                    <img src="/src/images/video-upload.svg" alt="">
-                    <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                </div> -->
-                <!-- <button>Post</button> -->
 
-                <!-- <div>
-                        <img src="/src/images/photo-upload.svg" alt="">
-                        <img src="/src/images/video-upload.svg" alt="">
-                        <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                    </div> -->
-                <!-- <button>Post</button> -->
-                <!-- modal for post button-->
-                <!-- Button trigger modal -->
-                <button type="button" onclick="postButton()">
-                    Post
-                </button>
-
-                <!-- Modal -->
-
-
+        <form id="bioForm">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Profile Tag-Line</label>
+              <input  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
             </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Bio</label>
+                <input  class="form-control" >
+              </div>
+            <div class="col-auto">
+              <label for="exampleInputPassword1" class="form-label">Profession</label>
+              <input  class="form-control" id="work">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Place</label>
+                <input  class="form-control" >
+              </div>
+             
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Education</label>
+                <input  class="form-control" id="exampleInputPassword1" id="education">
+              </div>
+            <div class="mb-3 form-check">
+              <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+              <!-- <label class="form-check-label" for="exampleCheck1">I agree</label> -->
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
 
-        </div>
-        <div class="feed-card">
-            <div class="feed-card-top">
-                <div class="feed-card-top-left">
-                    <img class="feed-profile-pic" src="/src/images/default-profile-picture.jpg" alt="">
-                    <div class="feed-card-top-left-1">
-                        <span>Siddharth Singh</span>
-                        <p>2 Days Ago</p>
-                    </div>
-                    <img class="feed-verified" src="/src/images/verified.svg" alt="">
-                </div>
-                <div class="feed-card-top-right">
-                    <img src="/src/images/z-score.svg" alt="">
-                    <span>1710</span>
-                    <img src="/src/images/z-heat.svg" alt="">
-                    <span>0.8</span>
-                </div>
-            </div>
-            <a class="feed-post-link" href="">
-                <div class="feed-card-mid">
-                    <p class="feed-post-text">
-                        Idea would do good after merger with Vodafone. Idea would sell their tower businesses and
-                        acquire more percentage of the final entity, Kumar Managlam Birla would serve as the
-                        Chairman. Idea would do good after merger with Vodafone. Idea would sell their tower
-                        businesses and acquire more percentage of the final entity.
-                    </p>
-                    <img class="feed-post-img" src="https://images.indianexpress.com/2020/06/JM25Airport03.jpg?w=759"
-                        alt="">
-                </div>
-            </a>
-            <div class="feed-card-bottom">
-                <div class="upanddown">
-                    <div class="upvote">
-                        <img src="/src/images/upvote.svg" alt="">
-                        <span>7.1k</span>
-                    </div>
-                    <div class="downvote">
-                        <img src="/src/images/downvote.svg" alt="">
-                        <span>2.0k</span>
-                    </div>
-                </div>
-                <div class="comments">
-                    <img src="/src/images/comments.svg" alt="">
-                    <span>292 Comments</span>
-                </div>
-            </div>
-            <div class="feed-card-comments">
-                <img src="/src/images/default-profile-picture.jpg" alt="">
-                <input type="text" placeholder="Write a comment..">
-                <img class="comment-post" src="/src/images/send.svg" alt="">
-            </div>
-        </div>
-
+        
     </div>
     </div>
     <div class="trending">
@@ -233,7 +179,7 @@
             </div>
         </div>
     </div>
-    <script src="/src/scripts/user-feed.js"></script>
+    <script src="/src/scripts/edit-bio.js"></script>
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;
