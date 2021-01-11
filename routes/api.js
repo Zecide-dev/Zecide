@@ -4,6 +4,7 @@ const path = require('path');
 const fetch = require("node-fetch");
 const { url } = require('inspector');
 var Cosmic = require('cosmicjs');
+// const { userBio } = require('../src/scripts/user-feed')
 var api = Cosmic();
 var bucket = api.bucket({
     slug:'zecide-blogs',
@@ -13,6 +14,10 @@ var bucket = api.bucket({
 router.get('/',function(req,res){
     res.sendFile(path.join(__dirname, "../public/index.html"))
 })
+router.get('/user-profile',function(req,res){
+    
+    res.render('user-profile')
+})
 
 router.get('/users/login',function(req,res){
     res.sendFile(path.join(__dirname, "../public/login.html"))
@@ -20,6 +25,9 @@ router.get('/users/login',function(req,res){
 
 router.get('/posts/:pageid',function(req,res){
     res.sendFile(path.join(__dirname, "../public/feed.html"))
+})
+router.get('/edit-bio',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/edit-bio.html"))
 })
 
 router.get('/users/current',function(req,res){

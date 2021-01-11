@@ -1,12 +1,14 @@
 const myHeaders = new Headers();
 
 // var token = getCookie('token');
-var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6InF3ZXJ0eUBtbmJ2YyIsImlkIjoiNWU5OTU3YzI4ZDdkNjA1NzE1ODg2Mjk1IiwiZXhwIjozMTcxMjU1OTgwNzIsImlhdCI6MTU5MDMyNTUwOH0.3xtOT9SbnAdf1Q3letgZb5g7m3NFlTYc-KvhmKcUPyM";
+// 
+var token = localStorage.getItem("jwttoken");
+
 myHeaders.append('authorization', 'Token ' + token);
 
 function fetchPostData(){
     var dataset;
-    fetch('http://localhost:8000/Posts/0',{
+    fetch('https://ec2-13-233-183-42.ap-south-1.compute.amazonaws.com:8010/Posts/0',{
       method: 'get',
       headers: myHeaders,
   })
