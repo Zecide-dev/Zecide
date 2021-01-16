@@ -4,22 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zecide - Feed</title>
+    <title>Zecide - My Profile</title>
     <link rel="icon" href="/src/images/logo.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/styles/profile.css">
     <link rel="stylesheet" href="/src/styles/feed.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-    </script>
-
 
 </head>
 
 <body>
-
+<!-- <h2><%= idToOpen.idToOpen %></h2> -->
 
 
 
@@ -57,14 +55,9 @@
                         </button>
                         <div class="dropdown-content">
                             <ul>
-                                <li><a href="/logout" onclick="logout()"> <span>Logout</span> </a></li>
+                                <li><a href="/logout"> <span>Logout</span> </a></li>
                                 <li><a href="#"> <span>Settings</span> </a></li>
                             </ul>
-                            <script>
-                                function logout() {
-                                    localStorage.clear();
-                                }
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -114,107 +107,104 @@
                     <span>Profile</span>
                 </div>
             </a>
-            <a href="/help-support">
-                <div class="nav-item nav-help">
-                    <img src="/src/images/help.svg" alt="">
-                    <span>Help & Support</span>
-                </div>
-            </a>
-            <a href="/about-us">
-                <div class="nav-item nav-about-us">
-                    <img src="/src/images/about.svg" alt="">
-                    <span>About Us</span>
-                </div>
-            </a>
+            <div class="nav-item nav-help">
+                <img src="/src/images/help.svg" alt="">
+                <span>Help & Support</span>
+            </div>
+            <div class="nav-item nav-about-us">
+                <img src="/src/images/about.svg" alt="">
+                <span>About Us</span>
+            </div>
         </div>
     </div>
-    <div id='infinite-list'></div>
     <div class="card-container">
-        <div class="status-card">
-            <textarea placeholder="What's on your mind?" id="postBody"
-                style="height: 15vh;margin-bottom: 1vh;"></textarea>
-            <!-- <span>What's on your mind?</span> -->
-            <div class="status-card-lower">
-                <!-- <div>
-                    <img src="/src/images/photo-upload.svg" alt="">
-                    <img src="/src/images/video-upload.svg" alt="">
-                    <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                </div> -->
-                <!-- <button>Post</button> -->
 
-                <!-- <div>
-                        <img src="/src/images/photo-upload.svg" alt="">
-                        <img src="/src/images/video-upload.svg" alt="">
-                        <img class="file-upload" src="/src/images/file-upload.svg" alt="">
+        <div class="profile-card">
+            <div class="profile-main-top" style="display: flex;
+            flex-direction: row;
+            justify-content: space-between;">
+                <div class="profile-main-top-left">
+                    <div class="profile-main-top-left-1">
+                        <img class="profile-main-profile-pic" src="/src/images/default-profile-picture.jpg" alt="">
+                        <div>
+                            <div class="name-and-verified">
+                                <h1 id="firstName">Siddharth Singh</h1>
+                                <img class="profile-verified" src="/src/images/verified.svg" alt="">
+                            </div>
+                            <p id="tagLine">Profile Tag-Line</p>
+                            <!-- <div class="z-scores">
+                                <img src="/src/images/z-score.svg" alt="">
+                                <span>1710</span>
+                                <img src="/src/images/z-heat.svg" alt="">
+                                <span>0.8</span>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="profile-main-top-left-2">
+                        <p id="profileBio" class="bio" style="
+                        font-size: 2vw;
+                        line-height: 1.5;
+                        ">Profile Bio</p>
+                    </div>
+                </div>
+                <div class="profile-main-top-right" style="display: flex;
+                flex-direction: column;">
+                    <div class="followers">
+                        <p >Followers</p>
+                        <div class="followers-count">
+                            <p id="followers">0</p>
+                        </div>
+                    </div>
+                    <div class="following">
+                        <p>Following</p>
+                        <div class="followers-count">
+                            <p id="following">0</p>
+                        </div>
+                    </div>
+                    <div class="follow" id="follow">
+                        <p  >Follow</p>
+                    </div>
+                    <div class="followers"  id="unfollow" >
+                        <p>UnFollow </p>
+                        <!-- <i class="fas fa-minus-circle"></i> -->
+
+
+                    </div>
+                    <!-- Example single danger button -->
+                    <!-- <div class="more">
+                        <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            More ..
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="/edit-bio">Edit Bio</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </div> -->
-                <!-- <button>Post</button> -->
-                <!-- modal for post button-->
-                <!-- Button trigger modal -->
-                <button type="button" onclick="postButton()">
-                    Post
-                </button>
-
-                <!-- Modal -->
-
-
+                </div>
             </div>
-
+            <div class="profile-main-bottom">
+                <div class="work">
+                    <img src="/src/images/work.svg" alt="">
+                    <span id="profession">Profession</span>
+                </div>
+                <div class="location">
+                    <img src="/src/images/location.svg" alt="">
+                    <span id="place">Place</span>
+                </div>
+                <div class="education">
+                    <img src="/src/images/education.svg" alt="">
+                    <span id="education">Education</span>
+                </div>
+            </div>
         </div>
-        <!-- <div class="feed-card">
-            <div class="feed-card-top">
-                <div class="feed-card-top-left">
-                    <img class="feed-profile-pic" src="/src/images/default-profile-picture.jpg" alt="">
-                    <div class="feed-card-top-left-1">
-                        <span>Siddharth Singh</span>
-                        <p>2 Days Ago</p>
-                    </div>
-                    <img class="feed-verified" src="/src/images/verified.svg" alt="">
-                </div>
-                <div class="feed-card-top-right">
-                    <img src="/src/images/z-score.svg" alt="">
-                    <span>1710</span>
-                    <img src="/src/images/z-heat.svg" alt="">
-                    <span>0.8</span>
-                </div>
-            </div>
-            <a class="feed-post-link" href="">
-                <div class="feed-card-mid">
-                    <p class="feed-post-text">
-                        Idea would do good after merger with Vodafone. Idea would sell their tower businesses and
-                        acquire more percentage of the final entity, Kumar Managlam Birla would serve as the
-                        Chairman. Idea would do good after merger with Vodafone. Idea would sell their tower
-                        businesses and acquire more percentage of the final entity.
-                    </p>
-                    <img class="feed-post-img" src="https://images.indianexpress.com/2020/06/JM25Airport03.jpg?w=759"
-                        alt="">
-                </div>
-            </a>
-            <div class="feed-card-bottom">
-                <div class="upanddown">
-                    <div class="upvote">
-                        <img src="/src/images/upvote.svg" alt="">
-                        <span>7.1k</span>
-                    </div>
-                    <div class="downvote">
-                        <img src="/src/images/downvote.svg" alt="">
-                        <span>2.0k</span>
-                    </div>
-                </div>
-                <div class="comments">
-                    <img src="/src/images/comments.svg" alt="">
-                    <span>292 Comments</span>
-                </div>
-            </div>
-            <div class="feed-card-comments">
-                <img src="/src/images/default-profile-picture.jpg" alt="">
-                <input type="text" placeholder="Write a comment..">
-                <img class="comment-post" src="/src/images/send.svg" alt="">
-            </div>
-        </div> -->
+
 
     </div>
     </div>
-    <!-- <div class="trending">
+    <div class="trending">
         <div>
             <div class="trending-top">
                 <img src="/src/images/trending.svg" alt="">
@@ -240,9 +230,8 @@
                 </div>
             </div>
         </div>
-    </div> -->
-    <script src="/src/scripts/user-feed.js"></script>
-    
+    </div>
+    <script src="/src/scripts/view-profile.js"></script>
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;

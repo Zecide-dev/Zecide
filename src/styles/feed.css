@@ -1002,5 +1002,9 @@ li{
 ul{
   list-style-type: none;
 }
-
+.new-comments{
+  border-radius: 20px;
+  background-color: whitesmoke;
+  color: #ffffff;
+}
 
