@@ -4,6 +4,7 @@
 
 // const { response } = require("express");
 // const { default: fetch } = require("node-fetch");
+let backendbaseurl = "http://143.110.191.194";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
@@ -46,7 +47,7 @@ let fButton ;
 
 function userBio() {
 
-    fetch('http://localhost:8000/users/'+userToSend, {
+    fetch(backendbaseurl + '/users/'+userToSend, {
         method: 'get',
         headers: myHeaders
     }).then(response => response.json())
@@ -127,7 +128,7 @@ function followFun(){
     unfollow.style.display ='block'
     document.getElementById('followers').innerHTML = followCount + 1;
 
-    fetch('http://localhost:8000/users/Follow/'+userToSend, {
+    fetch(backendbaseurl+'/users/Follow/'+userToSend, {
         method: 'get',
         headers: myHeaders
     }).then((res)=>{
@@ -151,7 +152,7 @@ function unfollowFun(){
     // document.getElementById('followers').innerHTML = userData.userInfo.Followers.length - 1;
 
 
-    fetch('http://localhost:8000/users/UnFollow/'+userToSend, {
+    fetch(backendbaseurl+'/users/UnFollow/'+userToSend, {
         method: 'get',
         headers: myHeaders
     }).then((res)=>{
@@ -171,7 +172,7 @@ var filter = new Object();
 
 function fetchPostData() {
     var dataset;
-    fetch('http://localhost:8000/Posts/0', {
+    fetch(backendbaseurl+'/Posts/0', {
         method: 'get',
         headers: myHeaders
     })
@@ -407,7 +408,7 @@ function useData(d) {
                     receivedComments.style.display = "inline";
                     hide[i] = 0;
                     if (cfetch[i] == 1) {
-                        fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                        fetch(backendbaseurl+'/Posts/' + postid + '/comment', {
                             method: 'get',
                             headers: myHeaders
                         })
@@ -501,7 +502,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                fetch(backendbaseurl+'/Posts/' + postid + '/comment', {
                     method: 'POST',
                     headers: myCommHeaders,
                     body: JSON.stringify(infoObject)
@@ -543,7 +544,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Down', {
+                fetch(backendbaseurl+'/Posts/' + postid + '/Down', {
                     method: 'get',
                     headers: myHeaders
                 })
@@ -569,7 +570,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Up', {
+                fetch(backendbaseurl+'/Posts/' + postid + '/Up', {
                     method: 'get',
                     headers: myHeaders
                 })

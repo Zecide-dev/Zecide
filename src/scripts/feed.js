@@ -8,7 +8,7 @@ myHeaders.append('authorization', 'Token ' + token);
 
 function fetchPostData(){
     var dataset;
-    fetch('http://localhost:8000/Posts/0',{
+    fetch('http://143.110.191.194/Posts/0',{
       method: 'get',
       headers: myHeaders,
   })

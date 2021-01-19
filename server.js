@@ -54,7 +54,7 @@ app.use('/', indexRouter2);
 var schedule = require('node-schedule');
 const { get } = require("./routes/api2");
 function newsCall() {
-    fetch('http://localhost:8000/Insights/Populate', {
+    fetch('http://143.110.191.194/Insights/Populate', {
         method: 'get'
 
     }).catch((err) => {
@@ -80,7 +80,7 @@ passport.use(
         // options for google strategy
         clientID: "823136671916-sf2jadrsssthoppu8lq9bdvo73r9c6en.apps.googleusercontent.com",
         clientSecret: "FuTZATXnlsuliQswDJj1KV-w",
-        callbackURL: 'http://localhost:8080/auth/google/callback'
+        callbackURL: '/auth/google/callback'
     }, (accessToken, refreshToken, profile, done) => {
         // passport callback function
 
@@ -152,7 +152,7 @@ app.post('/login-post', function (req, res) {
 app.get('/user-feed', async (req, res) => {
     if (!(session.userId == 1)) {
         console.log('un success')
-        return res.redirect('http://localhost:8080/users/login')
+        return res.redirect('/users/login')
     }
     else {
 
@@ -171,7 +171,7 @@ app.get('/user-feed', async (req, res) => {
 // })
 app.get('/logout', (req, res) => {
     session.userId = null
-    res.redirect('http://localhost:8080/users/login')
+    res.redirect('/users/login')
 })
 
 

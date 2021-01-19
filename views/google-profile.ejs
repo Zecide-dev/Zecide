@@ -27,6 +27,8 @@
                     </h4>
                 </center>
                 <script>
+                    let backendbaseurl = "http://143.110.191.194";
+
                     var getName = '<%= dname;  %>';
                     console.log(getName)
                     localStorage.setItem('usernam', getName)
@@ -52,7 +54,7 @@
                         // console.log(abd)
 
                         var stat;
-                        fetch("http://localhost:8000/users/login", {
+                        fetch(backendbaseurl + "/users/login", {
                             method: 'POST',
                             body: new URLSearchParams(formData2)
                         }).then((resp) => {
@@ -92,7 +94,7 @@
                             if (stat == 200) {
 
                                 console.log(stat)
-                                fetch('http://localhost:8080/login-post', {
+                                fetch('/login-post', {
                                     method: 'POST',
                                     body: formData
                                 }).then(res => {
@@ -125,7 +127,7 @@
                                         var infoObject = { "UserName": username, "Email": email, "password": password, "registrationToken": registrationtoken };
                                         var info = JSON.stringify(infoObject);
                                         formData1.append("user", info);
-                                        fetch('http://localhost:8000/Users', {
+                                        fetch(backendbaseurl + '/Users', {
                                             method: 'POST',
                                             body: formData1
                                         }).then(function (response) {

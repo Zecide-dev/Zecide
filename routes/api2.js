@@ -4,9 +4,9 @@ const path = require('path');
 const auth = require('./auth');
 // const jwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-global.document = new JSDOM("http://localhost:8080").window.document;
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
+// global.document = new JSDOM("http://localhost:8080").window.document;
 
 
 const fetch = require("node-fetch");
