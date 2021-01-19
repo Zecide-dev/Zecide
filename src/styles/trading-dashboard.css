@@ -199,7 +199,11 @@ a:hover {
 }
 
 .bubble-chart-div {
-  height: 55vh;
+  height: 70vh;
+}
+
+#creating-bubble-chart {
+  padding-top: 30%;
 }
 
 #bubble-chart {

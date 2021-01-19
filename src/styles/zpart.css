@@ -261,7 +261,7 @@ a{
 }
 
 #question-card {
-  min-height: 400px;
+  min-height: 300px;
 }
 
 #mid-content {
@@ -271,16 +271,21 @@ a{
 
 #fetching-data {
   text-align: center;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
-#snippet-div {
+#snippet-div, #snippet-question-div, #snippet-question-result-div, #thank-you-div {
   display: none;
   margin: 20px;
 }
 
-#show-question {
+#show-question, #next-question, #previous-question, #next-snippet {
   float: right;
+  margin: 15px;
+}
+
+#next-snippet {
+  display: none;
 }
 
 .question-card{

@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFYVG2WN9Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CFYVG2WN9Z');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zecide - Z-Part</title>
@@ -124,7 +133,19 @@
           <button type="button" class="btn btn-outline-primary btn-sm" id='show-question'>Next</button>
         </div>
         <div id='snippet-question-div'>
-          
+          <p id='snippet-question-content'></p>
+          <div id='snippet-questions'>
+          </div>
+
+          <button type="button" class="btn btn-outline-primary btn-sm" id='next-snippet'>Next</button>
+          <button type="button" class="btn btn-outline-primary btn-sm" id='next-question'>-></button>
+          <button type="button" class="btn btn-outline-primary btn-sm disabled" id='previous-question'><-</button>
+          <br>
+          <br>
+        </div>
+        <div id='thank-you-div'>
+          <p>Thank you for answering!</p>
+          <a href="/posts/0"><button class="zpart-btn">Go to Feed</button></a>
         </div>
       </div>
     </div>
