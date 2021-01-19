@@ -14,6 +14,9 @@
   <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
     type="text/javascript"></script>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.33.1/plotly.min.js"
+    integrity="sha512-V0j9LhrK9IMNdFYZqh+IqU4cjo7wdxyHNyH+L0td4HryBuZ7Oq6QxP2/CWr6TituX31+gv5PnolvERuTbz8UNA=="
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -290,7 +293,14 @@
         <div class="card">
           <div class="card-body">
             <div class="bubble-chart-div">
-              <div id="bubble-chart"></div>
+              <div id="bubble-chart">
+                <div id='creating-bubble-chart'>
+                  <h4 style="text-align: center;">Creating Chart...</h4>
+                  <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
