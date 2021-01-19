@@ -1,3 +1,5 @@
+let backendbaseurl = "http://143.110.191.194";
+
 const myHeaders = new Headers();
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
@@ -31,7 +33,7 @@ myHeaders.append('authorization', 'Token ' + token);
 var pageNo = 0;
 function fetchPostData() {
     var dataset;
-    fetch('http://localhost:8000/Posts/' + pageNo, {
+    fetch(backendbaseurl + '/Posts/' + pageNo, {
         method: 'get',
         headers: myHeaders
     })
@@ -66,7 +68,7 @@ function postButton() {
     // const data = { message : postBody }
     // var message = JSON.stringify(data)
     // console.log(message);
-    fetch('http://localhost:8000/Posts/create', {
+    fetch(backendbaseurl + '/Posts/create', {
         method: 'POST',
         headers: myHeaders,
         body: formData
@@ -283,7 +285,7 @@ function useData(d) {
                     receivedComments.style.display = "inline";
                     hide[i] = 0;
                     if (cfetch[i] == 1) {
-                        fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                        fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                             method: 'get',
                             headers: myHeaders
                         })
@@ -379,7 +381,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                     method: 'POST',
                     headers: myCommHeaders,
                     body: JSON.stringify(infoObject)
@@ -421,7 +423,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Down', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/Down', {
                     method: 'get',
                     headers: myHeaders
                 })
@@ -447,7 +449,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Up', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/Up', {
                     method: 'get',
                     headers: myHeaders
                 })
@@ -521,7 +523,7 @@ function useData(d) {
                     receivedComments.style.display = "inline";
                     hide[i] = 0;
                     if (cfetch[i] == 1) {
-                        fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                        fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                             method: 'get',
                             headers: myHeaders
                         })
@@ -617,7 +619,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Insights/' + postid + '/comment', {
+                fetch(backendbaseurl + '/Insights/' + postid + '/comment', {
                     method: 'POST',
                     headers: myCommHeaders,
                     body: JSON.stringify(infoObject)
@@ -659,7 +661,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Insights/' + postid + '/DownVote', {
+                fetch(backendbaseurl + '/Insights/' + postid + '/DownVote', {
                     method: 'get',
                     headers: myHeaders
                 })
@@ -685,7 +687,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Insights/' + postid + '/UpVote', {
+                fetch(backendbaseurl + '/Insights/' + postid + '/UpVote', {
                     method: 'get',
                     headers: myHeaders
                 })
