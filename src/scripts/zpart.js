@@ -1,4 +1,7 @@
-let backendBaseURL = 'http://localhost:8000/';
+let backendBaseURL = 'http://143.110.191.194/';
+
+let jwtToken = localStorage.getItem('jwttoken');
+console.log(jwtToken);
 
 const navToggle = () => {
     var e = document.getElementById("burger"),
@@ -106,7 +109,7 @@ function getSnippet() {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 }
 
@@ -167,7 +170,7 @@ function submitAnswer(buttonId, selectedAns) {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6InN4dHlhbSIsImlkIjoiNWZlZjM0M2U2OTU1YjBjNjQ4ZDA5MGFhIiwiZXhwIjozMTcxMjU1OTgwNzIsImlhdCI6MTYwOTUyMjIxNX0.0B422CqU9ov8ZsNke2ijJl8cdlyNUoHmtgr8SQ1z46o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 
   let button = document.getElementById(buttonId);
@@ -197,7 +200,7 @@ showQuestionButton.addEventListener('click', () => {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6InN4dHlhbSIsImlkIjoiNWZlZjM0M2U2OTU1YjBjNjQ4ZDA5MGFhIiwiZXhwIjozMTcxMjU1OTgwNzIsImlhdCI6MTYwOTUyMjIxNX0.0B422CqU9ov8ZsNke2ijJl8cdlyNUoHmtgr8SQ1z46o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
