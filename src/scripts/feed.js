@@ -1,12 +1,14 @@
 const myHeaders = new Headers();
 
 // var token = getCookie('token');
-var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6InF3ZXJ0eUBtbmJ2YyIsImlkIjoiNWU5OTU3YzI4ZDdkNjA1NzE1ODg2Mjk1IiwiZXhwIjozMTcxMjU1OTgwNzIsImlhdCI6MTU5MDMyNTUwOH0.3xtOT9SbnAdf1Q3letgZb5g7m3NFlTYc-KvhmKcUPyM";
+// 
+var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6IjMwMDAxNzU2MzAwIiwiaWQiOiI1ZmVkYTk2NjY0MTMyYTU1Yzk0YmU2MmEiLCJleHAiOjMxNzEyNTU5ODA3MiwiaWF0IjoxNjEwNjQ0MTAwfQ.cJHo-yiIrJGceTAqZJLJfwCpuBMsbLI1wIXBsRwdSdQ'
+
 myHeaders.append('authorization', 'Token ' + token);
 
 function fetchPostData(){
     var dataset;
-    fetch('https://ec2-13-233-183-42.ap-south-1.compute.amazonaws.com:8010/Posts/0',{
+    fetch('http://143.110.191.194/Posts/0',{
       method: 'get',
       headers: myHeaders,
   })
@@ -157,10 +159,10 @@ function useData(d){
             var dateDiff = date2-date1;
             postedOn.innerHTML= timeSince(dateDiff) + " ago";
             feedVerified.setAttribute('src', '/src/images/verified.svg');
-            zScoreImg.setAttribute('src', '/src/images/z-score.svg');
-            zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
-            zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
-            zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
+            // zScoreImg.setAttribute('src', '/src/images/z-score.svg');
+            // zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
+            // zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
+            // zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
             feedCardMid.innerHTML=d[i].Post;
             upvoteImg.setAttribute('src', '/src/images/upvote.svg');
             upvoteCount.innerHTML=d[i].UpVote.length;

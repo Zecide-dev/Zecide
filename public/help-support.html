@@ -2,20 +2,18 @@
 <html lang="en">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFYVG2WN9Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-CFYVG2WN9Z');
-  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zecide - Profile</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+    <title>Zecide - Feed</title>
     <link rel="icon" href="/src/images/logo.svg">
-    <link rel="stylesheet" href="/src/styles/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/styles/feed.css">
+
 </head>
 
 <body>
@@ -52,7 +50,7 @@
                             <ul>
                                 <li><a href="/"> <span>Logout</span> </a></li>
                                 <li><a href="/"> <span>Settings</span> </a></li>
-                        </ul>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -72,29 +70,36 @@
     </div>
     <div class="side-nav">
         <div>
-            <div class="nav-item">
-                <img src="/src/images/feed.svg" alt="">
-                <a href="/posts/0"><span>Feed</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <img src="/src/images/insights.svg" alt="">
-                <a href="/insights"><span>Insights</span></a>
-            </div>
+            <a href="/posts/0">
+                <div class="nav-item nav-item-active">
+                    <img src="/src/images/feed-active.svg" alt="">
+                    <span>Feed</span>
+                </div>
+            </a>
+            <a href="/insights">
+                <div class="nav-item">
+                    <img src="/src/images/insights.svg" alt="">
+                    <span>Insights</span>
+                </div>
+            </a>
             <a href="/z">
                 <div class="nav-item nav-z-part">
                     <img src="/src/images/z-part.svg" alt="">
-                    <a href="/z"><span>Z-Part</span></a>
+                    <span>Z-Part</span>
                 </div>
             </a>
-            <div class="nav-item">
-                <img src="/src/images/tools.svg" alt="">
-                <a href="/tools"><span>Tools</span></a>
-            </div>
-            <div class="nav-item nav-item-active">
-                <img src="/src/images/profile-active.svg" alt="">
-                <span>Profile</span>
-            </div>
+            <a href="/tools">
+                <div class="nav-item">
+                    <img src="/src/images/tools.svg" alt="">
+                    <span>Tools</span>
+                </div>
+            </a>
+            <a href="/users/current">
+                <div class="nav-item">
+                    <img src="/src/images/profile.svg" alt="">
+                    <span>Profile</span>
+                </div>
+            </a>
             <div class="nav-item nav-help">
                 <img src="/src/images/help.svg" alt="">
                 <span>Help & Support</span>
@@ -106,48 +111,36 @@
         </div>
     </div>
     <div class="card-container">
-        <!-- <div class="status-card">
-            <span>What's on your mind?</span>
-            <div class="status-card-lower">
-                <div>
-                    <img src="/src/images/photo-upload.svg" alt="">
-                    <img src="/src/images/video-upload.svg" alt="">
-                    <img src="/src/images/file-upload.svg" alt="">
-                </div>
-                <button>Post</button>
-            </div>
-        </div> -->
-     
-    </div>
-    </div>
-    <div class="trending">
-        <div>
-            <div class="trending-top">
-                <img src="/src/images/trending.svg" alt="">
-                <h2>Trending Topics</h2>
-            </div>
-            <img src="/src/images/trending-line.svg" alt="">
-            <div class="trending-bottom">
-                <div class="trending-topics">
-                    <span>#idea</span>
-                    <span>#vodafone</span>
-                    <span>#india</span>
-                    <span>#covid19</span>
-                    <span>#reliance</span>
-                    <span>#delhi</span>
-                </div>
-                <div class="trending-numbers">
-                    <span>9.7k</span>
-                    <span>7.2k</span>
-                    <span>6.4k</span>
-                    <span>5.3k</span>
-                    <span>3.6k</span>
-                    <span>2.7k</span>
-                </div>
-            </div>
+        <div class="status-card">
+            <center>
+                <h2>For any help or query mail at siddharth@zecide.com</h2>
+                <h3>Or contact us on Ph: 9003711038</h3>
+                <br>
+                <br>
+
+                <!-- <img src="../src/images/footer-art.svg" alt="" srcset="" /> -->
+
+                <h4>Office</h4>
+                <p>
+                LGF, 416, Sector 45 <br />
+                Gurgaon, Haryana <br />
+                </p>
+            </center>
+
+
         </div>
+        <!-- <div class="copyright">© 2020 Zecide</div> -->
+
+
+
+
+
     </div>
-    <script src="/src/scripts/profile.js"></script>
+
+    </div>
+    </div>
+
+    <script src="/src/scripts/feed.js"></script>
 </body>
 
 </html>

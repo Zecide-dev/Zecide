@@ -107,7 +107,9 @@ a {
   padding-right: 3.2vw;
   padding-bottom: 1.7vh;
 }
-
+li{
+  vertical-align: middle;
+}
 
 .search {
   display: flex;
@@ -260,7 +262,7 @@ a {
   border-radius: 12px;
   padding: 30px 50px;
   color: #aeaeae;
-  height: 15vh;
+  /* height: 15vh; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -268,12 +270,12 @@ a {
 }
 
 .status-card textarea {
-  font-size: 1vw;
-  height: 10vh;
-  margin-bottom: 1vh;
+  /* font-size: 1vw; */
+  /* height: 100vh; */
+  /* margin-bottom: 1vh; */
   border: none;
-  font-family: "Quicksand";
-  outline: none;
+  /* font-family: "Quicksand"; */
+  /* outline: none; */
 }
 
 .status-card-lower {
@@ -287,7 +289,7 @@ a {
 }
 
 .status-card-lower button {
-  height: 4vh;
+  /* height: 4vh; */
   background-color: #3b98ff;
   color: #ffffff;
   font-family: "Quicksand";
@@ -744,8 +746,8 @@ a {
     border-radius: 12px;
     padding: 30px 25px;
     color: #aeaeae;
-    height: 15vh;
-    width: 75vw;
+    /* height: 15vh; */
+    /* width: 75vw; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -753,9 +755,9 @@ a {
     margin-bottom: 20px;
   }
 
-  .status-card textarea {
+  .status-card  {
     font-size: 3.5vw;
-    height: 10vh;
+    height: 15vh;
     margin-bottom: 1vh;
     border: none;
     font-family: "Quicksand";
@@ -769,7 +771,7 @@ a {
   }
 
   .status-card-lower img {
-    width: 4.5vw;
+    /* width: 4.5vw; */
     padding-right: 10px;
     cursor: pointer;
   }
@@ -779,7 +781,7 @@ a {
   }
 
   .status-card-lower button {
-    height: 3.5vh;
+    /* height: 3.5vh; */
     background-color: #3b98ff;
     color: #ffffff;
     font-family: "Quicksand";
@@ -935,6 +937,8 @@ a {
   }
 
   .feed-card-comments input {
+    display: flex;
+    flex-direction: row;
     width: 50vw;
     border: none;
     border-bottom: 1px solid #e4e4e4;
@@ -994,3 +998,13 @@ a {
     margin-bottom: 2vh;
   }
 }
+
+ul{
+  list-style-type: none;
+}
+.new-comments{
+  border-radius: 20px;
+  background-color: whitesmoke;
+  color: #ffffff;
+}
+

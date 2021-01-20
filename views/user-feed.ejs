@@ -2,18 +2,8 @@
 <html lang="en">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFYVG2WN9Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-CFYVG2WN9Z');
-  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
     <title>Zecide - Feed</title>
     <link rel="icon" href="/src/images/logo.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -22,10 +12,20 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/src/styles/feed.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+
 
 </head>
 
 <body>
+
+
+
+
+
+
+
     <div class="upper-nav">
         <div>
             <div class="logo">
@@ -49,7 +49,7 @@
                 <div class="profile-dropdown">
 
                     <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
-                    <span id="user-name">Siddharth</span>
+                    <span id="usern">abc</span>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <img class="burger dropdown-img" id="burger" src="/src/images/dropdown-button.svg"
@@ -57,9 +57,14 @@
                         </button>
                         <div class="dropdown-content">
                             <ul>
-                                <li><a href="/"> <span>Logout</span> </a></li>
-                                <li><a href="/"> <span>Settings</span> </a></li>
+                                <li><a href="/logout" onclick="logout()"> <span>Logout</span> </a></li>
+                                <li><a href="#"> <span>Settings</span> </a></li>
                             </ul>
+                            <script>
+                                function logout() {
+                                    localStorage.clear();
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -79,7 +84,7 @@
     </div>
     <div class="side-nav">
         <div>
-            <a href="/posts/0">
+            <a href="/user-feed">
                 <div class="nav-item nav-item-active">
                     <img src="/src/images/feed-active.svg" alt="">
                     <span>Feed</span>
@@ -103,25 +108,31 @@
                     <span>Tools</span>
                 </div>
             </a>
-            <a href="/users/current">
+            <a href="/user-profile">
                 <div class="nav-item">
                     <img src="/src/images/profile.svg" alt="">
                     <span>Profile</span>
                 </div>
             </a>
-            <div class="nav-item nav-help">
-                <img src="/src/images/help.svg" alt="">
-                <span>Help & Support</span>
-            </div>
-            <div class="nav-item nav-about-us">
-                <img src="/src/images/about.svg" alt="">
-                <span>About Us</span>
-            </div>
+            <a href="/help-support">
+                <div class="nav-item nav-help">
+                    <img src="/src/images/help.svg" alt="">
+                    <span>Help & Support</span>
+                </div>
+            </a>
+            <a href="/about-us">
+                <div class="nav-item nav-about-us">
+                    <img src="/src/images/about.svg" alt="">
+                    <span>About Us</span>
+                </div>
+            </a>
         </div>
     </div>
+    <div id='infinite-list'></div>
     <div class="card-container">
         <div class="status-card">
-            <textarea name="" id="" cols="30" rows="10" placeholder="What's on your mind?" style="height: 15vh;margin-bottom: 1vh;"></textarea>
+            <textarea placeholder="What's on your mind?" id="postBody"
+                style="height: 15vh;margin-bottom: 1vh;"></textarea>
             <!-- <span>What's on your mind?</span> -->
             <div class="status-card-lower">
                 <!-- <div>
@@ -139,7 +150,7 @@
                 <!-- <button>Post</button> -->
                 <!-- modal for post button-->
                 <!-- Button trigger modal -->
-                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" onclick="postButton()">
                     Post
                 </button>
 
@@ -147,24 +158,9 @@
 
 
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">You must be logged in to Post</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
 
-                        <div class="modal-footer">
-                            <a class="btn btn-primary active" href="/users/login" role="button">LogIn</a>
-                            <a href="/users"><button type="button" class="btn btn-outline-primary">SignUp</button></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="feed-card">
+        <!-- <div class="feed-card">
             <div class="feed-card-top">
                 <div class="feed-card-top-left">
                     <img class="feed-profile-pic" src="/src/images/default-profile-picture.jpg" alt="">
@@ -214,11 +210,11 @@
                 <input type="text" placeholder="Write a comment..">
                 <img class="comment-post" src="/src/images/send.svg" alt="">
             </div>
-        </div>
+        </div> -->
 
     </div>
     </div>
-    <div class="trending">
+    <!-- <div class="trending">
         <div>
             <div class="trending-top">
                 <img src="/src/images/trending.svg" alt="">
@@ -244,8 +240,33 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script src="/src/scripts/feed.js"></script>
+    </div> -->
+    <script src="/src/scripts/user-feed.js"></script>
+    
+    <script>
+        function setCookie(cname, cvalue) {
+            document.cookie = cname + "=" + cvalue;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        var userna = getCookie('token');
+        document.getElementById('usern').innerHTML = localStorage.getItem('usernam');
+
+    </script>
 </body>
 
 </html>

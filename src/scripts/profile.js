@@ -4,7 +4,7 @@ myHeaders.append('authorization', 'Token ' + token);
 
 function fetchPostData(){
     var dataset;
-    fetch('http://ec2-15-206-1-218.ap-south-1.compute.amazonaws.com:8000/posts/0',{
+    fetch('http://localhost:8000/posts/0',{
       method: 'get',
       headers: myHeaders,
   })
@@ -143,10 +143,10 @@ function useData(d){
             var dateDiff = date2-date1;
             postedOn.innerHTML= timeSince(dateDiff) + " ago";
             profileVerified.setAttribute('src', '/src/images/verified.svg');
-            zScoreImg.setAttribute('src', '/src/images/z-score.svg');
-            zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
-            zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
-            zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
+            // zScoreImg.setAttribute('src', '/src/images/z-score.svg');
+            // zScore.innerHTML=d[i].Author.WeightNum.toPrecision(3);
+            // zHeatImg.setAttribute('src', '/src/images/z-heat.svg');
+            // zHeat.innerHTML=d[i].Author.Weightage.toPrecision(3);
             profileCardMid.innerHTML=d[i].Post;
             upvoteImg.setAttribute('src', '/src/images/upvote.svg');
             upvoteCount.innerHTML=d[i].UpVote.length;

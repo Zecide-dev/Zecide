@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zecide - My Profile</title>
+    <link rel="icon" href="/src/images/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/styles/profile.css">
+    <link rel="stylesheet" href="/src/styles/feed.css">
+
+</head>
+
+<body>
+   
+    
+    
+
+
+
+
+    <div class="upper-nav">
+        <div>
+            <div class="logo">
+                <img src="/src/images/logo.svg" alt="">
+                <span>Zecide</span>
+            </div>
+            <div class="upper-right">
+                <div class="upper-nav-1">
+                    <div class="search">
+                        <input placeholder="Search.." style="border: none;" />
+                        <img src="/src/images/search.svg" />
+                    </div>
+
+                    <button class="download-btn">App Coming Soon!</button>
+                </div>
+
+
+                <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+
+
+                <div class="profile-dropdown">
+
+                    <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
+                    <span id="usern">abc</span>
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            <img class="burger dropdown-img" id="burger" src="/src/images/dropdown-button.svg"
+                                alt="burger" />
+                        </button>
+                        <div class="dropdown-content">
+                            <ul>
+                                <li><a href="/logout"> <span>Logout</span> </a></li>
+                                <li><a href="#"> <span>Settings</span> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- <div class="profile-dropdown">
+            <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
+            <span>Siddharth</span>
+            <img class="dropdown-btn" src="/src/images/dropdown-button.svg" alt="">
+        </div> -->
+        </div>
+
+    </div>
+    <div class="side-nav">
+        <div>
+            <a href="/user-feed">
+                <div class="nav-item nav-item-active">
+                    <img src="/src/images/feed-active.svg" alt="">
+                    <span>Feed</span>
+                </div>
+            </a>
+            <a href="/insights">
+                <div class="nav-item">
+                    <img src="/src/images/insights.svg" alt="">
+                    <span>Insights</span>
+                </div>
+            </a>
+            <a href="/z">
+                <div class="nav-item nav-z-part">
+                    <img src="/src/images/z-part.svg" alt="">
+                    <span>Z-Part</span>
+                </div>
+            </a>
+            <a href="/tools">
+                <div class="nav-item">
+                    <img src="/src/images/tools.svg" alt="">
+                    <span>Tools</span>
+                </div>
+            </a>
+            <a href="/user-profile">
+                <div class="nav-item">
+                    <img src="/src/images/profile.svg" alt="">
+                    <span>Profile</span>
+                </div>
+            </a>
+            <div class="nav-item nav-help">
+                <img src="/src/images/help.svg" alt="">
+                <span>Help & Support</span>
+            </div>
+            <div class="nav-item nav-about-us">
+                <img src="/src/images/about.svg" alt="">
+                <span>About Us</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-container">
+
+        <form id="bioForm">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Profile Tag-Line</label>
+              <input  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Bio</label>
+                <input  class="form-control" >
+              </div>
+            <div class="col-auto">
+              <label for="exampleInputPassword1" class="form-label">Profession</label>
+              <input  class="form-control" id="work">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Place</label>
+                <input  class="form-control" >
+              </div>
+             
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Education</label>
+                <input  class="form-control" id="exampleInputPassword1" id="education">
+              </div>
+            <div class="mb-3 form-check">
+              <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+              <!-- <label class="form-check-label" for="exampleCheck1">I agree</label> -->
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+        
+    </div>
+    </div>
+    <div class="trending">
+        <div>
+            <div class="trending-top">
+                <img src="/src/images/trending.svg" alt="">
+                <h2>Trending Topics</h2>
+            </div>
+            <img src="/src/images/trending-line.svg" alt="">
+            <div class="trending-bottom">
+                <div class="trending-topics">
+                    <span>#idea</span>
+                    <span>#vodafone</span>
+                    <span>#india</span>
+                    <span>#covid19</span>
+                    <span>#reliance</span>
+                    <span>#delhi</span>
+                </div>
+                <div class="trending-numbers">
+                    <span>9.7k</span>
+                    <span>7.2k</span>
+                    <span>6.4k</span>
+                    <span>5.3k</span>
+                    <span>3.6k</span>
+                    <span>2.7k</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/src/scripts/edit-bio.js"></script>
+    <script>
+        function setCookie(cname, cvalue) {
+            document.cookie = cname + "=" + cvalue;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        var userna = getCookie('token');
+        document.getElementById('usern').innerHTML = localStorage.getItem('usernam');
+
+    </script>
+</body>
+
+</html>

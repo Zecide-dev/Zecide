@@ -4,6 +4,8 @@ const path = require('path');
 const fetch = require("node-fetch");
 const { url } = require('inspector');
 var Cosmic = require('cosmicjs');
+const { route } = require('./api2');
+// const { userBio } = require('../src/scripts/user-feed')
 var api = Cosmic();
 var bucket = api.bucket({
     slug:'zecide-blogs',
@@ -13,6 +15,16 @@ var bucket = api.bucket({
 router.get('/',function(req,res){
     res.sendFile(path.join(__dirname, "../public/index.html"))
 })
+router.get('/user-profile',function(req,res){
+    
+    res.render('user-profile')
+})
+router.get('/view-profile/:openId',function(req,res){
+    var idToOpen = {idToOpen:req.params.openId}
+    console.log(idToOpen)
+    
+    res.render('view-profile',idToOpen)
+})
 
 router.get('/users/login',function(req,res){
     res.sendFile(path.join(__dirname, "../public/login.html"))
@@ -21,11 +33,29 @@ router.get('/users/login',function(req,res){
 router.get('/posts/:pageid',function(req,res){
     res.sendFile(path.join(__dirname, "../public/feed.html"))
 })
+router.get('/edit-bio',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/edit-bio.html"))
+})
 
 router.get('/users/current',function(req,res){
     res.sendFile(path.join(__dirname, "../public/profile.html"))
 })
+router.get('/terms-conditions',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/terms-conditions.html"))
+})
+router.get('/privacy-policy',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/privacy-policy.html"))
+})
+router.get('/about-us',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/about-us.html"))
+})
+router.get('/help-support',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/help-support.html"))
+})
+// router.get('/abc',(req,res)=>{
+//     res.render('google-profile');
 
+// })
 router.get('/Insights',function(req,res){
     res.sendFile(path.join(__dirname, "../public/insights.html"))
 })
