@@ -1,4 +1,4 @@
-let backendBaseURL = 'http://143.110.191.194/';
+let backendBaseURL = 'https://www.backend.zecide.com/';
 
 let jwtToken = localStorage.getItem('jwttoken');
 
