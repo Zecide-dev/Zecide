@@ -124,6 +124,10 @@ a {
   color: #000000;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .upper-nav>div {
   position: fixed;
 }
@@ -260,6 +264,14 @@ a {
 .cards {
   margin-top: 15vw;
   margin-left: 11vw;
+}
+
+#coming-soon-card {
+  font-size: 0.8rem;
+}
+
+#coming-soon-insights {
+  font-size: 0.7rem;
 }
 
 .dropbtn {
