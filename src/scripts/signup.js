@@ -1,4 +1,5 @@
 const form = document.getElementById('signUpForm');
+let backendbaseurl ="https://www.backend.zecide.com"
 
 function setCookie(cname, cvalue) {
     document.cookie = cname + "=" + cvalue;

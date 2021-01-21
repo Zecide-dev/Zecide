@@ -1,4 +1,4 @@
-let backendbaseurl = "http://143.110.191.194";
+let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
@@ -16,7 +16,7 @@ myHeaders.append('authorization', 'Token ' + token);
 // var userInfo;
 
 // function userBio() {
-   
+
 //     fetch('http://localhost:8000/users/current', {
 //         method: 'get',
 //         headers: myHeaders
@@ -25,9 +25,9 @@ myHeaders.append('authorization', 'Token ' + token);
 //     }
 //     )
 //     return userInfo;
-        
 
-    
+
+
 // }
 // userBio();
 var pageNo = 0;
@@ -43,15 +43,15 @@ function fetchPostData() {
 
 fetchPostData();
 
-$(window).on("scroll", function() {
+$(window).on("scroll", function () {
     var scrollHeight = $(document).height();
     var scrollPos = $(window).height() + $(window).scrollTop();
     if ((scrollHeight - scrollPos) / scrollHeight == 0) {
-      pageNo = pageNo + 1;
-      console.log("bottom!");
-      fetchPostData();
+        pageNo = pageNo + 1;
+        console.log("bottom!");
+        fetchPostData();
     }
-  });
+});
 // console.log(postBody)
 
 function postButton() {
@@ -365,6 +365,13 @@ function useData(d) {
                 console.log(commentText);
                 // var formData = new FormData();
                 commentInput[i].value = ' ';
+                d[i].comments.length = d[i].comments.length + 1;
+
+                // data[i].UpVote.length = data[i].UpVote.length + 1;
+                let commcount = d[i].comments.length;
+                // upvoteCount[i].innerHTML = upcount;
+                commentsCount[i].innerHTML = (commcount) + " comments";
+
 
                 // var stat;
                 let infoObject = { "comment": commentText };
@@ -388,7 +395,6 @@ function useData(d) {
                 })
                     .then(response => response.json())
                     .then(() => {
-                        // commentsCount[i].innerHTML = (commentCounter ) + " comments";
 
                         var test = document.createElement('section');
                         test.setAttribute('id', 'test');
@@ -599,6 +605,7 @@ function useData(d) {
                 // data[i].DownVote.length = data[i].DownVote.length + 1;
                 // let downcount = data[i].DownVote.length;
                 // downvoteCount[i].innerHTML = downcount;
+
                 let commentText = commentInput[i].value;
                 console.log(commentText);
                 // var formData = new FormData();
@@ -611,6 +618,11 @@ function useData(d) {
                 myCommHeaders = new Headers()
                 myCommHeaders.append('authorization', 'Token ' + token);
                 myCommHeaders.append('Content-Type', 'application/json');
+                // data[i].UpVote.length = data[i].UpVote.length + 1;
+                // let commcount = data[i].UpVote.length;
+                // // upvoteCount[i].innerHTML = upcount;
+                // commentsCount[i].innerHTML = (commcount) + " comments";
+
 
 
 
@@ -626,7 +638,6 @@ function useData(d) {
                 })
                     .then(response => response.json())
                     .then(() => {
-                        // commentsCount[i].innerHTML = (commentCounter ) + " comments";
 
                         var test = document.createElement('section');
                         test.setAttribute('id', 'test');
@@ -640,6 +651,7 @@ function useData(d) {
                         li.className = 'list-group-item list-group-item-secondary';
                         ul.appendChild(li);
                         li.innerHTML = li.innerHTML + commentText;
+
 
 
 

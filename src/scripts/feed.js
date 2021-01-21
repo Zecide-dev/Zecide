@@ -1,22 +1,37 @@
 const myHeaders = new Headers();
-
+let backendbaseurl = "https://www.backend.zecide.com";
+var script = document.createElement('script');
+script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+script.type = 'text/javascript';
+document.getElementsByTagName('head')[0].appendChild(script);
 // var token = getCookie('token');
 // 
 var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6IjMwMDAxNzU2MzAwIiwiaWQiOiI1ZmVkYTk2NjY0MTMyYTU1Yzk0YmU2MmEiLCJleHAiOjMxNzEyNTU5ODA3MiwiaWF0IjoxNjEwNjQ0MTAwfQ.cJHo-yiIrJGceTAqZJLJfwCpuBMsbLI1wIXBsRwdSdQ'
 
 myHeaders.append('authorization', 'Token ' + token);
 
-function fetchPostData(){
+var pageNo = 0;
+function fetchPostData() {
     var dataset;
-    fetch('http://143.110.191.194/Posts/0',{
-      method: 'get',
-      headers: myHeaders,
-  })
-    .then(response => response.json())
-    .then(data => useData(data))
+    fetch(backendbaseurl + '/Posts/' + pageNo, {
+        method: 'get',
+        headers: myHeaders
+    })
+        .then(response => response.json())
+        .then(data => useData(data))
 }
 
 fetchPostData();
+
+$(window).on("scroll", function () {
+    var scrollHeight = $(document).height();
+    var scrollPos = $(window).height() + $(window).scrollTop();
+    if ((scrollHeight - scrollPos) / scrollHeight == 0) {
+        pageNo = pageNo + 1;
+        console.log("bottom!");
+        fetchPostData();
+    }
+});
 var data;
 var cardContainer = document.querySelector('.card-container');
 

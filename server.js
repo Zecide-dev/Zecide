@@ -54,7 +54,7 @@ app.use('/', indexRouter2);
 var schedule = require('node-schedule');
 const { get } = require("./routes/api2");
 function newsCall() {
-    fetch('http://143.110.191.194/Insights/Populate', {
+    fetch('https://www.backend.zecide.com/Insights/Populate', {
         method: 'get'
 
     }).catch((err) => {

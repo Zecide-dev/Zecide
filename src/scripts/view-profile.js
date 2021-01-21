@@ -4,7 +4,7 @@
 
 // const { response } = require("express");
 // const { default: fetch } = require("node-fetch");
-let backendbaseurl = "http://143.110.191.194";
+let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
