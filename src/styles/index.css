@@ -1507,7 +1507,7 @@ body::-webkit-scrollbar-thumb
     flex-direction: column;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(14, 1fr);
-    margin-top: 370px;
+    margin-top: 70px;
   }
 
   .bottom button {
@@ -1771,9 +1771,9 @@ body::-webkit-scrollbar-thumb
   .image-top img {
     margin-top: 13vh;
   }
-  .bottom {
+  /* .bottom {
     height: 100vh !important;
-  }
+  } */
 
   .bottom-content {
     margin-top: 5vh;
