@@ -1,5 +1,5 @@
 // const { load } = require("dotenv/types");
-let backendbaseurl = "http://143.110.191.194";
+let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
