@@ -3,6 +3,7 @@
 // const { response } = require("express");
 // const { default: fetch } = require("node-fetch");
 
+let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
@@ -37,7 +38,7 @@ myHeaders.append('authorization', 'Token ' + token);
 
 function userBio() {
 
-    fetch('http://localhost:8000/users/current', {
+    fetch(backendbaseurl + '/users/current', {
         method: 'get',
         headers: myHeaders
     }).then(response => response.json())
@@ -67,7 +68,7 @@ var filter = new Object();
 
 function fetchPostData() {
     var dataset;
-    fetch('http://localhost:8000/Posts/0', {
+    fetch(backendbaseurl + '/Posts/0', {
         method: 'get',
         headers: myHeaders
     })
@@ -281,7 +282,7 @@ function useData(d) {
                 if (window.confirm("You will delete this post")) {
                     // window.open("exit.html", "Thanks for Visiting!");
                   
-                fetch('http://localhost:8000/Posts/' + postid + '/delete',{
+                fetch(backendbaseurl + '/Posts/' + postid + '/delete',{
                     method:'delete',
                     headers:myHeaders
                 }).then(response=>response.json)
@@ -303,7 +304,7 @@ function useData(d) {
                     receivedComments.style.display = "inline";
                     hide[i] = 0;
                     if (cfetch[i] == 1) {
-                        fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                        fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                             method: 'get',
                             headers: myHeaders
                         })
@@ -397,7 +398,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                     method: 'POST',
                     headers: myCommHeaders,
                     body: JSON.stringify(infoObject)
@@ -439,7 +440,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Down', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/Down', {
                     method: 'get',
                     headers: myHeaders
                 })
@@ -465,7 +466,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Up', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/Up', {
                     method: 'get',
                     headers: myHeaders
                 })

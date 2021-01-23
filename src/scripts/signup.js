@@ -1,4 +1,5 @@
 const form = document.getElementById('signUpForm');
+let backendbaseurl ="https://www.backend.zecide.com"
 
 function setCookie(cname, cvalue) {
     document.cookie = cname + "=" + cvalue;
@@ -35,7 +36,7 @@ form.addEventListener('submit', function (e) {
     var infoObject = { "UserName": username, "Email": email, "password": password , "registrationToken" : registrationtoken};
     var info = JSON.stringify(infoObject);
     formData.append("user", info);
-    fetch('http://localhost:8000/Users', {
+    fetch(backendbaseurl + '/Users', {
         method: 'POST',
         body: formData
     }).then(function (response) {

@@ -3,6 +3,7 @@ const express = require("express");
 //set up express app
 const app = express();
 
+
 //redirect http to https
 const secure = require("ssl-express-www");
 const session = require('express-session')
@@ -17,7 +18,8 @@ const bodyParser = require('body-parser');
 
 //initialize routes
 const routes = require('./routes/api');
-const routes2 = require('./routes/api2')
+const routes2 = require('./routes/api2');
+const routes3 = require('./routes/getDatafeed');
 
 const jwt = require('jsonwebtoken');
 const fetch = require("node-fetch");
@@ -29,14 +31,41 @@ var logger = require('morgan');
 var path = require('path');
 var indexRouter = require('./routes/api');
 var indexRouter2 = require('./routes/api2');
+var indexRouter3 = require('./routes/getDatafeed');
 const { response } = require("express");
+const passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+const cookieSession = require('cookie-session');
+require('./passport');
+app.use(cookieSession({
+    name: 'session-name',
+    keys: ['key1', 'key2']
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/', indexRouter2);
+app.use('/', indexRouter3);
+var schedule = require('node-schedule');
+const { get } = require("./routes/api2");
+function newsCall() {
+    fetch('https://www.backend.zecide.com/Insights/Populate', {
+        method: 'get'
 
+    }).catch((err) => {
+        console.log(err)
+    })
+
+}
+setInterval(newsCall, 3600000);
 
 
 app.use(session({
@@ -45,6 +74,76 @@ app.use(session({
     secret: '24knb6k247b2k7b2k7bk247hb2kh7b2',
 }))
 
+
+
+// passport auth
+
+passport.use(
+    new GoogleStrategy({
+        // options for google strategy
+        clientID: "823136671916-sf2jadrsssthoppu8lq9bdvo73r9c6en.apps.googleusercontent.com",
+        clientSecret: "FuTZATXnlsuliQswDJj1KV-w",
+        callbackURL: '/auth/google/callback'
+    }, (accessToken, refreshToken, profile, done) => {
+        // passport callback function
+
+        // User.findOne({googleId:profile.id})
+
+        console.log('passport callback function fired:');
+        console.log(profile);
+        userProfile = profile;
+        return done(null,userProfile)
+    })
+);
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+var googleData;
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+    function (req, res) {
+        // session.userId = 1;
+        // console.log(req.user)
+        googleData = req.user;
+        res.redirect('/google-profile');
+    }
+);
+
+app.get('/failed', (req, res) => {
+    res.send('<h1>Log in Failed :(</h1>')
+});
+
+const checkUserLoggedIn = (req, res, next) => {
+    req.user ? next() : res.sendStatus(401);
+}
+app.get('/google-profile', checkUserLoggedIn, (req, res) => {
+
+
+    // res.send(req.user);
+    // // res.json(req.user)
+    // res.redirect('/abc');
+    console.log('hi');
+    console.log(req.user)
+    // res.send(req.user)
+    res.render('google-profile',{user:req.user})
+
+
+
+});
+// app.get('/abc',(req,res)=>{
+
+// })
+// Auth Routes
+
+
+
+//Logout
+app.get('/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/');
+})
+
+
+// passport auth ends
 app.post('/login-post', function (req, res) {
     // var { body: { user } } = req;
     // user = JSON.parse(req.body.user);
@@ -54,9 +153,9 @@ app.post('/login-post', function (req, res) {
     res.redirect('/user-feed');
 })
 app.get('/user-feed', async (req, res) => {
-    if (!(session.userId==1)) {
+    if (!(session.userId == 1)) {
         console.log('un success')
-          return res.redirect('http://localhost:8080/users/login')
+        return res.redirect('/users/login')
     }
     else {
 
@@ -67,16 +166,16 @@ app.get('/user-feed', async (req, res) => {
 // app.get('/user-profile',(req,res)=>{
 //     // var userData = req.body;
 //     // console.log(userData)
-    
 
-  
-        
+
+
+
 //     res.render('user-profile',{abc: 'hello abu'})
 // })
 app.get('/logout', (req, res) => {
     session.userId = null
-    res.redirect('http://localhost:8080/users/login')
-  })
+    res.redirect('/users/login')
+})
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -165,4 +264,3 @@ app.post("/users", function (req, res) {
     }
 
 });
-

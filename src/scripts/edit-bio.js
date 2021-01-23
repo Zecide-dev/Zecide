@@ -27,7 +27,7 @@ form.addEventListener('submit', function (e) {
         var infoObject = { "TagLine" : ptagLine,"UserBio" :bio, "Work": prof,"Location":place, "Education": edu };
         var info = JSON.stringify(infoObject);
         formData.append("user", info);
-        fetch('http://localhost:8000/Users/tagline', {
+        fetch('https://www.backend.zecide.com/Users/tagline', {
             method: 'POST',
             headers: myHeaders,
             body: formData

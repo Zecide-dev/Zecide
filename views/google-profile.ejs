@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../src/scripts/google-profile.js"></script>
+</head>
+
+<body>
+    <center>
+
+        <h1>Loading Feed for :</h1>
+
+    </center>
+    <% var dname=user.displayName; %>
+
+        <% var dId=user.id; %>
+            <% var dEmail=user._json.email %>
+                <center>
+                    <h3>
+                        <%= dname %>
+                    </h3>
+                    <h4>
+                        <%= dEmail %>
+                    </h4>
+                </center>
+                <script>
+                    let backendbaseurl = "https://www.backend.zecide.com";
+
+                    var getName = '<%= dname;  %>';
+                    console.log(getName)
+                    localStorage.setItem('usernam', getName)
+                    var getId = '<%= dId  %>';
+                    console.log(getId)
+                    localStorage.setItem('pass', getId)
+                    var getEmail = '<%= dEmail; %>';
+                    console.log(getEmail)
+                    localStorage.setItem('email', getEmail)
+                    var newUserRegistration = 0;
+
+
+
+                    //logi in mehtod
+                    if (newUserRegistration == 0) {
+                        var formData2 = new FormData();
+                        // var infoObject = { 'UserName': getName,'password':getId };
+                        // var info = JSON.stringify(infoObject);
+                        formData2.append("UserName", getName);
+                        formData2.append('password', getId)
+                        // let _data = { 'UserName': getName,'password':getId }
+                        // var abd = new URLSearchParams(new FormData(_data))
+                        // console.log(abd)
+
+                        var stat;
+                        fetch(backendbaseurl + "/users/login", {
+                            method: 'POST',
+                            body: new URLSearchParams(formData2)
+                        }).then((resp) => {
+                            stat = resp.status;
+                            console.log(stat)
+                            return resp.json();
+                        }).then((body) => {
+                            if (!body) {
+                                console.log('error encoun')
+                            }
+                            console.log(body);
+                            console.log(body.UserName);
+                            console.log(body._id);
+                            console.log(body.token);
+                            // setCookie("UserName", body.UserName);
+                            // setCookie("UserID", body._id);
+                            // setCookie("token", body.token);
+                            localStorage.setItem('jwttoken', body.token);
+                            localStorage.setItem('usernam', body.UserName)
+                            localStorage.setItem('userid', body._id)
+                            var authToken = localStorage.getItem('jwttoken');
+                            var bodytoken = body.token;
+                            console.log(bodytoken)
+                            newUserRegistration = 1;
+                            console.log(newUserRegistration)
+
+                            var formData = new FormData();
+                            var infoObject = { "bodytoken": bodytoken };
+                            var info = JSON.stringify(infoObject);
+                            formData.append("user", info);
+
+
+
+
+
+
+                            if (stat == 200) {
+
+                                console.log(stat)
+                                fetch('/login-post', {
+                                    method: 'POST',
+                                    body: formData
+                                }).then(res => {
+                                    console.log('user logged in')
+                                    window.location = /user-feed/;
+
+
+
+
+                                })
+
+
+                            }
+                            else {
+                                console.log("110 erro")
+                                // registerNewUser();
+                                console.log(newUserRegistration)
+                               
+                                    function registerNewUser() {
+
+                                        var formData1 = new FormData();
+                                        var email = getEmail;
+
+                                        var username = getName;
+                                        var password = getId;
+                                        var registrationtoken = "abcdef";
+
+                                        //to append registration token
+                                        var stat;
+                                        var infoObject = { "UserName": username, "Email": email, "password": password, "registrationToken": registrationtoken };
+                                        var info = JSON.stringify(infoObject);
+                                        formData1.append("user", info);
+                                        fetch(backendbaseurl + '/Users', {
+                                            method: 'POST',
+                                            body: formData1
+                                        }).then(function (response) {
+                                            stat = response.status;
+                                            return response.json();
+                                        }).then(function (text) {
+                                            console.log(text.user.UserName);
+                                            console.log(text.user._id);
+                                            console.log(text.user.token);
+                                            // setCookie("UserName", text.user.UserName);
+                                            // setCookie("UserID", text.user._id);
+                                            // setCookie("token", text.user.token);
+
+
+                                            //uncomment the above code 
+
+
+
+                                            // var usc = getCookie("UserName");
+                                            // var uic = getCookie("UserID");
+                                            // var tc = getCookie("token");
+
+                                            // console.log(usc);
+                                            // console.log(uic);
+                                            // console.log(tc);
+
+                                            if (stat == 200) {
+                                                console.log('new user registered')
+
+                                                // window.location.pathname = '/google-profile';
+                                                location.reload();
+
+                                            }
+                                            else {
+                                                alert('An error occured!')
+                                            }
+                                        }).catch(function (error) {
+                                            console.error(error);
+                                        })
+                                    }
+                                    registerNewUser();
+
+                                
+
+
+
+                            }
+
+
+                        }).catch((error) => {
+                            console.log('user not found')
+                            console.log(newUserRegistration)
+                            console.error(error);
+
+
+
+                        });
+                    }
+                    else {
+
+                    }
+
+
+
+
+
+
+
+                </script>
+
+
+</body>
+
+</html>

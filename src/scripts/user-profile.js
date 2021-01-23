@@ -1,4 +1,5 @@
 // const { load } = require("dotenv/types");
+let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
@@ -17,7 +18,7 @@ var userData;
 
 function userBio() {
 
-    fetch('http://localhost:8000/users/current', {
+    fetch(backendbaseurl + '/users/current', {
         method: 'get',
         headers: myHeaders
     }).then(response => response.json())
@@ -36,7 +37,7 @@ function userBio() {
 userBio();
 function fetchPostData() {
     var dataset;
-    fetch('http://localhost:8000/Posts/0', {
+    fetch(backendbaseurl + '/Posts/0', {
         method: 'get',
         headers: myHeaders
     })
@@ -209,7 +210,7 @@ function useData(d) {
                     receivedComments.style.display = "inline";
                     hide[i] = 0;
                     if (cfetch[i] == 1) {
-                        fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                        fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                             method: 'get',
                             headers: myHeaders
                         })
@@ -303,7 +304,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/comment', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
                     method: 'POST',
                     headers: myCommHeaders,
                     body: JSON.stringify(infoObject)
@@ -345,7 +346,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Down', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/Down', {
                     method: 'get',
                     headers: myHeaders
                 })
@@ -371,7 +372,7 @@ function useData(d) {
 
 
                 // console.log(data[i].UpVote.length)
-                fetch('http://localhost:8000/Posts/' + postid + '/Up', {
+                fetch(backendbaseurl + '/Posts/' + postid + '/Up', {
                     method: 'get',
                     headers: myHeaders
                 })

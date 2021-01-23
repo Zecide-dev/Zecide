@@ -57,7 +57,7 @@ form.addEventListener('submit', (event) => {
         if (stat == 200) {
 
             console.log('token')
-            fetch('http://localhost:8080/login-post', {
+            fetch('/login-post', {
                 method: 'POST',
                 body: formData
             })

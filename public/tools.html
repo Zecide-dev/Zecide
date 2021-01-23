@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFYVG2WN9Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CFYVG2WN9Z');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zecide - Tools</title>
@@ -70,61 +79,67 @@
   </div>
   <div class="side-nav">
     <div>
-      <a href="/posts/0">
-        <div class="nav-item">
-          <img src="/src/images/feed.svg" alt="" />
-          <span>Feed</span>
-        </div>
-      </a>
-      <a href="/insights">
-        <div class="nav-item">
-          <img src="/src/images/insights.svg" alt="" />
-          <span>Insights</span>
-        </div>
-      </a>
-      <a href="/z">
-        <div class="nav-item nav-z-part">
-          <img src="/src/images/z-part.svg" alt="" />
-          <span>Z-Part</span>
-        </div>
-      </a>
-      <a href="/tools">
-        <div class="nav-item nav-item-active">
-          <img src="/src/images/tools-active.svg" alt="" />
-          <span>Tools</span>
-        </div>
-      </a>
-      <a href="/users/current">
-        <div class="nav-item">
-          <img src="/src/images/profile.svg" alt="" />
-          <span>Profile</span>
-        </div>
-      </a>
-      <div class="nav-item nav-help">
-        <img src="/src/images/help.svg" alt="" />
-        <span>Help & Support</span>
-      </div>
-      <div class="nav-item nav-about-us">
-        <img src="/src/images/about.svg" alt="" />
-        <span>About Us</span>
-      </div>
+        <a href="/user-feed">
+            <div class="nav-item nav-item-active">
+                <img src="/src/images/feed-active.svg" alt="">
+                <span>Feed</span>
+            </div>
+        </a>
+        <a href="/insights">
+            <div class="nav-item">
+                <img src="/src/images/insights.svg" alt="">
+                <span>Insights &nbsp; <span id='coming-soon-insights' class="badge badge-info">Coming Soon!</span></span>
+            </div>
+        </a>
+        <a href="/z">
+            <div class="nav-item nav-z-part">
+                <img src="/src/images/z-part.svg" alt="">
+                <span>Z-Part</span>
+            </div>
+        </a>
+        <a href="/tools">
+            <div class="nav-item">
+                <img src="/src/images/tools.svg" alt="">
+                <span>Tools</span>
+            </div>
+        </a>
+        <a href="/user-profile">
+            <div class="nav-item">
+                <img src="/src/images/profile.svg" alt="">
+                <span>Profile</span>
+            </div>
+        </a>
+        <a href="/help-support">
+            <div class="nav-item nav-help">
+                <img src="/src/images/help.svg" alt="">
+                <span>Help & Support</span>
+            </div>
+        </a>
+        <a href="/about-us">
+            <div class="nav-item nav-about-us">
+                <img src="/src/images/about.svg" alt="">
+                <span>About Us</span>
+            </div>
+        </a>
     </div>
-  </div>
+</div>
   <div class="container">
     <div class="row cards">
       <div class="col-5">
+        <a href="/tools/Dashboard">
         <div class="card">
           <img src="/src/images/bubble_detector.svg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Trading Dashboard</h5>
           </div>
         </div>
+        </a>
       </div>
       <div class="col-5">
         <div class="card">
           <img src="/src/images/comparative_correlation.svg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Investing Dashboard</h5>
+            <h5 class="card-title">Investing Dashboard <span id='coming-soon-card' class="badge badge-info">Coming Soon!</span></h5>
           </div>
         </div>
       </div>

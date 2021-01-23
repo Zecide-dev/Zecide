@@ -1,4 +1,6 @@
-let backendBaseURL = 'http://localhost:8000/';
+let backendBaseURL = 'https://www.backend.zecide.com/';
+
+let jwtToken = localStorage.getItem('jwttoken');
 
 var xmlHttp = new XMLHttpRequest();
 let url = backendBaseURL + 'Questions/AllQuestions';
@@ -30,7 +32,7 @@ xmlHttp.onreadystatechange = function () {
 }
 console.log('getting');
 xmlHttp.open("GET", url, true); // true for asynchronous 
-xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
 xmlHttp.send(null);
 
 

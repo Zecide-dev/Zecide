@@ -4,7 +4,7 @@ myHeaders.append('authorization', 'Token ' + token);
 
 function fetchPostData(){
     var dataset;
-    fetch('http://localhost:8000/posts/0',{
+    fetch('https://www.backend.zecide.com/posts/0',{
       method: 'get',
       headers: myHeaders,
   })

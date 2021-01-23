@@ -1,4 +1,6 @@
-let backendBaseURL = 'http://localhost:8000/';
+let backendBaseURL = 'https://www.backend.zecide.com/';
+
+let jwtToken = localStorage.getItem('jwttoken');
 
 
 // For future use
@@ -83,39 +85,45 @@ const chartCreation = () => {
     });
   })
 
-  var bubbleChart = new CanvasJS.Chart("bubble-chart",
-    {
-      title: {
-        text: "Comparison among Countries on Fertility Rate Vs Life Expectancy in 2009"
-      },
-      data: [
-        {
-          type: "bubble",
-          dataPoints: [
-            // { x: 64.8, y: 2.66, z:12074.4 , name: "India"},
-            //  { x: 73.1, y: 1.61, z:13313.8, name: "China"},
-            { x: 78.1, y: 2.00, z: 306.77, name: "US" },
-            { x: 68.5, y: 2.15, z: 237.414, name: "Indonesia" },
-            { x: 72.5, y: 1.86, z: 193.24, name: "Brazil" },
-            { x: 76.5, y: 2.36, z: 112.24, name: "Mexico" },
-            { x: 50.9, y: 5.56, z: 154.48, name: "Nigeria" },
-            { x: 68.6, y: 1.54, z: 141.91, name: "Russia" },
 
-            { x: 82.9, y: 1.37, z: 127.55, name: "Japan" },
-            { x: 79.8, y: 1.36, z: 81.90, name: "Australia" },
-            { x: 72.7, y: 2.78, z: 79.71, name: "Egypt" },
-            { x: 80.1, y: 1.94, z: 61.81, name: "UK" },
-            { x: 55.8, y: 4.76, z: 39.24, name: "Kenya" },
-            { x: 81.5, y: 1.93, z: 21.95, name: "Australia" },
-            { x: 68.1, y: 4.77, z: 31.09, name: "Iraq" },
-            { x: 47.9, y: 6.42, z: 33.42, name: "Afganistan" },
-            { x: 50.3, y: 5.58, z: 18.55, name: "Angola" }
-          ]
-        }
-      ]
-    });
+  // NEW BUBBLE CHART
 
-  bubbleChart.render();
+  // FETCHIG BUBBLE CHART DATA
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/bubbleChartData';
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      bubbleChartData = JSON.parse(xmlHttp.responseText);
+
+      // Showing bubbleChart
+
+      var layout = {
+        title: 'Sector Analytics',
+        showlegend: true,
+        height: 520,
+        width: 850,
+        xaxis: {
+          title: "Latest Move Percentage",
+          range: [ 0, 2 ]
+        },
+        yaxis: {
+          title: "Returns",
+          range: [ -1, 7 ]
+        },
+        plot_bgcolor: "#F3FAFf"
+      };
+
+      document.getElementById('creating-bubble-chart').style.display = 'none';
+    
+      Plotly.newPlot('bubble-chart', bubbleChartData, layout);
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.send(null);
 }
 
 
@@ -130,6 +138,9 @@ function changeCandleStickChart(companyName) {
   // Changing the Chart Title
   let candlestickChartTitle = document.getElementById('candlestick-chart-title');
   candlestickChartTitle.innerText = companyName;
+
+  // Changing the company in the risk management section
+  document.getElementById('risk-management-company-name').innerText = companyName;
 
   // Showing Creating Chart loader
   let candlestickChartDiv = document.getElementById('candlestick-chart-div');
@@ -155,7 +166,7 @@ function changeCandleStickChart(companyName) {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 }
 
@@ -724,7 +735,7 @@ function createMovingAverage(type) {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 }
 
@@ -790,7 +801,7 @@ createVWAPEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -847,7 +858,7 @@ createSupertrendEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -899,7 +910,7 @@ createIchimokuEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -950,7 +961,7 @@ createVortexEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1001,7 +1012,7 @@ createPSAREvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1048,7 +1059,7 @@ createCKSPEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1110,7 +1121,7 @@ createCHOPEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1167,7 +1178,7 @@ createAroonEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1264,7 +1275,7 @@ createADXEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1328,7 +1339,7 @@ createKCEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1390,7 +1401,7 @@ createAccBandsEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1450,7 +1461,7 @@ createDonchianEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1548,7 +1559,7 @@ createBBandsEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1600,7 +1611,7 @@ createOBVEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1653,7 +1664,7 @@ createCMFEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1708,7 +1719,7 @@ createMFIEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1759,7 +1770,7 @@ createAOEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1814,7 +1825,7 @@ createStochEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1869,7 +1880,7 @@ createStochRSIEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1924,7 +1935,7 @@ createCCIEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -1972,7 +1983,7 @@ createROCEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2023,7 +2034,7 @@ createMACDEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2086,7 +2097,7 @@ createRSIEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2151,7 +2162,7 @@ createCPREvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2215,7 +2226,7 @@ createPivotFiboEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2267,7 +2278,7 @@ createORBEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2319,7 +2330,7 @@ createStructureEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2369,7 +2380,7 @@ createPullbackEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2421,7 +2432,7 @@ createRangeBoundEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2474,7 +2485,7 @@ createBreakoutEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2526,7 +2537,7 @@ createReversalEvent.addEventListener('click', function () {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 
@@ -2575,7 +2586,7 @@ riskPercentage.addEventListener('input', () => {
 
 let riskManagementGo = document.getElementById('risk-management-go');
 riskManagementGo.addEventListener('click', () => {
-  
+
   // Hiding the riskmanagement screen and showing the calculating loader
   let calculatingRiskManagement = document.getElementById('calculating-risk-management');
   riskManagementBody.style.display = 'none';
@@ -2588,7 +2599,7 @@ riskManagementGo.addEventListener('click', () => {
 
   var xmlHttp = new XMLHttpRequest();
   let url = backendBaseURL + 'Dashboard/RiskManagement?';
-  url += ('confidence=' + Number(confidence.value)/100);
+  url += ('confidence=' + Number(confidence.value) / 100);
   url += ('&riskReward=' + riskReward.value);
   url += ('&riskPercentage=' + riskPercentage.value);
   url += ('&value=' + riskManagementValue.value);
@@ -2613,7 +2624,7 @@ riskManagementGo.addEventListener('click', () => {
   }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o');
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
 

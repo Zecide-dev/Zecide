@@ -12,6 +12,9 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/src/styles/feed.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+
 
 </head>
 
@@ -111,16 +114,21 @@
                     <span>Profile</span>
                 </div>
             </a>
-            <div class="nav-item nav-help">
-                <img src="/src/images/help.svg" alt="">
-                <span>Help & Support</span>
-            </div>
-            <div class="nav-item nav-about-us">
-                <img src="/src/images/about.svg" alt="">
-                <span>About Us</span>
-            </div>
+            <a href="/help-support">
+                <div class="nav-item nav-help">
+                    <img src="/src/images/help.svg" alt="">
+                    <span>Help & Support</span>
+                </div>
+            </a>
+            <a href="/about-us">
+                <div class="nav-item nav-about-us">
+                    <img src="/src/images/about.svg" alt="">
+                    <span>About Us</span>
+                </div>
+            </a>
         </div>
     </div>
+    <div id='infinite-list'></div>
     <div class="card-container">
         <div class="status-card">
             <textarea placeholder="What's on your mind?" id="postBody"
@@ -152,7 +160,7 @@
             </div>
 
         </div>
-        <div class="feed-card">
+        <!-- <div class="feed-card">
             <div class="feed-card-top">
                 <div class="feed-card-top-left">
                     <img class="feed-profile-pic" src="/src/images/default-profile-picture.jpg" alt="">
@@ -202,11 +210,11 @@
                 <input type="text" placeholder="Write a comment..">
                 <img class="comment-post" src="/src/images/send.svg" alt="">
             </div>
-        </div>
+        </div> -->
 
     </div>
     </div>
-    <div class="trending">
+    <!-- <div class="trending">
         <div>
             <div class="trending-top">
                 <img src="/src/images/trending.svg" alt="">
@@ -232,8 +240,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <script src="/src/scripts/user-feed.js"></script>
+    
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;
