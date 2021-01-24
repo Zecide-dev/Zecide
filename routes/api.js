@@ -23,7 +23,8 @@ router.get('/view-profile/:openId',function(req,res){
     var idToOpen = {idToOpen:req.params.openId}
     console.log(idToOpen)
     
-    res.render('view-profile',idToOpen)
+    res.render('view-profile')
+    
 })
 
 router.get('/users/login',function(req,res){
