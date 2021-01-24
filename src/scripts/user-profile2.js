@@ -270,11 +270,12 @@ function useData(d) {
             let receivedComments = document.createElement('div')
             receivedComments.className = "list-group"
             receivedComments.setAttribute('id', 'recCom');
+            feedCardComments[i].style.display = 'none';
 
             cfetch[i] = 1;
             hide[i] = 1;
             var resC = 1;
-            var commentCounter = d[i].comments.length;
+            // var commentCounter = d[i].comments.length;
 
 
             function deletePost(){
@@ -297,6 +298,7 @@ function useData(d) {
             function showcomm() {
                 console.log('show comm');
                 let postid = data[i]._id;
+                feedCardComments[i].style.display = 'flex';
 
 
 
@@ -366,6 +368,7 @@ function useData(d) {
                 else {
                     receivedComments.style.display = "none"
                     hide[i] = 1;
+                    feedCardComments[i].style.display = 'none';
 
 
                 }
@@ -382,6 +385,12 @@ function useData(d) {
                 console.log(commentText);
                 // var formData = new FormData();
                 commentInput[i].value = ' ';
+                d[i].comments.length = d[i].comments.length + 1;
+
+                // data[i].UpVote.length = data[i].UpVote.length + 1;
+                let commcount = d[i].comments.length;
+                // upvoteCount[i].innerHTML = upcount;
+                commentsCount[i].innerHTML = (commcount) + " comments";
 
                 // var stat;
                 let infoObject = { "comment": commentText };
@@ -405,7 +414,7 @@ function useData(d) {
                 })
                     .then(response => response.json())
                     .then(() => {
-                        commentsCount[i].innerHTML = (commentCounter + 1) + " comments";
+                        // commentsCount[i].innerHTML = (commentCounter + 1) + " comments";
 
                         var test = document.createElement('section');
                         test.setAttribute('id', 'test');

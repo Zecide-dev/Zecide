@@ -20,10 +20,17 @@ myHeaders.append('authorization', 'Token ' + token);
 // var userData;
 var loc = window.location.pathname;
 // console.log(loc);
-var ca = loc.split('%20');
+var ca = loc.split('/');
 // console.log(ca)
-var userToSend = ca[1];
+var userToSend = ca[2];
 console.log(userToSend)
+if (myuserid==userToSend) {
+    window.location.pathname ='/user-profile'
+    
+}
+const unique = (value, index, self) => {
+    return self.indexOf(value) === index
+  }
 // // console.log(myHeaders)
 // var userInfo;
 
@@ -44,7 +51,8 @@ console.log(userToSend)
 // userBio();
 var followCount;
 let fButton ;
-
+var followingDisplay;
+var followDisplay;
 function userBio() {
 
     fetch(backendbaseurl + '/users/'+userToSend, {
@@ -60,26 +68,38 @@ function userBio() {
             document.getElementById('profession').innerHTML = userData.userInfo.Work;
             document.getElementById('education').innerHTML = userData.userInfo.Education;
             document.getElementById('place').innerHTML = userData.userInfo.Place;
-            followCount = userData.userInfo.Followers.length;
+            followCount = userData.userInfo.Followers;
+            console.log(followCount)
+            var followersUnique = followCount.filter(unique);
+            console.log(followersUnique)
+            var followingCount = userData.userInfo.Following;
+            console.log(followingCount);
+            var followingUnique = followingCount.filter(unique);
+            console.log(followingUnique)
+            
+            followDisplay = followersUnique.length;
+            followingDisplay = followingUnique.length;
+
+
             var follow = document.getElementById('follow')
             var unfollow = document.getElementById('unfollow')
-            var following = userData.userInfo.Following.length;
+            
             var fCount = 0;
-            for(var i = 0;i<following;i++){
-                for(var j = 0;j<following;j++){
-                    if(!(userData.userInfo.Following[i]==userData.userInfo.Following[j])){
-                        fCount = fCount + 1;
-                    }
+            // for(var i = 0;i<following;i++){
+            //     for(var j = 0;j<following;j++){
+            //         if(!(userData.userInfo.Following[i]==userData.userInfo.Following[j])){
+            //             fCount = fCount + 1;
+            //         }
                     
-                }
-            }
+            //     }
+            // }
 
 
 
 
-            document.getElementById('followers').innerHTML = followCount;
-            document.getElementById('following').innerHTML = fCount
-            for(var i = 0;i<followCount;i++){
+            document.getElementById('followers').innerHTML = followDisplay;
+            document.getElementById('following').innerHTML = followingDisplay;
+            for(var i = 0;i<followDisplay;i++){
                 if(userData.userInfo.Followers[i]==myuserid){
                     fButton = 0;
                     console.log(fButton)
@@ -100,13 +120,13 @@ function userBio() {
 userBio();
 // var userid = localStorage.getItem("userid");
 
-// console.log(userid)
-for(var i = 0;i<followCount;i++){
-    if(userData.userInfo.Followers[i]==myuserid){
-        fButton = 0;
-        console.log(fButton)
-    }
-}
+// // console.log(userid)
+// for(var i = 0;i<followCount;i++){
+//     if(userData.userInfo.Followers[i]==myuserid){
+//         fButton = 0;
+//         console.log(fButton)
+//     }
+// }
 
 follow.addEventListener('click',followFun)
 unfollow.style.display = 'none';
@@ -126,7 +146,8 @@ function followFun(){
     console.log('followed')
     follow.style.display = 'none'
     unfollow.style.display ='block'
-    document.getElementById('followers').innerHTML = followCount + 1;
+    followDisplay = followDisplay +1;
+    document.getElementById('followers').innerHTML = followDisplay; 
 
     fetch(backendbaseurl+'/users/Follow/'+userToSend, {
         method: 'get',
@@ -146,8 +167,8 @@ function unfollowFun(){
     unfollow.style.display = 'none'
 
     follow.style.display ='inline'
-    var avar = document.getElementById('followers').innerHTML
-    document.getElementById('followers').innerHTML = avar -1 ; ;
+    followDisplay = followDisplay -1;
+    document.getElementById('followers').innerHTML = followDisplay ;
 
     // document.getElementById('followers').innerHTML = userData.userInfo.Followers.length - 1;
 
