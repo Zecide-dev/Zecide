@@ -1,25 +1,13 @@
-
-
-
-
-
-
-
-
-
-
-
-
 // ####################################################################################################################################
 let backendBaseURL = 'https://www.backend.zecide.com/';
 //
-// let jwtToken = localStorage.getItem('jwttoken');
-//
-//
-// // For future use
-// let candleSeries;
-// let candlestickChartData = [];
-// let selectedCompany = 'INFY.NS';
+let jwtToken = localStorage.getItem('jwttoken');
+
+
+// For future use
+let candleSeries;
+let candlestickChartData = [];
+let selectedCompany = 'INFY.NS';
 //
 //
 // // CREATING COMPANY TAB DIV
