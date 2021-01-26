@@ -4,6 +4,7 @@ const path = require('path');
 const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const request = require('request');
 
 const candlestickData = [
   { time: '2018-10-19', open: 180.34, high: 180.99, low: 178.57, close: 179.85 },
@@ -209,71 +210,109 @@ router3.get('/getFeed', (req, res) => {
 
 router3.get('/getFeed/time', (req, res) => {
         console.log('[time]: Method call')
-        const time = Math.floor(Date.now() / 1000)  // In seconds
-        res.code(200).header('Content-Type', 'text/plain').send(time.toString())
+        const time = Math.floor(Date.now())  // In seconds
+        console.log(time);
+        res.sendStatus(200).send(time);
     })
 
 
 router3.get('/getFeed/config',function(req,res){
   var x = {
-    supported_resolutions: ['1', '5', '15', '30', '60', '1D', '1W', '1M'],
+    supported_resolutions: ['1','5', '15', '30','60','1D','1W','1M'],
     supports_group_request: true,
     supports_marks: false,
     supports_search: false,
     supports_timescale_marks: false,
+    supports_time: true
 }
 res.send(x);
 })
 
 router3.get('/getFeed/symbol_info', async (req, res) => {
   console.log('[symbol_info]: Method call')
+  console.log(req.query.group);
   var x = {
-   symbol: ["AAPL", "MSFT", "SPX"],
-   description: ["Apple Inc", "Microsoft corp", "S&P 500 index"],
-   exchange_listed: "NYSE",
-   exchange_traded: "NYSE",
+   symbol: ['INFY.NS', 'ITC.NS', 'UPL.NS', 'CIPLA.NS', 'ASIANPAINT.NS', 'DRREDDY.NS', 'WIPRO.NS', 'HCLTECH.NS', 'HINDALCO.NS', 'MARUTI.NS', 'POWERGRID.NS', 'DIVISLAB.NS', 'ICICIBANK.NS', 'TECHM.NS', 'ADANIPORTS.NS', 'TCS.NS', 'SBIN.NS', 'HDFC.NS', 'BAJFINANCE.NS', 'TATASTEEL.NS', 'ULTRACEMCO.NS', 'TITAN.NS', 'SUNPHARMA.NS', 'M&M.NS', 'RELIANCE.NS', 'HINDUNILVR.NS', 'BAJAJFINSV.NS', 'AXISBANK.NS', 'BRITANNIA.NS', 'NTPC.NS', 'LT.NS', 'KOTAKBANK.NS', 'GRASIM.NS', 'NESTLEIND.NS', 'SHREECEM.NS', 'IOC.NS', 'BPCL.NS', 'BAJAJ-AUTO.NS', 'HEROMOTOCO.NS', 'COALINDIA.NS', 'SBILIFE.NS', 'EICHERMOT.NS', 'HDFCBANK.NS', 'ONGC.NS', 'INDUSINDBK.NS', 'TATAMOTORS.NS', 'HDFCLIFE.NS', 'GAIL.NS', 'JSWSTEEL.NS', 'BHARTIARTL.NS'],
+   description: ['INFY.NS', 'ITC.NS', 'UPL.NS', 'CIPLA.NS', 'ASIANPAINT.NS', 'DRREDDY.NS', 'WIPRO.NS', 'HCLTECH.NS', 'HINDALCO.NS', 'MARUTI.NS', 'POWERGRID.NS', 'DIVISLAB.NS', 'ICICIBANK.NS', 'TECHM.NS', 'ADANIPORTS.NS', 'TCS.NS', 'SBIN.NS', 'HDFC.NS', 'BAJFINANCE.NS', 'TATASTEEL.NS', 'ULTRACEMCO.NS', 'TITAN.NS', 'SUNPHARMA.NS', 'M&M.NS', 'RELIANCE.NS', 'HINDUNILVR.NS', 'BAJAJFINSV.NS', 'AXISBANK.NS', 'BRITANNIA.NS', 'NTPC.NS', 'LT.NS', 'KOTAKBANK.NS', 'GRASIM.NS', 'NESTLEIND.NS', 'SHREECEM.NS', 'IOC.NS', 'BPCL.NS', 'BAJAJ-AUTO.NS', 'HEROMOTOCO.NS', 'COALINDIA.NS', 'SBILIFE.NS', 'EICHERMOT.NS', 'HDFCBANK.NS', 'ONGC.NS', 'INDUSINDBK.NS', 'TATAMOTORS.NS', 'HDFCLIFE.NS', 'GAIL.NS', 'JSWSTEEL.NS', 'BHARTIARTL.NS'],
+   exchange_listed: "NSE",
+   exchange_traded: "NSE",
    minmovement: 1,
    minmovement2: 0,
-   pricescale: [1, 1, 100],
+   pricescale: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1,  1, 1],
    has_dwm: true,
    has_intraday: true,
-   has_no_volume: [false, false, true],
-   type: ["stock", "stock", "index"],
-   ticker: ["AAPL~0", "MSFT~0", "$SPX500"],
-   timezone: "America/New_York",
-   session_regular: "0900-1600"
+   has_daily : true,
+   has_no_volume: [false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+   type: ['stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock','stock', 'stock', 'stock',  'stock', 'stock'],
+   timezone: "India/Kolkata",
+   session_regular: "0915-1530"
  }
 
 res.send(x);
     })
 
 
-router3.get('/getFeed/symbols',function(req,res){
-  var x = {
-   symbol: ["AAPL", "MSFT", "SPX"],
-   description: ["Apple Inc", "Microsoft corp", "S&P 500 index"],
-   exchange_listed: "NYSE",
-   exchange_traded: "NYSE",
-   minmovement: 1,
-   minmovement2: 0,
-   pricescale: [1, 1, 100],
-   has_dwm: true,
-   has_intraday: true,
-   has_no_volume: [false, false, true],
-   type: ["stock", "stock", "index"],
-   ticker: ["AAPL~0", "MSFT~0", "$SPX500"],
-   timezone: "America/New_York",
-   session_regular: "0900-1600"
- }
 
-res.send(x);
-});
 
 router3.get('/getFeed/history',function(req,res){
+  let left = parseInt(req.query.from);
+  let right = parseInt(req.query.to);
+  // console.log(left,right);
+  let backendBaseURL = 'https://www.backend.zecide.com/';
+  let url = backendBaseURL + 'Dashboard/fetchChartData?companyName=' + req.query.symbol;
+  console.log(url);
+
+  request(url, (err, response, body) => {
+  if (err) {
+    return res.send({ s : "err", errmsg : err});
+  }
+
+  // console.log(body);
+  body = JSON.parse(body);
+  const len = body.length;
+  // console.log(body);
+  let sendJson = {
+    s : "ok",
+    o : [],
+    t : [],
+    c : [],
+    h : [],
+    l : []
+  };
+  let t= body[0].time;
+  for(var i =0; i <len ;i+=1){
+    // console.log(body[i]);
+    if(body[i].time > left && body[i].time < right){
+      sendJson.o.push(body[i].open);
+      sendJson.t.push(body[i].time*1000);
+      sendJson.c.push(body[i].close);
+      sendJson.h.push(body[i].high);
+      sendJson.l.push(body[i].low);
+
+      // console.log(body[i].time*1000 + "  " + parseInt(i));
+    }
+    // body[i].time*=1000;
+  }
+  // console.log(len);
+  if(sendJson.t.length != 0){
+    // console.log(sendJson);
+    // console.log(sendJson.t);
+    res.send(sendJson);
+  }else{
+    // console.log("$$$$$$$$$$%%%%%%%%%%%%%%%%%%%");
+    return res.send({
+      s : "no_data"
+    });
+  }
+
+
+
+});
   // Feed.find(function(err,foundFeeds){
   //   // console.log(foundFeeds);
   //   res.send(foundFeeds[4]);
   // })
-  res.send(y);
+  // res.send(y);
 });
+
 module.exports = router3;

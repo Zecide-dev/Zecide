@@ -16,13 +16,13 @@ router.get('/',function(req,res){
     res.sendFile(path.join(__dirname, "../public/index.html"))
 })
 router.get('/user-profile',function(req,res){
-    
+
     res.render('user-profile')
 })
 router.get('/view-profile/:openId',function(req,res){
     var idToOpen = {idToOpen:req.params.openId}
     console.log(idToOpen)
-    
+
     res.render('view-profile',idToOpen)
 })
 
@@ -70,6 +70,14 @@ router.get('/Insights/SectorReports',function(req,res){
 
 router.get('/Tools',function(req,res){
     res.sendFile(path.join(__dirname, "../public/tools.html"))
+})
+router.get('/Tools/bundles/:file',function(req,res){
+  res.sendFile(path.join(__dirname,"../public/charts/charting_library/bundles/"+req.params.file));
+})
+
+
+router.get('/Tools/en-tv-chart.2f0c4150.html',function(req,res){
+  res.sendFile(path.join(__dirname,"../public/en-tv-chart.2f0c4150.html"))
 })
 
 router.get('/Tools/Dashboard',function(req,res){

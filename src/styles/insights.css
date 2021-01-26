@@ -95,7 +95,7 @@ body {
 
 /* Preloader */
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: #000000; }
 
 .upper-nav > div {
@@ -135,24 +135,31 @@ a {
     flex-direction: column;
     align-items: flex-end;
   }
-  
+
   .dropdown-content{
     align-items: center;
     border-radius: 20px;
   }
-  
+
   .dropdown ul {
-    
+
     list-style: none;
   }
-  
+
   .dropdown li{
     padding-top: 1.7;
     padding-right: 3.2vw;
     padding-bottom: 1.7vh;
   }
-  
-  
+
+  #coming-soon-card {
+    font-size: 0.8rem;
+  }
+
+  #coming-soon-insights {
+    font-size: 0.7rem;
+  }
+
 .search {
   display: flex;
   background-color: #f8f8f8;
@@ -186,7 +193,7 @@ a {
     width: 2.5vw;
     padding-top: 0.7vh;
   }
-  
+
   .upper-right{
     display: flex;
   }
@@ -207,7 +214,7 @@ a {
     align-items: center;
   }
 
-  
+
 
 .profile-dropdown {
   display: flex;

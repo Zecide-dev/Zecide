@@ -16,7 +16,7 @@ function initOnReady() {
 	var widget = new TradingView.widget({
 		debug: true, // uncomment this line to see Library errors and warnings in the console
 		fullscreen: true,
-		symbol: 'AAPL',
+		symbol: 'INFY.N',
 		interval: '1',
 		container_id: "tv_chart_container",
 
