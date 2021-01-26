@@ -76,7 +76,7 @@ app.use(session({
 
 
 
-// passport auth
+
 
 passport.use(
     new GoogleStrategy({
@@ -116,7 +116,6 @@ const checkUserLoggedIn = (req, res, next) => {
 }
 app.get('/google-profile', checkUserLoggedIn, (req, res) => {
 
-
     // res.send(req.user);
     // // res.json(req.user)
     // res.redirect('/abc');
@@ -125,11 +124,10 @@ app.get('/google-profile', checkUserLoggedIn, (req, res) => {
     // res.send(req.user)
     res.render('google-profile',{user:req.user})
 
-
-
+    
+   
 });
 // app.get('/abc',(req,res)=>{
-
 // })
 // Auth Routes
 

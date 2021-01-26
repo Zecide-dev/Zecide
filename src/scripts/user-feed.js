@@ -1,3 +1,6 @@
+
+// const { default: fetch } = require("node-fetch");
+
 let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
@@ -261,6 +264,8 @@ function useData(d) {
             downvoteImg.addEventListener("click", downvotefun);
             commentPost.addEventListener("click", commentfun);
             comments.addEventListener('click', showcomm);
+            name.style.cursor = 'pointer';
+            name.addEventListener('click',postAuthor);
 
             let receivedComments = document.createElement('div')
             receivedComments.className = "list-group"
@@ -272,6 +277,14 @@ function useData(d) {
             var resC = 1;
             // var commentCounter = d[i].comments.length;
 
+            function postAuthor(){
+                var openId = d[i].Author.UserID;
+                console.log(openId)
+                fetch('/view-profile/'+openId).then(()=>{
+                    window.location.pathname = '/view-profile/'+ openId;
+
+                })
+            }
 
             function showcomm() {
                 console.log('show comm');

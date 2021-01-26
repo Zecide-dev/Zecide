@@ -87,9 +87,68 @@ function addCompaniesIntoNifty() {
 //   })
 
 
+
   // NEW BUBBLE CHART
 
   // FETCHIG BUBBLE CHART DATA
+
+  var xmlHttp = new XMLHttpRequest();
+  let url = backendBaseURL + 'Dashboard/bubbleChartData';
+  console.log(url);
+
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      bubbleChartData = JSON.parse(xmlHttp.responseText);
+
+      // Showing bubbleChart
+
+      var layout = {
+        title: 'Sector Analytics',
+        showlegend: true,
+        height: 520,
+        width: 850,
+        xaxis: {
+          title: "Latest Move Percentage",
+          range: [ 0, 2 ]
+        },
+        yaxis: {
+          title: "Returns",
+          range: [ -1, 7 ]
+        },
+        plot_bgcolor: "#F3FAFf"
+      };
+
+      document.getElementById('creating-bubble-chart').style.display = 'none';
+    
+      Plotly.newPlot('bubble-chart', bubbleChartData, layout);
+    }
+  }
+  console.log('getting');
+  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.send(null);
+}
+
+
+// CHANGE CANDLESTICK CHART
+
+// function changeCandleStickChart(companyName) {
+//   console.log('Changing Chart!');
+
+//   // Changing the selected Company
+//   selectedCompany = companyName;
+
+//   // Changing the Chart Title
+//   let candlestickChartTitle = document.getElementById('candlestick-chart-title');
+//   candlestickChartTitle.innerText = companyName;
+
+//   // Changing the company in the risk management section
+//   document.getElementById('risk-management-company-name').innerText = companyName;
+
+//   // Showing Creating Chart loader
+//   let candlestickChartDiv = document.getElementById('candlestick-chart-div');
+//   let creatingCandlestickChart = document.getElementById('creating-candlestick-chart');
+//   candlestickChartDiv.style.display = 'none';
+//   creatingCandlestickChart.style.display = 'block';
 
   var xmlHttp = new XMLHttpRequest();
   let url = backendBaseURL + 'Dashboard/bubbleChartData';
@@ -122,7 +181,8 @@ function addCompaniesIntoNifty() {
       Plotly.newPlot('bubble-chart', bubbleChartData, layout);
     }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 }
 
@@ -800,7 +860,7 @@ createVWAPEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchron
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -857,7 +917,7 @@ createSupertrendEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -960,7 +1020,8 @@ createVortexEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1011,7 +1072,7 @@ createPSAREvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1058,7 +1119,7 @@ createCKSPEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1120,7 +1181,7 @@ createCHOPEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1177,7 +1238,7 @@ createAroonEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1274,7 +1335,7 @@ createADXEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1338,7 +1399,7 @@ createKCEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1400,7 +1461,7 @@ createAccBandsEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1460,7 +1521,7 @@ createDonchianEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1558,7 +1619,7 @@ createBBandsEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1610,7 +1671,7 @@ createOBVEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1663,7 +1724,7 @@ createCMFEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1718,7 +1779,7 @@ createMFIEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1879,7 +1940,7 @@ createStochRSIEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1934,7 +1995,7 @@ createCCIEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1982,7 +2043,7 @@ createROCEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2033,7 +2094,7 @@ createMACDEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2161,7 +2222,7 @@ createCPREvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2277,7 +2338,7 @@ createORBEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2484,7 +2545,7 @@ createBreakoutEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2536,7 +2597,8 @@ createReversalEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2623,7 +2685,8 @@ riskManagementGo.addEventListener('click', () => {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
+
+  xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })

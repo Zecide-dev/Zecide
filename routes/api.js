@@ -24,6 +24,7 @@ router.get('/view-profile/:openId',function(req,res){
     console.log(idToOpen)
 
     res.render('view-profile',idToOpen)
+
 })
 
 router.get('/users/login',function(req,res){
