@@ -244,7 +244,7 @@ router3.get('/getFeed/symbol_info', async (req, res) => {
    has_daily : true,
    has_no_volume: [false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
    type: ['stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock', 'stock','stock', 'stock', 'stock',  'stock', 'stock'],
-   timezone: "India/Kolkata",
+   timezone: "Asia/Kolkata",
    session_regular: "0915-1530"
  }
 

@@ -16,13 +16,13 @@ function createCompanyTabDiv(companyName) {
   let span = document.createElement('span');
 
   div.setAttribute('class', 'company-tab');
-  div.setAttribute('onclick', 'changeCandleStickChart(\'' + companyName + '\')')
+  // div.setAttribute('onclick', 'changeCandleStickChart(\'' + companyName + '\')')
   span.setAttribute('class', 'symbol');
   span.innerText = companyName.substr(0, companyName.length - 3);
   div.append(span);
   return (div);
 }
-//
+
 //
 // // ADDING COMPANY TABS INTO THE NIFTY SECTION
 let nifty = ['INFY.NS', 'ITC.NS', 'UPL.NS', 'CIPLA.NS', 'ASIANPAINT.NS', 'DRREDDY.NS', 'WIPRO.NS', 'HCLTECH.NS', 'HINDALCO.NS', 'MARUTI.NS', 'POWERGRID.NS', 'DIVISLAB.NS', 'ICICIBANK.NS', 'TECHM.NS', 'ADANIPORTS.NS', 'TCS.NS', 'SBIN.NS', 'HDFC.NS', 'BAJFINANCE.NS', 'TATASTEEL.NS', 'ULTRACEMCO.NS', 'TITAN.NS', 'SUNPHARMA.NS', 'M&M.NS', 'RELIANCE.NS', 'HINDUNILVR.NS', 'BAJAJFINSV.NS', 'AXISBANK.NS', 'BRITANNIA.NS', 'NTPC.NS', 'LT.NS', 'KOTAKBANK.NS', 'GRASIM.NS', 'NESTLEIND.NS', 'SHREECEM.NS', 'IOC.NS', 'BPCL.NS', 'BAJAJ-AUTO.NS', 'HEROMOTOCO.NS', 'COALINDIA.NS', 'SBILIFE.NS', 'EICHERMOT.NS', 'HDFCBANK.NS', 'ONGC.NS', 'INDUSINDBK.NS', 'TATAMOTORS.NS', 'HDFCLIFE.NS', 'GAIL.NS', 'JSWSTEEL.NS', 'BHARTIARTL.NS']
@@ -33,6 +33,7 @@ function addCompaniesIntoNifty() {
     niftyCompaniesDiv.append(returnedDiv);
   })
 }
+addCompaniesIntoNifty();
 //
 //
 // const chartCreation = () => {
@@ -136,7 +137,7 @@ function addCompaniesIntoNifty() {
 //   selectedCompany = companyName;
 //
   // Changing the Chart Title
-  let candlestickChartTitle = document.getElementById('candlestick-chart-title');
+  // let candlestickChartTitle = document.getElementById('candlestick-chart-title');
   // candlestickChartTitle.innerText = companyName;
 //
 //   // Changing the company in the risk management section
@@ -658,25 +659,25 @@ function createNewBubbleForModal(eventName) {
 
 
 // Adding fetchedData into their respective screens tab
-function addFetchedData(eventName, fetchedData) {
-  let screenNum = 1;
-  for (let screen in fetchedData) {
-    let screenCompanyTabs = document.getElementById(eventName + '-screen' + screenNum + '-company-tabs');
-    for (let i = 0; i < fetchedData[screen].length; i++) {
-      let div = document.createElement('div');
-      let span = document.createElement('span');
-
-      div.setAttribute('class', 'company-tab');
-      div.setAttribute('onclick', 'changeCandleStickChart(\'' + fetchedData[screen][i].toString() + '\')')
-      span.setAttribute('class', 'symbol');
-      span.innerText = fetchedData[screen][i].toString().substr(0, fetchedData[screen][i].toString().length - 3);
-      div.append(span);
-      screenCompanyTabs.append(div);
-
-      if (i == fetchedData[screen].length - 1) screenNum++;
-    }
-  }
-}
+// function addFetchedData(eventName, fetchedData) {
+//   let screenNum = 1;
+//   for (let screen in fetchedData) {
+//     let screenCompanyTabs = document.getElementById(eventName + '-screen' + screenNum + '-company-tabs');
+//     for (let i = 0; i < fetchedData[screen].length; i++) {
+//       let div = document.createElement('div');
+//       let span = document.createElement('span');
+//
+//       div.setAttribute('class', 'company-tab');
+//       div.setAttribute('onclick', 'changeCandleStickChart(\'' + fetchedData[screen][i].toString() + '\')')
+//       span.setAttribute('class', 'symbol');
+//       span.innerText = fetchedData[screen][i].toString().substr(0, fetchedData[screen][i].toString().length - 3);
+//       div.append(span);
+//       screenCompanyTabs.append(div);
+//
+//       if (i == fetchedData[screen].length - 1) screenNum++;
+//     }
+//   }
+// }
 
 
 // Creating Events
