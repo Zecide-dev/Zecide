@@ -58,6 +58,8 @@ res.send(x);
 
 
 router3.get('/getFeed/history',function(req,res){
+  let left = req.query.from;
+  let right = req.query.to;
   // console.log(left,right);
   let backendBaseURL = 'https://www.backend.zecide.com/';
   let url = backendBaseURL + 'Dashboard/fetchChartData?companyName=' + req.query.symbol;
