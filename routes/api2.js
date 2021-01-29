@@ -80,9 +80,9 @@ const bucket = api.bucket({
 //   // })
 // });
 
-router2.get('/learn2', function (req, res, next) {
+router2.get('/learn', function (req, res, next) {
   bucket.getObjects({
-    limit: 5
+    limit: 25
   }).then(data => {
     res.render('learn', { 'data': data });
   })
@@ -97,7 +97,7 @@ function mdParse(text) {
 }
 
 /* GET individual module */
-router2.get('/learn2/:slug', function (req, res, next) {
+router2.get('/learn/:slug', function (req, res, next) {
   bucket.getObject({
     slug: req.params.slug
   }).then(data => {
