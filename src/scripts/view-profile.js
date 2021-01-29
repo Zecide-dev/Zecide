@@ -20,6 +20,7 @@ myHeaders.append('authorization', 'Token ' + token);
 // var userData;
 var loc = window.location.pathname;
 // console.log(loc);
+
 var ca = loc.split('/');
 // console.log(ca)
 var userToSend = ca[2];
@@ -68,6 +69,7 @@ function userBio() {
             document.getElementById('profession').innerHTML = userData.userInfo.Work;
             document.getElementById('education').innerHTML = userData.userInfo.Education;
             document.getElementById('place').innerHTML = userData.userInfo.Place;
+
             followCount = userData.userInfo.Followers;
             console.log(followCount)
             var followersUnique = followCount.filter(unique);
@@ -120,6 +122,7 @@ function userBio() {
 userBio();
 // var userid = localStorage.getItem("userid");
 
+
 // // console.log(userid)
 // for(var i = 0;i<followCount;i++){
 //     if(userData.userInfo.Followers[i]==myuserid){
@@ -167,6 +170,7 @@ function unfollowFun(){
     unfollow.style.display = 'none'
 
     follow.style.display ='inline'
+
     followDisplay = followDisplay -1;
     document.getElementById('followers').innerHTML = followDisplay ;
 

@@ -29,6 +29,12 @@
         type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+    <!-- trading view -->
+    <script type="text/javascript" src="charts/charting_library/charting_library.standalone.js"></script>
+		<script type="text/javascript" src="charts/datafeeds/udf/dist/polyfills.js"></script>
+		<script type="text/javascript" src="charts/datafeeds/udf/dist/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+
 </head>
 
 <body>
@@ -58,13 +64,13 @@
     </div>
 
     <!-- Modal for Show all events -->
-    
+
 
     <!-- Side Navbar -->
 
 
     <!-- NAVBAR -->
-    <div class="upper-nav"> 
+    <div class="upper-nav">
         <div class="logo" style="padding-left: 1vw;">
             <a href="/learn2">
                 <img class="alogo" src="/src/images/logo.svg" alt="zecide-logo" />
@@ -87,6 +93,9 @@
             </div>
         </div>
     </div>
+
+
+    <div id="tv_chart_container" style="margin-left:10vw;margin-right:10vw"></div>
 
     <!-- BODY -->
     <div id="body-container" class="container-fluid">
@@ -147,7 +156,7 @@
                                         <li><a class="dropdown-item" href="#">10s</a></li>
                                         <li><a class="dropdown-item" href="#">15s</a></li>
                                         <li><a class="dropdown-item" href="#">30s</a></li>
-                                        
+
                                     </ul>
                                 </div>
 
@@ -221,7 +230,7 @@
                         <button class='monitor-create-buttons'>Create Event</button>
                     </div> -->
                 </div>
-      
+
 
             </div>
         </div>
@@ -233,7 +242,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
-    <script src="/src/scripts/trading-simulator.js"></script>
+    <script type="module" src="/src/scripts/trading-simulator.js"></script>
 </body>
 
 

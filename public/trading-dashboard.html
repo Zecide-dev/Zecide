@@ -26,6 +26,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.33.1/plotly.min.js"
     integrity="sha512-V0j9LhrK9IMNdFYZqh+IqU4cjo7wdxyHNyH+L0td4HryBuZ7Oq6QxP2/CWr6TituX31+gv5PnolvERuTbz8UNA=="
     crossorigin="anonymous"></script>
+    <!-- trading view -->
+    <script type="text/javascript" src="/public/charts/charting_library/charting_library.standalone.js"></script>
+		<script type="text/javascript" src="/public/charts/datafeeds/udf/dist/polyfills.js"></script>
+		<script type="text/javascript" src="/public/charts/datafeeds/udf/dist/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
 </head>
 
 <body>
@@ -149,22 +154,15 @@
     </div>
   </div>
 
+
+  <div id="tv_chart_container" style="margin-left:10vw;margin-right:10vw"></div>
   <!-- BODY -->
   <div id="body-container" class="container-fluid">
     <div class="row">
       <div class="col-sm-8">
         <div class="card">
-          <div class="card-body">
-            <div id='creating-candlestick-chart'>
-              <h4 style="text-align: center;">Creating Chart...</h4>
-              <div class="spinner-grow text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
-            <div id="candlestick-chart-div">
-              <h4 id='candlestick-chart-title'>INFY</h4>
-              <div id="candlestick-chart"></div>
-            </div>
+          <div id="dashboard-chart">
+
           </div>
         </div>
         <div class='row'>
@@ -1456,7 +1454,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
-  <script src="/src/scripts/trading-dashboard.js"></script>
+  <script type='module' src="/src/scripts/trading-dashboard.js"></script>
+  <script type='module' src="/src/scripts/trading-dashboard2.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
+// ####################################################################################################################################
 let backendBaseURL = 'https://www.backend.zecide.com/';
-
+//
 let jwtToken = localStorage.getItem('jwttoken');
 
 
@@ -7,9 +8,9 @@ let jwtToken = localStorage.getItem('jwttoken');
 let candleSeries;
 let candlestickChartData = [];
 let selectedCompany = 'INFY.NS';
-
-
-// CREATING COMPANY TAB DIV
+//
+//
+// // CREATING COMPANY TAB DIV
 function createCompanyTabDiv(companyName) {
   let div = document.createElement('div');
   let span = document.createElement('span');
@@ -21,9 +22,9 @@ function createCompanyTabDiv(companyName) {
   div.append(span);
   return (div);
 }
-
-
-// ADDING COMPANY TABS INTO THE NIFTY SECTION
+//
+//
+// // ADDING COMPANY TABS INTO THE NIFTY SECTION
 let nifty = ['INFY.NS', 'ITC.NS', 'UPL.NS', 'CIPLA.NS', 'ASIANPAINT.NS', 'DRREDDY.NS', 'WIPRO.NS', 'HCLTECH.NS', 'HINDALCO.NS', 'MARUTI.NS', 'POWERGRID.NS', 'DIVISLAB.NS', 'ICICIBANK.NS', 'TECHM.NS', 'ADANIPORTS.NS', 'TCS.NS', 'SBIN.NS', 'HDFC.NS', 'BAJFINANCE.NS', 'TATASTEEL.NS', 'ULTRACEMCO.NS', 'TITAN.NS', 'SUNPHARMA.NS', 'M&M.NS', 'RELIANCE.NS', 'HINDUNILVR.NS', 'BAJAJFINSV.NS', 'AXISBANK.NS', 'BRITANNIA.NS', 'NTPC.NS', 'LT.NS', 'KOTAKBANK.NS', 'GRASIM.NS', 'NESTLEIND.NS', 'SHREECEM.NS', 'IOC.NS', 'BPCL.NS', 'BAJAJ-AUTO.NS', 'HEROMOTOCO.NS', 'COALINDIA.NS', 'SBILIFE.NS', 'EICHERMOT.NS', 'HDFCBANK.NS', 'ONGC.NS', 'INDUSINDBK.NS', 'TATAMOTORS.NS', 'HDFCLIFE.NS', 'GAIL.NS', 'JSWSTEEL.NS', 'BHARTIARTL.NS']
 function addCompaniesIntoNifty() {
   let niftyCompaniesDiv = document.getElementById('nifty-companies-div');
@@ -32,58 +33,59 @@ function addCompaniesIntoNifty() {
     niftyCompaniesDiv.append(returnedDiv);
   })
 }
+//
+//
+// const chartCreation = () => {
+//   var chart = LightweightCharts.createChart(document.getElementById('candlestick-chart'), {
+//     // width: 600,
+//     // height: 300,
+//     layout: {
+//       backgroundColor: '#FFF',
+//       textColor: '#000',
+//     },
+//     grid: {
+//       vertLines: {
+//         color: 'rgba(197, 203, 206, 0.5)',
+//       },
+//       horzLines: {
+//         color: 'rgba(197, 203, 206, 0.5)',
+//       },
+//     },
+//     crosshair: {
+//       mode: LightweightCharts.CrosshairMode.Normal,
+//     },
+//     rightPriceScale: {
+//       borderColor: 'rgba(197, 203, 206, 0.8)',
+//     },
+//     timeScale: {
+//       borderColor: 'rgba(197, 203, 206, 0.8)',
+//       timeVisible: true,
+//       secondsVisible: false
+//     },
+//     localization: {
+//       locale: 'en-IN',
+//     }
+//   });
+//
+//   candleSeries = chart.addCandlestickSeries({
+//     upColor: 'rgba(255, 144, 0, 1)',
+//     downColor: '#000',
+//     borderDownColor: 'rgba(255, 144, 0, 1)',
+//     borderUpColor: 'rgba(255, 144, 0, 1)',
+//     wickDownColor: 'rgba(255, 144, 0, 1)',
+//     wickUpColor: 'rgba(255, 144, 0, 1)',
+//   });
+//
+//   candleSeries.setData(candlestickChartData);
+//
+//   // Resizing chart when window is resized, so that it always fits the container.
+//   window.addEventListener('resize', () => {
+//     chart.applyOptions({
+//       width: $('#candlestick-chart').width(),
+//       height: $('#candlestick-chart').height(),
+//     });
+//   })
 
-
-const chartCreation = () => {
-  var chart = LightweightCharts.createChart(document.getElementById('candlestick-chart'), {
-    // width: 600,
-    // height: 300,
-    layout: {
-      backgroundColor: '#FFF',
-      textColor: '#000',
-    },
-    grid: {
-      vertLines: {
-        color: 'rgba(197, 203, 206, 0.5)',
-      },
-      horzLines: {
-        color: 'rgba(197, 203, 206, 0.5)',
-      },
-    },
-    crosshair: {
-      mode: LightweightCharts.CrosshairMode.Normal,
-    },
-    rightPriceScale: {
-      borderColor: 'rgba(197, 203, 206, 0.8)',
-    },
-    timeScale: {
-      borderColor: 'rgba(197, 203, 206, 0.8)',
-      timeVisible: true,
-      secondsVisible: false
-    },
-    localization: {
-      locale: 'en-IN',
-    }
-  });
-
-  candleSeries = chart.addCandlestickSeries({
-    upColor: 'rgba(255, 144, 0, 1)',
-    downColor: '#000',
-    borderDownColor: 'rgba(255, 144, 0, 1)',
-    borderUpColor: 'rgba(255, 144, 0, 1)',
-    wickDownColor: 'rgba(255, 144, 0, 1)',
-    wickUpColor: 'rgba(255, 144, 0, 1)',
-  });
-
-  candleSeries.setData(candlestickChartData);
-
-  // Resizing chart when window is resized, so that it always fits the container.
-  window.addEventListener('resize', () => {
-    chart.applyOptions({
-      width: $('#candlestick-chart').width(),
-      height: $('#candlestick-chart').height(),
-    });
-  })
 
 
   // NEW BUBBLE CHART
@@ -120,7 +122,6 @@ const chartCreation = () => {
     
       Plotly.newPlot('bubble-chart', bubbleChartData, layout);
     }
-  }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.send(null);
@@ -129,41 +130,55 @@ const chartCreation = () => {
 
 // CHANGE CANDLESTICK CHART
 
-function changeCandleStickChart(companyName) {
-  console.log('Changing Chart!');
+// function changeCandleStickChart(companyName) {
+//   console.log('Changing Chart!');
 
-  // Changing the selected Company
-  selectedCompany = companyName;
+//   // Changing the selected Company
+//   selectedCompany = companyName;
 
-  // Changing the Chart Title
-  let candlestickChartTitle = document.getElementById('candlestick-chart-title');
-  candlestickChartTitle.innerText = companyName;
+//   // Changing the Chart Title
+//   let candlestickChartTitle = document.getElementById('candlestick-chart-title');
+//   candlestickChartTitle.innerText = companyName;
 
-  // Changing the company in the risk management section
-  document.getElementById('risk-management-company-name').innerText = companyName;
+//   // Changing the company in the risk management section
+//   document.getElementById('risk-management-company-name').innerText = companyName;
 
-  // Showing Creating Chart loader
-  let candlestickChartDiv = document.getElementById('candlestick-chart-div');
-  let creatingCandlestickChart = document.getElementById('creating-candlestick-chart');
-  candlestickChartDiv.style.display = 'none';
-  creatingCandlestickChart.style.display = 'block';
+//   // Showing Creating Chart loader
+//   let candlestickChartDiv = document.getElementById('candlestick-chart-div');
+//   let creatingCandlestickChart = document.getElementById('creating-candlestick-chart');
+//   candlestickChartDiv.style.display = 'none';
+//   creatingCandlestickChart.style.display = 'block';
 
   var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL + 'Dashboard/fetchChartData?companyName=' + companyName;
+  let url = backendBaseURL + 'Dashboard/bubbleChartData';
   console.log(url);
 
   xmlHttp.onreadystatechange = function () {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-      candlestickChartData = JSON.parse(xmlHttp.responseText);
+      bubbleChartData = JSON.parse(xmlHttp.responseText);
 
-      // Showing Candlestick Chart
-      candlestickChartDiv.style.display = 'block';
-      creatingCandlestickChart.style.display = 'none';
+      // Showing bubbleChart
 
-      candleSeries.setData(candlestickChartData);
-      console.log('Done');
+      var layout = {
+        title: 'Sector Analytics',
+        showlegend: true,
+        height: 520,
+        width: 850,
+        xaxis: {
+          title: "Latest Move Percentage",
+          range: [ 0, 2 ]
+        },
+        yaxis: {
+          title: "Returns",
+          range: [ -1, 7 ]
+        },
+        plot_bgcolor: "#F3FAFf"
+      };
+
+      document.getElementById('creating-bubble-chart').style.display = 'none';
+
+      Plotly.newPlot('bubble-chart', bubbleChartData, layout);
     }
-  }
   console.log('getting');
   xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
@@ -171,11 +186,55 @@ function changeCandleStickChart(companyName) {
 }
 
 
-window.addEventListener('load', () => {
-  chartCreation();
-  addCompaniesIntoNifty();
-  changeCandleStickChart('INFY.NS');
-});
+// CHANGE CANDLESTICK CHART
+
+// function changeCandleStickChart(companyName) {
+//   console.log('Changing Chart!');
+//
+//   // Changing the selected Company
+//   selectedCompany = companyName;
+//
+  // Changing the Chart Title
+  let candlestickChartTitle = document.getElementById('candlestick-chart-title');
+  // candlestickChartTitle.innerText = companyName;
+//
+//   // Changing the company in the risk management section
+//   document.getElementById('risk-management-company-name').innerText = companyName;
+//
+//   // Showing Creating Chart loader
+//   let candlestickChartDiv = document.getElementById('candlestick-chart-div');
+//   let creatingCandlestickChart = document.getElementById('creating-candlestick-chart');
+//   candlestickChartDiv.style.display = 'none';
+//   creatingCandlestickChart.style.display = 'block';
+//
+//   var xmlHttp = new XMLHttpRequest();
+//   let url = backendBaseURL + 'Dashboard/fetchChartData?companyName=' + companyName;
+//   console.log(url);
+//
+//   xmlHttp.onreadystatechange = function () {
+//     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+//       candlestickChartData = JSON.parse(xmlHttp.responseText);
+//
+//       // Showing Candlestick Chart
+//       candlestickChartDiv.style.display = 'block';
+//       creatingCandlestickChart.style.display = 'none';
+//
+//       candleSeries.setData(candlestickChartData);
+//       console.log('Done');
+//     }
+//   }
+//   console.log('getting');
+//   xmlHttp.open("GET", url, true); // true for asynchronous
+//   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
+//   xmlHttp.send(null);
+// }
+//
+//
+// window.addEventListener('load', () => {
+//   chartCreation();
+//   addCompaniesIntoNifty();
+//   changeCandleStickChart('INFY.NS');
+// });
 
 
 // Checklist addition
@@ -734,7 +793,7 @@ function createMovingAverage(type) {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 }
@@ -800,7 +859,7 @@ createVWAPEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchron
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -909,7 +968,7 @@ createIchimokuEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -960,6 +1019,7 @@ createVortexEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
+
   xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
@@ -1769,7 +1829,7 @@ createAOEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -1824,7 +1884,7 @@ createStochEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2096,7 +2156,7 @@ createRSIEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2225,7 +2285,7 @@ createPivotFiboEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2329,7 +2389,7 @@ createStructureEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2379,7 +2439,7 @@ createPullbackEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2431,7 +2491,7 @@ createRangeBoundEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.open("GET", url, true); // true for asynchronous
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
 })
@@ -2536,6 +2596,7 @@ createReversalEvent.addEventListener('click', function () {
     }
   }
   console.log('getting');
+
   xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
@@ -2623,6 +2684,7 @@ riskManagementGo.addEventListener('click', () => {
     }
   }
   console.log('getting');
+
   xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
   xmlHttp.send(null);
