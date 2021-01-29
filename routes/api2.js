@@ -82,7 +82,7 @@ const bucket = api.bucket({
 
 router2.get('/learn', function (req, res, next) {
   bucket.getObjects({
-    limit: 5
+    limit: 25
   }).then(data => {
     res.render('learn', { 'data': data });
   })
