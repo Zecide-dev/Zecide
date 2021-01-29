@@ -526,12 +526,12 @@ $('#delete-monitor-bubble-modal').on('show.bs.modal', function (event) {
 
 let totalCustomEvents = 1;
 let customEventCounter = 0;
-
+let eventNamesArr = {};
 // Price-action / Indicator / Price div toggle
 
 let priceActionButton = document.getElementById('price-action-button');
 let indicatorButton = document.getElementById('indicator-button');
-let priceButton = document.getElementById('price-button');
+// let priceButton = document.getElementById('price-button');
 let priceActionDiv = document.getElementById('price-action-div');
 let indicatorDiv = document.getElementById('indicator-div');
 let priceDiv = document.getElementById('price-div');
@@ -548,11 +548,12 @@ indicatorButton.addEventListener('click', function () {
   priceDiv.style.display = 'none';
 })
 
-priceButton.addEventListener('click', function () {
-  priceActionDiv.style.display = 'none';
-  indicatorDiv.style.display = 'none';
-  priceDiv.style.display = 'block';
-})
+// PRICE BUTTON NOT WORKING FOR NOW
+// priceButton.addEventListener('click', function () {
+//   priceActionDiv.style.display = 'none';
+//   indicatorDiv.style.display = 'none';
+//   priceDiv.style.display = 'block';
+// })
 
 
 // Displaying different Price Action tools
@@ -620,6 +621,16 @@ for (let i = 0; i < toolsChoicesDropdown.length; i++) {
 // This function will create the eventName, add it into the numScreens Variable with the given number of screens and return the eventName
 function newEventInitialiser(num) {
   let eventName = document.getElementById('event-name').value.toString().split(' ').join('-');
+  // console.log(eventNamesArr);
+
+  if(eventNamesArr[eventName] != undefined){
+    document.getElementById('exist').style.display = 'block';
+    creatingEventLoader.style.display = "none";
+    createEvent.style.display = "block";
+    document.getElementById('exist').innerHTML =  "'" + eventName + "' "+ "<i>event already exists. Please choose new name for the event.</i>";
+    throw new Error(eventName + ' event already exists. Please choose new name for the event.');
+  }
+  $(".no-event-heading").hide();
   if (eventName == '') {
     eventName = 'Custom-Event-' + totalCustomEvents;
     totalCustomEvents++;
@@ -631,6 +642,8 @@ function newEventInitialiser(num) {
       }
     }
   }
+  document.getElementById('exist').style.display = 'none';
+  eventNamesArr[eventName] = true;
   numScreens[eventName] = num;
   return eventName;
 }
@@ -659,25 +672,27 @@ function createNewBubbleForModal(eventName) {
 
 
 // Adding fetchedData into their respective screens tab
-// function addFetchedData(eventName, fetchedData) {
-//   let screenNum = 1;
-//   for (let screen in fetchedData) {
-//     let screenCompanyTabs = document.getElementById(eventName + '-screen' + screenNum + '-company-tabs');
-//     for (let i = 0; i < fetchedData[screen].length; i++) {
-//       let div = document.createElement('div');
-//       let span = document.createElement('span');
-//
-//       div.setAttribute('class', 'company-tab');
-//       div.setAttribute('onclick', 'changeCandleStickChart(\'' + fetchedData[screen][i].toString() + '\')')
-//       span.setAttribute('class', 'symbol');
-//       span.innerText = fetchedData[screen][i].toString().substr(0, fetchedData[screen][i].toString().length - 3);
-//       div.append(span);
-//       screenCompanyTabs.append(div);
-//
-//       if (i == fetchedData[screen].length - 1) screenNum++;
-//     }
-//   }
-// }
+function addFetchedData(eventName, fetchedData) {
+  console.log(fetchedData);
+  let screenNum = 1;
+  for (let screen in fetchedData) {
+    console.log(screen);
+    let screenCompanyTabs = document.getElementById(eventName + '-screen' + screenNum + '-company-tabs');
+    for (let i = 0; i < fetchedData[screen].length; i++) {
+      let div = document.createElement('div');
+      let span = document.createElement('span');
+
+      div.setAttribute('class', 'company-tab');
+      div.setAttribute('onclick', 'changeCandleStickChart(\'' + fetchedData[screen][i].toString() + '\')')
+      span.setAttribute('class', 'symbol');
+      span.innerText = fetchedData[screen][i].toString().substr(0, fetchedData[screen][i].toString().length - 3);
+      div.append(span);
+      screenCompanyTabs.append(div);
+
+      if (i == fetchedData[screen].length - 1) screenNum++;
+    }
+  }
+}
 
 
 // Creating Events
@@ -719,6 +734,7 @@ function createMovingAverage(type) {
   console.log(url);
 
   xmlHttp.onreadystatechange = function () {
+
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
       creatingEventLoader.style.display = 'none';
       monitorEvent.style.display = 'block';

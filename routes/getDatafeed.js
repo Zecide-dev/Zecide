@@ -218,7 +218,7 @@ router3.get('/getFeed/time', (req, res) => {
 
 router3.get('/getFeed/config',function(req,res){
   var x = {
-    supported_resolutions: ['1','5', '15', '30','60','1D','1W','1M'],
+    supported_resolutions: ['5','30','60'],
     supports_group_request: true,
     supports_marks: false,
     supports_search: false,
@@ -284,7 +284,7 @@ router3.get('/getFeed/history',function(req,res){
     // console.log(body[i]);
     if(body[i].time > left && body[i].time < right){
       sendJson.o.push(body[i].open);
-      sendJson.t.push(body[i].time*1000);
+      sendJson.t.push(body[i].time);
       sendJson.c.push(body[i].close);
       sendJson.h.push(body[i].high);
       sendJson.l.push(body[i].low);
