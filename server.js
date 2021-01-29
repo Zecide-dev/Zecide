@@ -18,7 +18,8 @@ const bodyParser = require('body-parser');
 
 //initialize routes
 const routes = require('./routes/api');
-const routes2 = require('./routes/api2')
+const routes2 = require('./routes/api2');
+const routes3 = require('./routes/getDatafeed');
 
 const jwt = require('jsonwebtoken');
 const fetch = require("node-fetch");
@@ -30,6 +31,7 @@ var logger = require('morgan');
 var path = require('path');
 var indexRouter = require('./routes/api');
 var indexRouter2 = require('./routes/api2');
+var indexRouter3 = require('./routes/getDatafeed');
 const { response } = require("express");
 const passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -51,6 +53,7 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/', indexRouter2);
+app.use('/', indexRouter3);
 var schedule = require('node-schedule');
 const { get } = require("./routes/api2");
 function newsCall() {
@@ -73,7 +76,7 @@ app.use(session({
 
 
 
-// passport auth 
+
 
 passport.use(
     new GoogleStrategy({
@@ -113,7 +116,6 @@ const checkUserLoggedIn = (req, res, next) => {
 }
 app.get('/google-profile', checkUserLoggedIn, (req, res) => {
 
-       
     // res.send(req.user);
     // // res.json(req.user)
     // res.redirect('/abc');
@@ -121,12 +123,11 @@ app.get('/google-profile', checkUserLoggedIn, (req, res) => {
     console.log(req.user)
     // res.send(req.user)
     res.render('google-profile',{user:req.user})
-    
+
     
    
 });
 // app.get('/abc',(req,res)=>{
-    
 // })
 // Auth Routes
 
@@ -261,4 +262,3 @@ app.post("/users", function (req, res) {
     }
 
 });
-

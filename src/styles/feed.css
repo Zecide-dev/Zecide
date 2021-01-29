@@ -8,6 +8,13 @@
     opacity: 1;
   }
 }
+#coming-soon-card {
+  font-size: 0.8rem;
+}
+
+#coming-soon-insights {
+  font-size: 0.7rem;
+}
 
 html,
 body {
@@ -29,7 +36,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: #000000;
 }
 
@@ -71,7 +78,7 @@ a {
 
 .logo span {
   font-size: 1.6vw;
-} 
+}
  .upper-right{
   display: flex !important;
   width: 76.7vw;
@@ -98,7 +105,7 @@ a {
 }
 
 .dropdown ul {
-  
+
   list-style: none;
 }
 
@@ -862,14 +869,14 @@ li{
   .feed-card-mid {
     margin-bottom: 2vh;
   }
-  
-  
+
+
   .feed-card-mid p{
     color: black;
     font-size: 3.8vw;
     margin: 0;
   }
-  
+
   .feed-card-mid img{
     width: 100%;
     margin-top: 2vh;
@@ -1007,4 +1014,3 @@ ul{
   background-color: whitesmoke;
   color: #ffffff;
 }
-
