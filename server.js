@@ -73,6 +73,7 @@ app.use(session({
     saveUninitialized: true,
     secret: '24knb6k247b2k7b2k7bk247hb2kh7b2',
 }))
+session.userId ;
 
 
 
@@ -150,10 +151,11 @@ app.post('/login-post', function (req, res) {
     session.userId = authToken;
     res.redirect('/user-feed');
 })
+
 app.get('/user-feed', async (req, res) => {
     if (!(session.userId == 1)) {
         console.log('un success')
-        return res.redirect('/users/login')
+        res.redirect('/users/login')
     }
     else {
 

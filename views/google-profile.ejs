@@ -11,20 +11,90 @@
 <body>
     <center>
 
-        <h1>Loading Feed for :</h1>
+        <h1>Loading Feed :</h1>
+        <div class="load">
+            <hr />
+            <hr />
+            <hr />
+            <hr />
+        </div>
 
     </center>
+    <style>
+        body {
+            background: #ECF0F1
+        }
+
+        .load {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /*change these sizes to fit into your project*/
+            width: 100px;
+            height: 100px;
+        }
+
+        .load hr {
+            border: 0;
+            margin: 0;
+            width: 40%;
+            height: 40%;
+            position: absolute;
+            border-radius: 50%;
+            animation: spin 2s ease infinite
+        }
+
+        .load :first-child {
+            background: #19A68C;
+            animation-delay: -1.5s
+        }
+
+        .load :nth-child(2) {
+            background: #F63D3A;
+            animation-delay: -1s
+        }
+
+        .load :nth-child(3) {
+            background: #FDA543;
+            animation-delay: -0.5s
+        }
+
+        .load :last-child {
+            background: #193B48
+        }
+
+        @keyframes spin {
+
+            0%,
+            100% {
+                transform: translate(0)
+            }
+
+            25% {
+                transform: translate(160%)
+            }
+
+            50% {
+                transform: translate(160%, 160%)
+            }
+
+            75% {
+                transform: translate(0, 160%)
+            }
+        }
+    </style>
     <% var dname=user.displayName; %>
 
         <% var dId=user.id; %>
             <% var dEmail=user._json.email %>
                 <center>
-                    <h3>
+                    <!-- <h3>
                         <%= dname %>
                     </h3>
                     <h4>
                         <%= dEmail %>
-                    </h4>
+                    </h4> -->
                 </center>
                 <script>
                     let backendbaseurl = "https://www.backend.zecide.com";
@@ -112,65 +182,65 @@
                                 console.log("110 erro")
                                 // registerNewUser();
                                 console.log(newUserRegistration)
-                               
-                                    function registerNewUser() {
 
-                                        var formData1 = new FormData();
-                                        var email = getEmail;
+                                function registerNewUser() {
 
-                                        var username = getName;
-                                        var password = getId;
-                                        var registrationtoken = "abcdef";
+                                    var formData1 = new FormData();
+                                    var email = getEmail;
 
-                                        //to append registration token
-                                        var stat;
-                                        var infoObject = { "UserName": username, "Email": email, "password": password, "registrationToken": registrationtoken };
-                                        var info = JSON.stringify(infoObject);
-                                        formData1.append("user", info);
-                                        fetch(backendbaseurl + '/Users', {
-                                            method: 'POST',
-                                            body: formData1
-                                        }).then(function (response) {
-                                            stat = response.status;
-                                            return response.json();
-                                        }).then(function (text) {
-                                            console.log(text.user.UserName);
-                                            console.log(text.user._id);
-                                            console.log(text.user.token);
-                                            // setCookie("UserName", text.user.UserName);
-                                            // setCookie("UserID", text.user._id);
-                                            // setCookie("token", text.user.token);
+                                    var username = getName;
+                                    var password = getId;
+                                    var registrationtoken = "abcdef";
 
-
-                                            //uncomment the above code 
+                                    //to append registration token
+                                    var stat;
+                                    var infoObject = { "UserName": username, "Email": email, "password": password, "registrationToken": registrationtoken };
+                                    var info = JSON.stringify(infoObject);
+                                    formData1.append("user", info);
+                                    fetch(backendbaseurl + '/Users', {
+                                        method: 'POST',
+                                        body: formData1
+                                    }).then(function (response) {
+                                        stat = response.status;
+                                        return response.json();
+                                    }).then(function (text) {
+                                        console.log(text.user.UserName);
+                                        console.log(text.user._id);
+                                        console.log(text.user.token);
+                                        // setCookie("UserName", text.user.UserName);
+                                        // setCookie("UserID", text.user._id);
+                                        // setCookie("token", text.user.token);
 
 
+                                        //uncomment the above code 
 
-                                            // var usc = getCookie("UserName");
-                                            // var uic = getCookie("UserID");
-                                            // var tc = getCookie("token");
 
-                                            // console.log(usc);
-                                            // console.log(uic);
-                                            // console.log(tc);
 
-                                            if (stat == 200) {
-                                                console.log('new user registered')
+                                        // var usc = getCookie("UserName");
+                                        // var uic = getCookie("UserID");
+                                        // var tc = getCookie("token");
 
-                                                // window.location.pathname = '/google-profile';
-                                                location.reload();
+                                        // console.log(usc);
+                                        // console.log(uic);
+                                        // console.log(tc);
 
-                                            }
-                                            else {
-                                                alert('An error occured!')
-                                            }
-                                        }).catch(function (error) {
-                                            console.error(error);
-                                        })
-                                    }
-                                    registerNewUser();
+                                        if (stat == 200) {
+                                            console.log('new user registered')
 
-                                
+                                            // window.location.pathname = '/google-profile';
+                                            location.reload();
+
+                                        }
+                                        else {
+                                            alert('An error occured!')
+                                        }
+                                    }).catch(function (error) {
+                                        console.error(error);
+                                    })
+                                }
+                                registerNewUser();
+
+
 
 
 
