@@ -7,8 +7,7 @@ const mongoose = require('mongoose');
 const request = require('request');
 
 router3.get('/getFeed', (req, res) => {
-        res.code(200).header('Content-Type', 'text/plain')
-            .send('Welcome to UDF Adapter for TradingView. See ./config for more details.'
+            res.send('Welcome to UDF Adapter for TradingView. See ./config for more details.'
 )});
 
 router3.get('/getFeed/time', (req, res) => {
