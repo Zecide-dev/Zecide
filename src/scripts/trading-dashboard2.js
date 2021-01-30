@@ -16,11 +16,11 @@ function initOnReady() {
 		debug: true, // uncomment this line to see Library errors and warnings in the console
 		fullscreen: true,
 		symbol: 'INFY.NS',
-		interval: '1',
+		interval: '5',
 		container_id: "dashboard-chart",
 		//	BEWARE: no trailing slash is expected in feed URL
 		// datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com",100000),
-		datafeed: new Datafeeds.UDFCompatibleDatafeed("http://localhost:8080/getFeed",10000),
+		datafeed: new Datafeeds.UDFCompatibleDatafeed("http://localhost:8080/getFeed",300*1000),
 		library_path: "charting_library/",
 		locale: getParameterByName('lang') || "en",
 
