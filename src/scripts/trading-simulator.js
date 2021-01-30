@@ -16,8 +16,8 @@ function initOnReady() {
 	var widget = new TradingView.widget({
 		debug: true, // uncomment this line to see Library errors and warnings in the console
 		fullscreen: true,
-		symbol: 'INFY.N',
-		interval: '1',
+		symbol: 'INFY.NS',
+		interval: '5',
 		container_id: "tv_chart_container",
 
 		//	BEWARE: no trailing slash is expected in feed URL
