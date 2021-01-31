@@ -149,41 +149,41 @@ xmlHttp.send(null);
 //   candlestickChartDiv.style.display = 'none';
 //   creatingCandlestickChart.style.display = 'block';
 
-  var xmlHttp = new XMLHttpRequest();
-  let url = backendBaseURL + 'Dashboard/bubbleChartData';
-  console.log(url);
+//   var xmlHttp = new XMLHttpRequest();
+//   let url = backendBaseURL + 'Dashboard/bubbleChartData';
+//   console.log(url);
 
-  xmlHttp.onreadystatechange = function () {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-      bubbleChartData = JSON.parse(xmlHttp.responseText);
+//   xmlHttp.onreadystatechange = function () {
+//     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+//       bubbleChartData = JSON.parse(xmlHttp.responseText);
 
-      // Showing bubbleChart
+//       // Showing bubbleChart
 
-      var layout = {
-        title: 'Sector Analytics',
-        showlegend: true,
-        height: 520,
-        width: 850,
-        xaxis: {
-          title: "Latest Move Percentage",
-          range: [ 0, 2 ]
-        },
-        yaxis: {
-          title: "Returns",
-          range: [ -1, 7 ]
-        },
-        plot_bgcolor: "#F3FAFf"
-      };
+//       var layout = {
+//         title: 'Sector Analytics',
+//         showlegend: true,
+//         height: 520,
+//         width: 850,
+//         xaxis: {
+//           title: "Latest Move Percentage",
+//           range: [ 0, 2 ]
+//         },
+//         yaxis: {
+//           title: "Returns",
+//           range: [ -1, 7 ]
+//         },
+//         plot_bgcolor: "#F3FAFf"
+//       };
 
-      document.getElementById('creating-bubble-chart').style.display = 'none';
+//       document.getElementById('creating-bubble-chart').style.display = 'none';
 
-      Plotly.newPlot('bubble-chart', bubbleChartData, layout);
-    }
-  console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
-  xmlHttp.send(null);
-}
+//       Plotly.newPlot('bubble-chart', bubbleChartData, layout);
+//     }
+//   console.log('getting');
+//   xmlHttp.open("GET", url, true); // true for asynchronous 
+//   xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
+//   xmlHttp.send(null);
+// }
 
 
 // CHANGE CANDLESTICK CHART
