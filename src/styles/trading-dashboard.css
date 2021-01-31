@@ -547,6 +547,11 @@ a:hover {
   display: none;
 }
 
+#exist{
+  color : red;
+  font-size: 0.8em;
+  margin : 1em;
+}
 #ema-div, #cpr-div {
   display: block;
 }
