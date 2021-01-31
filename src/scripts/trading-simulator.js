@@ -6,7 +6,6 @@ function getParameterByName(name) {
 }
 
 
-
 // console.log(JSON.stringify(_datafeed));
 function initOnReady() {
 	var _datafeed = new Datafeeds.UDFCompatibleDatafeed("http://localhost:8080/getFeed");
