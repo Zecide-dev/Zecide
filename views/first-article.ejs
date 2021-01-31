@@ -67,9 +67,14 @@
         <div id="container" class="pg-container">
             <div class="navbar-m">
                 <div class="logo-m">
-                    <a href="/blog">
-                        <img class="alogo" src="/src/images/logo.svg" alt="zecide-logo" />
-                        <span>Zecide Learn</span>
+                    <a style="text-decoration: none;" href="/learn">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <img  class="alogo p-2 bd-highlight" src="/src/images/logo.svg" alt="zecide-logo" />
+                            <div class="p-2 bd-highlight">
+                                <span>Zecide </span>
+                                <span>Learn</span>
+                            </div>
+                        </div>
                     </a>
                 </div>
                 <div class="dropdown">
@@ -137,7 +142,7 @@
                             </div>
 
                         </div>
-                        <button style="display: none;" onclick="myFunction()" class="btn-outline-primary" id="bimg">View
+                        <button style="display: none;" onclick="myFunction()" class="btn-outline-primary bimg" id="bimg">View
                             Chapters⟶</button>
                         <br>
                         <br>
@@ -498,9 +503,9 @@
     
 </script> -->
 <script>
-    if (screen.width <= 700) {
-        myFunction();
-    }
+    // if (screen.width <= 700) {
+    //     myFunction();
+    // }
     function myFunction() {
         var sidebar = document.getElementById("sidebar");
         //   var moreText = document.getElementById("more");
@@ -595,6 +600,12 @@
         }
         .flex-item{
             width: 100%;
+        }
+        #bimg{
+            display: none;
+        }
+        .bimg{
+            display: none;
         }
     }
 </style>
