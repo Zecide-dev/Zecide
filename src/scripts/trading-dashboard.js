@@ -122,11 +122,10 @@ addCompaniesIntoNifty();
 
       Plotly.newPlot('bubble-chart', bubbleChartData, layout);
     }
-  console.log('getting');
-  xmlHttp.open("GET", url, true); // true for asynchronous
-  xmlHttp.send(null);
 }
-
+console.log('getting');
+xmlHttp.open("GET", url, true); // true for asynchronous
+xmlHttp.send(null);
 
 // CHANGE CANDLESTICK CHART
 
