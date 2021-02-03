@@ -10,7 +10,7 @@ const cors = require('cors');
 var whitelist = ['http://www.zecide.com', 'http://zecide.com'];
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
