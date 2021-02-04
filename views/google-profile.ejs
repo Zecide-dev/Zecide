@@ -117,14 +117,15 @@
                         var formData2 = new FormData();
                         // var infoObject = { 'UserName': getName,'password':getId };
                         // var info = JSON.stringify(infoObject);
-                        formData2.append("UserName", getEmail);
-                        formData2.append('password', getId)
+                        formData2.append("UserName", getName);
+                        formData2.append("email", getEmail);
+                        // formData2.append('password', getId)
                         // let _data = { 'UserName': getName,'password':getId }
                         // var abd = new URLSearchParams(new FormData(_data))
                         // console.log(abd)
 
                         var stat;
-                        fetch(backendbaseurl + "/users/login", {
+                        fetch(backendbaseurl + "/users/loginGoogle", {
                             method: 'POST',
                             body: new URLSearchParams(formData2)
                         }).then((resp) => {
