@@ -7,18 +7,8 @@ const mongoose = require('mongoose');
 const request = require('request');
 const cors = require('cors');
 
-var whitelist = ['http://www.zecide.com', 'http://zecide.com'];
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
-router3.get('/getFeed',cors(corsOptions), (req, res) => {
+router3.use(cors());
+router3.get('/getFeed', (req, res) => {
             res.send('Welcome to UDF Adapter for TradingView. See ./config for more details.'
 )});
 
@@ -30,19 +20,19 @@ router3.get('/getFeed/time', (req, res) => {
     })
 
 
-router3.get('/getFeed/config',cors(corsOptions),function(req,res){
+router3.get('/getFeed/config',function(req,res){
   var x = {
     supported_resolutions: ['5','30','60'],
     supports_group_request: true,
     supports_marks: false,
     supports_search: false,
     supports_timescale_marks: false,
-    supports_time: true
+    supports_time: false
 }
 res.send(x);
 })
 
-router3.get('/getFeed/symbol_info',cors(corsOptions), async (req, res) => {
+router3.get('/getFeed/symbol_info', async (req, res) => {
   console.log('[symbol_info]: Method call')
   console.log(req.query.group);
   var x = {
@@ -68,7 +58,7 @@ res.send(x);
 
 
 
-router3.get('/getFeed/history',cors(corsOptions),function(req,res){
+router3.get('/getFeed/history',function(req,res){
   let left = req.query.from;
   let right = req.query.to;
   // console.log(left,right);
