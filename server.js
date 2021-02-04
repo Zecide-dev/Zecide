@@ -102,7 +102,7 @@ var googleData;
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
     function (req, res) {
         // session.userId = 1;
-        // console.log(req.user)
+        console.log(req.user);
         googleData = req.user;
         res.redirect('/google-profile');
     }
@@ -121,7 +121,8 @@ app.get('/google-profile', checkUserLoggedIn, (req, res) => {
     // // res.json(req.user)
     // res.redirect('/abc');
     console.log('hi');
-    console.log(req.user)
+    console.log(req.user);
+    console.log(googleData);
     // res.send(req.user)
     res.render('google-profile',{user:req.user})
 
