@@ -7,6 +7,8 @@ function getParameterByName(name) {
 
 
 // console.log(JSON.stringify(_datafeed));
+var sym = "";
+var ref ;
 function initOnReady() {
 	// var _datafeed = new Datafeeds.UDFCompatibleDatafeed("http://localhost:8080/getFeed",1000);
 	// document.getElementById("x").innerHTML = _datafeed;
@@ -35,11 +37,17 @@ function initOnReady() {
 
 	widget.onChartReady(function() {
 
-		widget.onRealtimeTick = function(data) {
-		alert(data);
+		ref = function(){
+			widget.setSymbol(sym,'5');
 		}
 	});
-
 };
+
+
+function changeCandleStickChart(symName){
+	sym = symName;
+	ref();
+};
+
 // setInterval(initOnReady,3000);
 window.addEventListener('DOMContentLoaded', initOnReady, false);

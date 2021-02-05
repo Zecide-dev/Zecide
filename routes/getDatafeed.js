@@ -3,26 +3,15 @@ const router3 = express.Router();
 const path = require('path');
 const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const request = require('request');
-const cors = require('cors');
 
-router3.use(cors());
 router3.get('/getFeed', (req, res) => {
             res.send('Welcome to UDF Adapter for TradingView. See ./config for more details.'
 )});
 
-router3.get('/getFeed/time', (req, res) => {
-        console.log('[time]: Method call')
-        const time = Math.floor(Date.now())  // In seconds
-        console.log(time);
-        res.sendStatus(200).send(time);
-    })
-
-
 router3.get('/getFeed/config',function(req,res){
   var x = {
-    supported_resolutions: ['5','30','60'],
+    supported_resolutions: ['5'],
     supports_group_request: true,
     supports_marks: false,
     supports_search: false,
@@ -30,7 +19,7 @@ router3.get('/getFeed/config',function(req,res){
     supports_time: false
 }
 res.send(x);
-})
+});
 
 router3.get('/getFeed/symbol_info', async (req, res) => {
   console.log('[symbol_info]: Method call')
