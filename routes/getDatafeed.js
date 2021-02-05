@@ -4,7 +4,9 @@ const path = require('path');
 const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
 const request = require('request');
+const cors = require('cors');
 
+router3.use(cors());
 router3.get('/getFeed', (req, res) => {
             res.send('Welcome to UDF Adapter for TradingView. See ./config for more details.'
 )});
