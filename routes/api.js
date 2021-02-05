@@ -12,6 +12,15 @@ var bucket = api.bucket({
     read_key: 'ux7DSu9vRfdtTCzg3Q8iCkTzFwjkv4gkUKDgzgsGTHnsncEOgR'
 });
 //get the homepage
+router.get('/*', function(req, res, next) {
+  // console.log(req.headers.host);
+  if (req.headers.host.match('www.') == null ) {
+    console.log('http://' + req.headers.host.replace('','www.') + req.url);
+    res.redirect('http://' + req.headers.host.replace('','www.') + req.url);
+  } else {
+    next();
+  }
+})
 router.get('/',function(req,res){
     res.sendFile(path.join(__dirname, "../public/index.html"))
 })
