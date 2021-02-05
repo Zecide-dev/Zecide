@@ -16,7 +16,7 @@ function createCompanyTabDiv(companyName) {
   let span = document.createElement('span');
 
   div.setAttribute('class', 'company-tab');
-  // div.setAttribute('onclick', 'changeCandleStickChart(\'' + companyName + '\')')
+  div.setAttribute('onclick', 'changeCandleStickChart(\'' + companyName + '\')')
   span.setAttribute('class', 'symbol');
   span.innerText = companyName.substr(0, companyName.length - 3);
   div.append(span);
