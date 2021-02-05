@@ -2,6 +2,92 @@
 <html lang="en">
 
 <head>
+    <style>
+        /* Preloader */
+
+        .preloader{
+        width: 100vw;
+        height: 100vh;
+        background-color: #ffffff;
+        }
+
+        .pl-svg {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(1);
+                transform: translate(-50%, -50%) rotate(45deg) scale(1);
+        }
+
+        .stroke-still {
+        stroke: #e0e0e0;
+        }
+
+        .stroke-animation {
+        -webkit-animation: stroke-spacing 1.2s ease-in, stroke-color 4.8s linear;
+                animation: stroke-spacing 1.2s ease-in, stroke-color 4.8s linear;
+        -webkit-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+        -webkit-animation-delay: 0;
+                animation-delay: 0;
+        -webkit-animation-direction: normal;
+                animation-direction: normal;
+        -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards;
+        -webkit-animation-play-state: running;
+                animation-play-state: running;
+        -webkit-transform-origin: center center;
+                transform-origin: center center;
+        }
+
+        @-webkit-keyframes stroke-spacing {
+        0% {
+            stroke-dasharray: 0 200;
+        }
+        45% {
+            stroke-dashoffset: 0;
+            stroke-dasharray: 200 200;
+        }
+        90% {
+            stroke-dashoffset: -200;
+            stroke-dasharray: 200 200;
+        }
+        100% {
+            stroke-dashoffset: -200;
+            stroke-dasharray: 200 200;
+        }
+        }
+
+        @keyframes stroke-spacing {
+        0% {
+            stroke-dasharray: 0 200;
+        }
+        45% {
+            stroke-dashoffset: 0;
+            stroke-dasharray: 200 200;
+        }
+        90% {
+            stroke-dashoffset: -200;
+            stroke-dasharray: 200 200;
+        }
+        100% {
+            stroke-dashoffset: -200;
+            stroke-dasharray: 200 200;
+        }
+        }
+
+        @-webkit-keyframes stroke-color {
+        0%  { stroke: #3b98ff; }
+        99% { stroke: #3b98ff; }
+        }
+
+        @keyframes stroke-color {
+        0%  { stroke: #3b98ff; }
+        99% { stroke: #3b98ff; }
+        }
+
+        /* Preloader */
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -10,80 +96,20 @@
 
 <body>
     <center>
-
-        <h1>Loading Feed :</h1>
-        <div class="load">
-            <hr />
-            <hr />
-            <hr />
-            <hr />
+        <!-- <h1>Loading Feed :</h1> -->
+        <!-- Preloader -->
+        <div class="preloader">
+            <svg class="pl-svg" width="200" height="200" viewBox="0 0 100 100">
+            <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+            </polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+            </polyline>
+            </svg>
         </div>
-
     </center>
-    <style>
-        body {
-            background: #ECF0F1
-        }
-
-        .load {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            /*change these sizes to fit into your project*/
-            width: 100px;
-            height: 100px;
-        }
-
-        .load hr {
-            border: 0;
-            margin: 0;
-            width: 40%;
-            height: 40%;
-            position: absolute;
-            border-radius: 50%;
-            animation: spin 2s ease infinite
-        }
-
-        .load :first-child {
-            background: #19A68C;
-            animation-delay: -1.5s
-        }
-
-        .load :nth-child(2) {
-            background: #F63D3A;
-            animation-delay: -1s
-        }
-
-        .load :nth-child(3) {
-            background: #FDA543;
-            animation-delay: -0.5s
-        }
-
-        .load :last-child {
-            background: #193B48
-        }
-
-        @keyframes spin {
-
-            0%,
-            100% {
-                transform: translate(0)
-            }
-
-            25% {
-                transform: translate(160%)
-            }
-
-            50% {
-                transform: translate(160%, 160%)
-            }
-
-            75% {
-                transform: translate(0, 160%)
-            }
-        }
-    </style>
+    
     <% var dname=user.displayName; %>
 
         <% var dId=user.id; %>
