@@ -20,7 +20,7 @@ function initOnReady() {
 		container_id: "dashboard-chart",
 		//	BEWARE: no trailing slash is expected in feed URL
 		// datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com",100000),
-		datafeed: new Datafeeds.UDFCompatibleDatafeed("https://www.zecide.com/getFeed",300*1000),
+		datafeed: new Datafeeds.UDFCompatibleDatafeed("https://zecide.com/getFeed",300*1000),
 		library_path: "charting_library/",
 		locale: getParameterByName('lang') || "en",
 
