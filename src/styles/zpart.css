@@ -28,82 +28,89 @@ body {
     grid-gap: 20px; */
 }
 
-a{
-    text-decoration: none !important;
-    color: #000000 !important;
-}
-
-.upper-nav > div{
+a {
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  .upper-nav>div {
     position: fixed;
-}
-
-.side-nav > div{
+  }
+  
+  .side-nav>div {
     position: fixed;
-}
-
-.mascot > div{
+  }
+  
+  .mascot>div {
     position: fixed;
-}
-
-.upper-nav{
+  }
+  
+  .upper-nav {
     grid-column: 1/16;
     grid-row: 1/2;
     z-index: 100;
     margin-left: 5vw;
-}
-
-.upper-nav > div{
+  }
+  
+  .upper-nav>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 90vw;
-}
-
-.logo{
+  }
+  
+  .logo {
     display: flex;
     align-items: center;
-}
-
-.logo img{
+  }
+  
+  .logo img {
     width: 2vw;
     margin-right: 0.7vw;
-}
-
-.logo span{
+  }
+  
+  .side-nav-logo {
+    width: 10vw;
+    height: 11vh;
+    z-index: 25;
+  }
+  
+  .logo span {
     font-size: 1.6vw;
-}
-
-.dropdown {
+  }
+  
+  .dropdown {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
-
-  .dropdown-content{
+  
+  .dropdown-content {
     align-items: center;
     border-radius: 20px;
   }
-
+  
   .dropdown ul {
-
     list-style: none;
   }
-
-  .dropdown li{
+  
+  .dropdown li {
     padding-top: 1.7;
     padding-right: 3.2vw;
     padding-bottom: 1.7vh;
   }
-
-
-
-.search{
+  
+  .search {
     display: flex;
     background-color: #f8f8f8;
     border-radius: 20px;
-}
-
-.search input{
+  }
+  
+  .search input {
     background-color: #f8f8f8;
     border-radius: 20px;
     width: 40vw;
@@ -112,13 +119,13 @@ a{
     margin-left: 15px;
     font-family: 'Quicksand';
     outline: none;
-}
-
-.search img{
+  }
+  
+  .search img {
     margin-right: 15px;
-}
-
-.download-btn{
+  }
+  
+  .download-btn {
     height: 4vh;
     font-size: 0.94vw;
     background-color: #3b98ff;
@@ -127,17 +134,17 @@ a{
     border: none;
     border-radius: 20px;
     padding: 5px 30px;
-}
-
-.notification-bell{
+  }
+  
+  .notification-bell {
     width: 2.5vw;
     padding-top: 0.7vh;
   }
-
-  .upper-right{
+  
+  .upper-right {
     display: flex;
   }
-
+  
   .upper-nav-1 {
     display: flex;
     justify-content: space-between;
@@ -146,15 +153,13 @@ a{
     padding: 4vh 0vw 3vh 0vw;
     background-color: #ffffff;
   }
-
-  .upper-right{
+  
+  .upper-right {
     display: flex !important;
     width: 76.7vw;
     justify-content: space-between;
     align-items: center;
   }
-
-
 
 .dropbtn {
     border: none;
