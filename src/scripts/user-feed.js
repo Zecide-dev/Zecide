@@ -49,7 +49,7 @@ fetchPostData();
 $(window).on("scroll", function () {
     var scrollHeight = $(document).height();
     var scrollPos = $(window).height() + $(window).scrollTop();
-    if ((scrollHeight - scrollPos) / scrollHeight == 0) {
+    if ((scrollHeight - scrollPos) / scrollHeight < 0.01) {
         pageNo = pageNo + 1;
         console.log("bottom!");
         fetchPostData();
