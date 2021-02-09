@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <title>Investing Dashboard</title>    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFYVG2WN9Z"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CFYVG2WN9Z');
+        </script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="icon" href="../src/images/logo.svg" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+        <link rel="stylesheet" href="../src/styles/investing-dashboard.css">
+    </head>
+    <body>
+
+        <section id="company-selected-toanalyze">
+            <div class="container container-investing-portfolio">
+                <div class="row">
+                    <div class="col-12 col-sm-8 col-md-12">
+                        <div class="card border-primary bg-light">
+                            <div class="card-header card-header-analyze">
+                                <ul class="nav nav-tabs card-header-tabs" id="search-list" role="tablist">
+                                    <li class="nav-item">
+                                      <a class="nav-link active" href="#financials" role="tab" aria-controls="financials" aria-selected="true">Financials</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link"  href="#research" role="tab" aria-controls="research" aria-selected="false">Research</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="#valuation" role="tab" aria-controls="valuation" aria-selected="false">Valuation</a>
+                                    </li>
+                                  </ul>
+                            </div>
+                            <div class="card-body card-body-financials">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="financials" role="tabpanel">
+                                        <div class="card-header card-header-analyze-further">
+                                            <ul class="nav nav-tabs card-header-tabs" id="search-list" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" href="#pnl" role="tab" aria-controls="pnl" aria-selected="true">PnL</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"  href="#qr" role="tab" aria-controls="qr" aria-selected="false">QR</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#ar" role="tab" aria-controls="ar" aria-selected="false">AR</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#bs" role="tab" aria-controls="bs" aria-selected="false">BS</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#cf" role="tab" aria-controls="cf" aria-selected="false">CF</a>
+                                                </li>
+                                            </ul>
+                                        </div>  
+                                    <div class="card-body-remaining">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="pnl" role="tabpanel" aria-labelledby="pnl">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text">
+                                                    <h5 class="card-heading mt-3 card-category">Profit And Loss:-</h5>
+                                                </div>
+                                                <table class="table table-hover mt-3">
+                                                    <thead>
+                                                      <tr class="table-secondary">
+                                                        <th scope="col"> </th>
+                                                        <th scope="col">09</th>
+                                                        <th scope="col">10</th>
+                                                        <th scope="col">11</th>
+                                                        <th scope="col">12</th>
+                                                        <th scope="col">13</th>
+                                                        <th scope="col">14</th>
+                                                        <th scope="col">15</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <th scope="row">Sales</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>81.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">Expenses</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="row">OP</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">OPM</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  <div class="evaluation">
+                                                      <h5 class="card-text">Evaluation: <span class="evaluation-value">5</span></h5>
+                                                      <div class="slidecontainer">
+                                                        <input type="range" min="0" max="10" value="5" class="slider" class="myRange">
+                                                      </div>
+                                                  </div>
+                                            </div>
+                                            <div class="tab-pane" id="qr" role="tabpanel" aria-labelledby="qr">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text">
+                                                    <h5 class="card-heading mt-3 card-category">QR:-</h5>
+                                                </div>
+                                                <table class="table table-hover mt-3">
+                                                    <thead>
+                                                      <tr class="table-secondary">
+                                                        <th scope="col"> </th>
+                                                        <th scope="col">09</th>
+                                                        <th scope="col">10</th>
+                                                        <th scope="col">11</th>
+                                                        <th scope="col">12</th>
+                                                        <th scope="col">13</th>
+                                                        <th scope="col">14</th>
+                                                        <th scope="col">15</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <th scope="row">Sales</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>81.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">Expenses</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="row">OP</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">OPM</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  <div class="evaluation">
+                                                      <h5 class="card-text">Evaluation: <span class="evaluation-value">5</span></h5>
+                                                      <div class="slidecontainer">
+                                                        <input type="range" min="0" max="10" value="5" class="slider myRange">
+                                                      </div>
+                                                  </div>
+                                            </div>
+                                            <div class="tab-pane" id="ar" role="tabpanel" aria-labelledby="ar">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text">
+                                                    <h5 class="card-heading mt-3 card-category">Annual Revenue:-</h5>
+                                                </div>
+                                                <table class="table table-hover mt-3">
+                                                    <thead>
+                                                      <tr class="table-secondary">
+                                                        <th scope="col"> </th>
+                                                        <th scope="col">09</th>
+                                                        <th scope="col">10</th>
+                                                        <th scope="col">11</th>
+                                                        <th scope="col">12</th>
+                                                        <th scope="col">13</th>
+                                                        <th scope="col">14</th>
+                                                        <th scope="col">15</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <th scope="row">Sales</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>81.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">Expenses</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="row">OP</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">OPM</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  <div class="evaluation">
+                                                      <h5 class="card-text">Evaluation: <span class="evaluation-value">5</span></h5>
+                                                      <div class="slidecontainer">
+                                                        <input type="range" min="0" max="10" value="5" class="slider myRange">
+                                                      </div>
+                                                  </div>
+                                            </div>
+                                            <div class="tab-pane" id="bs" role="tabpanel" aria-labelledby="bs">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text">
+                                                    <h5 class="card-heading mt-3 card-category">BS:-</h5>
+                                                </div>
+                                                <table class="table table-hover mt-3">
+                                                    <thead>
+                                                      <tr class="table-secondary">
+                                                        <th scope="col"> </th>
+                                                        <th scope="col">09</th>
+                                                        <th scope="col">10</th>
+                                                        <th scope="col">11</th>
+                                                        <th scope="col">12</th>
+                                                        <th scope="col">13</th>
+                                                        <th scope="col">14</th>
+                                                        <th scope="col">15</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <th scope="row">Sales</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>81.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">Expenses</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="row">OP</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">OPM</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  <div class="evaluation">
+                                                      <h5 class="card-text">Evaluation: <span class="evaluation-value">5</span></h5>
+                                                      <div class="slidecontainer">
+                                                        <input type="range" min="0" max="10" value="5" class="slider myRange">
+                                                      </div>
+                                                  </div>
+                                            </div>
+                                            <div class="tab-pane" id="cf" role="tabpanel" aria-labelledby="cf">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text">
+                                                    <h5 class="card-heading mt-3 card-category">Cash Flow:-</h5>
+                                                </div>
+                                                <table class="table table-hover mt-3">
+                                                    <thead>
+                                                      <tr class="table-secondary">
+                                                        <th scope="col"> </th>
+                                                        <th scope="col">09</th>
+                                                        <th scope="col">10</th>
+                                                        <th scope="col">11</th>
+                                                        <th scope="col">12</th>
+                                                        <th scope="col">13</th>
+                                                        <th scope="col">14</th>
+                                                        <th scope="col">15</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <th scope="row">Sales</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>81.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">Expenses</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th scope="row">OP</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                      <tr class="table-secondary">
+                                                        <th scope="row">OPM</th>
+                                                        <td>1250.32</td>
+                                                        <td>17538.10</td>
+                                                        <td>8143.62</td>
+                                                        <td>16904.85</td>
+                                                        <td>9832.16</td>
+                                                        <td>8143.62</td>
+                                                        <td>9832.16</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  <div class="evaluation">
+                                                      <h5 class="card-text">Evaluation: <span class="evaluation-value">5</span></h5>
+                                                      <div class="slidecontainer">
+                                                        <input type="range" min="0" max="10" value="5" class="slider myRange">
+                                                      </div>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    </div>
+                                    <div class="tab-pane" id="research" role="tabpanel" aria-labelledby="research">
+                                        <h3 class="card-title text-center card-title-portfolio mt-4">In Development</h3>
+                                        <button class="btn btn-secondary btn-inactive" style="cursor: default; display: flex; margin:auto">
+                                            Coming Soon!
+                                        </button>
+                                    </div>
+
+                                    <div class="tab-pane" id="valuation" role="tabpanel" aria-labelledby="valuation">
+                                        <div class="card-header card-header-valuation">
+                                            <ul class="nav nav-tabs card-header-tabs" id="search-list" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" href="#dcf" role="tab" aria-controls="dcf" aria-selected="true">DCF</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"  href="#ddm" role="tab" aria-controls="ddm" aria-selected="false">DDM</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#ratios" role="tab" aria-controls="ratios" aria-selected="false">Ratios</a>
+                                                </li>
+                                            </ul>
+                                        </div>  
+                                    <div class="card-body-remaining">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="dcf" role="tabpanel" aria-labelledby="dcf">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text mt-4 text-center">
+                                                    <form class="analyse-form" autocomplete="on">
+                                                        <label for="DiscountRate"><h5 class="text-center">Discount Rate:</h5></label>
+                                                        <input type="number" id="DiscountRate" name="DiscountRate"><br>
+                                                        <input type="checkbox" id="Wacc" name="Wacc">
+                                                        <label for="Wacc"><h6><span class="tooltips" tooltip="For Using WACC" tooltip-position="right">Find through WACC <i class="fas fa-info-circle"></i></span></h6></label><br>
+                                                        <label for="TerminalValueRate"><h5 class="text-center mt-2">Terminal Value Rate:</h5></label>
+                                                        <input type="number" id="TerminalValueRate" name="TerminalValueRate"><br>
+                                                        <button class="btn btn-primary mt-2" style="margin-left: auto; margin-right: auto;">CALCULATE DCF</button>
+                                                    </form>                                         
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="ddm" role="tabpanel" aria-labelledby="ddm">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text mt-4 text-center">
+                                                    <form class="analyse-form" autocomplete="on">
+                                                        <label for="DiscountRate"><h5 class="text-center">Discount Rate:</h5></label>
+                                                        <input type="number" id="DiscountRate" name="DiscountRate"><br>
+                                                        <input type="checkbox" id="Wacc" name="Wacc">
+                                                        <label for="Wacc"><h6><span class="tooltips" tooltip="For Using WACC" tooltip-position="right">Find through WACC <i class="fas fa-info-circle"></i></span></h6></label><br>
+                                                        <label for="TerminalValueRate"><h5 class="text-center mt-2">Terminal Value Rate:</h5></label>
+                                                        <input type="number" id="TerminalValueRate" name="TerminalValueRate"><br>
+                                                        <button class="btn btn-primary mt-2" style="margin-left: auto; margin-right: auto;">CALCULATE DCF</button>
+                                                    </form>                                         
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="ratios" role="tabpanel" aria-labelledby="ratios">
+                                                <div class="companies-selected-heading">
+                                                    <h4 style="font-weight: 600;" class="card-title text-center mt-2">Efficient Frontiers Selected</h4>
+                                                    <a class="btn btn-danger pt-2" href="investing-dashboard-analyse.html">UNSELECT</a>
+                                                </div>
+                                                <div class="card-text mt-4 text-center">
+                                                    <form class="analyse-form" autocomplete="on">
+                                                        <label for="DiscountRate"><h5 class="text-center">Discount Rate:</h5></label>
+                                                        <input type="number" id="DiscountRate" name="DiscountRate"><br>
+                                                        <input type="checkbox" id="Wacc" name="Wacc">
+                                                        <label for="Wacc"><h6><span class="tooltips" tooltip="For Using WACC" tooltip-position="right">Find through WACC <i class="fas fa-info-circle"></i></span></h6></label><br>
+                                                        <label for="TerminalValueRate"><h5 class="text-center mt-2">Terminal Value Rate:</h5></label>
+                                                        <input type="number" id="TerminalValueRate" name="TerminalValueRate"><br>
+                                                        <button class="btn btn-primary mt-2" style="margin-left: auto; margin-right: auto;">CALCULATE DCF</button>
+                                                    </form>                                         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>       
+                            </div>                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+        <script>
+            $('#search-list a').on('click', function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+            })
+            var slider = document.getElementsByClassName("myRange");
+            var output = document.getElementsByClassName("evaluation-value");
+            // output.innerHTML = slider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            for(var i=0;i<slider.length;i++){
+              slider[i].oninput=function(){
+                output[i].innerHTML=this.value;    
+              }
+            }
+        </script>
+        <script>
+            $('.tooltips').append("<span></span>");
+            $('.tooltips:not([tooltip-position])').attr('tooltip-position','bottom');
+
+            $(".tooltips").mouseenter(function(){
+            $(this).find('span').empty().append($(this).attr('tooltip'));
+            });
+        </script>
+    </body>
+</html>

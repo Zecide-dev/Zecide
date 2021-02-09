@@ -31,6 +31,30 @@
 		<script type="text/javascript" src="/public/charts/datafeeds/udf/dist/polyfills.js"></script>
 		<script type="text/javascript" src="/public/charts/datafeeds/udf/dist/bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <style>
+
+      #trading-dashboard-mobileview{
+        display: none;
+      }
+      @media only screen and (max-width:600px) {
+        #body-container{
+          display: none;
+        }
+        .side-nav{
+          display: none;
+        }
+        #trading-dashboard-mobileview{
+          display: block;
+        }
+        #trading-dashboard-unavailable-mobile{
+          height: 80vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    </style>
 </head>
 
 <body>
@@ -1453,6 +1477,13 @@
           </div>
         </div> -->
       </div>
+    </div>
+  </div>
+
+  <div id="trading-dashboard-mobileview">
+    <div id="trading-dashboard-unavailable-mobile">
+      <h4 class="text-center">Trading Dashboard unavailable on mobile devices</h4>
+      <h4 class="text-center">Open on Desktop.</h4>
     </div>
   </div>
 
