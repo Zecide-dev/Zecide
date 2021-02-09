@@ -21,13 +21,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="icon" href="/src/images/logo.svg" />
-
   <style>
-    a{
-      text-decoration: none !important;
-    }
-  </style>
 
+    @media only screen and (max-width: 600px) {
+      .btn-cards-mobileview {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-self: center;
+        margin: 0 auto;
+        width: 70%;
+      }
+    }
+    @media only screen and (max-width: 408px) {
+    .btn-cards-mobileview {
+      display: flex;
+      margin: 0 auto;
+      width: 90%;
+    }
+  }
+  </style>
 </head>
 
 <body>
@@ -56,7 +69,7 @@
             <img class="burger" id="burger" src="/src/images/burger.svg" alt="burger" />
           </button>
           <div class="dropdown-content">
-            <a href="/"> <span style"text-decoration: none;">Home</span> </a>
+            <a href="/"> <span style="text-decoration: none;">Home</span> </a>
             <a href="#features"><span>Features</span></a>
             <a href="/blog"><span>Blogs</span></a>
 
@@ -111,7 +124,7 @@
             <strong style="color: darkslategrey;">Invest</strong> with our DIY tools that replaces finance degrees<br>
             <strong style="color: darkslategrey;">Information</strong> consumption optimized for busy people</p>
         
-          <div class="download-links">
+          <div class="download-links" id="download-links-mobileview">
             <!-- <img
                 class="d-links gplay"
                 src="/src/images/Google-Play.svg"
@@ -132,7 +145,7 @@
                 <input class="waitlist-button" type="submit" value="→" />
               </form>
             </div> -->
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links-mobileview">
               <a href="/users"><button id="signup-button-mobileview">Sign Up</button></a>
             </div>
           </div>
@@ -140,36 +153,67 @@
       </div>
 
       <div class='container-fluid row' id='mid-section-wrapper'>
-        <div class='col-sm-6 mid-section-div'>
-          <div class='row'>
-            <div class='col-8 col-md-9'>
-              <h3>Trailblaze your Trading</h3>
-              <p class='text-muted mid-section-subheading'>Advance Monitoring Trading Dashboards</p>
-              <p>Create and monitor custom events taking place in market in real time. Use the popular implementations
-                of Price Action and Technical Indicators. Utilize Risk Management techniques, Sector analytics and more!
-              </p>
-              <a href="/Tools/Dashboard" class="glow-on-hover" type="button">Go to Dashboard &ensp; <i
-                  class="fas fa-long-arrow-alt-right"></i></a>
-            </div>
-            <div class='col-4 col-md-3'>
-              <img src="/src/images/bubble_detector.svg" alt="" style="width: 80%;">
+        <section id="landing-page-cards">
+          <div class='col-sm-6 mid-section-div'>
+            <div class='row'>
+              <div class='col-8 col-md-9'>
+                <h3>Trailblaze your Trading</h3>
+                <p class='text-muted mid-section-subheading'>Advance Monitoring Trading Dashboards</p>
+                <p>Create and monitor custom events taking place in market in real time. Use the popular implementations
+                  of Price Action and Technical Indicators. Utilize Risk Management techniques, Sector analytics and more!
+                </p>
+                <a href="/Tools/Dashboard" class="glow-on-hover" type="button">Go to Dashboard &ensp; <i
+                    class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+              <div class='col-4 col-md-3'>
+                <img src="/src/images/bubble_detector.svg" alt="" style="width: 80%;">
+              </div>
             </div>
           </div>
-        </div>
-        <div class='col-sm-6 mid-section-div'>
-          <div class='row'>
-            <div class='col-8 col-md-9'>
-              <h3>Finance for Millennial</h3>
-              <p class='text-muted mid-section-subheading'>Free and Interactive Tutorials</p>
-              <p>Read through Zecide Learn's chic, concise and deeply conceptual explanations of beginner to advanced
-                topics in Financial Markets. They contain practical know-how coupled with interactive learning.
-              </p>
-              <br>
-              <a href="/learn" class="glow-on-hover" type="button">Go to Zecide Learn &ensp; <i
-                  class="fas fa-long-arrow-alt-right"></i></a>
+          <div class='col-sm-6 mid-section-div'>
+            <div class='row'>
+              <div class='col-8 col-md-9'>
+                <h3>Finance for Millennial</h3>
+                <p class='text-muted mid-section-subheading'>Free and Interactive Tutorials</p>
+                <p>Read through Zecide Learn's chic, concise and deeply conceptual explanations of beginner to advanced
+                  topics in Financial Markets. They contain practical know-how coupled with interactive learning.
+                </p>
+                <br>
+                <a href="/learn" class="glow-on-hover" type="button">Go to Zecide Learn &ensp; <i
+                    class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+              <div class='col-4 col-md-3'>
+                <img src="/src/images/e-learning.png" alt="" style="width: 80%;">
+              </div>
             </div>
-            <div class='col-4 col-md-3'>
-              <img src="/src/images/e-learning.png" alt="" style="width: 80%;">
+          </div>
+        </section>
+      </div>
+
+      <div class="container container-landing-page-cards-mobileview" id="landing-page-cards-mobileview">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card card-mobileview">
+              <div class="card-heading mt-3 text-center">
+                <h4 style="font-style: 2.5rem;">Trailblaze your Trading</h4>
+              </div>
+              <div class="card-body" style="padding-top: 0px;">
+                <img src="../src/images/bubble_detector.svg" alt="" style="height: 200px; width: 100%;">
+                <a href="/Tools/Dashboard" class="btn btn-primary btn-cards-mobileview">Go to Dashboard &ensp; <i
+                  class="fas fa-long-arrow-alt-right mt-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="card mt-3 card-mobileview">
+              <div class="card-heading mt-3 text-center">
+                <h4 style="font-style: 2.5rem;">Finance for Millennial</h4>
+              </div>
+              <div class="card-body" style="padding-top: 0px;">
+                <img src="../src/images/e-learning.png" alt="" style="height: 200px; width: 70%; display: flex; margin: 0 auto;">
+                <a href="/learn" class="btn btn-primary btn-cards-mobileview">Go to Zecide Learn &ensp; <i
+                  class="fas fa-long-arrow-alt-right mt-1"></i></a>
+              </div>
             </div>
           </div>
         </div>
@@ -303,7 +347,7 @@
                 Gurgaon, Haryana <br />
                 Ph: 9003711038
                 <br>
-                <a href="/privacy-policy">
+                <a href="/privacy-policy" style="text-decoration: none; color: white;">
                   <div style="color: white;">Privacy Policy</div>
                 </a>
                 <a href="/terms-conditions">
