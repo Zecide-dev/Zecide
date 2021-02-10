@@ -1014,3 +1014,9 @@ ul{
   background-color: whitesmoke;
   color: #ffffff;
 }
+
+.commenter-img
+{
+  width: 3vw;
+  margin-right: 2vw;
+}

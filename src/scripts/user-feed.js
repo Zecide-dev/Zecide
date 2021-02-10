@@ -162,6 +162,7 @@ function useData(d) {
         var downvote = document.createElement('div');
         var downvoteImg = document.createElement('img');
         downvoteCount[i] = document.createElement('span');
+        
         var comments = document.createElement('div');
         var commentsImg = document.createElement('img');
         commentsCount[i] = document.createElement('span');
@@ -170,10 +171,15 @@ function useData(d) {
         commentInput[i] = document.createElement('input');
         var commentPost = document.createElement('img');
 
+        let receivedComments = document.createElement('div')
+        receivedComments.className = "list-group"
+        receivedComments.setAttribute('id', 'recCom');
+
         cardContainer.append(feedCard);
         feedCard.append(feedCardTop);
         feedCard.append(feedPostLink);
         feedCard.append(feedCardBottom);
+        feedCard.append(receivedComments);
         feedCard.append(feedCardComments[i]);
         feedCardTop.append(feedCardTopLeft);
         feedCardTop.append(feedCardTopRight);
@@ -197,6 +203,7 @@ function useData(d) {
         upvote.append(upvoteCount[i]);
         downvote.append(downvoteImg);
         downvote.append(downvoteCount[i]);
+        
         comments.append(commentsImg);
         comments.append(commentsCount[i]);
         feedCardComments[i].append(userImg);
@@ -267,9 +274,7 @@ function useData(d) {
             name.style.cursor = 'pointer';
             name.addEventListener('click', postAuthor);
 
-            let receivedComments = document.createElement('div')
-            receivedComments.className = "list-group"
-            receivedComments.setAttribute('id', 'recCom');
+            
             feedCardComments[i].style.display = 'none';
 
             cfetch[i] = 1;
@@ -316,7 +321,7 @@ function useData(d) {
                                     feedCardComments[i].parentNode.insertBefore(breakB, feedCardComments[i].nextSibling)
 
                                     // breakB.insertAdjacentElement(receivedComments)
-                                    breakB.parentNode.insertBefore(receivedComments, breakB.nextSibling)
+                                    // breakB.parentNode.insertBefore(receivedComments, breakB.nextSibling)
 
 
 
@@ -325,8 +330,8 @@ function useData(d) {
                                         commentOutput[j] = document.createElement('li');
                                         // commentOutput[j].className = 'li';
                                         // console.log(usr.usr.comments[j].comment)
-                                        let item = (usr.usr.comments[j].comment);
-
+                                        let item = (usr.usr.comments[j]);
+                                        
                                         var test = document.createElement('section');
                                         test.setAttribute('id', 'test');
 
@@ -335,16 +340,98 @@ function useData(d) {
 
                                         receivedComments.appendChild(test);
                                         test.appendChild(ul);
+                                        var commenterImg = document.createElement('img');
+                                        var commenterName = document.createElement('span');
+                                        var commentedOn = document.createElement('p');
                                         var li = document.createElement('li');
+                                        var commentupAndDown = document.createElement('div');
+                                        var commentupvote = document.createElement('div');
+                                        var commentupvoteImg = document.createElement('img');
+                                        var commentupvoteCount = document.createElement('span');
+                                        var commentdownvote = document.createElement('div');
+                                        var commentdownvoteImg = document.createElement('img');
+                                        var commentdownvoteCount = document.createElement('span');
                                         li.className = 'list-group-item list-group-item-secondary';
+                                         
                                         ul.appendChild(li);
-                                        li.innerHTML = li.innerHTML + item
-                                        // feedCardComments[i].append(
-                                        //     commentOutput[j].innerHTML = item
+                                        li.appendChild(commenterImg);
+                                        commenterImg.className = 'commenter-img feed-post-img';
+                                        commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                                        li.appendChild(commenterName);
+                                        commenterName.className = 'name';
+                                        commenterName.innerHTML = commenterName.innerHTML + item.commenter.UserName;
+                                        li.appendChild(commentedOn);
+                                        commentedOn.className = 'posted-on';
+                                        let dateData = item.date;
+                                        let date1 = Date.parse(dateData);
+                                        let date2 = Date.now();
+                                        let dateDiff = date2 - date1;
+                                        commentedOn.innerHTML = timeSince(dateDiff) + " ago";
+                                        li.innerHTML = li.innerHTML + item.comment
+                                        li.appendChild(commentupAndDown);
+                                        commentupAndDown.append(commentupvote);
+                                        commentupAndDown.append(commentdownvote);
+                                        commentupvote.append(commentupvoteImg);
+                                        commentupvote.append(commentupvoteCount);
+                                        commentdownvote.append(commentdownvoteImg);
+                                        commentdownvote.append(commentdownvoteCount);
+                                        commentupAndDown.className = 'upanddown';
+                                        commentupvote.className = 'upvote';
+                                        commentupvoteImg.className = 'upvote-img';
+                                        commentupvoteCount.className = 'upvote-count';
+                                        commentdownvote.className = 'downvote';
+                                        commentdownvoteImg.className = 'downvote-img';
+                                        commentdownvoteCount.className = 'downvote-count';
+                                        
+                                        commentupvoteImg.setAttribute('src', '/src/images/upvote.svg');
+                                        commentupvoteCount.innerHTML = item.Upvote.length;
+                                        commentdownvoteImg.setAttribute('src', '/src/images/downvote.svg');
+                                        commentdownvoteCount.innerHTML = item.Downvote.length;
 
-                                        // $("<li></li>").text(`[${usr.usr.comments[j].comment}]`)
-                                        // var listOfCom = document.createComment('li');
-                                        // );
+                                        commentupvoteImg.addEventListener("click", commentupvotefun);
+                                        commentdownvoteImg.addEventListener("click", commentdownvotefun);
+                                        commenterName.style.cursor = 'pointer';
+                                        commenterName.addEventListener('click', commentAuthor);
+
+                                        function commentAuthor() {
+                                            var openId = item.commenter._id;
+                                            console.log(openId)
+                                            fetch('/view-profile/' + openId).then(() => {
+                                                window.location.pathname = '/view-profile/' + openId;
+                            
+                                            })
+                                        }
+
+                                        function commentdownvotefun() {
+                                            console.log('Comment Downvoted');
+                            
+                                            let postid = data[i]._id;
+                                            commentdownvoteCount.innerHTML = parseInt(commentdownvoteCount.innerHTML) + 1;
+                            
+                                            fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + item._id, {
+                                                method: 'get',
+                                                headers: myHeaders
+                                            })
+                                                .then(response => response.json())
+                                                .then(() => {
+                                                })
+                                        }
+                            
+                                        function commentupvotefun() {
+                            
+                                            console.log('Comment Upvoted');
+                            
+                                            let postid = data[i]._id;
+                                            commentupvoteCount.innerHTML = parseInt(commentupvoteCount.innerHTML) + 1;
+                            
+                                            fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + item._id, {
+                                                method: 'get',
+                                                headers: myHeaders
+                                            })
+                                                .then(response => response.json())
+                                                .then(() => {
+                                                })
+                                        }
                                     }
                                     c = 0;
 
@@ -368,65 +455,137 @@ function useData(d) {
 
             }
 
-            function commentfun() {
-                console.log('commented')
-                let postid = data[i]._id;
-                // data[i].DownVote.length = data[i].DownVote.length + 1;
-                // let downcount = data[i].DownVote.length;
-                // downvoteCount[i].innerHTML = downcount;
-                let commentText = commentInput[i].value;
-                console.log(commentText);
-                // var formData = new FormData();
-                commentInput[i].value = ' ';
-                d[i].comments.length = d[i].comments.length + 1;
+            function commentfun() 
+            {
+                if(commentInput[i].value != "")
+                {                
+                    console.log('commented')
+                    let postid = data[i]._id;
+                    let commentText = commentInput[i].value;
+                    console.log(commentText);
+                    commentInput[i].value = '';
+                    d[i].comments.length = d[i].comments.length + 1;
 
-                // data[i].UpVote.length = data[i].UpVote.length + 1;
-                let commcount = d[i].comments.length;
-                // upvoteCount[i].innerHTML = upcount;
-                commentsCount[i].innerHTML = (commcount) + " comments";
+                    let commcount = d[i].comments.length;
+                    commentsCount[i].innerHTML = (commcount) + " comments";
 
 
-                // var stat;
-                let infoObject = { "comment": commentText };
-                // var info = JSON.stringify(infoObject);
-                // formData.append("comment",commentText);
-                myCommHeaders = new Headers()
-                myCommHeaders.append('authorization', 'Token ' + token);
-                myCommHeaders.append('Content-Type', 'application/json');
+                    let infoObject = { "comment": commentText };
+                    myCommHeaders = new Headers()
+                    myCommHeaders.append('authorization', 'Token ' + token);
+                    myCommHeaders.append('Content-Type', 'application/json');
 
 
-
-
-
-
-
-                // console.log(data[i].UpVote.length)
-                fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
-                    method: 'POST',
-                    headers: myCommHeaders,
-                    body: JSON.stringify(infoObject)
-                })
-                    .then(response => response.json())
-                    .then(() => {
-
-                        var test = document.createElement('section');
-                        test.setAttribute('id', 'test');
-
-                        var ul = document.createElement('ul');
-
-
-                        receivedComments.appendChild(test);
-                        test.appendChild(ul);
-                        var li = document.createElement('li');
-                        li.className = 'list-group-item list-group-item-secondary';
-                        ul.appendChild(li);
-                        li.innerHTML = li.innerHTML + commentText;
-
-
-
+                    
+                    fetch(backendbaseurl + '/Posts/' + postid + '/comment', {
+                        method: 'POST',
+                        headers: myCommHeaders,
+                        body: JSON.stringify(infoObject)
                     })
+                        .then(response => response.json())
+                        .then(() => {
+
+                            var test = document.createElement('section');
+                            test.setAttribute('id', 'test');
+
+                            var ul = document.createElement('ul');
 
 
+                            receivedComments.appendChild(test);
+                            test.appendChild(ul);
+                            var commenterImg = document.createElement('img');
+                            var commenterName = document.createElement('span');
+                            var commentedOn = document.createElement('p');
+                            var li = document.createElement('li');
+                            var commentupAndDown = document.createElement('div');
+                            var commentupvote = document.createElement('div');
+                            var commentupvoteImg = document.createElement('img');
+                            var commentupvoteCount = document.createElement('span');
+                            var commentdownvote = document.createElement('div');
+                            var commentdownvoteImg = document.createElement('img');
+                            var commentdownvoteCount = document.createElement('span');
+                            li.className = 'list-group-item list-group-item-secondary';
+                            ul.appendChild(li);
+                            li.appendChild(commenterImg);
+                            commenterImg.className = 'commenter-img feed-post-img';
+                            commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                            li.appendChild(commenterName);
+                            commenterName.className = 'name';
+                            commenterName.innerHTML = commenterName.innerHTML + 'Unknown';
+                            li.appendChild(commentedOn);
+                            commentedOn.className = 'posted-on';
+                            // let dateData = item.date;
+                            let date1 = Date.now();
+                            let date2 = Date.now();
+                            let dateDiff = date2 - date1;
+                            commentedOn.innerHTML = timeSince(dateDiff) + " ago";
+                            li.innerHTML = li.innerHTML + commentText;
+                            li.appendChild(commentupAndDown);
+                            commentupAndDown.append(commentupvote);
+                            commentupAndDown.append(commentdownvote);
+                            commentupvote.append(commentupvoteImg);
+                            commentupvote.append(commentupvoteCount);
+                            commentdownvote.append(commentdownvoteImg);
+                            commentdownvote.append(commentdownvoteCount);
+                            commentupAndDown.className = 'upanddown';
+                            commentupvote.className = 'upvote';
+                            commentupvoteImg.className = 'upvote-img';
+                            commentupvoteCount.className = 'upvote-count';
+                            commentdownvote.className = 'downvote';
+                            commentdownvoteImg.className = 'downvote-img';
+                            commentdownvoteCount.className = 'downvote-count';
+                            
+                            commentupvoteImg.setAttribute('src', '/src/images/upvote.svg');
+                            commentupvoteCount.innerHTML = 0;
+                            commentdownvoteImg.setAttribute('src', '/src/images/downvote.svg');
+                            commentdownvoteCount.innerHTML = 0;
+
+                            commentupvoteImg.addEventListener("click", commentupvotefun);
+                            commentdownvoteImg.addEventListener("click", commentdownvotefun);
+                            commenterName.style.cursor = 'pointer';
+                            commenterName.addEventListener('click', commentAuthor);
+
+                            function commentAuthor() {
+                                var openId = item.commenter._id;
+                                console.log(openId)
+                                fetch('/view-profile/' + openId).then(() => {
+                                    window.location.pathname = '/view-profile/' + openId;
+                
+                                })
+                            }
+
+                            function commentdownvotefun() {
+                                console.log('Comment Downvoted');
+                
+                                let postid = data[i]._id;
+                                commentdownvoteCount.innerHTML = parseInt(commentdownvoteCount.innerHTML) + 1;
+                
+                                fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + item._id, {
+                                    method: 'get',
+                                    headers: myHeaders
+                                })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                    })
+                            }
+                
+                            function commentupvotefun() {
+                
+                                console.log('Comment Upvoted');
+                
+                                let postid = data[i]._id;
+                                commentupvoteCount.innerHTML = parseInt(commentupvoteCount.innerHTML) + 1;
+                
+                                fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + item._id, {
+                                    method: 'get',
+                                    headers: myHeaders
+                                })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                    })
+                            }
+                        })
+                }
             }
 
 
