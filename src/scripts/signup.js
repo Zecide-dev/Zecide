@@ -24,7 +24,6 @@ function getCookie(cname) {
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var formData = new FormData();
     var email = form.elements[0].value;
     console.log(email);
     var username = form.elements[1].value;
@@ -34,11 +33,14 @@ form.addEventListener('submit', function (e) {
     //to append registration token
     var stat;
     var infoObject = { "UserName": username, "Email": email, "password": password , "registrationToken" : registrationtoken};
-    var info = JSON.stringify(infoObject);
-    formData.append("user", info);
+    var info = {"user": infoObject};
+    var data = JSON.stringify(info);
     fetch(backendbaseurl + '/Users', {
         method: 'POST',
-        body: formData
+        body: data,
+        headers: {
+            'Content-Type': 'application/json'
+        }
     }).then(function (response) {
         stat = response.status;
         return response.json();
