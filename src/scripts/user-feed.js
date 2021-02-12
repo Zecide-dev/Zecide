@@ -111,11 +111,12 @@ var cardContainer = document.querySelector('.card-container');
 // console.log(token);
 
 function getUsername() {
-    var userName = document.getElementById('user-name');
+    var userName = document.getElementById('usern');
+    return userName.textContent;
     // userName.innerHTML = getCookie("UserName");
 }
 
-getUsername();
+// getUsername();
 
 // function upvotefun(){
 
@@ -340,10 +341,15 @@ function useData(d) {
 
                                         receivedComments.appendChild(test);
                                         test.appendChild(ul);
+                                        var commentCardTop = document.createElement('div');
+                                        var commentCardTopLeft = document.createElement('div');
                                         var commenterImg = document.createElement('img');
+                                        var commentCardTopLeft1 = document.createElement('div');
                                         var commenterName = document.createElement('span');
                                         var commentedOn = document.createElement('p');
-                                        var li = document.createElement('li');
+                                        var li = document.createElement('li');                                
+                                        var commentCardMid = document.createElement('div');
+                                        var commentPostText = document.createElement('p');
                                         var commentupAndDown = document.createElement('div');
                                         var commentupvote = document.createElement('div');
                                         var commentupvoteImg = document.createElement('img');
@@ -354,20 +360,34 @@ function useData(d) {
                                         li.className = 'list-group-item list-group-item-secondary';
                                          
                                         ul.appendChild(li);
-                                        li.appendChild(commenterImg);
-                                        commenterImg.className = 'commenter-img feed-post-img';
+                                        li.appendChild(commentCardTop);
+                                        li.appendChild(commentCardMid);
+                                        commentCardTop.appendChild(commentCardTopLeft);
+                                        commentCardTopLeft.append(commenterImg);
+                                        commentCardTopLeft.append(commentCardTopLeft1);
+                                        commentCardTopLeft1.append(commenterName);
+                                        commentCardTopLeft1.append(commentedOn);
+                                        commentCardMid.appendChild(commentPostText);
+                                        li.className= 'comment-card';
+                                        commentCardTop.className = 'feed-card-top';
+                                        commentCardTopLeft.className = 'feed-card-top-left';
+                                        commentCardTopLeft1.className = 'feed-card-top-left-1';
+                                        commentedOn.className = 'posted-on';
+                                        commenterImg.className = 'feed-profile-pic';
+                                        commentCardMid.className = 'comment-card-mid';
+                                        commentPostText.className = 'comment-post-text';
                                         commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
-                                        li.appendChild(commenterName);
+                                        // li.appendChild(commenterName);
                                         commenterName.className = 'name';
                                         commenterName.innerHTML = commenterName.innerHTML + item.commenter.UserName;
-                                        li.appendChild(commentedOn);
+                                        // li.appendChild(commentedOn);
                                         commentedOn.className = 'posted-on';
                                         let dateData = item.date;
                                         let date1 = Date.parse(dateData);
                                         let date2 = Date.now();
                                         let dateDiff = date2 - date1;
                                         commentedOn.innerHTML = timeSince(dateDiff) + " ago";
-                                        li.innerHTML = li.innerHTML + item.comment
+                                        commentPostText.innerHTML = commentPostText.innerHTML + item.comment
                                         li.appendChild(commentupAndDown);
                                         commentupAndDown.append(commentupvote);
                                         commentupAndDown.append(commentdownvote);
@@ -493,10 +513,15 @@ function useData(d) {
 
                             receivedComments.appendChild(test);
                             test.appendChild(ul);
+                            var commentCardTop = document.createElement('div');
+                            var commentCardTopLeft = document.createElement('div');
                             var commenterImg = document.createElement('img');
+                            var commentCardTopLeft1 = document.createElement('div');
                             var commenterName = document.createElement('span');
                             var commentedOn = document.createElement('p');
-                            var li = document.createElement('li');
+                            var li = document.createElement('li');                                
+                            var commentCardMid = document.createElement('div');
+                            var commentPostText = document.createElement('p');
                             var commentupAndDown = document.createElement('div');
                             var commentupvote = document.createElement('div');
                             var commentupvoteImg = document.createElement('img');
@@ -506,20 +531,37 @@ function useData(d) {
                             var commentdownvoteCount = document.createElement('span');
                             li.className = 'list-group-item list-group-item-secondary';
                             ul.appendChild(li);
-                            li.appendChild(commenterImg);
-                            commenterImg.className = 'commenter-img feed-post-img';
+                            
+                            li.appendChild(commentCardTop);
+                            li.appendChild(commentCardMid);
+                            commentCardTop.appendChild(commentCardTopLeft);
+                            commentCardTopLeft.append(commenterImg);
+                            commentCardTopLeft.append(commentCardTopLeft1);
+                            commentCardTopLeft1.append(commenterName);
+                            commentCardTopLeft1.append(commentedOn);
+                            commentCardMid.appendChild(commentPostText);
+                            li.className= 'comment-card';
+                            commentCardTop.className = 'feed-card-top';
+                            commentCardTopLeft.className = 'feed-card-top-left';
+                            commentCardTopLeft1.className = 'feed-card-top-left-1';
+                            commentedOn.className = 'posted-on';
+                            commenterImg.className = 'feed-profile-pic';
+                            commentCardMid.className = 'comment-card-mid';
+                            commentPostText.className = 'comment-post-text';
                             commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
-                            li.appendChild(commenterName);
+                            
+                            // li.appendChild(commenterName);
                             commenterName.className = 'name';
-                            commenterName.innerHTML = commenterName.innerHTML + 'Unknown';
-                            li.appendChild(commentedOn);
+                            var usernameComment=getUsername();
+                            commenterName.innerHTML = commenterName.innerHTML + usernameComment;
+                            // li.appendChild(commentedOn);
                             commentedOn.className = 'posted-on';
                             // let dateData = item.date;
                             let date1 = Date.now();
                             let date2 = Date.now();
                             let dateDiff = date2 - date1;
                             commentedOn.innerHTML = timeSince(dateDiff) + " ago";
-                            li.innerHTML = li.innerHTML + commentText;
+                            commentPostText.innerHTML = commentPostText.innerHTML + commentText;
                             li.appendChild(commentupAndDown);
                             commentupAndDown.append(commentupvote);
                             commentupAndDown.append(commentdownvote);
