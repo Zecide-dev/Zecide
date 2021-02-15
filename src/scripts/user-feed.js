@@ -678,7 +678,7 @@ function useData(d) {
                         body: JSON.stringify(infoObject)
                     })
                         .then(response => response.json())
-                        .then(() => {
+                        .then((com) => {
 
                             var test = document.createElement('section');
                             test.setAttribute('id', 'test');
@@ -782,7 +782,7 @@ function useData(d) {
                             commenterName.addEventListener('click', commentAuthor);
 
                             function commentAuthor() {
-                                var openId = item.commenter._id;
+                                var openId = user_id;
                                 console.log(openId)
                                 fetch('/view-profile/' + openId).then(() => {
                                     window.location.pathname = '/view-profile/' + openId;
@@ -814,7 +814,7 @@ function useData(d) {
                                 }
                                 
 
-                                fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + item._id, {
+                                fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + com._id, {
                                     method: 'get',
                                     headers: myHeaders
                                 })
@@ -846,7 +846,7 @@ function useData(d) {
                                     commentupvoteCountselected.innerHTML=0;
                                 }
 
-                                fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + item._id, {
+                                fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + com._id, {
                                     method: 'get',
                                     headers: myHeaders
                                 })
@@ -1233,7 +1233,7 @@ function useData(d) {
                                             commenterName.addEventListener('click', commentAuthor);
 
                                             function commentAuthor() {
-                                                var openId = item.commenter._id;
+                                                var openId = user_id;
                                                 console.log(openId)
                                                 fetch('/view-profile/' + openId).then(() => {
                                                     window.location.pathname = '/view-profile/' + openId;
@@ -1285,7 +1285,7 @@ function useData(d) {
                                                 }
                                                 commentdownvoteCountselected.innerHTML = downcount;
     
-                                                fetch(backendbaseurl + '/Insights/' + postid + '/DownVote/' + item._id, {
+                                                fetch(backendbaseurl + '/Insights/' + postid + '/' + item._id + '/DownVote/', {
                                                     method: 'get',
                                                     headers: myHeaders
                                                 })
@@ -1339,7 +1339,7 @@ function useData(d) {
                                                 }
                                                 commentupvoteCountselected.innerHTML = upcount;
     
-                                                fetch(backendbaseurl + '/Insights/' + postid + '/UpVote/' + item._id, {
+                                                fetch(backendbaseurl + '/Insights/' + postid +'/' +item._id + '/UpVote/', {
                                                     method: 'get',
                                                     headers: myHeaders
                                                 })
@@ -1426,10 +1426,10 @@ function useData(d) {
                         myCommHeaders = new Headers()
                         myCommHeaders.append('authorization', 'Token ' + token);
                         myCommHeaders.append('Content-Type', 'application/json');
-                        // data[i].UpVote.length = data[i].UpVote.length + 1;
-                        // let commcount = data[i].UpVote.length;
-                        // // upvoteCount[i].innerHTML = upcount;
-                        // commentsCount[i].innerHTML = (commcount) + " comments";
+                        data[i].comments.length = data[i].comments.length + 1;
+                        let commcount = data[i].comments.length;
+                        // upvoteCount[i].innerHTML = upcount;
+                        commentsCount[i].innerHTML = (commcount) + " comments";
 
 
                         // console.log(data[i].UpVote.length)
@@ -1439,7 +1439,7 @@ function useData(d) {
                             body: JSON.stringify(infoObject)
                         })
                             .then(response => response.json())
-                            .then(() => {
+                            .then((com) => {
 
                                 var test = document.createElement('section');
                                 test.setAttribute('id', 'test');
@@ -1541,7 +1541,7 @@ function useData(d) {
                                 commenterName.addEventListener('click', commentAuthor);
 
                                 function commentAuthor() {
-                                    var openId = item.commenter._id;
+                                    var openId = user_id;
                                     console.log(openId)
                                     fetch('/view-profile/' + openId).then(() => {
                                         window.location.pathname = '/view-profile/' + openId;
@@ -1573,7 +1573,7 @@ function useData(d) {
                                     }
                                     
     
-                                    fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + item._id, {
+                                    fetch(backendbaseurl + '/Insights/' + postid + '/' + com._id + '/DownVote/', {
                                         method: 'get',
                                         headers: myHeaders
                                     })
@@ -1605,7 +1605,7 @@ function useData(d) {
                                         commentupvoteCountselected.innerHTML=0;
                                     }
     
-                                    fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + item._id, {
+                                    fetch(backendbaseurl + '/Insights/' + postid +'/'+ com._id+ '/UpVote/', {
                                         method: 'get',
                                         headers: myHeaders
                                     })
