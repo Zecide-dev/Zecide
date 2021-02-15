@@ -814,7 +814,7 @@ function useData(d) {
                                 }
                                 
 
-                                fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + com._id, {
+                                fetch(backendbaseurl + '/Posts/' + postid + '/DownVote/' + com.cmt._id, {
                                     method: 'get',
                                     headers: myHeaders
                                 })
@@ -846,7 +846,7 @@ function useData(d) {
                                     commentupvoteCountselected.innerHTML=0;
                                 }
 
-                                fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + com._id, {
+                                fetch(backendbaseurl + '/Posts/' + postid + '/UpVote/' + com.cmt._id, {
                                     method: 'get',
                                     headers: myHeaders
                                 })
@@ -1573,7 +1573,7 @@ function useData(d) {
                                     }
                                     
     
-                                    fetch(backendbaseurl + '/Insights/' + postid + '/' + com._id + '/DownVote/', {
+                                    fetch(backendbaseurl + '/Insights/' + postid + '/' + com.cmt._id + '/DownVote/', {
                                         method: 'get',
                                         headers: myHeaders
                                     })
@@ -1605,7 +1605,7 @@ function useData(d) {
                                         commentupvoteCountselected.innerHTML=0;
                                     }
     
-                                    fetch(backendbaseurl + '/Insights/' + postid +'/'+ com._id+ '/UpVote/', {
+                                    fetch(backendbaseurl + '/Insights/' + postid +'/'+ com.cmt._id+ '/UpVote/', {
                                         method: 'get',
                                         headers: myHeaders
                                     })
