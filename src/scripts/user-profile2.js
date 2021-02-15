@@ -45,6 +45,7 @@ function userBio() {
         .then((usr) => {
             userData = usr;
             console.log(userData)
+            document.getElementById('profilePicture').setAttribute('src', userData.userInfo.imgUrl);
             document.getElementById('firstName').innerHTML = userData.user.UserName;
             document.getElementById('tagLine').innerHTML = userData.userInfo.TagLine;
             document.getElementById('profileBio').innerHTML = userData.userInfo.UserBio;

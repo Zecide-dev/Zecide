@@ -46,7 +46,9 @@ router.get('/posts/:pageid',function(req,res){
 router.get('/edit-bio',function(req,res){
     res.sendFile(path.join(__dirname, "../public/edit-bio.html"))
 })
-
+router.get('/change-profile-picture',function(req,res){
+    res.sendFile(path.join(__dirname, "../public/change-profile-picture.html"))
+})
 router.get('/users/current',function(req,res){
     res.sendFile(path.join(__dirname, "../public/profile.html"))
 })
