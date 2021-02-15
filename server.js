@@ -183,8 +183,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(routes);
 app.use(express.static(__dirname));
-// make the uploads path available to the browser
-app.use('/Uploads', express.static(__dirname + '/Uploads'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
