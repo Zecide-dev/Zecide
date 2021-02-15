@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/src/styles/feed.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
+    <script src="https://kit.fontawesome.com/1b9ab29bbb.js" crossorigin="anonymous"></script>
 
 
 </head>
@@ -244,7 +245,6 @@
             </div>
         </div>
     </div> -->
-    <script src="/src/scripts/user-feed.js"></script>
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;
@@ -267,8 +267,10 @@
         }
         var userna = getCookie('token');
         document.getElementById('usern').innerHTML = localStorage.getItem('usernam');
+        var user_id = localStorage.getItem('userid');
 
     </script>
+    <script src="/src/scripts/user-feed.js"></script>
 </body>
 
 </html>

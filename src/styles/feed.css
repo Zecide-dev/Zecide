@@ -895,6 +895,9 @@ li {
     width: 4vw;
   }
 
+  .voteIcon {
+    margin-right: 100px;
+  }
   .upvote span,
   .downvote span {
     font-size: 3.5vw;
@@ -1036,4 +1039,13 @@ ul {
   font-size: 1.1vw;
   line-height: 1.4;
   margin: 0;
+}
+.upvoteIcon-span {
+  /* width: 4vw; */
+  margin-right: 0.8vw;
+  padding-top: 1px;
+  /* height: 10px; */
+}
+.voted {
+  color: #0275d8;
 }
