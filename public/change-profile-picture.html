@@ -47,7 +47,7 @@
                 <div class="profile-dropdown">
 
                     <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
-                    <span id="usern">abc</span>
+                    <span id="usern">Guest</span>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <img class="burger dropdown-img" id="burger" src="/src/images/dropdown-button.svg"
@@ -119,8 +119,8 @@
     </div>
     <div class="card-container">
 
-        <form action="https://www.backend.zecide.com/Users/update" enctype="multipart/form-data" method="POST">
-            <input type="file" name="profilePicture" placeholder="Profile Picture">
+        <form id="cpp" enctype="multipart/form-data">
+            <input type="file" name="imgUrl" placeholder="Profile Picture">
             <input type="submit" value="Change Profile Picture">
         </form>
 
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    <script src="/src/scripts/edit-bio.js"></script>
+    <script src="/src/scripts/change-profile-picture.js"></script>
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;
