@@ -114,6 +114,7 @@
 
         <% var dId=user.id; %>
             <% var dEmail=user._json.email %>
+            <% var dPicture=user._json.picture %>
                 <center>
                     <!-- <h3>
                         <%= dname %>
@@ -134,6 +135,9 @@
                     var getEmail = '<%= dEmail; %>';
                     console.log(getEmail)
                     localStorage.setItem('email', getEmail)
+                    var getPicture = '<%= dPicture; %>';
+                    console.log(getPicture)
+                    localStorage.setItem('picture', getPicture)
                     var newUserRegistration = 0;
 
 
@@ -145,6 +149,7 @@
                         // var info = JSON.stringify(infoObject);
                         formData2.append("UserName", getName);
                         formData2.append("email", getEmail);
+                        formData2.append("picture", getPicture);
                         // formData2.append('password', getId)
                         // let _data = { 'UserName': getName,'password':getId }
                         // var abd = new URLSearchParams(new FormData(_data))
@@ -166,12 +171,14 @@
                             console.log(body.UserName);
                             console.log(body._id);
                             console.log(body.token);
+                            console.log(body.imgUrl);
                             // setCookie("UserName", body.UserName);
                             // setCookie("UserID", body._id);
                             // setCookie("token", body.token);
                             localStorage.setItem('jwttoken', body.token);
-                            localStorage.setItem('usernam', body.UserName)
-                            localStorage.setItem('userid', body._id)
+                            localStorage.setItem('usernam', body.UserName);
+                            localStorage.setItem('userid', body._id);
+                            localStorage.setItem('userpicture', body.imgUrl);
                             var authToken = localStorage.getItem('jwttoken');
                             var bodytoken = body.token;
                             console.log(bodytoken)
