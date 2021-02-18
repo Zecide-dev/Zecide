@@ -147,7 +147,7 @@
                         var formData2 = new FormData();
                         // var infoObject = { 'UserName': getName,'password':getId };
                         // var info = JSON.stringify(infoObject);
-                        formData2.append("UserName", getName);
+                        formData2.append("name", getName);
                         formData2.append("email", getEmail);
                         formData2.append("picture", getPicture);
                         // formData2.append('password', getId)
@@ -168,7 +168,8 @@
                                 console.log('error encoun')
                             }
                             console.log(body);
-                            console.log(body.UserName);
+                            console.log(body.Name);
+                            console.log(body.Email);
                             console.log(body._id);
                             console.log(body.token);
                             console.log(body.imgUrl);
@@ -176,7 +177,8 @@
                             // setCookie("UserID", body._id);
                             // setCookie("token", body.token);
                             localStorage.setItem('jwttoken', body.token);
-                            localStorage.setItem('usernam', body.UserName);
+                            localStorage.setItem('usernam', body.Name);
+                            localStorage.setItem('useremail', body.Email);
                             localStorage.setItem('userid', body._id);
                             localStorage.setItem('userpicture', body.imgUrl);
                             var authToken = localStorage.getItem('jwttoken');
