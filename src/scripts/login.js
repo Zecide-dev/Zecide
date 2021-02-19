@@ -33,15 +33,19 @@ form.addEventListener('submit', (event) => {
         return resp.json();
     }).then((body) => {
         console.log(body);
-        console.log(body.UserName);
+        console.log(body.Name);
+        console.log(body.Email);
         console.log(body._id);
         console.log(body.token);
-        setCookie("UserName", body.UserName);
-        setCookie("UserID", body._id);
+        console.log(body.imgUrl);
+        setCookie("name", body.UserName);
+        setCookie("userid", body._id);
         setCookie("token", body.token);
         localStorage.setItem('jwttoken', body.token);
-        localStorage.setItem('usernam',body.UserName)
-        localStorage.setItem('userid',body._id)
+        localStorage.setItem('usernam', body.Name);
+        localStorage.setItem('useremail', body.Email);
+        localStorage.setItem('userid', body._id);
+        localStorage.setItem('userpicture', body.imgUrl);
         var authToken = localStorage.getItem('jwttoken');
         var bodytoken = body.token;
         console.log(bodytoken)
