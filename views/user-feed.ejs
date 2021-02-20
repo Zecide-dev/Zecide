@@ -126,34 +126,25 @@
     <div id='infinite-list'></div>
     <div class="card-container">
         <div class="status-card">
-            <textarea placeholder="What's on your mind?" id="postBody"
-                style="height: 15vh;margin-bottom: 1vh;"></textarea>
-            <!-- <span>What's on your mind?</span> -->
-            <div class="status-card-lower">
-                <!-- <div>
-                    <img src="/src/images/photo-upload.svg" alt="">
-                    <img src="/src/images/video-upload.svg" alt="">
-                    <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                </div> -->
-                <!-- <button>Post</button> -->
-
-                <!-- <div>
-                        <img src="/src/images/photo-upload.svg" alt="">
-                        <img src="/src/images/video-upload.svg" alt="">
-                        <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                    </div> -->
-                <!-- <button>Post</button> -->
-                <!-- modal for post button-->
-                <!-- Button trigger modal -->
-                <button type="button" onclick="postButton()">
-                    Post
-                </button>
-
-                <!-- Modal -->
-
-
-            </div>
-
+            <form id="new-post" enctype="multipart/form-data">
+                <textarea name="message" placeholder="What's on your mind?" id="postBody" style="height: 15vh;margin-bottom: 1vh;"></textarea>
+                <!-- <input type="file" name="postPicture" placeholder="Profile Picture"> -->
+                <!-- <span>What's on your mind?</span> -->
+                <div class="status-card-lower">
+                    <div class="image-upload">
+                        <label for="file-input">
+                          <img src="/src/images/photo-upload.svg" alt="upload picture" />
+                        </label>
+                      
+                        <input id="file-input" type="file" name="postPicture" style="display: none;"/>
+                    </div>                    
+                        <button type="submit">
+                            Post
+                        </button>
+                      <!-- <input id="file-submit" type="submit" value="Post"> -->
+                        <!-- <img src="/src/images/photo-upload.svg" alt=""> -->
+                </div>
+            </form>
         </div>
 
     </div>

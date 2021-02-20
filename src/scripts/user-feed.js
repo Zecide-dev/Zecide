@@ -11,6 +11,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 // var token = getCookie('token');
 var token = localStorage.getItem("jwttoken");
+var user_img = localStorage.getItem("userpicture");
+var user_name=localStorage.getItem('usernam');
 // myHeaders.append('Content-Type', 'application/json');
 myHeaders.append('authorization', 'Token ' + token);
 // var userData;
@@ -57,37 +59,30 @@ $(window).on("scroll", function () {
 });
 // console.log(postBody)
 
-function postButton() {
-    var postBody = document.getElementById('postBody').value;
+// function postButton() {
 
-
-    var formData = new FormData();
-
-    // var stat;
-    var infoObject = { "message": postBody };
-    var info = JSON.stringify(infoObject);
-    formData.append("user", info);
-
-    // const data = { message : postBody }
-    // var message = JSON.stringify(data)
-    // console.log(message);
-    fetch(backendbaseurl + '/Posts/create', {
+//     const form = document.getElementById('new-post');
+//         console.log(form);
+//         const formData = new FormData(form);
+//         console.log(formData);
+//         fetch(backendbaseurl+'/Posts/create', {
+//             method: 'POST',
+//             headers: myHeaders,
+//             body: formData
+//         })
+// };
+const form = document.getElementById('new-post');
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    console.log(form);
+    const formData = new FormData(form);
+    console.log(formData);
+    fetch(backendbaseurl+'/Posts/create', {
         method: 'POST',
         headers: myHeaders,
         body: formData
-    }).then(function (response) {
-        stat = response.status;
-
-        console.log(stat)
-
-
-        if (stat == 200) {
-            window.location.pathname = '/user-feed';
-        }
-
     })
-
-}
+});
 var data;
 var cardContainer = document.querySelector('.card-container');
 
@@ -109,12 +104,6 @@ var cardContainer = document.querySelector('.card-container');
 //   }
 
 // console.log(token);
-
-function getUsername() {
-    var userName = document.getElementById('usern');
-    return userName.textContent;
-    // userName.innerHTML = getCookie("UserName");
-}
 
 // getUsername();
 
@@ -259,8 +248,8 @@ function useData(d) {
         commentPost.className = 'comment-post';
 
         if (d[i].Content === undefined) {
-            feedProfilePic.setAttribute('src', '/src/images/default-profile-picture.jpg');
-            name.innerHTML = d[i].Author.UserName;
+            feedProfilePic.setAttribute('src', d[i].Author.imgUrl);
+            name.innerHTML = d[i].Author.Name;
             var dateData = d[i].date;
             var date1 = Date.parse(dateData);
             var date2 = Date.now();
@@ -419,10 +408,10 @@ function useData(d) {
                                         commenterImg.className = 'feed-profile-pic';
                                         commentCardMid.className = 'comment-card-mid';
                                         commentPostText.className = 'comment-post-text';
-                                        commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                                        commenterImg.setAttribute('src', item.commenter.imgUrl);
                                         // li.appendChild(commenterName);
                                         commenterName.className = 'name';
-                                        commenterName.innerHTML = commenterName.innerHTML + item.commenter.UserName;
+                                        commenterName.innerHTML = commenterName.innerHTML + item.commenter.Name;
                                         // li.appendChild(commentedOn);
                                         commentedOn.className = 'posted-on';
                                         let dateData = item.date;
@@ -732,12 +721,11 @@ function useData(d) {
                             commenterImg.className = 'feed-profile-pic';
                             commentCardMid.className = 'comment-card-mid';
                             commentPostText.className = 'comment-post-text';
-                            commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                            commenterImg.setAttribute('src', user_img);
                             
                             // li.appendChild(commenterName);
                             commenterName.className = 'name';
-                            var usernameComment=getUsername();
-                            commenterName.innerHTML = commenterName.innerHTML + usernameComment;
+                            commenterName.innerHTML = commenterName.innerHTML + user_name;
                             // li.appendChild(commentedOn);
                             commentedOn.className = 'posted-on';
                             // let dateData = item.date;
@@ -1164,10 +1152,10 @@ function useData(d) {
                                             commenterImg.className = 'feed-profile-pic';
                                             commentCardMid.className = 'comment-card-mid';
                                             commentPostText.className = 'comment-post-text';
-                                            commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                                            commenterImg.setAttribute('src', item.commenter.imgUrl);
                                             // li.appendChild(commenterName);
                                             commenterName.className = 'name';
-                                            commenterName.innerHTML = commenterName.innerHTML + item.commenter.UserName;
+                                            commenterName.innerHTML = commenterName.innerHTML + item.commenter.Name;
                                             // li.appendChild(commentedOn);
                                             commentedOn.className = 'posted-on';
                                             let dateData = item.date;
@@ -1493,11 +1481,10 @@ function useData(d) {
                                 commenterImg.className = 'feed-profile-pic';
                                 commentCardMid.className = 'comment-card-mid';
                                 commentPostText.className = 'comment-post-text';
-                                commenterImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                                commenterImg.setAttribute('src', user_img);
                                 // li.appendChild(commenterName);
                                 commenterName.className = 'name';
-                                var usernameComment=getUsername();
-                                commenterName.innerHTML = commenterName.innerHTML + usernameComment;
+                                commenterName.innerHTML = commenterName.innerHTML +user_name;
                                 // li.appendChild(commentedOn);
                                 commentedOn.className = 'posted-on';
                                 let date1 = Date.now();

@@ -24,15 +24,15 @@ function getCookie(cname) {
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var email = form.elements[0].value;
+    var name=form.elements[0].value;
+    var email = form.elements[1].value;
     console.log(email);
-    var username = form.elements[1].value;
-    var password = form.elements[2].value;
+    var username = form.elements[2].value;
+    var password = form.elements[3].value;
     var registrationtoken = "abcdef";
-    
     //to append registration token
     var stat;
-    var infoObject = { "UserName": username, "Email": email, "password": password , "registrationToken" : registrationtoken};
+    var infoObject = { "name":name,"username": username, "email": email, "password": password , "registrationToken" : registrationtoken};
     var info = {"user": infoObject};
     var data = JSON.stringify(info);
     fetch(backendbaseurl + '/Users', {
@@ -45,19 +45,22 @@ form.addEventListener('submit', function (e) {
         stat = response.status;
         return response.json();
     }).then(function (text) {
-        console.log(text.user.UserName);
+        console.log(text.user.Username);
         console.log(text.user._id);
+        console.log(text.user.Name);
         console.log(text.user.token);
-        setCookie("UserName", text.user.UserName);
+        setCookie("Username", text.user.Username);
         setCookie("UserID", text.user._id);
         setCookie("token", text.user.token);
+        setCookie("Name",text.user.Name);
+        setCookie("UserPicture",text.user.imgUrl);
 
 
         //uncomment the above code 
 
 
 
-        var usc = getCookie("UserName");
+        var usc = getCookie("Username");
         var uic = getCookie("UserID");
         var tc = getCookie("token");
 
