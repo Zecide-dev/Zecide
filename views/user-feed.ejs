@@ -28,6 +28,34 @@
 
     resize: none; /*remove the resize handle on the bottom right*/
 }
+.dropdown-content-notification {
+  align-items: center;
+  border-radius: 20px;
+  margin-top: 80px;
+}
+.dropdown-content-notification-hide {
+  display: none;
+}
+.dropdown-notification {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.dropdown-notification {
+  align-items: center;
+  border-radius: 20px;
+}
+
+.dropdown-notification ul {
+  list-style: none;
+}
+
+.dropdown-notification li {
+  padding-top: 1.7;
+  padding-right: 3.2vw;
+  padding-bottom: 1.7vh;
+}
 </style>
 
 <body>
@@ -47,8 +75,20 @@
                     <button class="download-btn">App Coming Soon!</button>
                 </div>
 
+                <div class="dropdown-notification">
+                    <div class="notification" style="display: flex; justify-content: center; padding-top: 10px;">
+                        <img src="/src/images/notification.svg" id="notification-img" alt="" class="notification-bell mt-2" srcset="">
+                        <div class="notifications-number">1</div>    
+                    </div>
 
-                <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+                    <div class="dropdown-content-notification dropdown-content-notification-hide">
+                        <ul class="dropdown-notification-ul">
+                            <li><a href="#"> <span>5 friend requests</span> </a></li>
+                            <li><a href="#"> <span>xyz commented on your post</span> </a></li>
+                        </ul>
+                    </div>
+                </div>
+                
 
 
                 <div class="profile-dropdown">
@@ -181,6 +221,18 @@
 
     </script>
     <script src="/src/scripts/user-feed.js"></script>
+    <script src="/src/scripts/notifications.js"></script>
+    <script>
+        const notificationnavToggle = () => {
+            var e = document.getElementById("notification-img"),
+                t = document.querySelector(".dropdown-content-notification");
+            e.addEventListener("click", () => {
+                t.classList.toggle("dropdown-content-active");
+                t.classList.toggle('dropdown-content-notification-hide');
+            });
+        };
+        notificationnavToggle();
+    </script>
 </body>
 
 </html>
