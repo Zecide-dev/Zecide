@@ -74,15 +74,23 @@ $(window).on("scroll", function () {
 const form = document.getElementById('new-post');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    console.log(form);
-    const formData = new FormData(form);
-    console.log(formData);
-    fetch(backendbaseurl+'/Posts/create', {
+    myPostHeaders = new Headers()
+    myPostHeaders.append('authorization', 'Token ' + token);
+    myPostHeaders.append('Content-Type', 'application/json');
+
+    var messageText=form.elements[0].value;
+    var infoObject = { "message": messageText};
+    var info = {"user": infoObject};
+    fetch(backendbaseurl + '/Posts/create', {
         method: 'POST',
-        headers: myHeaders,
-        body: formData
+        headers: myPostHeaders,
+        body: JSON.stringify(info)
     })
 });
+
+
+
+
 var data;
 var cardContainer = document.querySelector('.card-container');
 
@@ -287,7 +295,7 @@ function useData(d) {
             }
             commentsImg.setAttribute('src', '/src/images/comments.svg');
             commentsCount[i].innerHTML = d[i].comments.length + " comments";
-            userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+            userImg.setAttribute('src', user_img);
             commentInput[i].setAttribute('placeholder', 'Write a comment..');
             commentPost.setAttribute('src', '/src/images/send.svg');
             // var postno = d[i];
@@ -1036,7 +1044,7 @@ function useData(d) {
                 }
                 commentsImg.setAttribute('src', '/src/images/comments.svg');
                 commentsCount[i].innerHTML = d[i].comments.length + " comments";
-                userImg.setAttribute('src', '/src/images/default-profile-picture.jpg');
+                userImg.setAttribute('src', user_img);
                 commentInput[i].setAttribute('placeholder', 'Write a comment..');
                 commentPost.setAttribute('src', '/src/images/send.svg');
                 feedVerified.style.visibility = "hidden";
