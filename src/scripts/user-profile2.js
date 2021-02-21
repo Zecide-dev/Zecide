@@ -13,6 +13,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 // var token = getCookie('token');
 var token = localStorage.getItem("jwttoken");
+var user_img = localStorage.getItem("userpicture");
+var user_name=localStorage.getItem('usernam');
 // myHeaders.append('Content-Type', 'application/json');
 myHeaders.append('authorization', 'Token ' + token);
 // var userData;
@@ -35,6 +37,9 @@ myHeaders.append('authorization', 'Token ' + token);
 
 // }
 // userBio();
+
+let navbarImg=document.getElementsByClassName('dropdown-img');
+navbarImg[0].setAttribute("src",user_img);
 
 function userBio() {
 

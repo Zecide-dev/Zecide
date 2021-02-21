@@ -31,7 +31,9 @@ myHeaders.append('authorization', 'Token ' + token);
 //     )
 //     return userInfo;
 
-
+// updating navbar image
+let navbarImg=document.getElementsByClassName('dropdown-img');
+navbarImg[0].setAttribute("src",user_img);
 
 // }
 // userBio();

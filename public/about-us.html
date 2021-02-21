@@ -47,7 +47,7 @@
                 <div class="profile-dropdown">
 
                     <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
-                    <span id="user-name">Siddharth</span>
+                    <span id="user-name">Guest</span>
                     <div class="dropdown">
                         <button class="dropbtn">
                             <img class="burger dropdown-img" id="burger" src="/src/images/dropdown-button.svg"
@@ -77,7 +77,7 @@
     </div>
     <div class="side-nav">
         <div>
-            <a href="/user-feed>
+            <a href="/user-feed">
                 <div class="nav-item ">
                     <img src="/src/images/feed.svg" alt="">
                     <span>Feed</span>
@@ -109,13 +109,13 @@
             </a>
             <a href="/help-support">
                 <div class="nav-item nav-help">
-                    <img src="/src/images/help.svg" alt="">
+                    <img src="/src/images/help-active.svg" alt="">
                     <span>Help & Support</span>
                 </div>
             </a>
             <a href="/about-us">
                 <div class="nav-item nav-about-us nav-item-active">
-                    <img src="/src/images/about-active.svg" alt="">
+                    <img src="/src/images/about.svg" alt="">
                     <span>About Us</span>
                 </div>
             </a>
@@ -133,7 +133,15 @@
     </div>
     </div>
 
-    <script src="/src/scripts/feed.js"></script>
+    <!-- <script src="/src/scripts/feed.js"></script> -->
+    <script>
+        var user_img = localStorage.getItem("userpicture");
+          var user_name=localStorage.getItem('usernam');
+          let navbarImg=document.getElementsByClassName('dropdown-img');
+          navbarImg[0].setAttribute("src",user_img);
+          let namespan=document.getElementById("user-name");
+          namespan.innerHTML=user_name;
+  </script>
 </body>
 
 </html>

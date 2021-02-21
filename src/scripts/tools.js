@@ -14,14 +14,12 @@ function getCookie(cname) {
     }
     return "";
     }
-  
-  function getUsername(){
-    var userName = document.getElementById('user-name');
-    userName.innerHTML = getCookie("UserName");
-  }
-  
-  getUsername();
-  
+  var user_img = localStorage.getItem("userpicture");
+  var user_name=localStorage.getItem('usernam');
+  let navbarImg=document.getElementsByClassName('dropdown-img');
+  navbarImg[0].setAttribute("src",user_img);
+  let namespan=document.getElementById("user-name");
+  namespan.innerHTML=user_name;
 var preloader = document.querySelector('.preloader');
 
 window.addEventListener('load', function(){

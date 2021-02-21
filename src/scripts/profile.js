@@ -40,6 +40,11 @@ function getUsername(){
 
 getUsername();
 
+// var user_img = localStorage.getItem("userpicture");
+// // updating navbar image
+// let navbarImg=document.getElementById('user_image');
+// navbarImg.setAttribute("src",user_img);
+
 function useData(d){
     data= d;
     len= data.length;

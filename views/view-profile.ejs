@@ -46,7 +46,7 @@
 
                 <div class="profile-dropdown">
 
-                    <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
+                    <img src="/src/images/default-profile-picture.jpg" id="user_image" class="dropdown-img" alt="">
                     <span id="usern">abc</span>
                     <div class="dropdown">
                         <button class="dropbtn">
@@ -231,7 +231,6 @@
             </div>
         </div>
     </div>
-    <script src="/src/scripts/view-profile.js"></script>
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;
@@ -256,6 +255,7 @@
         document.getElementById('usern').innerHTML = localStorage.getItem('usernam');
 
     </script>
+    <script src="/src/scripts/view-profile.js"></script>
 </body>
 
 </html>

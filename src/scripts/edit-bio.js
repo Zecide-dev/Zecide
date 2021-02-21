@@ -18,9 +18,6 @@ form.addEventListener('submit', function (e) {
 
     var edu = form.elements[4].value;
     console.log(edu);
-    if (ptagLine && bio && prof && place && edu) {
-
-
 
         //to append registration token
         var stat;
@@ -66,8 +63,4 @@ form.addEventListener('submit', function (e) {
         }).catch(function (error) {
             console.error(error);
         })
-    }
-    else {
-        alert('fill all fields')
-    }
 });
