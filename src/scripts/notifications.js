@@ -15,12 +15,13 @@ function fetchNotificationData() {
 }
 var isfirstTime=true;
 let notificationDropdown=document.getElementsByClassName("notification")[0];
-notificationDropdown.addEventListener("click",function(){
-    if(isfirstTime){
-        fetchNotificationData();
-        isfirstTime=false;
-    }
-})
+// notificationDropdown.addEventListener("click",function(){
+//     if(isfirstTime){
+//         fetchNotificationData();
+//         isfirstTime=false;
+//     }
+// })
+fetchNotificationData();
 
 function useNoti(allNotifications){
     var notifications=allNotifications.notifications;
@@ -28,20 +29,24 @@ function useNoti(allNotifications){
     var len = notifications.length;
 
     let notificationul=document.getElementsByClassName('dropdown-notification-ul')[0];
+    let notificationNumber=document.getElementsByClassName('notifications-number')[0];
+    notificationNumber.innerHTML=len;
     console.log(notificationul);
     console.log(allNotifications.notifications.length);  
     for(var i=0;i<len;i++){
         let notificationli=document.createElement('li');
-        let notificationDiv=document.createElement('div');
+        let notificationlink=document.createElement('a');
         let notificationImg=document.createElement('img');
+        let notificationMsgDiv=document.createElement('div');
         let notificationMsg=document.createElement('p');
         let notificationTime=document.createElement('span');
         
         notificationul.prepend(notificationli);
-        notificationli.append(notificationDiv);
-        notificationDiv.append(notificationImg);
-        notificationDiv.append(notificationMsg);
-        notificationDiv.append(notificationTime);
+        notificationli.append(notificationlink);
+        notificationlink.append(notificationImg);
+        notificationlink.append(notificationMsgDiv);
+        notificationMsgDiv.append(notificationMsg);
+        notificationMsgDiv.appendChild(notificationTime);
 
         notificationMsg.innerHTML=notifications[i].message;
         notificationImg.setAttribute('src',notifications[i].icon);
@@ -50,6 +55,25 @@ function useNoti(allNotifications){
         var date2 = Date.now();
         var dateDiff = date2-date1;
         notificationTime.innerHTML= timeSince(dateDiff) + " ago";
+
+        // setting attributes
+        notificationli.className="noti-li";
+        notificationlink.className="noti-div";
+        notificationImg.className="noti-img";
+        notificationMsgDiv.className="noti-msg-div";
+        notificationMsg.className="noti-msg";
+        notificationTime.className="noti-time";
+        notificationlink.setAttribute('href',"#");
     }  
 }
+
+const notificationnavToggle = () => {
+    var e = document.getElementById("notification-img"),
+        t = document.querySelector(".dropdown-content-notification");
+    e.addEventListener("click", () => {
+        t.classList.toggle("dropdown-content-active");
+        t.classList.toggle('dropdown-content-notification-hide');
+    });
+};
+notificationnavToggle();
     
