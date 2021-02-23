@@ -8,6 +8,11 @@
   justify-content: center;
   padding-top: 10px;
 }
+.notifications-number {
+  font-size: bold;
+  font-weight: 600;
+  color: blue;
+}
 .dropdown-content-notification {
   align-items: center;
   border-radius: 20px;
@@ -29,6 +34,7 @@
 
 .dropdown-notification ul {
   list-style: none;
+  padding-left: 20px;
 }
 
 .dropdown-notification li {
@@ -44,6 +50,7 @@
   width: 5vw;
   height: 5vw;
   padding-top: 5px;
+  border-radius: 50%;
 }
 .noti-msg {
   padding-left: 15px;

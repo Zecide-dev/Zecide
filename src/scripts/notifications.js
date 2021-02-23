@@ -21,7 +21,11 @@ let notificationDropdown=document.getElementsByClassName("notification")[0];
 //         isfirstTime=false;
 //     }
 // })
-fetchNotificationData();
+if(isfirstTime){
+    fetchNotificationData();
+    isfirstTime=false;
+}
+
 
 function useNoti(allNotifications){
     var notifications=allNotifications.notifications;

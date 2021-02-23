@@ -18,6 +18,7 @@
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="icon" href="/src/images/logo.svg" />
   <link rel="stylesheet" href="/src/styles/tools.css" />
+  <link rel="stylesheet" href="/src/styles/notifications.css" />
 </head>
 
 <body>
@@ -47,7 +48,21 @@
           </div>
           <button class="download-btn">App Coming Soon!</button>
         </div>
-        <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+        
+        <div class="dropdown-notification">
+          <div class="notification">
+              <img src="/src/images/notification.svg" id="notification-img" alt="" class="notification-bell mb-3" srcset="">
+              <div class="notifications-number">1</div>    
+          </div>
+
+          <div class="dropdown-content-notification dropdown-content-notification-hide">
+              <ul class="dropdown-notification-ul">
+                  <!-- <li><a href="#"> <span>5 friend requests</span> </a></li>
+                  <li><a href="#"> <span>xyz commented on your post</span> </a></li> -->
+              </ul>
+          </div>
+        </div>
+
         <div class="profile-dropdown">
           <img src="/src/images/default-profile-picture.jpg" class="dropdown-img" alt="">
           <span id="user-name">Guest</span>
@@ -151,6 +166,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
+  <script src="/src/scripts/notifications.js"></script>
   <script src="/src/scripts/tools.js"></script>
 </body>
 
