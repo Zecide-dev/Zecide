@@ -1,6 +1,7 @@
 .notification-bell {
   width: 2.5vw;
   padding-top: 0.7vh;
+  cursor: pointer;
 }
 .notification {
   display: flex;
@@ -37,7 +38,7 @@
 }
 .noti-div {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 .noti-img {
   width: 5vw;
