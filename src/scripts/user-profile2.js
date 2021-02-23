@@ -3,7 +3,7 @@
 // const { response } = require("express");
 // const { default: fetch } = require("node-fetch");
 
-let backendbaseurl = "https://www.backend.zecide.com";
+// let backendbaseurl = "https://www.backend.zecide.com";
 
 const myHeaders = new Headers();
 var script = document.createElement('script');
