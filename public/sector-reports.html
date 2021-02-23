@@ -18,6 +18,7 @@
     <link rel="icon" href="/src/images/logo.svg">
     <link rel="stylesheet" href="/src/styles/sector-reports.css">
     <link rel="stylesheet" href="/src/styles/notification-bell.css">
+    <link rel="stylesheet" href="/src/styles/notifications.css">
 </head>
 
 <body>
@@ -38,7 +39,19 @@
                 </div>
 
 
-                <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+                <div class="dropdown-notification">
+                    <div class="notification">
+                        <img src="/src/images/notification.svg" id="notification-img" alt="" class="notification-bell mb-2" srcset="">
+                        <div class="notifications-number">1</div>    
+                    </div>
+          
+                    <div class="dropdown-content-notification dropdown-content-notification-hide">
+                        <ul class="dropdown-notification-ul">
+                            <!-- <li><a href="#"> <span>5 friend requests</span> </a></li>
+                            <li><a href="#"> <span>xyz commented on your post</span> </a></li> -->
+                        </ul>
+                    </div>
+                  </div>
 
 
                 <div class="profile-dropdown">
@@ -74,7 +87,7 @@
     </div>
     <div class="side-nav">
         <div>
-            <a href="/posts/0">
+            <a href="/user-feed">
                 <div class="nav-item ">
                     <img src="/src/images/feed.svg" alt="">
                     <span>Feed</span>
@@ -228,6 +241,7 @@
         </div>
         <div class="end"></div>
     </div>
+    <script src="/src/scripts/notifications.js"></script>
     <script src="/src/scripts/sector-reports.js"></script>
 </body>
 

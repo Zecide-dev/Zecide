@@ -15,6 +15,8 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/src/styles/feed.css">
+    <link rel="stylesheet" href="/src/styles/notifications.css">
+    
 
 </head>
 
@@ -36,7 +38,19 @@
                 </div>
 
 
-                <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+                <div class="dropdown-notification">
+                    <div class="notification">
+                        <img src="/src/images/notification.svg" id="notification-img" alt="" class="notification-bell mt-2" srcset="">
+                        <div class="notifications-number">1</div>    
+                    </div>
+          
+                    <div class="dropdown-content-notification dropdown-content-notification-hide">
+                        <ul class="dropdown-notification-ul">
+                            <!-- <li><a href="#"> <span>5 friend requests</span> </a></li>
+                            <li><a href="#"> <span>xyz commented on your post</span> </a></li> -->
+                        </ul>
+                    </div>
+                  </div>
 
 
                 <div class="profile-dropdown">
@@ -145,8 +159,16 @@
 
     </div>
     </div>
-
+    <script src="/src/scripts/notifications.js"></script>
     <script src="/src/scripts/feed.js"></script>
+    <script>
+          var user_img = localStorage.getItem("userpicture");
+            var user_name=localStorage.getItem('usernam');
+            let navbarImg=document.getElementsByClassName('dropdown-img');
+            navbarImg[0].setAttribute("src",user_img);
+            let namespan=document.getElementById("user-name");
+            namespan.innerHTML=user_name;
+    </script>
 </body>
 
 </html>

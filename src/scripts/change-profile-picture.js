@@ -1,17 +1,19 @@
 const form = document.getElementById('cpp');
-const myHeaders = new Headers();
+const myHeadersPictures = new Headers();
 
 // var token = getCookie('token');
 // 
 var token = localStorage.getItem("jwttoken");
-
-myHeaders.append('authorization', 'Token ' + token);
+myHeadersPictures.append('authorization', 'Token ' + token);
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     const formData = new FormData(form);
+    console.log(formData);
     fetch('https://www.backend.zecide.com/Users/update', {
         method: 'POST',
-        headers: myHeaders,
+        headers: myHeadersPictures,
         body: formData
     })
+    .then(response => response.json())
+    .then(data => {console.log(data)})
 });

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="/src/styles/feed.css">
+    <link rel="stylesheet" href="/src/styles/notifications.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
     <script src="https://kit.fontawesome.com/1b9ab29bbb.js" crossorigin="anonymous"></script>
@@ -20,6 +21,7 @@
     border: none;
     overflow: auto;
     outline: none;
+    width: 48vw;
 
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -46,8 +48,20 @@
                     <button class="download-btn">App Coming Soon!</button>
                 </div>
 
+                <div class="dropdown-notification">
+                    <div class="notification">
+                        <img src="/src/images/notification.svg" id="notification-img" alt="" class="notification-bell mt-2" srcset="">
+                        <div class="notifications-number">1</div>    
+                    </div>
 
-                <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+                    <div class="dropdown-content-notification dropdown-content-notification-hide">
+                        <ul class="dropdown-notification-ul">
+                            <!-- <li><a href="#"> <span>5 friend requests</span> </a></li>
+                            <li><a href="#"> <span>xyz commented on your post</span> </a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                
 
 
                 <div class="profile-dropdown">
@@ -126,36 +140,32 @@
     <div id='infinite-list'></div>
     <div class="card-container">
         <div class="status-card">
-            <textarea placeholder="What's on your mind?" id="postBody"
-                style="height: 15vh;margin-bottom: 1vh;"></textarea>
-            <!-- <span>What's on your mind?</span> -->
-            <div class="status-card-lower">
-                <!-- <div>
-                    <img src="/src/images/photo-upload.svg" alt="">
-                    <img src="/src/images/video-upload.svg" alt="">
-                    <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                </div> -->
-                <!-- <button>Post</button> -->
-
-                <!-- <div>
-                        <img src="/src/images/photo-upload.svg" alt="">
-                        <img src="/src/images/video-upload.svg" alt="">
-                        <img class="file-upload" src="/src/images/file-upload.svg" alt="">
-                    </div> -->
-                <!-- <button>Post</button> -->
-                <!-- modal for post button-->
-                <!-- Button trigger modal -->
-                <button type="button" onclick="postButton()">
-                    Post
-                </button>
-
-                <!-- Modal -->
-
-
-            </div>
-
+            <form id="new-post" enctype="multipart/form-data">
+                <textarea name="message" placeholder="What's on your mind?" id="postBody" style="height: 15vh;margin-bottom: 1vh;"></textarea>
+                <!-- <input type="file" name="postPicture" placeholder="Profile Picture"> -->
+                <!-- <span>What's on your mind?</span> -->
+                <!-- <input type="text" name="message" placeholder="What's on your mind?"> -->
+                <div class="status-card-lower">
+                    <div class="image-upload">
+                        <label for="file-input">
+                          <img src="/src/images/photo-upload.svg" alt="upload picture" />
+                        </label>
+                      
+                        <input id="file-input" type="file" name="postPicture" style="display: none;"/>
+                    </div>                    
+                        <button type="submit">
+                            Post
+                        </button>
+                      <!-- <input id="file-submit" type="submit" value="Post"> -->
+                        <!-- <img src="/src/images/photo-upload.svg" alt=""> -->
+                </div>
+            </form>
+            <!-- <form id="new-post" enctype="multipart/form-data">
+                <input type="text" name="message" placeholder="What's on your mind?">
+                <input type="file" name="postPicture" placeholder="Post Picture">
+                <input type="submit" value="Post">
+            </form> -->
         </div>
-
     </div>
     </div>
     <script>
@@ -183,7 +193,10 @@
         var user_id = localStorage.getItem('userid');
 
     </script>
+    
+    <script src="/src/scripts/notifications.js"></script>
     <script src="/src/scripts/user-feed.js"></script>
+
 </body>
 
 </html>

@@ -13,6 +13,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/src/styles/profile.css">
     <link rel="stylesheet" href="/src/styles/feed.css">
+    <link rel="stylesheet" href="/src/styles/notifications.css">
 
 </head>
 
@@ -41,7 +42,19 @@
                 </div>
 
 
-                <img src="/src/images/notification.svg" alt="" class="notification-bell" srcset="">
+                <div class="dropdown-notification">
+                    <div class="notification">
+                        <img src="/src/images/notification.svg" id="notification-img" alt="" class="notification-bell mb-2" srcset="">
+                        <div class="notifications-number">1</div>    
+                    </div>
+          
+                    <div class="dropdown-content-notification dropdown-content-notification-hide">
+                        <ul class="dropdown-notification-ul">
+                            <!-- <li><a href="#"> <span>5 friend requests</span> </a></li>
+                            <li><a href="#"> <span>xyz commented on your post</span> </a></li> -->
+                        </ul>
+                    </div>
+                  </div>
 
 
                 <div class="profile-dropdown">
@@ -154,7 +167,8 @@
             </div>
         </div>
     </div>
-    <script src="/src/scripts/change-profile-picture.js"></script>
+    <script src="/src/scripts/notifications.js"></script>
+    <!-- <script src="/src/scripts/change-profile-picture.js"></script> -->
     <script>
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue;

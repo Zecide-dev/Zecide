@@ -6,8 +6,7 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 // var token = getCookie('token');
 // 
-var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6IjMwMDAxNzU2MzAwIiwiaWQiOiI1ZmVkYTk2NjY0MTMyYTU1Yzk0YmU2MmEiLCJleHAiOjMxNzEyNTU5ODA3MiwiaWF0IjoxNjEwNjQ0MTAwfQ.cJHo-yiIrJGceTAqZJLJfwCpuBMsbLI1wIXBsRwdSdQ'
-
+var token = localStorage.getItem("jwttoken");
 myHeaders.append('authorization', 'Token ' + token);
 
 var pageNo = 0;

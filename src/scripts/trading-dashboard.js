@@ -355,6 +355,7 @@ createEventButton.addEventListener('click', function () {
   monitorEvent.style.display = 'none';
   createEvent.style.display = 'initial';
   niftyDiv.style.display = 'none';
+  resetMultipleEvents();
 })
 
 showNiftyButton.addEventListener('click', function () {
@@ -363,6 +364,918 @@ showNiftyButton.addEventListener('click', function () {
   niftyDiv.style.display = 'initial';
 })
 
+// creating some global objects for and operator functionality
+var isAlreadyAndUsed=false;
+var numScreensAndUsed=0;
+var numberOfEventsAddedinAnd=0;
+
+var isAlreadyOrUsed=false;
+var numScreensOrUsed=0;
+var numberOfEventsAddedinOr=0;
+
+let numberOfScreens={
+  'ichimoku':2,
+  'vortex':2,
+  'vwap':2,
+  'supertrend':2,
+  'psar':2,
+  'cksp':2,
+  'aroon':2,
+  'cmf':2,
+  'mfi':2,
+  'ao':2,
+  'stoch':2,
+  'stochrsi':2,
+  'cci':2,
+  'roc':2,
+  'macd':2,
+  'rsi':2,
+  'ema':2,
+  'dema':2,
+  'hma':2,
+  'kama':2,
+  'sma':2,
+  'rma':2,
+  'sinwma':2,
+  'swma':2,
+  't3ma':2,
+  'tema':2,
+  'trima':2,
+  'vwma':2,
+  'zlma':2,
+  'breakout':2,
+  'bbands':2,
+  'donchian':2,
+  'accbands':2,
+  'kc':2,
+  'adx':2,
+  'chop':2,
+  'reversal':1,
+  'rangebound':1,
+  'pullback':1
+}
+let addedEventsAndOperator={
+  'ichimoku':{},
+  'vortex':{},
+  'vwap':{},
+  'supertrend':{},
+  'psar':{},
+  'cksp':{},
+  'aroon':{},
+  'cmf':{},
+  'mfi':{},
+  'ao':{},
+  'stoch':{},
+  'stochrsi':{},
+  'cci':{},
+  'roc':{},
+  'macd':{},
+  'rsi':{},
+  'ema':{},
+  'dema':{},
+  'hma':{},
+  'kama':{},
+  'sma':{},
+  'rma':{},
+  'sinwma':{},
+  'swma':{},
+  't3ma':{},
+  'tema':{},
+  'trima':{},
+  'vwma':{},
+  'zlma':{},
+  'breakout':{},
+  'bbands':{},
+  'donchian':{},
+  'accbands':{},
+  'kc':{},
+  'adx':{},
+  'chop':{},
+  'reversal':{},
+  'rangebound':{},
+  'pullback':{}
+}
+let addedEventsOrOperator={
+  'ichimoku':{},
+  'vortex':{},
+  'vwap':{},
+  'supertrend':{},
+  'psar':{},
+  'cksp':{},
+  'aroon':{},
+  'cmf':{},
+  'mfi':{},
+  'ao':{},
+  'stoch':{},
+  'stochrsi':{},
+  'cci':{},
+  'roc':{},
+  'macd':{},
+  'rsi':{},
+  'ema':{},
+  'dema':{},
+  'hma':{},
+  'kama':{},
+  'sma':{},
+  'rma':{},
+  'sinwma':{},
+  'swma':{},
+  't3ma':{},
+  'tema':{},
+  'trima':{},
+  'vwma':{},
+  'zlma':{},
+  'breakout':{},
+  'bbands':{},
+  'donchian':{},
+  'accbands':{},
+  'kc':{},
+  'adx':{},
+  'chop':{},
+  'reversal':{},
+  'rangebound':{},
+  'pullback':{}
+}
+
+//reset create-btn
+function resetMultipleEvents(){
+  isAlreadyAndUsed=false;
+  numScreensAndUsed=0;
+  numberOfEventsAddedinAnd=0;
+
+  isAlreadyOrUsed=false;
+  numScreensOrUsed=0;
+  numberOfEventsAddedinOr=0;
+
+  addedEventsAndOperator={
+    'ichimoku':{},
+    'vortex':{},
+    'vwap':{},
+    'supertrend':{},
+    'psar':{},
+    'cksp':{},
+    'aroon':{},
+    'cmf':{},
+    'mfi':{},
+    'ao':{},
+    'stoch':{},
+    'stochrsi':{},
+    'cci':{},
+    'roc':{},
+    'macd':{},
+    'rsi':{},
+    'ema':{},
+    'dema':{},
+    'hma':{},
+    'kama':{},
+    'sma':{},
+    'rma':{},
+    'sinwma':{},
+    'swma':{},
+    't3ma':{},
+    'tema':{},
+    'trima':{},
+    'vwma':{},
+    'zlma':{},
+    'breakout':{},
+    'bbands':{},
+    'donchian':{},
+    'accbands':{},
+    'kc':{},
+    'adx':{},
+    'chop':{},
+    'reversal':{},
+    'rangebound':{},
+    'pullback':{}
+  }
+  addedEventsOrOperator={
+    'ichimoku':{},
+    'vortex':{},
+    'vwap':{},
+    'supertrend':{},
+    'psar':{},
+    'cksp':{},
+    'aroon':{},
+    'cmf':{},
+    'mfi':{},
+    'ao':{},
+    'stoch':{},
+    'stochrsi':{},
+    'cci':{},
+    'roc':{},
+    'macd':{},
+    'rsi':{},
+    'ema':{},
+    'dema':{},
+    'hma':{},
+    'kama':{},
+    'sma':{},
+    'rma':{},
+    'sinwma':{},
+    'swma':{},
+    't3ma':{},
+    'tema':{},
+    'trima':{},
+    'vwma':{},
+    'zlma':{},
+    'breakout':{},
+    'bbands':{},
+    'donchian':{},
+    'accbands':{},
+    'kc':{},
+    'adx':{},
+    'chop':{},
+    'reversal':{},
+    'rangebound':{},
+    'pullback':{}
+  }
+  let consoleDisplay=document.getElementById('console');
+  consoleDisplay.style.display='none';
+  consoleDisplay.innerHTML='';
+  showallAnd();
+  showallOR();
+} 
+
+
+// returns url to fetch data
+function getUrltoFetchData(eventType){
+  let url="";
+  if(eventType=='ichimoku'){
+    let IchimokuCross = document.getElementById('ichimoku-cross');
+    let IchimokuChoicesDropdown = document.getElementById('ichimoku-choices-dropdown');
+
+    url = backendBaseURL + 'Dashboard/ichimoku?';
+    url += ('&cross=' + (IchimokuCross.checked ? 1 : 0));
+    url += ('&choice=' + IchimokuChoicesDropdown.value.toString().substr(IchimokuChoicesDropdown.value.toString().length - 1));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='vortex'){
+    let VortexCross = document.getElementById('vortex-cross');
+
+    let url = backendBaseURL + 'Dashboard/vortex?';
+    url += ('&cross=' + (VortexCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='vwap'){
+    let VWAPCross = document.getElementById('vwap-cross');
+
+    let url = backendBaseURL + 'Dashboard/vwap?';
+    url += ('&cross=' + (VWAPCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='pullback'){
+    let PullbackBigWindow = document.getElementById('pullback-big-window');
+
+    let url = backendBaseURL + 'Dashboard/pullback?';
+    url += ('bigWindow=' + PullbackBigWindow.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='supertrend'){
+    let SupertrendCross = document.getElementById('supertrend-cross');
+    let SupertrendLength = document.getElementById('supertrend-length');
+    let SupertrendMultiplier = document.getElementById('supertrend-multiplier');
+    let SupertrendOffset = document.getElementById('supertrend-offset');
+
+    let url = backendBaseURL + 'Dashboard/supertrend?';
+    url += ('&cross=' + (SupertrendCross.checked ? 1 : 0));
+    url += ('&length=' + SupertrendLength.value.toString());
+    url += ('&multiplier=' + SupertrendMultiplier.value.toString());
+    url += ('&offset=' + SupertrendOffset.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='psar'){
+    let PSARLast = document.getElementById('psar-last');
+
+    let url = backendBaseURL + 'Dashboard/psar?';
+    url += ('&last=' + PSARLast.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='cksp'){
+    let url = backendBaseURL + 'Dashboard/cksp';
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='aroon'){
+    let AroonCross = document.getElementById('aroon-cross');
+    let AroonUpperThreshold = document.getElementById('aroon-upper-threshold');
+    let AroonLowerThreshold = document.getElementById('aroon-lower-threshold');
+    let AroonChoicesDropdown = document.getElementById('aroon-choices-dropdown');
+
+    let url = backendBaseURL + 'Dashboard/aroon?';
+    url += ('cross=' + (AroonCross.checked ? 1 : 0))
+    url += ('&choice=' + AroonChoicesDropdown.value.toString().substr(AroonChoicesDropdown.value.toString().length - 1));
+    url += ('&upperThreshold=' + AroonUpperThreshold.value.toString());
+    url += ('&lowerThreshold=' + AroonLowerThreshold.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='cmf'){
+    let CMFChoicesDropdown = document.getElementById('cmf-choices-dropdown');
+
+    let url = backendBaseURL + 'Dashboard/cmf?';
+    url += ('choice=' + CMFChoicesDropdown.value.toString().substr(CMFChoicesDropdown.value.toString().length - 1));
+    // url += ('&window=' + OBVWindow.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='mfi'){
+    let MFICross = document.getElementById('mfi-cross');
+    let MFIUpperThreshold = document.getElementById('mfi-upper-threshold');
+    let MFILowerThreshold = document.getElementById('mfi-lower-threshold');
+  
+    let url = backendBaseURL + 'Dashboard/mfi?';
+    url += ('upperThreshold=' + MFIUpperThreshold.value.toString());
+    url += ('&lowerThreshold=' + MFILowerThreshold.value.toString());
+    url += ('&cross=' + (MFICross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='ao'){
+    let AOChoicesDropdown = document.getElementById('ao-choices-dropdown');
+
+    let url = backendBaseURL + 'Dashboard/ao?';
+    url += ('choice=' + AOChoicesDropdown.value.toString().substr(AOChoicesDropdown.value.toString().length - 1));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='stoch'){
+    let StochChoicesDropdown = document.getElementById('stoch-choices-dropdown');
+    let StochUpperThreshold = document.getElementById('stoch-upper-threshold');
+    let StochLowerThreshold = document.getElementById('stoch-lower-threshold');
+  
+    let url = backendBaseURL + 'Dashboard/stoch?';
+    url += ('choice=' + StochChoicesDropdown.value.toString().substr(StochChoicesDropdown.value.toString().length - 1));
+    url += ('&upperThreshold=' + StochUpperThreshold.value.toString());
+    url += ('&lowerThreshold=' + StochLowerThreshold.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='stochrsi'){
+    let StochRSIChoicesDropdown = document.getElementById('stochrsi-choices-dropdown');
+    let StochRSIUpperThreshold = document.getElementById('stochrsi-upper-threshold');
+    let StochRSILowerThreshold = document.getElementById('stochrsi-lower-threshold');
+  
+    let url = backendBaseURL + 'Dashboard/stochrsi?';
+    url += ('choice=' + StochRSIChoicesDropdown.value.toString().substr(StochRSIChoicesDropdown.value.toString().length - 1));
+    url += ('&upperThreshold=' + StochRSIUpperThreshold.value.toString());
+    url += ('&lowerThreshold=' + StochRSILowerThreshold.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='cci'){
+    let CCIChoicesDropdown = document.getElementById('cci-choices-dropdown');
+    let CCIUpperThreshold = document.getElementById('cci-upper-threshold');
+    let CCILowerThreshold = document.getElementById('cci-lower-threshold');
+ 
+    let url = backendBaseURL + 'Dashboard/cci?';
+    url += ('choice=' + CCIChoicesDropdown.value.toString().substr(CCIChoicesDropdown.value.toString().length - 1));
+    url += ('&upperThreshold=' + CCIUpperThreshold.value.toString());
+    url += ('&lowerThreshold=' + CCILowerThreshold.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='roc'){
+    let url = backendBaseURL + 'Dashboard/roc';
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='macd'){
+    let MACDCross = document.getElementById('macd-cross');
+
+    let url = backendBaseURL + 'Dashboard/macd?';
+    url += ('cross=' + (MACDCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='rsi'){
+    let RSICross = document.getElementById('rsi-cross');
+    let RSIChoicesDropdown = document.getElementById('rsi-choices-dropdown');
+    let RSIUpperThreshold = document.getElementById('rsi-upper-threshold');
+    let RSILowerThreshold = document.getElementById('rsi-lower-threshold');
+    let choice = RSIChoicesDropdown.value.toString().substr(RSIChoicesDropdown.value.toString().length - 1);
+
+    let url = backendBaseURL + 'Dashboard/rsi?';
+    url += ('cross=' + (RSICross.checked ? 1 : 0));
+    url += ('&choice=' + choice);
+    url += ('&upperThreshold=' + RSIUpperThreshold.value.toString());
+    url += ('&lowerThreshold=' + RSILowerThreshold.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='rangebound'){
+    let RangeBoundWindow = document.getElementById('rangebound-window');
+    let RangeBoundPercentage = document.getElementById('rangebound-percentage');
+
+    let url = backendBaseURL + 'Dashboard/rangebound?';
+    url += ('window=' + RangeBoundWindow.value.toString());
+    url += ('&percentage=' + RangeBoundPercentage.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='breakout'){
+    let BreakoutWindow = document.getElementById('breakout-window');
+    let BreakoutPercentage = document.getElementById('breakout-percentage');
+
+    let url = backendBaseURL + 'Dashboard/breakout?';
+    url += ('window=' + BreakoutWindow.value.toString());
+    url += ('&percentage=' + BreakoutPercentage.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='reversal'){
+    let reversalWindow = document.getElementById('reversal-window');
+    let reversalExclude = document.getElementById('reversal-exclude');
+  
+    let url = backendBaseURL + 'Dashboard/reversal?';
+    url += ('window=' + reversalWindow.value.toString());
+    url += ('&exclude=' + reversalExclude.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='ema' || eventType=='dema' || eventType=='hma' || eventType=='kama' || eventType=='sma' || eventType=='rma' || eventType=='sinwma' || eventType=='swma' || eventType=='t3ma' || eventType=='tema' || eventType=='trima' || eventType=='vwma' || eventType=='zlma'){
+    let MAChoicesDropdown = document.getElementById(eventType + '-choices-dropdown');
+    let MALength = document.getElementById(eventType + '-length');
+    let MALen1 = document.getElementById(eventType + '-len1');
+    let MALen2 = document.getElementById(eventType + '-len2');
+    let MACross = document.getElementById(eventType + '-cross');
+  
+    let url = backendBaseURL + 'Dashboard/MovingAverage?';
+    url += ('type=' + eventType);
+    url += ('&choice=' + (MAChoicesDropdown.value === (eventType + '-crossovers') ? 2 : 1));
+    url += ('&cross=' + (MACross.checked ? 1 : 0));
+    url += ('&length=' + MALength.value.toString());
+    url += ('&len1=' + MALen1.value.toString());
+    url += ('&len2=' + MALen2.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='bbands'){
+    let BBandsChoicesDropdown = document.getElementById('bbands-choices-dropdown');
+    let choice = BBandsChoicesDropdown.value.toString().substr(BBandsChoicesDropdown.value.toString().length - 1);
+    let BBandsCross = document.getElementById('bbands-cross');
+    let BBandsLength = document.getElementById('bbands-length');
+    let BBandsThreshold = document.getElementById('bbands-threshold');
+    let BBandsExpansion = document.getElementById('bbands-expansion');
+    let BBandsStd = document.getElementById('bbands-std');
+
+    let url = backendBaseURL + 'Dashboard/bbands?';
+    url += ('&choice=' + choice);
+    url += ('&cross=' + (BBandsCross.checked ? 1 : 0));
+    url += ('&length=' + BBandsLength.value.toString());
+    url += ('&threshold=' + BBandsThreshold.value.toString());
+    url += ('&expansion=' + BBandsExpansion.value.toString());
+    url += ('&std=' + BBandsStd.value.toString());
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='donchian'){
+    let DonchianChoicesDropdown = document.getElementById('donchian-choices-dropdown');
+    let choice = DonchianChoicesDropdown.value.toString().substr(DonchianChoicesDropdown.value.toString().length - 1);
+    let DonchianCross = document.getElementById('donchian-cross');
+
+    let url = backendBaseURL + 'Dashboard/donchian?';
+    url += ('&choice=' + choice);
+    url += ('&cross=' + (DonchianCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='accbands'){
+    let AccBandsChoicesDropdown = document.getElementById('accbands-choices-dropdown');
+    let choice = AccBandsChoicesDropdown.value.toString().substr(AccBandsChoicesDropdown.value.toString().length - 1);
+    let AccBandsCross = document.getElementById('accbands-cross');
+    let AccBandsLength = document.getElementById('accbands-length');
+  
+    let url = backendBaseURL + 'Dashboard/accbands?';
+    url += ('&choice=' + choice);
+    url += ('&length=' + AccBandsLength.value.toString());
+    url += ('&cross=' + (AccBandsCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='kc'){
+    let KCChoicesDropdown = document.getElementById('kc-choices-dropdown');
+    let choice = KCChoicesDropdown.value.toString().substr(KCChoicesDropdown.value.toString().length - 1);
+
+    let KCCross = document.getElementById('kc-cross');
+    let KCLength = document.getElementById('kc-length');
+    let KCScalar = document.getElementById('kc-scalar');
+  
+    let url = backendBaseURL + 'Dashboard/kc?';
+    url += ('&choice=' + choice);
+    url += ('&length=' + KCLength.value.toString());
+    url += ('&scalar=' + KCScalar.value.toString());
+    url += ('&cross=' + (KCCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='adx'){
+    let ADXCross = document.getElementById('adx-cross');
+    let ADXThresholdADX = document.getElementById('adx-threshold-adx');
+    let ADXBuffer = document.getElementById('adx-buffer');
+    let ADXChoicesDropdown = document.getElementById('adx-choices-dropdown');
+    let choice = ADXChoicesDropdown.value.toString().substr(ADXChoicesDropdown.value.toString().length - 1);
+  
+    let url = backendBaseURL + 'Dashboard/adx?';
+    url += ('&choice=' + choice);
+    url += ('&thresholdADX=' + ADXThresholdADX.value.toString());
+    url += ('&buffer=' + ADXBuffer.value.toString());
+    url += ('&cross=' + (ADXCross.checked ? 1 : 0));
+    console.log(url);
+    return url;
+  }
+  else if(eventType=='chop'){
+    let CHOPChoicesDropdown = document.getElementById('chop-choices-dropdown');
+    let choice = CHOPChoicesDropdown.value.toString().substr(CHOPChoicesDropdown.value.toString().length - 1);
+
+    let CHOPUpper = document.getElementById('chop-upper');
+    let CHOPLower = document.getElementById('chop-lower');
+  
+    var xmlHttp = new XMLHttpRequest();
+    let url = backendBaseURL + 'Dashboard/chop?';
+    url += ('&choice=' + choice);
+    url += ('&upper=' + CHOPUpper.value.toString());
+    url += ('&lower=' + CHOPLower.value.toString());
+    console.log(url);
+    return url;
+  }
+  return url;;
+}
+
+// returns fetched data
+function getfetchedData(url,selectedEventName,operand){
+
+  try{
+    var fetchedData;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange =function () {
+      
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        createEvent.style.display = 'block';
+        creatingEventLoader.style.display = 'none';
+
+        fetchedData = JSON.parse(xmlHttp.responseText);
+        console.log(fetchedData);
+
+        if(operand==1){
+          addedEventsAndOperator[selectedEventName]=fetchedData;
+        }else if(operand==2){
+          addedEventsOrOperator[selectedEventName]=fetchedData;
+        }
+      }
+    }
+    xmlHttp.open("GET", url, true); // true for asynchronous
+    xmlHttp.setRequestHeader('Authorization', 'Token ' + jwtToken);
+    xmlHttp.send(null);
+  }
+  catch(err){
+
+  }
+  
+}
+// hide or button if and is clicked
+function hideallOR(){
+  let orOtherEventbtns=document.getElementsByClassName('or-event-btn');
+  for(var i=0;i<orOtherEventbtns.length;i++){
+    orOtherEventbtns[i].style.display="none";
+  }  
+}
+function showallOR(){
+  let orOtherEventbtns=document.getElementsByClassName('or-event-btn');
+  for(var i=0;i<orOtherEventbtns.length;i++){
+    orOtherEventbtns[i].style.display="initial";
+  }
+}
+// hide and button if or is clicked
+function hideallAnd(){
+  let andOtherEventbtns=document.getElementsByClassName('add-event-btn');
+  for(var i=0;i<andOtherEventbtns.length;i++){
+    andOtherEventbtns[i].style.display="none";
+  }
+}
+function showallAnd(){
+  let andOtherEventbtns=document.getElementsByClassName('add-event-btn');
+  for(var i=0;i<andOtherEventbtns.length;i++){
+    andOtherEventbtns[i].style.display="initial";
+  }
+}
+// Add other events button functionality
+let addOtherEventbtns=document.getElementsByClassName('add-event-btn');
+for(var k=0;k<addOtherEventbtns.length;k++){
+  addOtherEventbtns[k].addEventListener('click', function(){
+    let priceActionDiv = document.getElementById('price-action-div');
+    let indicatorDiv = document.getElementById('indicator-div');
+    let selectedEventName="";
+    if(priceActionDiv.style.display == 'block'){
+      let priceActionToolsDropdown = document.getElementById('price-action-tools-dropdown');
+      selectedEventName=priceActionToolsDropdown.value;
+    }else if(indicatorDiv.style.display == 'block'){
+      let indicatorToolsDropdown = document.getElementById('indicator-tools-dropdown');
+      selectedEventName=indicatorToolsDropdown.value;
+    }
+    console.log(selectedEventName);
+    
+    hideallOR();
+    let consoleDisplay=document.getElementById('console');
+    consoleDisplay.style.display="block";
+
+    // if(consoleDisplay.innerHTML!= "Cannot use AND operator on this event"){
+    //   let urlReceived=getUrltoFetchData(selectedEventName);
+    //   createEvent.style.display = 'none';
+    //   creatingEventLoader.style.display = 'block';
+    //   var data=getfetchedData(urlReceived,selectedEventName);
+    //   console.log(data);
+    //   console.log(Object.keys(data).length);
+    //   if(Object.keys(data).length<=2){
+    //     if(!isAlreadyAndUsed){
+    //       consoleDisplay.innerHTML=selectedEventName;
+    //     }else{
+    //       consoleDisplay.innerHTML=consoleDisplay.innerHTML + " AND " + selectedEventName;
+    //     }
+    //     numberOfEventsAddedinAnd++;    
+    //   }
+    //   else{
+    //     let consoleDisplay=document.getElementById('console');
+    //     consoleDisplay.style.display="block";
+    //     consoleDisplay.innerHTML="Cannot use AND operator on this event";  
+    //   }
+    // }
+
+    if(consoleDisplay.innerHTML!= "Cannot use AND operator on this event"){
+      // to check if screens are equal for and operator
+      if(numberOfScreens[selectedEventName]<=2){
+        let urlReceived=getUrltoFetchData(selectedEventName);
+        createEvent.style.display = 'none';
+        creatingEventLoader.style.display = 'block';
+        getfetchedData(urlReceived,selectedEventName,1);
+        console.log(consoleDisplay.innerHTML);
+        if(!isAlreadyAndUsed){
+          consoleDisplay.innerHTML=selectedEventName;
+        }else{
+          consoleDisplay.innerHTML=consoleDisplay.innerHTML + " AND " + selectedEventName;
+        }
+        numberOfEventsAddedinAnd++;
+      }else{
+        let consoleDisplay=document.getElementById('console');
+        consoleDisplay.style.display="block";
+        consoleDisplay.innerHTML="Cannot use AND operator on this event";  
+      }
+    } 
+    
+    isAlreadyAndUsed=true;
+    isAlreadyOrUsed=false;
+  })
+}
+
+// OR other events button functionality
+let orOtherEventbtns=document.getElementsByClassName('or-event-btn');
+for(var k=0;k<orOtherEventbtns.length;k++){
+  orOtherEventbtns[k].addEventListener('click', function(){
+    let priceActionDiv = document.getElementById('price-action-div');
+    let indicatorDiv = document.getElementById('indicator-div');
+    let selectedEventName="";
+    if(priceActionDiv.style.display == 'block'){
+      let priceActionToolsDropdown = document.getElementById('price-action-tools-dropdown');
+      selectedEventName=priceActionToolsDropdown.value;
+    }else if(indicatorDiv.style.display == 'block'){
+      let indicatorToolsDropdown = document.getElementById('indicator-tools-dropdown');
+      selectedEventName=indicatorToolsDropdown.value;
+    }
+    console.log(selectedEventName);
+
+    hideallAnd();
+    let consoleDisplay=document.getElementById('console');
+    consoleDisplay.style.display="block";
+
+    console.log(numberOfScreens[selectedEventName]);
+
+    if(consoleDisplay.innerHTML!= "Cannot use AND operator on this event"){
+      // to check if screens are <=2 for OR operator
+      if(numberOfScreens[selectedEventName]<=2){
+        let urlReceived=getUrltoFetchData(selectedEventName);
+        createEvent.style.display = 'none';
+        creatingEventLoader.style.display = 'block';
+        getfetchedData(urlReceived,selectedEventName,2);
+        console.log(consoleDisplay.innerHTML);
+        if(!isAlreadyOrUsed){
+          consoleDisplay.innerHTML=selectedEventName;
+        }else{
+          consoleDisplay.innerHTML=consoleDisplay.innerHTML + " OR " + selectedEventName;
+        }
+        numberOfEventsAddedinOr++;
+      }else{
+        let consoleDisplay=document.getElementById('console');
+        consoleDisplay.style.display="block";
+        consoleDisplay.innerHTML="Cannot use OR operator on this event";
+      }
+    }
+    
+    isAlreadyOrUsed=true;
+    isAlreadyAndUsed=false;
+  })
+}
+
+// function to add 2 events using AND
+function addEventsAnd(EventsArr){
+  var finalScreen=[];
+  if(EventsArr.length>0){
+    finalScreen=EventsArr[0];
+  }
+  for(var i=0;i<finalScreen.length;i++){
+    var companyToSearch=finalScreen[i];
+    var isThere=false;
+    for(var j=1;j<EventsArr.length;j++){
+      for(var k=0;k<EventsArr[j].length;k++){
+        if(EventsArr[j][k]==companyToSearch){
+          isThere=true;
+          break;
+        }
+      }
+      if(!isThere){
+        finalScreen.splice(i,1);
+        i--;
+        break;
+      }
+    }
+  }
+  return finalScreen;
+}
+
+//function to add Events using OR
+function isPresent(finalArr,company){
+  for(var i=0;i<finalArr.length;i++){
+    if(finalArr[i]==company){
+      return true;
+    }
+  }
+  return false;
+} 
+function addEventsOr(EventsArr){
+  var finalScreen=[];
+  if(EventsArr.length>0){
+    finalScreen=EventsArr[0];
+  }
+  for(var i=1;i<EventsArr.length;i++){
+    var companyToSearchArr=EventsArr[i];
+    for(var j=0;j<companyToSearchArr.length;j++){
+      if(!isPresent(finalScreen,companyToSearchArr[j])){
+        finalScreen.push(companyToSearchArr[j]);
+      }
+    }
+  }
+  return finalScreen;
+}
+
+// create resultant button functionality
+let resultantbtns=document.getElementsByClassName("resultant-btn");
+for(var i=0;i<resultantbtns.length;i++){
+  resultantbtns[i].addEventListener('click',function(){
+    if(isAlreadyAndUsed && (numberOfEventsAddedinAnd==1 || numberOfEventsAddedinAnd==0)){
+      var createBtnid=this.id.split('-resultbtn')[0];
+      document.getElementById(createBtnid).click();    
+    }
+    else if(isAlreadyOrUsed && (numberOfEventsAddedinOr==1 || numberOfEventsAddedinOr==0)){
+      var createBtnid=this.id.split('-resultbtn')[0];
+      document.getElementById(createBtnid).click();
+    }
+    else if(!isAlreadyAndUsed && !isAlreadyOrUsed){
+      var createBtnid=this.id.split('-resultbtn')[0];
+      document.getElementById(createBtnid).click();
+    }
+    else{
+      let consoleDisplay=document.getElementById('console');
+
+      if(consoleDisplay.innerHTML=="" || consoleDisplay.innerHTML=="Cannot use AND operator on this event" || consoleDisplay.innerHTML=="Cannot use OR operator on this event"){
+        consoleDisplay.innerHTML="Cannot create resultant event for these events";
+        // click createEvent btn now
+      }
+      else{
+        var maxScreens=0;
+        var screen1;
+        var screen2;
+
+        if(isAlreadyAndUsed){
+
+          for(var key in addedEventsAndOperator){
+            var screen=Object.keys(addedEventsAndOperator[key]).length;
+            if(screen>=maxScreens){
+              maxScreens=screen;
+            }
+          }
+          console.log(maxScreens);
+          var screenl1=[];
+          var screenl2=[];
+          for(var i in addedEventsAndOperator){
+            var currentscreen=1;
+            for(var j in addedEventsAndOperator[i]){
+              if(Object.keys(addedEventsAndOperator[i]).length==1){
+                screenl1.push(addedEventsAndOperator[i][j]);
+                screenl2.push(addedEventsAndOperator[i][j]);
+                break;
+              }
+              if(currentscreen==1){
+                screenl1.push(addedEventsAndOperator[i][j]);
+              }else if(currentscreen==2){
+                screenl2.push(addedEventsAndOperator[i][j]);
+              }
+
+              if(currentscreen<maxScreens){
+                currentscreen++;
+              }
+            }
+          }
+          console.log(screenl1);
+          console.log(screenl2);
+          screen1=addEventsAnd(screenl1);
+          screen2=addEventsAnd(screenl2);
+          console.log(screen1);
+          console.log(screen2);
+          
+        }
+        else{
+
+          for(var key in addedEventsOrOperator){
+            var screen=Object.keys(addedEventsOrOperator[key]).length;
+            if(screen>=maxScreens){
+              maxScreens=screen;
+            }
+          }
+          console.log(maxScreens);
+          var screenl1=[];
+          var screenl2=[];
+          console.log(addedEventsOrOperator);
+          for(var i in addedEventsOrOperator){
+            var currentscreen=1;
+            for(var j in addedEventsOrOperator[i]){
+              console.log(addedEventsOrOperator[i][j]);
+              if(Object.keys(addedEventsOrOperator[i]).length==1){
+                screenl1.push(addedEventsOrOperator[i][j]);
+                screenl2.push(addedEventsOrOperator[i][j]);
+                break;
+              }
+              if(currentscreen==1){
+                screenl1.push(addedEventsOrOperator[i][j]);
+              }else if(currentscreen==2){
+                screenl2.push(addedEventsOrOperator[i][j]);
+              }
+
+              if(currentscreen<maxScreens){
+                currentscreen++;
+              }
+            }
+          }
+          console.log(screenl1);
+          console.log(screenl2);
+          screen1=addEventsOr(screenl1);
+          screen2=addEventsOr(screenl2);
+          console.log(screen1);
+          console.log(screen2);
+        }
+
+        // creating final object
+        var finalData={
+          screen1,
+          screen2
+        }
+        // creating resultant event
+          createEvent.style.display = 'none';
+          creatingEventLoader.style.display = 'block';
+
+          // Initialising the event
+          let eventName = newEventInitialiser(maxScreens);
+
+          // Creating a bubble in the show all events modal
+          let modalBubblesContainer = document.getElementById('modal-bubbles-container');
+          let a = createNewBubbleForModal(eventName);
+          modalBubblesContainer.append(a);
+
+          // Creating new Monitor Div
+          let monitorDiv = createNewEventMonitorDiv(eventName);
+          document.getElementById('outer-screen-div').append(monitorDiv);
+
+          creatingEventLoader.style.display = 'none';
+          monitorEvent.style.display = 'block';
+
+          addFetchedData(eventName, finalData);
+
+          console.log('Final click');
+          // Opening the first Screen tab of the created monitor screens
+          changeCurrentEvent(eventName);
+          document.getElementById(eventName + '-screen1-tab').childNodes[0].click();
+          document.getElementById(eventName + '-screen1-title').innerText = consoleDisplay.innerHTML + ' Bullish';
+          document.getElementById(eventName + '-screen2-title').innerText = consoleDisplay.innerHTML + ' Bearish';
+
+      }
+    }
+
+    // finding events to add using and operator from console
+  })
+}
 
 // MONITOR SCREEN
 

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 body {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
 }
 
 a {
@@ -13,7 +13,7 @@ a:hover {
 }
 
 .upper-nav {
-  background-color: #F3FAFf;
+  background-color: #f3faff;
   display: flex;
   min-height: 7vh;
   height: 5.2vw;
@@ -46,7 +46,7 @@ a:hover {
   margin: 0 2vw;
   background-color: #f8f8f8;
   border-radius: 20px;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   height: 30px;
   width: 50%;
 }
@@ -69,7 +69,7 @@ a:hover {
   font-size: calc(5px + 0.7vw);
   background-color: #3b98ff;
   color: #ffffff;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   border: none;
   border-radius: 20px;
   padding: 5px 15px;
@@ -105,12 +105,12 @@ a:hover {
 }
 
 .card-header {
-  background-color: #F3FAFf;
+  background-color: #f3faff;
   text-align: center;
 }
 
 .card-footer {
-  background-color: #F3FAFf;
+  background-color: #f3faff;
 }
 
 #candlestick-chart-div {
@@ -139,7 +139,7 @@ a:hover {
   padding-right: 1vw;
   padding-left: 1vw;
   position: fixed;
-  background-color: #F3FAFf;
+  background-color: #f3faff;
   z-index: 100;
   margin-top: 0;
   width: 4.5vw;
@@ -169,7 +169,7 @@ a:hover {
 }
 
 #side-nav-z {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 7px rgba(79, 172, 255, 0.3);
   border-radius: 28px;
   padding: 10px 4px;
@@ -192,7 +192,7 @@ a:hover {
 }
 
 .nav-z-part {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 7px rgba(79, 172, 255, 0.3);
   border-radius: 28px;
   padding: 10px 12px;
@@ -307,15 +307,15 @@ a:hover {
 .custom-scrollbar::-webkit-scrollbar {
   height: 5px;
   width: 5px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-	background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-	background-color: #3b98ff;
+  background-color: #3b98ff;
 }
 
 .screen-nav-tabs {
@@ -330,7 +330,7 @@ a:hover {
 }
 
 .screen-nav-tabs .nav-link.active {
-  background-color:#cae9ff;
+  background-color: #cae9ff;
 }
 
 .screen-nav-tabs .nav-link button {
@@ -349,7 +349,7 @@ a:hover {
 }
 
 .add-screen-button:hover {
-  background-color: #F3FAFf;
+  background-color: #f3faff;
 }
 
 .add-screen-button:focus {
@@ -373,7 +373,7 @@ a:hover {
 }
 
 .company-tab-heading {
-  color:#000;
+  color: #000;
   background-color: #cae9ff;
   margin: 5px 4px 0 4px;
   border: 1px solid #aaa;
@@ -381,7 +381,7 @@ a:hover {
 }
 
 .company-tab {
-  color:#000;
+  color: #000;
   margin: 0 4px;
   border-left: 1px solid #aaa;
   border-right: 1px solid #aaa;
@@ -408,7 +408,7 @@ a:hover {
 }
 
 .monitor-bottom-section-buttons {
-  background-color: #F3FAFf;
+  background-color: #f3faff;
   font-size: 0.7rem;
   outline: none;
   border: 1px solid #aaa;
@@ -450,12 +450,14 @@ a:hover {
   cursor: pointer;
 }
 
-.monitor-bubble button, .modal-bubble button {
+.monitor-bubble button,
+.modal-bubble button {
   border: none;
   background-color: transparent;
 }
 
-.monitor-bubble button:focus, .modal-bubble button:focus {
+.monitor-bubble button:focus,
+.modal-bubble button:focus {
   outline: none;
 }
 
@@ -470,13 +472,13 @@ a:hover {
 .monitor-create-buttons {
   height: 35px;
   border: 1px solid #ccc;
-  background-color: #F3FAFf;
+  background-color: #f3faff;
   width: 50%;
   text-align: center;
   outline: none;
 }
 
-.monitor-create-buttons:focus{
+.monitor-create-buttons:focus {
   outline: none;
 }
 
@@ -547,16 +549,18 @@ a:hover {
   display: none;
 }
 
-#exist{
-  color : red;
+#exist {
+  color: red;
   font-size: 0.8em;
-  margin : 1em;
+  margin: 1em;
 }
-#ema-div, #cpr-div {
+#ema-div,
+#cpr-div {
   display: block;
 }
 
-#indicator-div, #price-div {
+#indicator-div,
+#price-div {
   display: none;
 }
 
@@ -576,13 +580,13 @@ a:hover {
   margin-top: 20px;
 }
 
-#risk-management-card-body input[type=range]{
+#risk-management-card-body input[type="range"] {
   width: 50%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-#risk-management-card-body input[type=number]{
+#risk-management-card-body input[type="number"] {
   width: 30%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -592,7 +596,8 @@ a:hover {
   display: none;
 }
 
-#risk-management-settings-button, #risk-management-reset-button {
+#risk-management-settings-button,
+#risk-management-reset-button {
   float: right;
   height: 22px;
   padding: 0 5px 5px 5px;
@@ -605,4 +610,7 @@ a:hover {
 
 #risk-management-result {
   display: none;
+}
+.screen-title {
+  text-transform: uppercase;
 }
