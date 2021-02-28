@@ -56,6 +56,7 @@ app.use('/', indexRouter2);
 app.use('/', indexRouter3);
 var schedule = require('node-schedule');
 const { get } = require("./routes/api2");
+
 function newsCall() {
     fetch('https://www.backend.zecide.com/Insights/Populate', {
         method: 'get'
@@ -66,6 +67,30 @@ function newsCall() {
 
 }
 setInterval(newsCall, 3600000);
+
+function scrapeSentimentsCall() {
+    fetch('https://www.backend.zecide.com/Insights/senti/scrape', {
+        method: 'get',
+
+    }).catch((err) => {
+        console.log(err)
+    })
+
+}
+setInterval(scrapeSentimentsCall, 82800000);
+
+
+function calculateSentimentsCall() {
+    fetch('https://www.backend.zecide.com/Insights/senti/calculate', {
+        method: 'get',
+
+    }).catch((err) => {
+        console.log(err)
+    })
+
+}
+setInterval(calculateSentimentsCall, 86400000);
+
 
 
 app.use(session({
