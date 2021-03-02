@@ -68,28 +68,28 @@ function newsCall() {
 }
 setInterval(newsCall, 3600000);
 
-function scrapeSentimentsCall() {
-    fetch('https://www.backend.zecide.com/Insights/senti/scrape', {
-        method: 'get',
+// function scrapeSentimentsCall() {
+//     fetch('https://www.backend.zecide.com/Insights/senti/scrape', {
+//         method: 'get',
 
-    }).catch((err) => {
-        console.log(err)
-    })
+//     }).catch((err) => {
+//         console.log(err)
+//     })
 
-}
-setInterval(scrapeSentimentsCall, 82800000);
+// }
+// setInterval(scrapeSentimentsCall, 82800000);
 
 
-function calculateSentimentsCall() {
-    fetch('https://www.backend.zecide.com/Insights/senti/calculate', {
-        method: 'get',
+// function calculateSentimentsCall() {
+//     fetch('https://www.backend.zecide.com/Insights/senti/calculate', {
+//         method: 'get',
 
-    }).catch((err) => {
-        console.log(err)
-    })
+//     }).catch((err) => {
+//         console.log(err)
+//     })
 
-}
-setInterval(calculateSentimentsCall, 86400000);
+// }
+// setInterval(calculateSentimentsCall, 86400000);
 
 
 
